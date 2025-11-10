@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. 문제 해결 - RE:  가이드</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-9257454501555292"
+         crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components-base.css">
+    <link rel="stylesheet" href="../css/components-layout.css">
+    <link rel="stylesheet" href="../css/browser-compatibility.css">
+    <link rel="stylesheet" href="../css/header-button-unify.css">
+    <link rel="stylesheet" href="css/guide-common.css">
+    
+    <style>
+        /* 아코디언 스타일 */
+        .accordion-item {
+            margin-bottom: 12px;
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-header {
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-secondary);
+            user-select: none;
+            transition: all 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--bg-hover);
+        }
+
+        .accordion-header.active {
+            background: var(--bg-hover);
+        }
+
+        .accordion-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .accordion-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+            color: var(--accent-primary);
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 2000px;
+        }
+
+        .accordion-body {
+            padding: 20px;
+            background: var(--bg-primary);
+        }
+
+        .solution-steps {
+            margin-top: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+        }
+
+        .solution-steps ol,
+        .solution-steps ul {
+            margin: 8px 0 0 20px;
+        }
+
+        .solution-steps li {
+            margin: 6px 0;
+            line-height: 1.6;
+        }
+
+        /* 의견제출 버튼 스타일 */
+        .contact-button {
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 피드백 모달 크기 조정 - index.html과 동일하게 */
+        .feedback-modal-content {
+            max-width: 1000px !important;
+            height: 92vh !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="header"></div>
+    
+    <!-- 피드백 모달 -->
+    <div class="feedback-modal" id="feedbackModal" onclick="closeFeedbackModal(event)">
+        <div class="feedback-modal-content" onclick="event.stopPropagation()">
+            <div class="feedback-modal-header">
+                <div class="feedback-modal-title">💬 의견 제출</div>
+                <button class="feedback-modal-close" onclick="closeFeedbackModal()" title="닫기">✕</button>
+            </div>
+            <div class="feedback-modal-body">
+                <iframe id="feedbackIframe" src="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="guide-page">
+        <div class="guide-breadcrumb">
+            <a href="index.html">📚 가이드 홈</a> / 5. 문제 해결
+        </div>
+
+        <div class="guide-header">
+            <div class="guide-number">5</div>
+            <h1>🔧 문제 해결</h1>
+            <p class="guide-header-desc">
+                자주 발생하는 문제와 해결 방법을 알아봅니다
+            </p>
+            <div class="guide-meta">
+                <div class="guide-meta-item">🎯 빠른 해결</div>
+            </div>
+        </div>
+
+        <!-- 섹션 1: API 키 관련 -->
+        <div class="guide-section">
+            <h2>🔑 API 키 관련 문제</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❌ "API 키가 유효하지 않습니다"</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <strong>원인:</strong> API 키를 잘못 입력했거나 만료되었습니다.
+                        <div class="solution-steps">
+                            <strong>해결 방법:</strong>
+                            <ol>
+                                <li>API 키를 다시 복사해서 붙여넣기</li>
+                                <li>앞뒤 공백이 없는지 확인</li>
+                                <li>Groq / OpenRouter 사이트에서 키가 활성화되어 있는지 확인</li>
+                                <li>필요시 새 키를 발급받아 다시 등록</li>
+                                <li>Browser 호환성 문제일 수 있어요. Chrome 사용을 권장</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❌ "일일 사용량을 초과했습니다"</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <strong>원인:</strong> Groq의 무료 일일 한도를 초과했습니다.
+                        <div class="solution-steps">
+                            <strong>해결 방법:</strong>
+                            <ul>
+                                <li><strong>방법 1:</strong> 사용량이 리셋 될때까지 기다리기</li>
+                                <li><strong>방법 2:</strong> OpenRouter로 전환 (유료이지만 제한 없음)</li>
+                                <li><strong>방법 3:</strong> 다른 Groq 및 OpenRouter 계정 만들기</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❓ API 키를 잃어버렸어요</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        API 키는 한 번만 표시됩니다. 잃어버렸다면:
+                        <ol style="margin-left: 20px; margin-top: 8px;">
+                            <li>Groq/OpenRouter 콘솔 접속</li>
+                            <li>기존 키 삭제</li>
+                            <li>새 키 발급</li>
+                            <li>RE: 설정에 새 키 등록</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 섹션 2: 보고서 생성 문제 -->
+        <div class="guide-section">
+            <h2>📝 보고서 생성 문제</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❌ 보고서가 생성되지 않아요</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <strong>가능한 원인:</strong>
+                        <div class="solution-steps">
+                            <ol>
+                                <li><strong>인터넷 연결 확인:</strong> Wi-Fi나 네트워크가 연결되어 있나요?</li>
+                                <li><strong>API 키 확인:</strong> 설정에서 API 키가 올바른지 확인</li>
+                                <li><strong>메모 길이:</strong> 너무 길거나 짧지 않은지 확인 (50자 이상 권장)</li>
+                                <li><strong>브라우저 새로고침:</strong> F5 키를 눌러 페이지 새로고침</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❌ 생성된 보고서가 이상해요</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <strong>원인:</strong> AI가 메모를 잘못 이해했을 수 있습니다.
+                        <div class="solution-steps">
+                            <strong>해결 방법:</strong>
+                            <ul>
+                                <li>메모를 더 구체적으로 작성</li>
+                                <li>핵심 내용을 먼저 작성</li>
+                                <li>"보고서 생성" 버튼을 다시 클릭 (매번 다르게 생성됨)</li>
+                                <li>AI 챗봇으로 수정 요청</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❓ 생성 속도가 너무 느려요</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <strong>Groq 사용 시:</strong> 일반적으로 5~10초 내에 생성됩니다. 더 오래 걸린다면 인터넷 속도를 확인하세요.<br><br>
+                        <strong>OpenRouter 사용 시:</strong> 모델에 따라 10~30초 걸릴 수 있습니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 섹션 3: 데이터 관련 -->
+        <div class="guide-section">
+            <h2>💾 데이터 관련 문제</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❌ 히스토리가 사라졌어요</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <strong>원인:</strong> 브라우저 캐시가 삭제되었거나 다른 브라우저를 사용 중입니다.
+                        <div class="solution-steps">
+                            <strong>해결 방법:</strong>
+                            <ul>
+                                <li>백업 파일이 있다면 "불러오기" 기능 사용</li>
+                                <li>앞으로는 정기적으로 "내보내기"로 백업</li>
+                                <li>중요한 보고서는 별도 파일로 저장</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❓ 히스토리를 다른 컴퓨터로 옮기고 싶어요</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <ol style="margin-left: 20px; margin-top: 8px;">
+                            <li>기존 컴퓨터에서: 설정 → "히스토리 내보내기" → JSON 파일 저장</li>
+                            <li>파일을 USB나 클라우드로 새 컴퓨터에 복사</li>
+                            <li>새 컴퓨터에서: 설정 → "히스토리 불러오기" → 파일 선택</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❓ 저장 용량이 부족하다고 나와요</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        RE: 는 브라우저 저장공간을 사용합니다. 용량이 부족하다면:
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>오래된 히스토리 삭제</li>
+                            <li>브라우저 캐시 정리</li>
+                            <li>다른 웹사이트의 데이터 삭제</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 섹션 4: 브라우저 호환성 -->
+        <div class="guide-section">
+            <h2>🌐 브라우저 관련 문제</h2>
+            
+            <div class="info-box">
+                <h4>✅ 권장 브라우저</h4>
+                <p>RE는 다음 브라우저에서 가장 잘 작동합니다:</p>
+                <ul>
+                    <li><strong>Chrome</strong> (버전 90 이상) - 가장 권장</li>
+                    <li><strong>Edge</strong> (버전 90 이상)</li>
+                    <li><strong>Firefox</strong> (버전 88 이상)</li>
+                    <li><strong>Safari</strong> (버전 14 이상)</li>
+                </ul>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❓ 화면이 깨져 보여요</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <ol style="margin-left: 20px; margin-top: 8px;">
+                            <li>브라우저를 최신 버전으로 업데이트</li>
+                            <li>Ctrl + F5로 강력 새로고침</li>
+                            <li>브라우저 확대/축소 비율을 100%로 설정 (Ctrl + 0)</li>
+                            <li>다른 브라우저로 시도</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">❓ 모바일에서도 사용할 수 있나요?</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        네! RE: 는 모바일에서도 작동합니다. 하지만:
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>화면이 작아 PC보다 불편할 수 있음</li>
+                            <li>키보드 입력이 많으므로 태블릿 권장</li>
+                            <li>인터넷 데이터 사용량 확인 (Wi-Fi 사용 권장)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 섹션 5: 자주 묻는 질문 -->
+        <div class="guide-section">
+            <h2>❓ 자주 묻는 질문 (FAQ)</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">💰 비용이 얼마나 드나요?</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <strong>Groq 사용 시:</strong> 완전 무료입니다! 단, 하루 사용량 제한이 있습니다.<br><br>
+                        <strong>OpenRouter 사용 시:</strong> 결제 수단을 등록하지 않으면, 제한량까지 무료 사용이 가능합니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">🔒 제 데이터가 안전한가요?</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        대부분의 데이터는 사용자 컴퓨터에만 저장됩니다. 보고서 생성 시에만 AI 서버로 임시 전송되며, 처리 후 즉시 삭제됩니다. 
+                        자세한 내용은 <a href="04-security.html" style="color: var(--accent-primary);">4. 보안 & 개인정보</a> 페이지를 참고하세요.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">👥 여러 명이 함께 사용할 수 있나요?</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        현재 RE: 는 개인 사용을 위해 설계되었습니다. 여러 명이 사용하려면:
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>각자 다른 API 키 사용 (API키를 공유하는 경우 사용량을 금방 소진할 수 있음. 주의!)</li>
+                            <li>각자 다른 브라우저 프로필 사용</li>
+                            <li>또는 각자 RE: 폴더를 별도로 복사</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">📱 오프라인에서도 사용할 수 있나요?</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        아니요, RE: 는 AI 서버와 통신이 필요하므로 인터넷 연결이 필수입니다. 메모 작성은 오프라인에서도 가능하지만, 보고서 생성은 온라인이어야 합니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">🔄 업데이트는 어떻게 하나요?</div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        새 버전이 나오면:
+                        <ol style="margin-left: 20px; margin-top: 8px;">
+                            <li>기존 히스토리와 API키를 "내보내기"로 백업</li>
+                            <li>새 버전 압축 파일 다운로드</li>
+                            <li>기존 폴더 삭제 후 새 파일 압축 해제</li>
+                            <li>히스토리 "불러오기"로 복구</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 연락처 -->
+        <div class="contact-box">
+            <div class="contact-title">💬 더 궁금한 점이 있으신가요?</div>
+            <div class="contact-desc">
+                위 내용으로 해결되지 않았다면 개발자에게 문의하세요.<br>
+                버그 리포트나 기능 제안도 환영합니다!
+            </div>
+            <button onclick="openFeedbackModal()" class="contact-button">
+                💬 의견 제출하기
+            </button>
+        </div>
+
+        <!-- 완료 메시지 -->
+        <div class="guide-section">
+            <h2>🎉 모든 가이드 완료!</h2>
+            <p>
+                축하합니다! RE 사용 가이드의 모든 내용을 완료하셨습니다.
+                이제 RE를 자유롭게 활용하실 수 있습니다!
+            </p>
+            
+            <div class="info-box success">
+                <h4>✅ 지금까지 배운 내용</h4>
+                <ul>
+                    <li><strong>1장:</strong> RE 소개 및 설치</li>
+                    <li><strong>2장:</strong> API 키 발급 및 기본 사용법</li>
+                    <li><strong>3장:</strong> AI 챗봇, 스타일 설정 등 고급 기능</li>
+                    <li><strong>4장:</strong> 보안 및 개인정보 보호</li>
+                    <li><strong>5장:</strong> 문제 해결 및 FAQ</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>📖 다음 단계</h4>
+                <ul>
+                    <li>실제 상담 보고서를 작성해보세요</li>
+                    <li>나만의 템플릿을 만들어보세요</li>
+                    <li>정기적으로 히스토리를 백업하세요</li>
+                    <li>새로운 기능이 업데이트되면 확인해보세요</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Google AdSense 디스플레이 광고 -->
+        <div style="text-align: center; margin: 40px auto; max-width: 728px;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9257454501555292"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- 네비게이션 -->
+        <div class="guide-navigation">
+            <a href="04-security.html" class="guide-nav-btn prev">
+                <div class="guide-nav-icon">←</div>
+                <div>
+                    <div class="guide-nav-btn-label">이전</div>
+                    <div class="guide-nav-btn-title">보안 & 개인정보</div>
+                </div>
+            </a>
+            
+            <a href="index.html" class="guide-nav-btn next" style="justify-content: center; flex-direction: column; align-items: center; padding: 24px 48px;">
+                <div style="font-size: 2.5em; margin-bottom: 8px;">🏠</div>
+                <div style="text-align: center;">
+                    <div class="guide-nav-btn-label">처음으로</div>
+                    <div class="guide-nav-btn-title">가이드 홈</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script src="../js/browser-polyfills.js"></script>
+    <script src="../js/common-components.js"></script>
+    
+    <script>
+        // 아코디언 토글 함수
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const isActive = element.classList.contains('active');
+            
+            // 모든 아코디언 닫기 (선택사항: 한 번에 하나만 열리게 하려면 주석 해제)
+            // document.querySelectorAll('.accordion-header').forEach(header => {
+            //     header.classList.remove('active');
+            //     header.nextElementSibling.classList.remove('active');
+            // });
+            
+            // 현재 클릭한 항목 토글
+            if (isActive) {
+                element.classList.remove('active');
+                content.classList.remove('active');
+            } else {
+                element.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+    </script>
+    
+    <script>
+        // 피드백 모달 열기
+        function openFeedbackModal() {
+            const modal = document.getElementById('feedbackModal');
+            const iframe = document.getElementById('feedbackIframe');
+            
+            // 구글 폼 URL
+            iframe.src = 'https://docs.google.com/forms/d/e/1FAIpQLScc5DQyJCcwpusgrI_UiTy_NtXMSsdWRk-uJJzx17nxX_d3qg/viewform?embedded=true';
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 피드백 모달 닫기
+        function closeFeedbackModal(event) {
+            const modal = document.getElementById('feedbackModal');
+            const iframe = document.getElementById('feedbackIframe');
+            
+            // 배경 클릭 또는 닫기 버튼 클릭 시
+            if (!event || event.target === modal || event.type === 'click') {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                // iframe 리셋 (다음 열기 위해)
+                setTimeout(() => {
+                    iframe.src = '';
+                }, 300);
+            }
+        }
+        
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('feedbackModal');
+                if (modal.classList.contains('active')) {
+                    closeFeedbackModal();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+/* ============================================
+   통합 버튼 스타일 시스템
+   모든 버튼 스타일을 이 파일에서 관리
+   ============================================ */
+
+/* ===========================================
+   1. 기본 버튼 스타일
+   =========================================== */
+
+.btn-action {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    /* 기본 스타일 */
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: var(--radius-btn);
+    
+    padding: 10px 16px;
+    min-height: 44px;
+    font-size: 0.95em;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.btn-action:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-action:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-action:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-action:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* ===========================================
+   2. 툴바 버튼 (저장, 보기, 지우기, 설정, 챗봇)
+   20% 축소 + 덜 진한 색상 + 이모지 10% 크기 증가
+   =========================================== */
+
+.input-actions-compact .btn-action {
+    /* 20% 축소: 44px -> 35px, 110px -> 88px */
+    min-height: 35px;
+    min-width: 88px;
+    max-width: 88px;
+    padding: 8px 14px;
+    font-size: 0.76em; /* 0.95em * 0.8 */
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+
+/* 이모지 크기 10% 증가 (모든 툴바 버튼) */
+.input-actions-compact .btn-action::before {
+    font-size: 1.1em; /* 이모지만 10% 크게 */
+}
+
+/* 💾 저장 버튼 - 연한 파란색 */
+.btn-action[onclick*="saveReport"] {
+    background: #60a5fa !important; /* 기존 #3b82f6 -> 밝은 파란색 */
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(96, 165, 250, 0.3) !important;
+}
+
+.btn-action[onclick*="saveReport"]:hover:not(:disabled) {
+    background: #3b82f6 !important; /* 호버 시 원래 색상 */
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4) !important;
+}
+
+/* 📂 보기 버튼 - 연한 초록색 */
+.btn-action[onclick*="showReportHistory"] {
+    background: #34d399 !important; /* 기존 #10b981 -> 밝은 초록색 */
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(52, 211, 153, 0.3) !important;
+}
+
+.btn-action[onclick*="showReportHistory"]:hover:not(:disabled) {
+    background: #10b981 !important; /* 호버 시 원래 색상 */
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* 🔄 지우기 버튼 - 연한 빨간색 */
+.btn-action[onclick*="clearInput"] {
+    background: #f87171 !important; /* 기존 #ef4444 -> 밝은 빨간색 */
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(248, 113, 113, 0.3) !important;
+}
+
+.btn-action[onclick*="clearInput"]:hover:not(:disabled) {
+    background: #ef4444 !important; /* 호버 시 원래 색상 */
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4) !important;
+}
+
+/* 📌 나의 설정 버튼 - 밝은 주황색 */
+#sidebarFloatingToggle,
+#sidebarFloatingToggle.btn-action,
+button#sidebarFloatingToggle {
+    background: #fb923c !important; /* 밝은 주황색 */
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(251, 146, 60, 0.4) !important;
+    min-height: 35px !important;
+    min-width: 97px !important; /* 88px * 1.1 = 96.8px ≈ 97px */
+    max-width: 97px !important;
+    padding: 8px 14px !important;
+    font-size: 0.76em !important;
+    border-radius: var(--radius-btn) !important;
+}
+
+#sidebarFloatingToggle:hover:not(:disabled),
+#sidebarFloatingToggle.btn-action:hover:not(:disabled),
+button#sidebarFloatingToggle:hover:not(:disabled) {
+    background: #f97316 !important; /* 호버 시 더 진한 주황색 */
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.5) !important;
+}
+
+/* 나의 설정 버튼 - 기존 이모지 제거 방지 (새 이모지 📌 사용) */
+#sidebarFloatingToggle::before,
+#sidebarFloatingToggle.btn-action::before {
+    content: none !important;
+}
+
+/* 🤖 챗봇 버튼 - 시그니처 그라데이션 + 애니메이션 */
+#chatbotFloatingBtn,
+#chatbotFloatingBtn.btn-action,
+button#chatbotFloatingBtn,
+.input-actions-compact #chatbotFloatingBtn,
+.button-group-right #chatbotFloatingBtn {
+    background: linear-gradient(
+        135deg, 
+        #667eea 0%, 
+        #764ba2 25%,
+        #f093fb 50%,
+        #4facfe 75%,
+        #667eea 100%
+    ) !important;
+    background-size: 200% 200% !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+    min-height: 35px !important;
+    min-width: 97px !important; /* 88px * 1.1 = 96.8px ≈ 97px */
+    max-width: 97px !important;
+    padding: 8px 14px !important;
+    font-size: 0.76em !important;
+    border-radius: var(--radius-btn) !important;
+    animation: chatbotGradientMove 3s ease infinite !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* 그라데이션 이동 애니메이션 - 챗봇 전용 */
+@keyframes chatbotGradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+#chatbotFloatingBtn:hover:not(:disabled),
+#chatbotFloatingBtn.btn-action:hover:not(:disabled),
+button#chatbotFloatingBtn:hover:not(:disabled),
+.input-actions-compact #chatbotFloatingBtn:hover:not(:disabled),
+.button-group-right #chatbotFloatingBtn:hover:not(:disabled) {
+    background: linear-gradient(
+        135deg, 
+        #667eea 0%, 
+        #764ba2 25%,
+        #f093fb 50%,
+        #4facfe 75%,
+        #667eea 100%
+    ) !important;
+    background-size: 200% 200% !important;
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6) !important;
+    animation: chatbotGradientMove 1.5s ease infinite !important;
+}
+
+/* 챗봇 버튼 - 기존 이모지 제거 방지 (이모지 🤖 사용) */
+#chatbotFloatingBtn::before,
+#chatbotFloatingBtn.btn-action::before {
+    content: none !important;
+}
+
+/* ===========================================
+   3. 보고서 작성 버튼 (메인 CTA)
+   가로 길이만 30% 축소: 400px -> 280px
+   =========================================== */
+
+.btn-generate {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    background: #4338ca !important; /* 더 어두운 보라색으로 변경 */
+    color: white !important;
+    border: none !important;
+    border-radius: var(--radius-btn);
+    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.4) !important;
+    
+    width: 100%;
+    max-width: 280px; /* 400px * 0.7 = 280px */
+    min-height: 50px;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 14px 24px;
+    cursor: pointer;
+    
+    transition: all 0.2s ease;
+}
+
+.btn-generate::before {
+    content: '✍️';
+    font-size: 1.1em;
+}
+
+.btn-generate:hover:not(:disabled) {
+    background: #5b21b6 !important; /* 더 어두운 호버 색상 */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(67, 56, 202, 0.6) !important;
+}
+
+.btn-generate:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.5) !important;
+}
+
+.btn-generate:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-generate:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* ===========================================
+   4. 하위 호환성 (기존 클래스명 지원)
+   =========================================== */
+
+.btn-generate-large {
+    /* .btn-generate와 동일하게 작동 */
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    background: #4338ca !important; /* 더 어두운 보라색으로 변경 */
+    color: white !important;
+    border: none !important;
+    border-radius: var(--radius-btn);
+    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.4) !important;
+    
+    width: 100%;
+    max-width: 280px; /* 400px * 0.7 = 280px */
+    min-height: 50px;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 14px 24px;
+    cursor: pointer;
+    
+    transition: all 0.2s ease;
+}
+
+.btn-generate-large::before {
+    content: '✍️';
+    font-size: 1.1em;
+}
+
+.btn-generate-large:hover:not(:disabled) {
+    background: #5b21b6 !important; /* 더 어두운 호버 색상 */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(67, 56, 202, 0.6) !important;
+}
+
+.btn-generate-large:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.5) !important;
+}
+
+.btn-generate-large:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 툴바 내 btn-generate-large (사용되지 않을 수 있지만 안전장치) */
+.input-actions-compact .btn-generate-large {
+    min-height: 40px;
+    padding: 10px 16px;
+    font-size: 0.9em;
+    max-width: 120px;
+}
+
+/* ===========================================
+   5. 작은 버튼 (복사, 기타 액션)
+   =========================================== */
+
+.btn--small {
+    min-height: 32px;
+    padding: 6px 12px;
+    font-size: 0.85em;
+}
+
+.btn--success {
+    background: #10b981;
+    color: white;
+    border: none;
+}
+
+.btn--success:hover:not(:disabled) {
+    background: #059669;
+}
+
+/* ===========================================
+   6. 라이트 모드 대응 (개선됨)
+   =========================================== */
+
+/* 라이트 모드 - 일반 버튼 스타일 (색상 버튼 제외) */
+body.light-mode .btn-action:not([onclick*="saveReport"]):not([onclick*="showReportHistory"]):not([onclick*="clearInput"]):not(#sidebarFloatingToggle):not(#chatbotFloatingBtn) {
+    background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(0,0,0,0.03)), #ffffff;
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    color: #1f2937;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .btn-action:not([onclick*="saveReport"]):not([onclick*="showReportHistory"]):not([onclick*="clearInput"]):not(#sidebarFloatingToggle):not(#chatbotFloatingBtn):hover:not(:disabled) {
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(0,0,0,0.05)), #f9fafb;
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* 라이트 모드 - 색상 버튼은 연한 색상 유지 */
+
+/* 💾 저장 버튼 - 라이트 모드 (연한 파란색) */
+body.light-mode .btn-action[onclick*="saveReport"] {
+    background: #60a5fa !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(96, 165, 250, 0.3) !important;
+}
+
+body.light-mode .btn-action[onclick*="saveReport"]:hover:not(:disabled) {
+    background: #3b82f6 !important;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4) !important;
+}
+
+/* 📂 보기 버튼 - 라이트 모드 (연한 초록색) */
+body.light-mode .btn-action[onclick*="showReportHistory"] {
+    background: #34d399 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(52, 211, 153, 0.3) !important;
+}
+
+body.light-mode .btn-action[onclick*="showReportHistory"]:hover:not(:disabled) {
+    background: #10b981 !important;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* 🔄 지우기 버튼 - 라이트 모드 (연한 빨간색) */
+body.light-mode .btn-action[onclick*="clearInput"] {
+    background: #f87171 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(248, 113, 113, 0.3) !important;
+}
+
+body.light-mode .btn-action[onclick*="clearInput"]:hover:not(:disabled) {
+    background: #ef4444 !important;
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4) !important;
+}
+
+/* 📌 나의 설정 버튼 - 라이트 모드 (밝은 주황색) */
+body.light-mode #sidebarFloatingToggle,
+body.light-mode #sidebarFloatingToggle.btn-action,
+body.light-mode button#sidebarFloatingToggle {
+    background: #fb923c !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(251, 146, 60, 0.4) !important;
+    min-width: 97px !important; /* 88px * 1.1 = 96.8px ≈ 97px */
+    max-width: 97px !important;
+}
+
+body.light-mode #sidebarFloatingToggle:hover:not(:disabled),
+body.light-mode #sidebarFloatingToggle.btn-action:hover:not(:disabled),
+body.light-mode button#sidebarFloatingToggle:hover:not(:disabled) {
+    background: #f97316 !important;
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.5) !important;
+}
+
+/* 🤖 챗봇 버튼 - 라이트 모드 (동일한 그라데이션) */
+body.light-mode #chatbotFloatingBtn,
+body.light-mode #chatbotFloatingBtn.btn-action,
+body.light-mode button#chatbotFloatingBtn,
+body.light-mode .input-actions-compact #chatbotFloatingBtn,
+body.light-mode .button-group-right #chatbotFloatingBtn {
+    background: linear-gradient(
+        135deg, 
+        #667eea 0%, 
+        #764ba2 25%,
+        #f093fb 50%,
+        #4facfe 75%,
+        #667eea 100%
+    ) !important;
+    background-size: 200% 200% !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5) !important;
+    animation: chatbotGradientMove 3s ease infinite !important;
+    min-width: 97px !important; /* 88px * 1.1 = 96.8px ≈ 97px */
+    max-width: 97px !important;
+}
+
+body.light-mode #chatbotFloatingBtn:hover:not(:disabled),
+body.light-mode #chatbotFloatingBtn.btn-action:hover:not(:disabled),
+body.light-mode button#chatbotFloatingBtn:hover:not(:disabled),
+body.light-mode .input-actions-compact #chatbotFloatingBtn:hover:not(:disabled),
+body.light-mode .button-group-right #chatbotFloatingBtn:hover:not(:disabled) {
+    background: linear-gradient(
+        135deg, 
+        #667eea 0%, 
+        #764ba2 25%,
+        #f093fb 50%,
+        #4facfe 75%,
+        #667eea 100%
+    ) !important;
+    background-size: 200% 200% !important;
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.7) !important;
+    animation: chatbotGradientMove 1.5s ease infinite !important;
+}
+
+/* 라이트 모드 - 생성 버튼 */
+body.light-mode .btn-generate,
+body.light-mode .btn-generate-large {
+    background: #4338ca !important; /* 더 어두운 보라색 */
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.5) !important;
+}
+
+body.light-mode .btn-generate:hover:not(:disabled),
+body.light-mode .btn-generate-large:hover:not(:disabled) {
+    background: #5b21b6 !important; /* 더 어두운 호버 색상 */
+    box-shadow: 0 8px 32px rgba(67, 56, 202, 0.7) !important;
+}
+
+/* ===========================================
+   7. 모션 감소 설정
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-action,
+    .btn-generate,
+    .btn-generate-large,
+    .btn--small {
+        transition: none;
+    }
+}
+
+/* ===========================================
+   8. 반응형 대응
+   =========================================== */
+
+@media (max-width: 768px) {
+    .input-actions-compact .btn-action {
+        /* 모바일에서는 더 작게 (20% 축소 유지) */
+        min-width: 76px; /* 95px * 0.8 */
+        max-width: 76px;
+        min-height: 32px; /* 40px * 0.8 */
+        font-size: 0.72em; /* 0.9em * 0.8 */
+        padding: 6px 11px;
+    }
+    
+    /* 모바일에서도 이모지 10% 크게 */
+    .input-actions-compact .btn-action::before {
+        font-size: 1.1em;
+    }
+    
+    #sidebarFloatingToggle,
+    #sidebarFloatingToggle.btn-action,
+    button#sidebarFloatingToggle,
+    #chatbotFloatingBtn,
+    #chatbotFloatingBtn.btn-action,
+    button#chatbotFloatingBtn {
+        min-width: 84px !important; /* 모바일: 76px * 1.1 = 83.6px ≈ 84px */
+        max-width: 84px !important;
+        min-height: 32px !important;
+        font-size: 0.72em !important;
+        padding: 6px 11px !important;
+    }
+    
+    .btn-generate,
+    .btn-generate-large {
+        font-size: 0.95em;
+        min-height: 46px;
+        padding: 12px 20px;
+        max-width: 240px; /* 모바일에서도 30% 축소 유지 */
+    }
+}

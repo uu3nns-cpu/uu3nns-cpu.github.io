@@ -1,0 +1,84 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#1a1b26"/>
+  
+  <!-- Browser Chrome -->
+  <rect x="50" y="50" width="1100" height="40" fill="#24283b" rx="8 8 0 0"/>
+  <circle cx="75" cy="70" r="8" fill="#f7768e"/>
+  <circle cx="100" cy="70" r="8" fill="#e0af68"/>
+  <circle cx="125" cy="70" r="8" fill="#9ece6a"/>
+  <rect x="200" y="60" width="800" height="20" fill="#1a1b26" rx="4"/>
+  <text x="220" y="75" font-family="Arial, sans-serif" font-size="12" fill="#565f89">
+    https://console.groq.com/keys
+  </text>
+  
+  <!-- Page Content -->
+  <rect x="50" y="90" width="1100" height="660" fill="#ffffff" rx="0 0 8 8"/>
+  
+  <!-- Header -->
+  <text x="150" y="150" font-family="Arial, sans-serif" font-size="32" fill="#1a1b26" font-weight="bold">
+    Groq Cloud
+  </text>
+  <text x="150" y="190" font-family="Arial, sans-serif" font-size="18" fill="#565f89">
+    API Keys
+  </text>
+  
+  <!-- Create Key Button -->
+  <rect x="950" y="130" width="150" height="45" fill="#667eea" rx="6"/>
+  <text x="1025" y="160" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold">
+    + Create API Key
+  </text>
+  
+  <!-- API Keys List Card -->
+  <rect x="150" y="230" width="900" height="400" fill="#f5f5f5" rx="8"/>
+  
+  <!-- Table Header -->
+  <rect x="170" y="250" width="860" height="50" fill="#e0e0e0" rx="6"/>
+  <text x="190" y="280" font-family="Arial, sans-serif" font-size="14" fill="#1a1b26" font-weight="bold">
+    Name
+  </text>
+  <text x="490" y="280" font-family="Arial, sans-serif" font-size="14" fill="#1a1b26" font-weight="bold">
+    API Key
+  </text>
+  <text x="850" y="280" font-family="Arial, sans-serif" font-size="14" fill="#1a1b26" font-weight="bold">
+    Created
+  </text>
+  
+  <!-- API Key Entry 1 -->
+  <rect x="170" y="310" width="860" height="60" fill="#ffffff" rx="6"/>
+  <text x="190" y="345" font-family="Arial, sans-serif" font-size="13" fill="#1a1b26">
+    My Report Key
+  </text>
+  <rect x="490" y="325" width="300" height="30" fill="#f0f0f0" rx="4"/>
+  <text x="510" y="347" font-family="Courier New, monospace" font-size="12" fill="#667eea">
+    gsk_••••••••••••••••••••••••1a2b
+  </text>
+  <circle cx="810" cy="340" r="15" fill="#e0e0e0"/>
+  <text x="810" y="347" font-family="Arial, sans-serif" font-size="14" fill="#565f89" text-anchor="middle">📋</text>
+  <text x="850" y="345" font-family="Arial, sans-serif" font-size="12" fill="#565f89">
+    2024-01-10
+  </text>
+  
+  <!-- API Key Entry 2 -->
+  <rect x="170" y="380" width="860" height="60" fill="#ffffff" rx="6"/>
+  <text x="190" y="415" font-family="Arial, sans-serif" font-size="13" fill="#1a1b26">
+    Test Key
+  </text>
+  <rect x="490" y="395" width="300" height="30" fill="#f0f0f0" rx="4"/>
+  <text x="510" y="417" font-family="Courier New, monospace" font-size="12" fill="#667eea">
+    gsk_••••••••••••••••••••••••9x8y
+  </text>
+  <circle cx="810" cy="410" r="15" fill="#e0e0e0"/>
+  <text x="810" y="417" font-family="Arial, sans-serif" font-size="14" fill="#565f89" text-anchor="middle">📋</text>
+  <text x="850" y="415" font-family="Arial, sans-serif" font-size="12" fill="#565f89">
+    2024-01-05
+  </text>
+  
+  <!-- Info Box -->
+  <rect x="150" y="660" width="900" height="60" fill="#e3f2fd" rx="8"/>
+  <text x="170" y="690" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#1976d2">
+    💡 API 키를 복사하여 RE 앱의 설정 페이지에 붙여넣으세요
+  </text>
+  <text x="170" y="710" font-family="Malgun Gothic, sans-serif" font-size="12" fill="#565f89">
+    무료 계정은 일일 14,400 요청까지 가능합니다
+  </text>
+</svg>

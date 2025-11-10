@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="Copyright (c) 2025 김도현. All Rights Reserved.">
+    <meta name="author" content="김도현">
+    <title>설정 - RE:  간편해진 보고서 작성</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+         crossorigin="anonymous"></script>
+    
+    <!-- CSS - 새 시스템 적용 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components-base.css">
+    <link rel="stylesheet" href="css/components-layout.css">
+    <link rel="stylesheet" href="css/browser-compatibility.css">
+    <link rel="stylesheet" href="css/header-button-unify.css">
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/settings-3column.css">
+</head>
+<body>
+    <div id="toast" class="toast"></div>
+
+    <!-- 공통 Header (JS로 자동 생성) -->
+    <div class="header"></div>
+
+    <div class="settings-container">
+        <!-- API 키 설정 (최소 구성) -->
+        <div class="settings-section-compact api-keys-compact">
+            <div class="section-title-compact">API 키 설정</div>
+            <div class="api-keys-row">
+                <div class="api-key-item">
+                    <label class="label">Groq</label>
+                    <input type="password" id="groqApiKey" class="input input--monospace input--small" placeholder="gsk_...">
+                    <button class="btn btn--small" onclick="toggleApiKeyVisibility('groq')">표시</button>
+                </div>
+                <div class="api-key-item">
+                    <label class="label">GPT-4o-mini</label>
+                    <input type="password" id="gptApiKey" class="input input--monospace input--small" placeholder="sk-or-v1-...">
+                    <button class="btn btn--small" onclick="toggleApiKeyVisibility('gpt')">표시</button>
+                </div>
+                <div class="api-key-actions">
+                    <button class="btn btn--small" onclick="window.open('guide/02-basic.html', '_blank')">발급방법</button>
+                    <button class="btn btn--small" onclick="window.location.href='data-management.html'" title="데이터 관리 페이지에서 백업/복원을 관리하세요">백업·복원</button>
+                </div>
+            </div>
+            
+            <!-- API 가이드 (접힌 상태) -->
+            <div class="api-guide-collapsed" id="apiGuideContent">
+                <div class="api-guide-inner">
+                    <div class="guide-col">
+                        <h3>1. Groq API 키 발급</h3>
+                        <ol>
+                            <li><a href="https://console.groq.com" target="_blank">console.groq.com</a> 접속</li>
+                            <li>Google/GitHub 로그인</li>
+                            <li>API Keys → Create API Key</li>
+                            <li>키 복사 (gsk_로 시작)</li>
+                        </ol>
+                    </div>
+                    <div class="guide-col">
+                        <h3>2. GPT-4o-mini API 키 발급</h3>
+                        <ol>
+                            <li><a href="https://openrouter.ai" target="_blank">openrouter.ai</a> 접속</li>
+                            <li>Google 계정 로그인 (무료 $5)</li>
+                            <li>Keys → Create Key</li>
+                            <li>키 복사 (sk-or-v1-로 시작)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3칼럼 레이아웃: 모델 설정 | 화면 설정 | 보고서 설정 -->
+        <div class="settings-row-three-column">
+            <!-- 1. 사용할 AI 모델 -->
+            <div class="settings-section-compact model-settings">
+                <div class="section-header-row">
+                    <div class="section-title-compact">사용할 AI 모델</div>
+                </div>
+                
+                <div class="setting-item-row">
+                    <div class="model-toggles">
+                        <label class="model-toggle-item">
+                            <input type="checkbox" id="useGroq" checked>
+                            <span class="toggle-ui"></span>
+                            <span class="model-label">Groq</span>
+                        </label>
+                        <label class="model-toggle-item">
+                            <input type="checkbox" id="useGPT" checked>
+                            <span class="toggle-ui"></span>
+                            <span class="model-label">GPT-4o-mini</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="info-box">최소 1개 이상의 모델을 선택해야 합니다.</div>
+            </div>
+
+            <!-- 2. 화면 설정 -->
+            <div class="settings-section-compact screen-settings">
+                <div class="section-header-row">
+                    <div class="section-title-compact">화면 설정</div>
+                </div>
+                
+                <!-- 글씨 크기 -->
+                <div class="setting-item-row">
+                    <div class="setting-label">글씨 크기</div>
+                    <div class="risk-meter-container">
+                        <input type="range" 
+                               id="fontSizeSlider" 
+                               class="risk-meter-slider"
+                               min="12" 
+                               max="20" 
+                               value="16" 
+                               step="1">
+                        <div class="risk-meter-track"></div>
+                        <div class="slider-labels font-labels">
+                            <span data-value="12">12px</span>
+                            <span data-value="13">13px</span>
+                            <span data-value="14">14px</span>
+                            <span data-value="15">15px</span>
+                            <span data-value="16" class="label-default">16px</span>
+                            <span data-value="17">17px</span>
+                            <span data-value="18">18px</span>
+                            <span data-value="19">19px</span>
+                            <span data-value="20">20px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 보고서 설정 -->
+            <div class="settings-section-compact report-settings">
+                <div class="section-header-row">
+                    <div class="section-title-compact">보고서 설정</div>
+                </div>
+                <div class="setting-item-row">
+                    <div class="setting-label">분량 / 상세도</div>
+                    <div class="risk-meter-container">
+                        <input type="range" 
+                               id="detailLevelSlider" 
+                               class="risk-meter-slider"
+                               min="-45" 
+                               max="45" 
+                               step="15" 
+                               value="0">
+                        <div class="risk-meter-track"></div>
+                        <div class="slider-labels detail-labels">
+                            <span data-value="-45">최소</span>
+                            <span data-value="-30">간결</span>
+                            <span data-value="-15">약간<br>간결</span>
+                            <span data-value="0" class="label-default">표준</span>
+                            <span data-value="15">약간<br>상세</span>
+                            <span data-value="30">상세</span>
+                            <span data-value="45">최대</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 나의 설정 모음 -->
+        <div class="settings-section-compact preset-manager">
+            <div class="section-title-compact">나의 설정 모음</div>
+            <div class="preset-info">
+                <span id="presetCount">0</span>개의 설정이 저장되어 있습니다
+            </div>
+            
+            <div class="preset-list" id="presetList">
+                <!-- JS로 동적 생성 -->
+            </div>
+        </div>
+
+        <!-- 메인 설정 (3열 그리드) -->
+        <div class="settings-grid-main">
+            <!-- 1열: 나만의 작성 규칙 -->
+            <div class="settings-column">
+                <div class="column-header">
+                    <h3>나만의 작성 규칙</h3>
+                </div>
+                <textarea id="customPrompt" class="input input--textarea" placeholder="AI에게 추가로 전달할 지시사항을 입력하세요.
+
+예시) 전체 내용을 구분하지 말고 자율 서술형으로 작성해줘"></textarea>
+                <div class="info-box info-box--primary">이 항목은 다른 설정보다 우선 반영됩니다.</div>
+            </div>
+
+            <!-- 2열: 보고서 구조 설정 -->
+            <div class="settings-column">
+                <div class="column-header">
+                    <h3>보고서 구조 설정</h3>
+                </div>
+                <div class="format-toggles">
+                    <label class="toggle-item">
+                        <span>상담 일시 / 회기</span>
+                        <input type="checkbox" id="format_datetime"><span class="toggle-ui"></span>
+                    </label>
+                    <label class="toggle-item">
+                        <span>주 호소 문제</span>
+                        <input type="checkbox" id="format_issue"><span class="toggle-ui"></span>
+                    </label>
+                    <label class="toggle-item">
+                        <span>상담 목표</span>
+                        <input type="checkbox" id="format_goal"><span class="toggle-ui"></span>
+                    </label>
+                    <label class="toggle-item">
+                        <span>상담 과정 / 내용</span>
+                        <input type="checkbox" id="format_process"><span class="toggle-ui"></span>
+                    </label>
+                    <label class="toggle-item">
+                        <span>사용한 기법</span>
+                        <input type="checkbox" id="format_technique"><span class="toggle-ui"></span>
+                    </label>
+                    <label class="toggle-item">
+                        <span>다음 회기 계획</span>
+                        <input type="checkbox" id="format_plan"><span class="toggle-ui"></span>
+                    </label>
+                </div>
+                <div class="info-box">활성화한 항목만 보고서에 포함됩니다.</div>
+            </div>
+
+            <!-- 3열: 보고서 기술 설정 -->
+            <div class="settings-column">
+                <div class="column-header">
+                    <h3>보고서 기술 설정</h3>
+                </div>
+                <div class="style-selects">
+                    <div class="select-group">
+                        <label class="label" title="보고서의 전문용어 사용 수준을 조절합니다">전문성 / 가독성</label>
+                        <select id="style_terminology" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="전문적" title="심리학 전문용어와 학술적 표현 사용">전문적</option>
+                            <option value="평이함" title="일상적 언어로 쉽게 풀어서 설명">평이함</option>
+                        </select>
+                        <small class="select-help">전문적: 학술 용어 · 평이함: 쉬운 표현</small>
+                    </div>
+                    <div class="select-group">
+                        <label class="label" title="내담자의 말과 행동을 어떻게 기록할지 선택합니다">내담자 표현</label>
+                        <select id="style_expression" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="직접인용" title="내담자의 말을 인용부호로 직접 인용">직접인용</option>
+                            <option value="관찰위주" title="상담자가 관찰한 내용 중심으로 서술">관찰위주</option>
+                        </select>
+                        <small class="select-help">직접인용: 내담자 말 그대로 · 관찰위주: 행동 중심</small>
+                    </div>
+                    <div class="select-group">
+                        <label class="label" title="보고서에서 강조할 관점을 선택합니다">관점 / 초점</label>
+                        <select id="style_focus" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="강점중심" title="내담자의 자원과 긍정적 변화 강조">강점중심</option>
+                            <option value="문제중심" title="해결해야 할 문제와 어려움 중심으로 서술">문제중심</option>
+                        </select>
+                        <small class="select-help">강점중심: 자원·변화 강조 · 문제중심: 어려움 중심</small>
+                    </div>
+                    <div class="select-group">
+                        <label class="label" title="상담 기법을 어떻게 기록할지 선택합니다">기법 서술</label>
+                        <select id="style_technique" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="기법명시" title="사용한 상담기법의 명칭을 명확히 기재">기법명시</option>
+                            <option value="과정중심" title="기법보다 상담 과정과 상호작용 중심">과정중심</option>
+                        </select>
+                        <small class="select-help">기법명시: 기법 이름 명시 · 과정중심: 상호작용 중심</small>
+                    </div>
+                    <div class="select-group">
+                        <label class="label" title="정서 표현의 상세도를 조절합니다">정서 표현</label>
+                        <select id="style_emotion" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="정서강조" title="내담자의 정서와 감정 변화를 상세히 묘사">정서강조</option>
+                            <option value="객관적" title="정서보다 사실과 행동을 객관적으로 기술">객관적</option>
+                        </select>
+                        <small class="select-help">정서강조: 감정 상세 묘사 · 객관적: 사실 중심 기술</small>
+                    </div>
+                    <div class="select-group">
+                        <label class="label" title="상담자의 개입과 반응을 포함할지 선택합니다">상담자 반응</label>
+                        <select id="style_counselor" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="반응포함" title="상담자의 개입과 반응을 상세히 기록">반응포함</option>
+                            <option value="내담자만" title="내담자의 말과 행동에만 초점">내담자만</option>
+                        </select>
+                        <small class="select-help">반응포함: 상담자 개입 기록 · 내담자만: 내담자 중심</small>
+                    </div>
+                    <div class="select-group">
+                        <label class="label" title="보고서 내용의 구성 방식을 선택합니다">구성 방식</label>
+                        <select id="style_structure" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="시간순" title="상담이 진행된 순서대로 기술">시간순</option>
+                            <option value="주제별" title="논의된 주제를 중심으로 재구성">주제별</option>
+                        </select>
+                        <small class="select-help">시간순: 진행 순서대로 · 주제별: 내용별 분류</small>
+                    </div>
+                    <div class="select-group">
+                        <label class="label" title="다음 회기 계획의 상세도를 조절합니다">회기 계획</label>
+                        <select id="style_plan" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="구체적" title="구체적인 활동과 목표를 상세히 명시">구체적</option>
+                            <option value="방향성" title="전반적인 방향과 초점만 간략히 제시">방향성</option>
+                        </select>
+                        <small class="select-help">구체적: 활동 상세 명시 · 방향성: 방향만 제시</small>
+                    </div>
+                    <div class="select-group">
+                        <label class="label" title="보고서를 읽을 대상에 맞춰 작성합니다">보고서 독자</label>
+                        <select id="style_audience" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="슈퍼비전" title="슈퍼바이저 검토를 위한 전문적 보고서">슈퍼비전</option>
+                            <option value="학부모" title="학부모가 이해하기 쉬운 설명적 보고서">학부모</option>
+                            <option value="기관" title="기관 보고 및 기록용 공식 문서">기관</option>
+                        </select>
+                        <small class="select-help">독자 수준에 맞는 용어와 설명 방식 조절</small>
+                    </div>
+                    <div class="select-group">
+                        <label class="label" title="보고서에 반영할 이론적 관점을 선택합니다">이론적 관점</label>
+                        <select id="style_approach" class="input input--select input--small">
+                            <option value="">기본</option>
+                            <option value="인지행동" title="생각과 행동의 관계 중심">인지행동</option>
+                            <option value="정신역동" title="무의식과 내적 갈등 중심">정신역동</option>
+                            <option value="인간중심" title="공감과 수용, 자기실현 중심">인간중심</option>
+                            <option value="발달심리" title="발달 단계와 과업 중심">발달심리</option>
+                            <option value="해결중심" title="문제보다 해결책 중심">해결중심</option>
+                            <option value="게슈탈트" title="현재 경험과 자각 중심">게슈탈트</option>
+                            <option value="가족체계" title="가족 관계와 체계 중심">가족체계</option>
+                            <option value="애착이론" title="애착 유형과 관계 패턴 중심">애착이론</option>
+                            <option value="현실치료" title="선택과 책임, 현실 인식 중심">현실치료</option>
+                            <option value="통합적" title="다양한 관점을 통합적으로 활용">통합적</option>
+                        </select>
+                        <small class="select-help">선택한 이론 관점의 개념과 용어로 해석</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer 버튼 영역 -->
+        <div class="settings-footer-buttons">
+            <div class="footer-left">
+                <button class="btn btn--large" onclick="history.back()">← 돌아가기</button>
+                <button class="btn btn--danger btn--large" onclick="resetSettings()">설정 초기화</button>
+            </div>
+            <div class="footer-center">
+                <button class="btn btn--primary btn--large btn-add-preset" onclick="saveCurrentAsPreset()">
+                     현재 설정을 나의 설정 모음에 추가
+                </button>
+            </div>
+            <div class="footer-right">
+                <button class="btn btn--large" onclick="window.location.href='report.html'">취소</button>
+                <button class="btn btn--primary btn--large" onclick="saveAndReturn()">저장하고 돌아가기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <!-- Polyfills (구형 브라우저 지원) -->
+    <script src="js/browser-polyfills.js"></script>
+    
+    <script src="js/common-components.js"></script>
+    <script src="js/security.js"></script>
+    <script src="js/preset-manager.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // 분량/상세도 슬라이더 설정 (7단계)
+        const detailLevelConfig = {
+            '-45': { label: '최소 (50%)', multiplier: 0.5, description: '핵심만 간결하게' },
+            '-30': { label: '간결 (80%)', multiplier: 0.8, description: '주요 내용 위주' },
+            '-15': { label: '약간 간결 (110%)', multiplier: 1.1, description: '표준보다 약간 짧게' },
+            '0': { label: '표준 (140%)', multiplier: 1.4, description: '기본 분량' },
+            '15': { label: '약간 상세 (170%)', multiplier: 1.7, description: '표준보다 약간 상세하게' },
+            '30': { label: '상세 (210%)', multiplier: 2.1, description: '구체적이고 상세하게' },
+            '45': { label: '최대 (250%)', multiplier: 2.5, description: '최대한 상세하고 풍부하게' }
+        };
+
+        const detailLevelSlider = document.getElementById('detailLevelSlider');
+        const detailLabels = document.querySelectorAll('.detail-labels span');
+
+        if (detailLevelSlider) {
+            const savedLevel = localStorage.getItem('detailLevel') || '0';
+            detailLevelSlider.value = savedLevel;
+            updateDetailLevelHighlight(savedLevel);
+
+            detailLevelSlider.addEventListener('input', (e) => {
+                const level = e.target.value;
+                updateDetailLevelHighlight(level);
+                localStorage.setItem('detailLevel', level);
+            });
+        }
+
+        function updateDetailLevelHighlight(level) {
+            detailLabels.forEach(label => {
+                if (label.getAttribute('data-value') === level) {
+                    label.classList.add('active');
+                } else {
+                    label.classList.remove('active');
+                }
+            });
+        }
+
+
+
+        // 글씨 크기 조절
+        const fontSizeSlider = document.getElementById('fontSizeSlider');
+        const fontLabels = document.querySelectorAll('.font-labels span');
+        
+        if (fontSizeSlider) {
+            const savedSize = localStorage.getItem('fontSize') || '16';
+            fontSizeSlider.value = savedSize;
+            document.documentElement.style.fontSize = savedSize + 'px';
+            updateFontSizeHighlight(savedSize);
+            
+            fontSizeSlider.addEventListener('input', (e) => {
+                const size = e.target.value;
+                document.documentElement.style.fontSize = size + 'px';
+                localStorage.setItem('fontSize', size);
+                updateFontSizeHighlight(size);
+            });
+        }
+
+        function updateFontSizeHighlight(size) {
+            fontLabels.forEach(label => {
+                if (label.getAttribute('data-value') === size) {
+                    label.classList.add('active');
+                } else {
+                    label.classList.remove('active');
+                }
+            });
+        }
+        
+
+        
+        function saveAndReturn() {
+            const success = saveSettingsToStorage();
+            
+            // 모델 설정도 저장
+            const models = {
+                groq: document.getElementById('useGroq').checked,
+                gpt: document.getElementById('useGPT').checked
+            };
+            localStorage.setItem('enabledModels', JSON.stringify(models));
+            
+            if (success) {
+                showToast('✓ 설정이 저장되었습니다.', 1000);
+                setTimeout(() => {
+                    window.location.href = 'report.html';
+                }, 1000);
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSettings();
+            
+            // 모델 토글 이벤트 리스너
+            const useGroq = document.getElementById('useGroq');
+            const useGPT = document.getElementById('useGPT');
+            
+            // 로드
+            const savedModels = JSON.parse(localStorage.getItem('enabledModels') || '{"groq":true,"gpt":true}');
+            useGroq.checked = savedModels.groq !== false;
+            useGPT.checked = savedModels.gpt !== false;
+            
+            // 변경 시 최소 1개 체크
+            function validateModelSelection(changedCheckbox, otherCheckbox) {
+                if (!changedCheckbox.checked && !otherCheckbox.checked) {
+                    showToast('⚠️ 최소 1개 이상의 모델을 선택해야 합니다.', 2000);
+                    changedCheckbox.checked = true;
+                    return false;
+                }
+                return true;
+            }
+            
+            useGroq.addEventListener('change', function() {
+                if (validateModelSelection(this, useGPT)) {
+                    const models = {
+                        groq: useGroq.checked,
+                        gpt: useGPT.checked
+                    };
+                    localStorage.setItem('enabledModels', JSON.stringify(models));
+                    showToast('✓ 모델 설정이 저장되었습니다.', 1500);
+                }
+            });
+            
+            useGPT.addEventListener('change', function() {
+                if (validateModelSelection(this, useGroq)) {
+                    const models = {
+                        groq: useGroq.checked,
+                        gpt: useGPT.checked
+                    };
+                    localStorage.setItem('enabledModels', JSON.stringify(models));
+                    showToast('✓ 모델 설정이 저장되었습니다.', 1500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

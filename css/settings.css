@@ -1,0 +1,1090 @@
+/**
+ * 설정 페이지 전용 스타일
+ * SETTINGS_DESIGN_PRINCIPLES.md 원칙 준수
+ * - 스크롤 없이 한 화면 구성
+ * - API 키 영역 최소화
+ * - Sticky 사용 금지
+ */
+
+/* ==================== 전체 컨테이너 ==================== */
+.settings-container {
+    max-width: 2200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 60px 60px 60px;
+}
+
+/* ==================== API 키 설정 (최소 구성) ==================== */
+.settings-section-compact {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s ease;
+}
+
+.settings-section-compact:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.section-title-compact {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.api-keys-compact {
+    margin-bottom: 15px;
+}
+
+.api-keys-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.api-key-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.api-key-item label {
+    min-width: 100px;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.api-key-item input {
+    flex: 1;
+    height: 36px;
+    padding: 0 10px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    color: var(--text-primary);
+    font-size: 0.85em;
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+.api-key-item input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.btn-toggle-key {
+    height: 36px;
+    padding: 0 12px;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s;
+}
+
+.btn-toggle-key:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+.api-key-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-api-action {
+    height: 36px;
+    padding: 0 14px;
+    background: transparent;
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s;
+}
+
+.btn-api-action:hover {
+    background: var(--accent-primary);
+    color: white;
+}
+
+/* API 가이드 (접힌 상태) */
+.api-guide-collapsed {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    margin-top: 0;
+}
+
+.api-guide-collapsed.active {
+    max-height: 300px;
+    margin-top: 15px;
+}
+
+.api-guide-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: var(--bg-primary);
+    padding: 15px;
+    border-radius: var(--radius-btn);
+}
+
+.guide-col h3 {
+    font-size: 0.95em;
+    color: var(--accent-primary);
+    margin-bottom: 8px;
+}
+
+.guide-col ol {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.85em;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.guide-col li {
+    margin-bottom: 4px;
+}
+
+.guide-col a {
+    color: var(--accent-primary);
+    text-decoration: none;
+}
+
+.guide-col a:hover {
+    text-decoration: underline;
+}
+
+/* ==================== 화면 설정 & 보고서 설정 (Risk Meter 스타일) ==================== */
+.settings-row-parallel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.settings-section-compact.screen-settings,
+.settings-section-compact.report-settings {
+margin-bottom: 0;
+min-height: 90px;
+}
+
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.setting-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.setting-item-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.setting-label {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* 모델 토글 스타일 */
+.model-toggles {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.model-toggle-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+    min-width: 140px;
+}
+
+.model-toggle-item:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-primary);
+}
+
+.model-toggle-item input {
+    display: none;
+}
+
+.model-toggle-item .toggle-ui {
+    position: relative;
+    width: 42px;
+    height: 22px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    transition: 0.3s;
+    flex-shrink: 0;
+}
+
+.model-toggle-item .toggle-ui::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
+}
+
+.model-toggle-item input:checked + .toggle-ui {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.model-toggle-item input:checked + .toggle-ui::before {
+    transform: translateX(20px);
+}
+
+.model-toggle-item .model-label {
+    font-size: 0.9em;
+    color: var(--text-primary);
+    font-weight: 500;
+    flex: 1;
+}
+
+/* Risk Meter 컨테이너 */
+.risk-meter-container {
+    position: relative;
+    padding: 16px 0 8px 0;
+}
+
+/* Risk Meter 트랙 (그라데이션 배경 - 테마 색상 일치) */
+.risk-meter-track {
+    position: absolute;
+    top: 16px;
+    left: 8px;
+    right: 8px;
+    height: 8px;
+    background: linear-gradient(
+        to right,
+        #8b7ee8 0%,      /* 보라 (accent-primary) */
+        #7366d9 33%,     /* 진한 보라 */
+        #6366f1 66%,     /* 파랑 */
+        #4f46e5 100%     /* 진한 파랑 */
+    );
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 1;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 슬라이더 input */
+.risk-meter-slider {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 2;
+    margin: 16px 0 0 0;
+    padding: 0;
+}
+
+/* WebKit - 썸 (테마 색상 일치) */
+.risk-meter-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(139, 126, 232, 0.3);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: -10px;
+}
+
+.risk-meter-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(139, 126, 232, 0.4);
+}
+
+.risk-meter-slider::-webkit-slider-thumb:active {
+    transform: scale(1.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(139, 126, 232, 0.5);
+}
+
+/* Firefox - 썸 */
+.risk-meter-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(139, 126, 232, 0.3);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.risk-meter-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(139, 126, 232, 0.4);
+}
+
+.risk-meter-slider::-moz-range-thumb:active {
+    transform: scale(1.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(139, 126, 232, 0.5);
+}
+
+/* 트랙 (투명하게) */
+.risk-meter-slider::-webkit-slider-runnable-track {
+    height: 8px;
+    background: transparent;
+    border-radius: 10px;
+}
+
+.risk-meter-slider::-moz-range-track {
+    height: 8px;
+    background: transparent;
+    border-radius: 10px;
+}
+
+/* 슬라이더 레이블 */
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding: 0 8px;
+    position: relative;
+    z-index: 3;
+}
+
+.slider-labels span {
+    font-size: 0.75em;
+    color: var(--text-tertiary);
+    text-align: center;
+    flex: 1;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1.3;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.slider-labels span:hover {
+    color: var(--text-secondary);
+}
+
+.slider-labels span.label-default {
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
+.slider-labels span.active {
+    color: var(--text-primary);
+    font-weight: 700;
+    transform: scale(1.1);
+}
+
+/* 기본값 버튼 */
+.slider-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.btn-default {
+    height: 32px;
+    padding: 0 16px;
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-default:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.btn-default:active {
+    transform: translateY(0);
+}
+
+/* ==================== 메인 설정 (3열 그리드 - 2200px 최적화) ==================== */
+.settings-grid-main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.settings-column {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s ease;
+}
+
+.settings-column:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.column-header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.column-header h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+}
+
+.column-subtitle {
+    font-size: 0.85em;
+    color: var(--text-tertiary);
+}
+
+/* 1열: Textarea */
+.settings-column textarea {
+    flex: 1;
+    padding: 14px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    color: var(--text-primary);
+    font-size: 0.9em;
+    line-height: 1.6;
+    resize: none;
+    margin-bottom: 12px;
+    min-height: 500px;
+}
+
+.settings-column textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+/* 2열: 토글 */
+.format-toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.toggle-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toggle-item:hover {
+    background: var(--bg-tertiary);
+}
+
+.toggle-item span:first-child {
+    font-size: 0.9em;
+    color: var(--text-primary);
+}
+
+.toggle-item input {
+    display: none;
+}
+
+.toggle-ui {
+    position: relative;
+    width: 42px;
+    height: 22px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    transition: 0.3s;
+}
+
+.toggle-ui::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
+}
+
+.toggle-item input:checked + .toggle-ui {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.toggle-item input:checked + .toggle-ui::before {
+    transform: translateX(20px);
+}
+
+/* 3열: Select */
+.style-selects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.select-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.select-group label {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.select-group select {
+    height: 36px;
+    padding: 0 10px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    color: var(--text-primary);
+    font-size: 0.85em;
+    cursor: pointer;
+}
+
+.select-group select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+/* 상세설명 (select 아래) */
+.select-help {
+    display: block;
+    font-size: 0.75em;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+    line-height: 1.4;
+    font-style: italic;
+}
+
+.select-group label[title] {
+    cursor: help;
+    border-bottom: 1px dotted var(--text-tertiary);
+    width: fit-content;
+    padding-bottom: 1px;
+}
+
+.select-group option[title] {
+    color: var(--text-primary);
+}
+
+/* 정보 노트 */
+.info-note {
+    background: rgba(59, 130, 246, 0.1);
+    border-left: 3px solid var(--info-text);
+    padding: 10px 12px;
+    border-radius: var(--radius-btn);
+    font-size: 0.85em;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+/* ==================== Footer 버튼 영역 ==================== */
+.settings-footer-buttons {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s ease;
+}
+
+.settings-footer-buttons:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.footer-center {
+    flex: 1;
+    justify-content: center;
+}
+
+/* 프리셋 추가 버튼 (보라색) */
+.btn-add-preset {
+    height: 50px;
+    padding: 0 36px;
+    border: 2px solid rgba(102, 126, 234, 0.6) !important;
+    background: transparent !important;
+    color: var(--accent-primary) !important;
+    font-weight: 600;
+    font-size: 1em;
+    border-radius: var(--radius-btn);
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.btn-add-preset:hover {
+    background: var(--accent-primary) !important;
+    color: white !important;
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+    transform: translateY(-1px);
+}
+
+/* 버튼 텍스트 처리 */
+.btn-add-preset {
+    /* HTML의 ➥ 이모지를 CSS 별 아이콘으로 대체 */
+}
+
+.btn-add-preset::before {
+    content: '⭐ ';
+}
+
+.btn-back-footer {
+    height: 50px;
+    padding: 0 28px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-back-footer:hover {
+    background: var(--border-color);
+}
+
+.btn-reset {
+    height: 50px;
+    padding: 0 28px;
+    background: transparent;
+    color: var(--error);
+    border: 1px solid var(--error);
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-reset:hover {
+    background: var(--error);
+    color: white;
+}
+
+.btn-cancel {
+    height: 50px;
+    padding: 0 28px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    background: var(--border-color);
+}
+
+.btn-save {
+    height: 50px;
+    padding: 0 36px;
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+}
+
+.btn-save:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
+}
+
+/* ====================  나의 설정 모음 ==================== */
+.preset-manager {
+    margin-bottom: 20px;
+    border: 1.5px solid rgba(102, 126, 234, 0.4) !important;
+    box-shadow: 0 2px 12px rgba(102, 126, 234, 0.15);
+    transition: all 0.2s;
+}
+
+.preset-manager:hover {
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.25);
+}
+
+/* 섹션 타이틀에 별 아이콘 추가 */
+.preset-manager .section-title-compact::before {
+    content: '⭐ ';
+}
+
+.preset-info {
+    font-size: 0.9em;
+    color: var(--text-tertiary);
+    margin-bottom: 16px;
+    padding: 0 0 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.preset-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+}
+
+.preset-card {
+    background: var(--bg-primary);
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    padding: 14px 16px;
+    transition: all 0.2s;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.preset-card:hover {
+    border-color: var(--accent-primary);
+    background: var(--bg-tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.preset-card.active {
+    border-color: var(--accent-primary);
+    background: rgba(99, 102, 241, 0.05);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.preset-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    gap: 12px;
+    min-height: 36px;
+}
+
+.preset-name-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.preset-icon {
+    font-size: 1.4em;
+    flex-shrink: 0;
+}
+
+.preset-name {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.preset-card.active .preset-name {
+    font-weight: 700;
+}
+
+.preset-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--accent-primary);
+    border-radius: var(--radius-btn);
+    font-size: 0.7em;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.preset-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.preset-action-btn {
+    padding: 6px 10px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-size: 0.75em;
+    font-weight: 500;
+    transition: all 0.2s;
+    white-space: nowrap;
+    color: var(--text-primary);
+}
+
+.preset-action-btn:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--text-tertiary);
+}
+
+.preset-action-btn.edit:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.preset-action-btn.delete:hover {
+    border-color: var(--error);
+    color: var(--error);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.preset-description {
+    font-size: 0.85em;
+    color: var(--text-tertiary);
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.preset-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75em;
+    color: var(--text-tertiary);
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.preset-stats {
+    display: flex;
+    gap: 12px;
+}
+
+.preset-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-tertiary);
+}
+
+.preset-empty-icon {
+    font-size: 3em;
+    margin-bottom: 12px;
+}
+
+.preset-empty-text {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+/* 프리셋 모달 */
+.preset-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.preset-modal.active {
+    display: flex;
+}
+
+.preset-modal-content {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-btn);
+    padding: 24px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.preset-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.preset-modal-title {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.preset-modal-close {
+    font-size: 1.5em;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.preset-modal-close:hover {
+    color: var(--text-primary);
+}
+
+.preset-form-group {
+    margin-bottom: 16px;
+}
+
+.preset-form-group label {
+    display: block;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.preset-form-group input,
+.preset-form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    color: var(--text-primary);
+    font-size: 0.9em;
+}
+
+.preset-form-group input:focus,
+.preset-form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.preset-modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* ==================== 홈으로 돌아가기 버튼 ==================== */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 42px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+    color: white;
+    border: none;
+    border-radius: var(--radius-btn);
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+}
+
+.btn-back:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+}
+
+.btn-back:active {
+    transform: translateY(-1px);
+}
+
+/* Footer 버튼들 크기 조정 */
+.settings-footer-buttons .btn--large {
+    height: 50px !important;
+    padding: 0 28px !important;
+    font-size: 1em !important;
+    font-weight: 500 !important;
+    border-radius: var(--radius-btn) !important;
+}
+
+.settings-footer-buttons .btn--primary.btn--large {
+    padding: 0 36px !important;
+    font-weight: 600 !important;
+}
+
+.settings-footer-buttons .btn--danger.btn--large {
+    font-weight: 500 !important;
+}

@@ -1,0 +1,111 @@
+/* ==================== 헤더 버튼 스타일 통일 (심플 & 플랫) ==================== */
+
+/* 모든 헤더 버튼을 카드 스타일처럼 심플하게 */
+.header .btn,
+.header .btn--icon,
+.header button,
+.header a.btn {
+    /* 카드와 동일한 심플 디자인 */
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-btn) !important;
+    
+    /* 그라데이션 제거 - 완전 플랫 */
+    box-shadow: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.header .btn:hover,
+.header .btn--icon:hover,
+.header button:hover,
+.header a.btn:hover {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--accent-primary) !important;
+    transform: none !important; /* 움직임 제거 */
+    box-shadow: none !important;
+}
+
+/* 활성 상태도 플랫하게 */
+.header .btn:active,
+.header .btn--icon:active,
+.header button:active,
+.header a.btn:active {
+    background: var(--bg-primary) !important;
+    transform: none !important;
+}
+
+/* 특정 버튼 스타일 통일 */
+.btn-report,
+.btn-guide,
+.btn-notice,
+.btn-home,
+.btn-settings,
+.btn-shortcuts,
+.btn-action {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-btn) !important;
+    box-shadow: none !important;
+}
+
+.btn-report:hover,
+.btn-guide:hover,
+.btn-notice:hover,
+.btn-home:hover,
+.btn-settings:hover,
+.btn-shortcuts:hover,
+.btn-action:hover {
+    background: var(--bg-tertiary) !important;
+    border-color: var(--accent-primary) !important;
+    box-shadow: none !important;
+}
+
+/* 테마 토글 버튼도 통일 */
+.theme-toggle {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-btn) !important;
+    box-shadow: none !important;
+}
+
+.theme-toggle:hover {
+    background: var(--bg-tertiary) !important;
+    border-color: var(--accent-primary) !important;
+    box-shadow: none !important;
+}
+
+/* 뱃지 스타일 통일 */
+.badge,
+.badge--warning,
+.badge--primary,
+.badge--success,
+.badge--danger,
+.badge--info {
+    border-radius: var(--radius-btn) !important;
+    box-shadow: none !important;
+}
+
+/* 라이트 모드 대응 */
+body.light-mode .header .btn,
+body.light-mode .header .btn--icon,
+body.light-mode .header button,
+body.light-mode .header a.btn,
+body.light-mode .theme-toggle,
+body.light-mode .btn-action {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+body.light-mode .header .btn:hover,
+body.light-mode .header .btn--icon:hover,
+body.light-mode .header button:hover,
+body.light-mode .header a.btn:hover,
+body.light-mode .theme-toggle:hover,
+body.light-mode .btn-action:hover {
+    background: var(--bg-tertiary) !important;
+    border-color: var(--accent-primary) !important;
+}

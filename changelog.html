@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="Copyright (c) 2025 김도현. All Rights Reserved.">
+    <meta name="author" content="김도현">
+    <title>업데이트 내역 - RE: </title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+         crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components-base.css">
+    <link rel="stylesheet" href="css/components-layout.css">
+    <link rel="stylesheet" href="css/browser-compatibility.css">
+    <link rel="stylesheet" href="css/header-button-unify.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            min-height: 100vh;
+        }
+        
+        .changelog-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 40px 40px 40px;
+            flex: 1;
+        }
+        
+        .changelog-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .changelog-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .changelog-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .changelog-header p {
+            font-size: 1em;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* 아코디언 스타일 */
+        .changelog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .version-accordion {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .version-accordion:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+        
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 35px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .accordion-header:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .version-accordion.expanded .accordion-header {
+            border-bottom-color: var(--border-color);
+        }
+        
+        .accordion-title {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .version-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .version-number {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: var(--accent-primary);
+        }
+        
+        .version-date {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .update-count {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            color: var(--accent-primary);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+        }
+        
+        .accordion-icon {
+            font-size: 1.5em;
+            color: var(--text-tertiary);
+            transition: transform 0.3s;
+        }
+        
+        .version-accordion.expanded .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+            opacity: 0;
+        }
+        
+        .version-accordion.expanded .accordion-content {
+            max-height: 2000px;
+            opacity: 1;
+        }
+        
+        .accordion-body {
+            padding: 35px;
+            padding-top: 25px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .feature-card {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.15);
+            border-color: var(--accent-primary);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            font-size: 2.8em;
+            margin-bottom: 18px;
+            display: block;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+        
+        .feature-title {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .feature-desc {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        .changelog-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 42px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-back:active {
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+            .changelog-container {
+                padding: 30px 20px 50px 20px;
+            }
+            
+            .changelog-header {
+                padding: 40px 25px;
+                margin-bottom: 40px;
+            }
+            
+            .changelog-header h1 {
+                font-size: 2em;
+            }
+            
+            .accordion-header {
+                padding: 20px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .accordion-title {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .version-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .version-number {
+                font-size: 1.5em;
+            }
+            
+            .accordion-icon {
+                position: absolute;
+                top: 25px;
+                right: 20px;
+            }
+            
+            .accordion-body {
+                padding: 25px 20px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 공통 Header (JS로 자동 생성) -->
+    <div class="header"></div>
+
+    <main class="changelog-container">
+        <div class="changelog-header">
+            <div class="changelog-icon">📝</div>
+            <h1>업데이트 내역</h1>
+            <p>주요 기능 한눈에 보기</p>
+        </div>
+        
+        <div class="changelog-list">
+            <!-- v0.9.1 - 최신 버전 (기본 펼침) -->
+            <div class="version-accordion expanded" data-version="v0.9.1">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">
+                        <div class="version-info">
+                            <span class="version-number">v0.9.1</span>
+                            <span class="version-date">2025.11.09</span>
+                        </div>
+                        <span class="update-count">4개 업데이트</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <span class="feature-icon">🎨</span>
+                                <h3 class="feature-title">보고서 작성 페이지 UI/UX 대폭 개선</h3>
+                                <p class="feature-desc">3단 레이아웃으로 재설계하여 직관적이고 효율적인 작업 환경 제공</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <span class="feature-icon">⚙️</span>
+                                <h3 class="feature-title">모델 선택 기능 추가</h3>
+                                <p class="feature-desc">Groq와 GPT 중 원하는 모델만 선택하여 사용하거나 두 모델 모두 사용 가능</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <span class="feature-icon">🛡️</span>
+                                <h3 class="feature-title">사용량 제한 시스템</h3>
+                                <p class="feature-desc">일일 30회 생성 제한으로 무료 API 사용량 조기 소진 방지</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <span class="feature-icon">🔐</span>
+                                <h3 class="feature-title">API 키 암호화</h3>
+                                <p class="feature-desc">AES-256 방식으로 API 키를 안전하게 암호화하여 저장</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- v0.9 - 초기 릴리즈 (기본 접힘) -->
+            <div class="version-accordion" data-version="v0.9">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title">
+                        <div class="version-info">
+                            <span class="version-number">v0.9</span>
+                            <span class="version-date">2025.11.04 - 초기 릴리즈</span>
+                        </div>
+                        <span class="update-count">6개 업데이트</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <span class="feature-icon">🤖</span>
+                                <h3 class="feature-title">듀얼 AI 생성</h3>
+                                <p class="feature-desc">Groq와 GPT 두 모델로 동시에 보고서를 생성하고 비교할 수 있습니다</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <span class="feature-icon">💬</span>
+                                <h3 class="feature-title">AI 챗봇 수정</h3>
+                                <p class="feature-desc">생성된 보고서를 대화로 실시간 수정하고 변경 사항을 확인할 수 있습니다</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <span class="feature-icon">⚙️</span>
+                                <h3 class="feature-title">세밀한 설정</h3>
+                                <p class="feature-desc">분량 7단계, 구조 6가지, 스타일 11가지 옵션으로 맞춤 설정이 가능합니다</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <span class="feature-icon">💾</span>
+                                <h3 class="feature-title">프리셋 저장</h3>
+                                <p class="feature-desc">자주 쓰는 설정을 프리셋으로 저장하고 클릭 한 번으로 전환할 수 있습니다</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <span class="feature-icon">📁</span>
+                                <h3 class="feature-title">히스토리 관리</h3>
+                                <p class="feature-desc">최근 50개 보고서를 자동 저장하고 검색, 정렬, 편집할 수 있습니다</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <span class="feature-icon">🛡️</span>
+                                <h3 class="feature-title">데이터 관리</h3>
+                                <p class="feature-desc">백업/복원, API 키 암호화, 선택적 초기화로 안전하게 데이터를 관리합니다</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="changelog-footer">
+            <a href="index.html" class="btn-back">
+                <span>🏠</span>
+                <span>홈으로 돌아가기</span>
+            </a>
+        </div>
+        
+        <!-- Google AdSense 디스플레이 광고 -->
+        <div style="text-align: center; margin: 40px auto; max-width: 728px;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9257454501555292"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="js/browser-polyfills.js"></script>
+    <script src="js/common-components.js"></script>
+    
+    <script>
+        // 아코디언 토글 함수
+        function toggleAccordion(headerElement) {
+            const accordion = headerElement.closest('.version-accordion');
+            const isExpanded = accordion.classList.contains('expanded');
+            
+            // 모든 아코디언 닫기
+            document.querySelectorAll('.version-accordion').forEach(acc => {
+                acc.classList.remove('expanded');
+            });
+            
+            // 클릭한 아코디언만 토글
+            if (!isExpanded) {
+                accordion.classList.add('expanded');
+            }
+        }
+        
+        // 페이지 로드 시 최신 버전만 펼침
+        document.addEventListener('DOMContentLoaded', function() {
+            const latestVersion = document.querySelector('.version-accordion[data-version="v0.9.1"]');
+            if (latestVersion) {
+                latestVersion.classList.add('expanded');
+            }
+        });
+    </script>
+</body>
+</html>

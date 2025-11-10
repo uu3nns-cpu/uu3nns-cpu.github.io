@@ -1,0 +1,948 @@
+/**
+ * Report Unified CSS
+ * report.html 전용 통합 스타일시트
+ * 
+ * 통합된 파일:
+ * - report-sidebar.css (사이드바 레이아웃)
+ * - report-enhancements.css (UI 개선)
+ * - report-custom.css (커스텀 스타일)
+ * 
+ * 셀렉터 특정성을 높여 !important 없이 우선순위 확보
+ */
+
+/* ============================================
+   SECTION 1: 사이드바 레이아웃
+   ============================================ */
+
+/* 3단 레이아웃 구조 */
+.report-layout {
+    display: flex;
+    width: 100%;
+    gap: 0;
+    height: calc(100vh - 120px);
+    overflow: hidden;
+    position: relative;
+    direction: ltr;
+}
+
+/* 우측 사이드바 */
+.report-layout .settings-sidebar {
+    position: fixed;
+    right: -494px;
+    top: 60px;
+    width: 494px;
+    height: calc(100vh - 120px);
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-shrink: 0;
+    transition: right 0.33s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10000;
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.3);
+}
+
+.report-layout .settings-sidebar.open {
+    right: 0;
+}
+
+/* 사이드바 헤더 */
+.report-layout .sidebar-header {
+    padding: 24px 24px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%);
+    flex-shrink: 0;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.report-layout .sidebar-header h3 {
+    font-size: 1.3em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+/* 사이드바 닫기 버튼 */
+.report-layout .sidebar-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    padding: 0;
+}
+
+.report-layout .sidebar-close-btn:hover {
+    background: rgba(255, 0, 0, 0.1);
+    color: var(--error);
+    transform: scale(1.1);
+}
+
+/* 현재 프리셋 표시 */
+.report-layout .current-preset-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    font-size: 0.9em;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+    transition: all 0.3s ease;
+}
+
+.report-layout .current-preset-display:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* 사이드바 섹션 */
+.report-layout .sidebar-section {
+    border-bottom: 1px solid var(--border-color);
+    padding: 24px 24px;
+    margin: 0 12px;
+    transition: all 0.3s ease;
+}
+
+.report-layout .sidebar-section:hover {
+    background: rgba(102, 126, 234, 0.03);
+    border-radius: 12px;
+    margin: 0 8px;
+    padding: 24px 28px;
+}
+
+.report-layout .sidebar-section:last-of-type {
+    border-bottom: none;
+}
+
+.report-layout .sidebar-section-title {
+    font-size: 0.95em;
+    font-weight: 700;
+    color: var(--accent-primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+/* ============================================
+   SECTION 2: UI 개선 및 모달
+   ============================================ */
+
+/* 팁 3칼럼 레이아웃 */
+.report-layout .tip-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+}
+
+/* 모달 공통 스타일 */
+.shortcuts-modal, 
+.report-history-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s;
+}
+
+/* 데스크톱: 사이드바 항상 표시 */
+@media (min-width: 1024px) {
+    .report-layout .settings-sidebar {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .report-layout {
+        grid-template-columns: 280px 1fr;
+    }
+}
+
+/* ============================================
+   SECTION 3: 메인 레이아웃 - 좌우 분할
+   ============================================ */
+
+/* Main Area 레이아웃 - 좌우 분할 (비율 최적화) */
+.report-layout .main-area {
+    display: grid;
+    grid-template-columns: minmax(600px, 1.5fr) minmax(400px, 1fr);
+    grid-template-areas: "output input";
+    gap: 20px;
+    height: calc(100vh - 80px);
+    padding: 20px;
+    padding-bottom: 60px;
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+    transition: margin-right 0.33s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.report-layout .main-area.sidebar-open {
+    margin-right: 494px;
+}
+
+/* 좌측: 출력 영역 (결과) */
+.report-layout .output-area-compact {
+    grid-area: output;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: calc(100vh - 160px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.2s ease;
+    min-height: 0;
+}
+
+.report-layout .output-area-compact:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* 우측: 입력 영역 (메모) - 높이 최대화 강제 */
+.report-layout .input-area-compact {
+    grid-area: input;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.2s ease;
+    min-height: 0;
+}
+
+.report-layout .input-area-compact:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   SECTION 4: 입력 영역 스타일
+   ============================================ */
+
+/* 입력 헤더 */
+.report-layout .input-header-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+    flex-grow: 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.report-layout .input-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    min-height: 48px;
+    box-sizing: border-box;
+}
+
+/* 상담 메모 타이틀 */
+.report-layout .memo-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+}
+
+/* 구분선 스타일 - 완전히 숨김 */
+.report-layout .input-divider {
+    display: none;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* 액션 버튼 영역 */
+.report-layout .input-actions-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 20px;
+    gap: 12px;
+    border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.report-layout .button-group-left,
+.report-layout .button-group-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.report-layout .button-group-middle {
+    flex: 1;
+}
+
+/* Textarea 영역 - 최대 높이 확보 강제 */
+.report-layout .textarea-wrapper {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    overflow: hidden;
+    position: relative;
+    min-height: 0;
+    max-height: 100%;
+}
+
+.report-layout .input-textarea-compact {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    padding: 14px;
+    font-size: 0.95em;
+    line-height: 1.8;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    resize: none;
+    transition: all 0.2s;
+    font-family: inherit;
+    text-align: justify;
+    word-break: keep-all;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.report-layout .input-textarea-compact:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+/* 글자수 오버레이 */
+.report-layout .char-count-overlay {
+    position: absolute;
+    bottom: 18px;
+    right: 26px;
+    font-size: 0.75em;
+    color: var(--text-tertiary);
+    background: var(--bg-secondary);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    pointer-events: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 생성 버튼 영역 */
+.report-layout .generate-button-area {
+    padding: 10px 20px;
+    background: var(--bg-secondary);
+    border-top: 0;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 가운데 정렬 */
+    gap: 12px;
+    position: relative; /* 사용량 배지 절대 위치 기준 */
+}
+
+/* 보고서 작성 버튼 - 가운데 정렬 */
+.report-layout .generate-button-area .btn-generate {
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+/* 사용량 배지 - 우측 고정 */
+.report-layout .usage-badge-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    right: 20px; /* 우측에 고정 */
+}
+
+/* ============================================
+   SECTION 5: 출력 영역 - Empty State
+   ============================================ */
+
+.report-layout .output-empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 60px 40px;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.06) 0%, transparent 50%),
+        var(--bg-primary);
+}
+
+.report-layout .empty-hero {
+    text-align: center;
+    max-width: 600px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.report-layout .empty-title {
+    font-size: 5em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+.report-layout .empty-divider {
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(102, 126, 234, 0.8), 
+        rgba(118, 75, 162, 0.8),
+        transparent
+    );
+    margin: 40px auto; /* 32px -> 40px로 증가 */
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+    display: block; /* none -> block으로 변경 */
+}
+
+/* 부제 텍스트 스타일 - 크기 증가, 볼드체, 줄간격 넘어 */
+.report-layout .empty-description {
+    font-size: 1.8em; /* 크기 증가 */
+    font-weight: 700; /* 볼드체 적용 */
+    color: var(--text-primary);
+    margin: 0;
+    margin-bottom: 20px; /* 줄간격 넘어 */
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+.report-layout .empty-subdescription {
+    font-size: 1.5em; /* 크기 증가 */
+    font-weight: 600; /* 볼드체 적용 */
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+}
+
+/* ============================================
+   SECTION 6: 탭 및 출력 패널 - 크기 완전 통일
+   ============================================ */
+
+/* 출력 탭 컨테이너 */
+.report-layout .output-tabs-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* 출력 탭 헤더 */
+.report-layout .output-tabs-header {
+    display: flex;
+    justify-content: stretch;
+    gap: 0;
+    padding: 12px 20px;
+    background: var(--bg-tertiary);
+    border-bottom: 2px solid var(--border-color);
+    flex-shrink: 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    min-height: 48px;
+    box-sizing: border-box;
+}
+
+.report-layout .output-tab {
+    padding: 6px 16px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    bottom: 0;
+    border-radius: 0;
+    flex: 1;
+    text-align: center;
+}
+
+/* 비교 탭은 더 넓게 */
+.report-layout .output-tab[data-tab="compare"] {
+    flex: 1.5;
+    padding: 6px 24px;
+}
+
+.report-layout .output-tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+.report-layout .output-tab.active {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+    background: var(--bg-secondary);
+}
+
+/* 출력 탭 패널 */
+.report-layout .output-tab-panel {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 40px;
+}
+
+.report-layout .output-tab-panel.active {
+    display: flex;
+}
+
+/* ============================================
+   SECTION 7: 비교 패널과 개별 패널 헤더 - 완전 통일
+   ============================================ */
+
+/* 비교 패널 헤더 */
+.report-layout .compare-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+    border-radius: 0;
+    min-height: 48px;
+    height: 48px;
+    box-sizing: border-box;
+}
+
+/* 개별 패널 헤더 */
+.report-layout .output-header-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+    border-radius: 0;
+    min-height: 48px;
+    height: 48px;
+    box-sizing: border-box;
+}
+
+/* 출력 카운트 통일 */
+.report-layout .output-count {
+    font-size: 0.85em;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* 버튼 스타일 통일 */
+.report-layout .compare-panel-header .btn,
+.report-layout .output-header-compact .btn,
+.report-layout .compare-panel-header button,
+.report-layout .output-header-compact button {
+    padding: 6px 14px;
+    font-size: 0.85em;
+    height: auto;
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+/* ============================================
+   SECTION 8: 비교 콘텐츠와 개별 콘텐츠 - 완전 통일
+   ============================================ */
+
+/* 비교 모드 컨테이너 */
+.report-layout .output-compare-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border-color);
+    height: 100%;
+    overflow: hidden;
+    padding-bottom: 16px;
+}
+
+.report-layout .output-compare-panel {
+    background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 0;
+    border: none;
+}
+
+/* 개별 패널 컨테이너 */
+.report-layout .output-panel-content {
+    background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* 비교 콘텐츠 영역 - 크기 및 여백 최적화 */
+.report-layout .compare-content {
+    padding: 20px;
+    line-height: 1.8;
+    font-size: 0.95em;
+    overflow-y: auto;
+    flex: 1;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin: 12px;
+    margin-bottom: 20px;
+    background: var(--bg-primary);
+    text-align: justify;
+    word-break: keep-all;
+    box-sizing: border-box;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+}
+
+/* 개별 콘텐츠 영역 - 크기 및 여백 최적화 */
+.report-layout .output-content {
+    padding: 20px;
+    line-height: 1.8;
+    font-size: 0.95em;
+    color: var(--text-primary);
+    overflow-y: auto;
+    flex: 1;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin: 12px;
+    margin-bottom: 20px;
+    background: var(--bg-primary);
+    text-align: justify;
+    word-break: keep-all;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+}
+
+/* 빈 상태 텍스트 제거 */
+.report-layout .output-content:empty::before,
+.report-layout .compare-content:empty::before,
+.report-layout .output-content:empty::after,
+.report-layout .compare-content:empty::after {
+    content: none;
+    display: none;
+}
+
+/* ============================================
+   SECTION 9: 로딩 애니메이션
+   ============================================ */
+
+.report-layout .loading {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 30px;
+    gap: 16px;
+    flex: 1;
+}
+
+.report-layout .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   SECTION 10: Floating 버튼 및 Resize Handle 숨김
+   ============================================ */
+
+/* Floating 버튼 숨김 */
+.sidebar-floating-toggle,
+.chatbot-floating-btn {
+    position: static;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    top: auto;
+    margin: 0;
+    transform: none;
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Resize Handle 완전히 숨김 */
+.resize-handle,
+.resize-handle-bar,
+.resizer,
+.drag-handle,
+.splitter,
+.horizontal-separator,
+.horizontal-resizer,
+.horizontal-divider {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    border: none !important;
+    background: none !important;
+}
+
+/* ============================================
+   SECTION 11: 반응형 디자인
+   ============================================ */
+
+@media (max-width: 1400px) {
+    .report-layout .main-area {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        height: auto;
+        min-height: calc(100vh - 80px);
+    }
+    
+    .report-layout .output-area-compact,
+    .report-layout .input-area-compact {
+        min-height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .report-layout .main-area {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .report-layout .output-compare-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+}
+
+/* ============================================
+   SECTION 12: 마크다운 콘텐츠 스타일
+   ============================================ */
+
+.report-layout .output-content h1,
+.report-layout .output-content h2,
+.report-layout .output-content h3,
+.report-layout .compare-content h1,
+.report-layout .compare-content h2,
+.report-layout .compare-content h3 {
+    color: var(--text-primary);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.report-layout .output-content p,
+.report-layout .compare-content p {
+    margin-bottom: 12px;
+}
+
+.report-layout .output-content ul,
+.report-layout .output-content ol,
+.report-layout .compare-content ul,
+.report-layout .compare-content ol {
+    margin-bottom: 12px;
+    padding-left: 24px;
+}
+
+/* 라이트 모드 대응 */
+body.light-mode .report-layout .usage-badge-inline {
+    background: #ffffff;
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+/* ============================================
+   SECTION 13: 사이드바 아이템 스타일 개선
+   ============================================ */
+
+/* 설정 미리보기 아이템 */
+.report-layout .setting-preview-item,
+.report-layout .format-preview-list > div,
+.report-layout .style-preview-list > div {
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.03) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.report-layout .setting-preview-item:hover,
+.report-layout .format-preview-list > div:hover,
+.report-layout .style-preview-list > div:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.06) 100%);
+    border-color: rgba(102, 126, 234, 0.3);
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+/* 나만의 작성 규칙 */
+.report-layout .custom-prompt-preview {
+    padding: 14px 16px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 10px;
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-style: italic;
+    max-height: 200px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+.report-layout .custom-prompt-preview:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.08) 100%);
+    border-color: rgba(102, 126, 234, 0.35);
+    box-shadow: 0 2px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* API 연결 상태 */
+.report-layout .api-status-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.report-layout .api-status-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.03) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    border-radius: 10px;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.report-layout .api-status-item:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.06) 100%);
+    border-color: rgba(102, 126, 234, 0.3);
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.report-layout .status-badge {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
+
+.report-layout .api-status-item:hover .status-badge {
+    transform: scale(1.2);
+}
+
+/* 프리셋 레이블 및 값 */
+.report-layout .preset-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.report-layout .preset-value {
+    font-weight: 700;
+    color: var(--accent-primary);
+    font-size: 1.05em;
+}
+
+.report-layout .preset-change-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+.report-layout .preset-change-link:hover {
+    background: rgba(102, 126, 234, 0.15);
+    transform: translateX(2px);
+}

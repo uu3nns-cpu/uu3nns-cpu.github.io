@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>후원하기 - RE</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- CSS - 새 시스템 적용 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components-base.css">
+    <link rel="stylesheet" href="css/components-layout.css">
+    <link rel="stylesheet" href="css/header-button-unify.css">
+    
+    <style>
+        /* 후원 페이지 전용 스타일 */
+        
+        .donate-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .donate-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .donate-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .donate-header p {
+            font-size: 1em;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .message-box {
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .message-box p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+        
+        .message-box .highlight {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+        
+        /* 탭 스타일 */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
+            background: var(--bg-secondary);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: var(--bg-tertiary);
+            color: var(--accent-primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab:hover:not(.active) {
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+        
+        /* 탭 컨텐츠 */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .buttons-grid {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .donation-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .donation-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+            border-color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: white;
+        }
+        
+        .donation-btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .btn-icon {
+            font-size: 24px;
+        }
+        
+        .btn-label {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .btn-title {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .btn-desc {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+        
+        .donation-btn:hover .btn-desc {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .btn-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+        
+        .donation-btn:hover .btn-amount {
+            color: white;
+        }
+        
+        .custom-section {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .custom-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .custom-input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .custom-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 16px;
+            text-align: right;
+            transition: all 0.3s;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .custom-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-primary-alpha);
+        }
+        
+        .currency {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .custom-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .custom-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+            background: var(--accent-secondary);
+        }
+        
+        .custom-btn:active {
+            transform: translateY(0);
+        }
+        
+        .donate-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .donate-footer p {
+            color: var(--text-tertiary);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .account-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-tertiary);
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+        
+        .copy-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .copy-btn:hover {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+        
+        .method-info {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .method-info h3 {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .method-info ol {
+            margin-left: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--accent-primary);
+        }
+        
+        /* changelog 스타일 버튼 */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 42px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-back:active {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <!-- 공통 Header (JS로 자동 생성) -->
+    <div class="header"></div>
+
+    <div class="document-container" style="max-width: 600px; margin: 0 auto;">
+        <div class="donate-header">
+            <div class="donate-icon">☕</div>
+            <h1>응원이 큰 힘이 됩니다</h1>
+            <p>상담보고서 도우미가 도움이 되셨나요?<br>소중한 후원이 더 나은 서비스를 만듭니다.</p>
+        </div>
+
+        <div class="message-box">
+            <p>후원해주신 금액은 <span class="highlight">100% 서비스 개선</span>에 사용됩니다.</p>
+            <p>AI 비용, 서버 유지, 새로운 기능 개발 등</p>
+        </div>
+
+        <!-- 탭 메뉴 -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('toss')">💳 토스</button>
+            <button class="tab" onclick="switchTab('kakao')">💛 카카오페이</button>
+        </div>
+
+        <!-- 토스 탭 -->
+        <div id="toss-content" class="tab-content active">
+            <div class="buttons-grid">
+                <a href="#" class="donation-btn" onclick="openToss(3900); return false;">
+                    <div class="btn-left">
+                        <div class="btn-icon">☕</div>
+                        <div class="btn-label">
+                            <div class="btn-title">커피 한 잔</div>
+                            <div class="btn-desc">따뜻한 응원 한 잔</div>
+                        </div>
+                    </div>
+                    <div class="btn-amount">3,900원</div>
+                </a>
+
+                <a href="#" class="donation-btn" onclick="openToss(7900); return false;">
+                    <div class="btn-left">
+                        <div class="btn-icon">🍰</div>
+                        <div class="btn-label">
+                            <div class="btn-title">디저트까지</div>
+                            <div class="btn-desc">특별한 감사의 마음</div>
+                        </div>
+                    </div>
+                    <div class="btn-amount">7,900원</div>
+                </a>
+
+                <a href="#" class="donation-btn" onclick="openToss(9900); return false;">
+                    <div class="btn-left">
+                        <div class="btn-icon">🍜</div>
+                        <div class="btn-label">
+                            <div class="btn-title">한 끼 식사</div>
+                            <div class="btn-desc">든든한 후원</div>
+                        </div>
+                    </div>
+                    <div class="btn-amount">9,900원</div>
+                </a>
+            </div>
+
+            <div class="custom-section">
+                <div class="custom-label">💝 원하는 금액으로 후원하기</div>
+                <div class="custom-input-group">
+                    <input type="number" id="customAmountToss" class="custom-input" placeholder="금액 입력" min="1000" step="100">
+                    <div class="currency">원</div>
+                </div>
+                <button class="custom-btn" onclick="sendCustomAmountToss()">후원하기</button>
+            </div>
+
+            <div class="donate-footer">
+                <p>💳 <strong>토스 송금</strong>으로 간편하게 후원하실 수 있습니다.</p>
+                <div class="account-info">
+                    <span>🏦 토스뱅크 1000-0532-8518 (김도현)</span>
+                    <button class="copy-btn" onclick="copyTossAccount()">복사</button>
+                </div>
+                <p style="font-size: 12px; margin-top: 10px;">
+                    ※ 버튼을 클릭하면 토스 앱이 열립니다.<br>
+                    (토스 미설치 시 계좌번호가 복사됩니다)
+                </p>
+            </div>
+        </div>
+
+        <!-- 카카오페이 탭 -->
+        <div id="kakao-content" class="tab-content">
+            <div class="buttons-grid">
+                <div class="donation-btn" onclick="copyAndNotifyKakao('3900')">
+                    <div class="btn-left">
+                        <div class="btn-icon">☕</div>
+                        <div class="btn-label">
+                            <div class="btn-title">커피 한 잔</div>
+                            <div class="btn-desc">따뜻한 응원</div>
+                        </div>
+                    </div>
+                    <div class="btn-amount">3,900원</div>
+                </div>
+
+                <div class="donation-btn" onclick="copyAndNotifyKakao('7900')">
+                    <div class="btn-left">
+                        <div class="btn-icon">🍰</div>
+                        <div class="btn-label">
+                            <div class="btn-title">디저트까지</div>
+                            <div class="btn-desc">특별한 감사</div>
+                        </div>
+                    </div>
+                    <div class="btn-amount">7,900원</div>
+                </div>
+
+                <div class="donation-btn" onclick="copyAndNotifyKakao('9900')">
+                    <div class="btn-left">
+                        <div class="btn-icon">🍜</div>
+                        <div class="btn-label">
+                            <div class="btn-title">한 끼 식사</div>
+                            <div class="btn-desc">든든한 후원</div>
+                        </div>
+                    </div>
+                    <div class="btn-amount">9,900원</div>
+                </div>
+            </div>
+
+            <div class="custom-section">
+                <div class="custom-label">💝 원하는 금액으로 후원하기</div>
+                <div class="custom-input-group">
+                    <input type="number" id="customAmountKakao" class="custom-input" placeholder="금액 입력" min="1000" step="100">
+                    <div class="currency">원</div>
+                </div>
+                <button class="custom-btn" onclick="sendCustomAmountKakao()">후원하기</button>
+            </div>
+
+            <div class="donate-footer">
+                <div class="account-info">
+                    <span>🏦 토스뱅크 1000-0532-8518 (김도현)</span>
+                    <button class="copy-btn" onclick="copyKakaoAccount()">복사</button>
+                </div>
+
+                <div class="method-info">
+                    <h3>💛 카카오페이에서 송금하는 방법</h3>
+                    <ol>
+                        <li>카카오톡 앱 실행 → 하단 더보기(···)</li>
+                        <li>Pay → 송금 → 계좌번호 입력</li>
+                        <li>금액 입력 → 송금하기</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- 하단 홈으로 돌아가기 -->
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid var(--border-color);">
+            <a href="index.html" class="btn-back">
+                <span>🏠</span>
+                <span>홈으로 돌아가기</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="js/common-components.js"></script>
+    
+    <script>
+        // 계좌 정보
+        const TOSS_ACCOUNT = '1000-0532-8518';
+        const ACCOUNT_HOLDER = '김도현';
+
+        // 탭 전환
+        function switchTab(tab) {
+            // 모든 탭과 컨텐츠 비활성화
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            // 선택한 탭 활성화
+            event.target.classList.add('active');
+            document.getElementById(tab + '-content').classList.add('active');
+        }
+
+        // 토스 송금
+        function openToss(amount) {
+            const tossUrl = `supertoss://send?bank=토스뱅크&accountNo=${TOSS_ACCOUNT}&amount=${amount}&msg=상담보고서도우미후원`;
+            
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                window.location.href = tossUrl;
+                
+                setTimeout(() => {
+                    if (confirm('토스 앱이 설치되어 있지 않습니다.\n계좌번호를 복사하시겠습니까?')) {
+                        copyToClipboard(`토스뱅크 ${TOSS_ACCOUNT} (${ACCOUNT_HOLDER}) ${amount.toLocaleString()}원`);
+                        showToast('계좌번호가 복사되었습니다!\n토스 앱에서 직접 송금해주세요.');
+                    }
+                }, 3000);
+            } else {
+                copyToClipboard(`토스뱅크 ${TOSS_ACCOUNT} (${ACCOUNT_HOLDER})`);
+                showToast(`${amount.toLocaleString()}원 후원\n\n계좌번호가 복사되었습니다!\n토스 앱이나 인터넷뱅킹에서 송금해주세요.\n\n${TOSS_ACCOUNT}\n(${ACCOUNT_HOLDER})`);
+            }
+        }
+
+        function sendCustomAmountToss() {
+            const amount = parseInt(document.getElementById('customAmountToss').value);
+            
+            if (!amount || amount < 1000) {
+                showToast('최소 1,000원 이상 입력해주세요.');
+                return;
+            }
+            
+            openToss(amount);
+        }
+
+        function copyTossAccount() {
+            copyToClipboard(`토스뱅크 ${TOSS_ACCOUNT} (${ACCOUNT_HOLDER})`);
+            showToast('계좌번호가 복사되었습니다!');
+        }
+
+        // 카카오페이
+        function copyAndNotifyKakao(amount) {
+            const text = `토스뱅크 ${TOSS_ACCOUNT} (${ACCOUNT_HOLDER}) ${amount}원`;
+            
+            copyToClipboard(text).then(() => {
+                showToast(`${amount}원 후원 정보가 복사되었습니다!\n카카오페이에서 송금해주세요.`);
+                
+                if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                    setTimeout(() => {
+                        window.location.href = 'kakaotalk://';
+                    }, 1000);
+                }
+            });
+        }
+
+        function sendCustomAmountKakao() {
+            const amount = parseInt(document.getElementById('customAmountKakao').value);
+            
+            if (!amount || amount < 1000) {
+                showToast('최소 1,000원 이상 입력해주세요.');
+                return;
+            }
+            
+            copyAndNotifyKakao(amount);
+        }
+
+        function copyKakaoAccount() {
+            copyToClipboard(`토스뱅크 ${TOSS_ACCOUNT} (${ACCOUNT_HOLDER})`);
+            showToast('계좌번호가 복사되었습니다!');
+        }
+
+        // 유틸리티 함수
+        function copyToClipboard(text) {
+            if (navigator.clipboard) {
+                return navigator.clipboard.writeText(text);
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--bg-tertiary);
+                color: var(--text-primary);
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 14px;
+                z-index: 10001;
+                animation: slideDown 0.3s ease-out;
+                white-space: pre-line;
+                text-align: center;
+                max-width: 90%;
+                border: 1px solid var(--border-color);
+                box-shadow: 0 4px 12px var(--shadow-color);
+            `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideUp 0.3s ease-out';
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+
+        // 엔터키로 후원
+        document.getElementById('customAmountToss').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendCustomAmountToss();
+        });
+
+        document.getElementById('customAmountKakao').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendCustomAmountKakao();
+        });
+
+        // CSS 애니메이션
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from { opacity: 0; transform: translate(-50%, -20px); }
+                to { opacity: 1; transform: translate(-50%, 0); }
+            }
+            @keyframes slideUp {
+                from { opacity: 1; transform: translate(-50%, 0); }
+                to { opacity: 0; transform: translate(-50%, -20px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

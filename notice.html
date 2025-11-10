@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="Copyright (c) 2025 김도현. All Rights Reserved.">
+    <meta name="author" content="김도현">
+    <title>공지사항 - RE</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+         crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components-base.css">
+    <link rel="stylesheet" href="css/components-layout.css">
+    <link rel="stylesheet" href="css/browser-compatibility.css">
+    <link rel="stylesheet" href="css/header-button-unify.css">
+    
+    <style>
+        .notice-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 40px 20px 40px;
+            flex: 1;
+        }
+        
+        .notice-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .notice-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .notice-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .notice-header p {
+            font-size: 1em;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .notice-content {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notice-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .notice-section {
+            margin-bottom: 40px;
+        }
+        
+        .notice-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .notice-section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notice-section-icon {
+            font-size: 1.2em;
+        }
+        
+        .notice-text {
+            font-size: 1.05em;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+        
+        .notice-highlight {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--accent-primary);
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .notice-highlight strong {
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+        
+        .notice-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .notice-list li {
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            position: relative;
+            padding-left: 50px;
+            transition: all 0.2s;
+        }
+        
+        .notice-list li:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-primary);
+            transform: translateX(5px);
+        }
+        
+        .notice-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-primary);
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+        
+        .notice-warning {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .notice-warning-title {
+            color: #f57c00;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .notice-info {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 4px solid #2196f3;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .notice-info-title {
+            color: #1976d2;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .notice-contact {
+            text-align: center;
+            padding: 30px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+        
+        .notice-contact-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        
+        .notice-contact-email {
+            font-size: 1.2em;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .notice-contact-text {
+            color: var(--text-secondary);
+            font-size: 1em;
+        }
+        
+        .notice-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+        
+        .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.35);
+        }
+        
+        .btn-back:active {
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+            .notice-container {
+                padding: 30px 20px 40px 20px;
+            }
+            
+            .notice-content {
+                padding: 30px 25px;
+            }
+            
+            .notice-header h1 {
+                font-size: 2em;
+            }
+            
+            .notice-section-title {
+                font-size: 1.5em;
+            }
+            
+            .notice-text {
+                font-size: 1em;
+            }
+        }
+        
+        /* 피드백 모달 스타일 */
+        .feedback-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .feedback-modal.active {
+            display: flex;
+        }
+        
+        .feedback-modal-content {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            width: 95%;
+            max-width: 1000px;
+            height: 92vh;
+            max-height: none;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .feedback-modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-tertiary);
+            border-radius: 16px 16px 0 0;
+        }
+        
+        .feedback-modal-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .feedback-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .feedback-modal-close:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .feedback-modal-body {
+            flex: 1;
+            overflow: hidden;
+            border-radius: 0 0 16px 16px;
+        }
+        
+        .feedback-modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 공통 Header (JS로 자동 생성) -->
+    <div class="header"></div>
+    
+    <!-- 피드백 모달 -->
+    <div class="feedback-modal" id="feedbackModal" onclick="closeFeedbackModal(event)">
+        <div class="feedback-modal-content" onclick="event.stopPropagation()">
+            <div class="feedback-modal-header">
+                <div class="feedback-modal-title">💬 의견 제출</div>
+                <button class="feedback-modal-close" onclick="closeFeedbackModal()" title="닫기">✕</button>
+            </div>
+            <div class="feedback-modal-body">
+                <iframe id="feedbackIframe" src="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <main class="notice-container">
+        <div class="notice-header">
+            <div class="notice-icon">📢</div>
+            <h1>공지사항</h1>
+            <p>서비스를 제공하는 개발자가 전하는 말씀입니다</p>
+        </div>
+        
+        <div class="notice-content">
+            <div class="notice-section">
+                <p class="notice-text">
+                    안녕하세요. RE: 서비스를 제공하고 있는 상담사입니다.
+                </p>
+                <p class="notice-text">
+                    이 서비스를 만들게 된 계기는, 매번 AI에게 상담일지나 보고서 작성을 요청할 때마다 비슷한 지시를 반복해야 하는 불편함 때문이었습니다. 보다 효율적으로 상담일지를 작성할 수 있는 방법을 찾던 중, AI를 활용한 도구를 직접 개발하게 되었고, 같은 불편을 겪는 분들과 공유하고 싶다는 마음으로 공개하게 되었습니다.
+                </p>
+                <p class="notice-text">
+                    저는 전문 개발자가 아니며, 개인적인 필요에서 출발한 프로젝트이기에 이 서비스를 꾸준히 유지·발전시켜 나갈 수 있을지는 아직 확실치 않습니다. 따라서 예고 없이 서비스가 중단될 수도 있다는 점 양해 부탁드립니다.
+                </p>
+                <p class="notice-text">
+                    이용 중 불편한 점이나 개선이 필요한 부분이 있다면 아래 버튼을 통해 의견을 제출해주세요.
+                </p>
+                
+                <!-- 의견 제출 버튼 -->
+                <div style="text-align: center; margin: 30px 0;">
+                    <button onclick="openFeedbackModal()" class="btn-back" style="display: inline-flex; align-items: center; gap: 8px;">
+                        💬 의견제출
+                    </button>
+                </div>
+                <p class="notice-text">
+                    이 서비스가 여러분의 보고서 작성 시간을 줄이고, 그만큼 더 많은 에너지를 '상담' 그 자체에 집중할 수 있도록 돕는 작은 도구가 되기를 바랍니다. 이용해주셔서 진심으로 감사합니다.
+                </p>
+            </div>
+        </div>
+        
+        <div class="notice-footer">
+            <a href="index.html" class="btn-back">
+                <span>🏠</span>
+                <span>홈으로 돌아가기</span>
+            </a>
+        </div>
+        
+        <!-- Google AdSense 디스플레이 광고 -->
+        <div style="text-align: center; margin: 40px auto; max-width: 728px;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9257454501555292"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="js/browser-polyfills.js"></script>
+    <script src="js/common-components.js"></script>
+    
+    <script>
+        // 피드백 모달 열기
+        function openFeedbackModal() {
+            const modal = document.getElementById('feedbackModal');
+            const iframe = document.getElementById('feedbackIframe');
+            
+            // 구글 폼 URL
+            iframe.src = 'https://docs.google.com/forms/d/e/1FAIpQLScc5DQyJCcwpusgrI_UiTy_NtXMSsdWRk-uJJzx17nxX_d3qg/viewform?embedded=true';
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 피드백 모달 닫기
+        function closeFeedbackModal(event) {
+            const modal = document.getElementById('feedbackModal');
+            const iframe = document.getElementById('feedbackIframe');
+            
+            // 배경 클릭 또는 닫기 버튼 클릭 시
+            if (!event || event.target === modal || event.type === 'click') {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                // iframe 리셋 (다음 열기 위해)
+                setTimeout(() => {
+                    iframe.src = '';
+                }, 300);
+            }
+        }
+        
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('feedbackModal');
+                if (modal.classList.contains('active')) {
+                    closeFeedbackModal();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

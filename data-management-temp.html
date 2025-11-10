@@ -1,0 +1,98 @@
+<!-- API 키 백업 카드 -->
+                <div class="action-card">
+                    <div class="action-card-header">
+                        <div class="action-card-icon backup">🔑</div>
+                        <div class="action-card-content">
+                            <div class="action-card-title">API 키 백업</div>
+                            <div class="action-card-desc">Groq와 GPT API 키만 백업</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-backup" onclick="backupApiKeys()" id="backupApiBtn">
+                            API 키 백업하기
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- API 키 복원 카드 -->
+                <div class="action-card">
+                    <div class="action-card-header">
+                        <div class="action-card-icon restore">🔑</div>
+                        <div class="action-card-content">
+                            <div class="action-card-title">API 키 복원</div>
+                            <div class="action-card-desc">백업된 API 키를 복원 (덮어쓰기)</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-restore" onclick="document.getElementById('restoreApiInput').click()">
+                            파일 선택하기
+                        </button>
+                        <input type="file" id="restoreApiInput" class="hidden-file-input" accept=".json" onchange="restoreApiKeys(this.files[0])">
+                    </div>
+                </div>
+                
+                <!-- 설정 백업 카드 -->
+                <div class="action-card">
+                    <div class="action-card-header">
+                        <div class="action-card-icon backup">⚙️</div>
+                        <div class="action-card-content">
+                            <div class="action-card-title">설정 모음 백업</div>
+                            <div class="action-card-desc">저장된 설정 프리셋만 백업</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-backup" onclick="backupPresets()" id="backupPresetsBtn">
+                            설정 백업하기
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 설정 복원 카드 -->
+                <div class="action-card">
+                    <div class="action-card-header">
+                        <div class="action-card-icon restore">⚙️</div>
+                        <div class="action-card-content">
+                            <div class="action-card-title">설정 모음 복원</div>
+                            <div class="action-card-desc">백업된 설정 프리셋을 복원 (덮어쓰기)</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-restore" onclick="document.getElementById('restorePresetsInput').click()">
+                            파일 선택하기
+                        </button>
+                        <input type="file" id="restorePresetsInput" class="hidden-file-input" accept=".json" onchange="restorePresets(this.files[0])">
+                    </div>
+                </div>
+                
+                <!-- 보고서 백업 카드 -->
+                <div class="action-card">
+                    <div class="action-card-header">
+                        <div class="action-card-icon backup">📋</div>
+                        <div class="action-card-content">
+                            <div class="action-card-title">보고서 백업</div>
+                            <div class="action-card-desc">저장된 모든 보고서를 백업</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-backup" onclick="backupReports()" id="backupReportsBtn">
+                            보고서 백업하기
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 보고서 복원 카드 -->
+                <div class="action-card">
+                    <div class="action-card-header">
+                        <div class="action-card-icon restore">📋</div>
+                        <div class="action-card-content">
+                            <div class="action-card-title">보고서 복원</div>
+                            <div class="action-card-desc">백업된 보고서를 복원 (덮어쓰기)</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-restore" onclick="document.getElementById('restoreReportsInput').click()">
+                            파일 선택하기
+                        </button>
+                        <input type="file" id="restoreReportsInput" class="hidden-file-input" accept=".json" onchange="restoreReports(this.files[0])">
+                    </div>
+                </div>

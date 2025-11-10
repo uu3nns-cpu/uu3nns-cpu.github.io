@@ -1,0 +1,19 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#1a1b26"/>
+  <rect x="50" y="50" width="700" height="300" fill="#24283b" rx="8"/>
+  <text x="400" y="120" font-family="Arial, sans-serif" font-size="24" fill="#a9b1d6" text-anchor="middle" font-weight="bold">
+    📁 RE 폴더 구조
+  </text>
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="18" fill="#7aa2f7" text-anchor="middle">
+    📂 RE/
+  </text>
+  <text x="400" y="230" font-family="Arial, sans-serif" font-size="16" fill="#9ece6a" text-anchor="middle">
+    📄 index.html ← 이 파일을 더블클릭하세요!
+  </text>
+  <text x="400" y="260" font-family="Arial, sans-serif" font-size="14" fill="#565f89" text-anchor="middle">
+    📁 css/, js/, guide/ ...
+  </text>
+  <text x="400" y="320" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#f7768e" text-anchor="middle">
+    ⚠️ 실제 스크린샷으로 교체 필요
+  </text>
+</svg>

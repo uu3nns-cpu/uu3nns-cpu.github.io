@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 관리 - RE</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components-base.css">
+    <link rel="stylesheet" href="css/components-layout.css">
+    <link rel="stylesheet" href="css/browser-compatibility.css">
+    <link rel="stylesheet" href="css/header-button-unify.css">
+    
+    <style>
+        html, body {
+            height: 100%;
+        }
+        
+        .data-management-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 40px 40px 40px;
+            flex: 1;
+        }
+        
+        /* 페이지 헤더 */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .page-header-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .page-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .page-header .subtitle {
+            font-size: 1em;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0 auto;
+        }
+        
+        /* 섹션 공통 */
+        .data-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* 3열 그리드 */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        /* 데이터 타입 카드 */
+        .data-type-card {
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .data-type-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 카드 헤더 */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .card-icon {
+            font-size: 2em;
+        }
+        
+        .card-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .card-desc {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.4;
+            min-height: 40px;
+        }
+        
+        /* 버튼 그룹 */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .data-btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .data-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+        
+        .data-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-backup {
+            background: #10B981;
+            color: white;
+        }
+        
+        .btn-backup:hover:not(:disabled) {
+            background: #059669;
+        }
+        
+        .btn-restore {
+            background: #8B5CF6;
+            color: white;
+        }
+        
+        .btn-restore:hover:not(:disabled) {
+            background: #7C3AED;
+        }
+        
+        .btn-delete {
+            background: transparent;
+            color: #EF4444;
+            border: 2px solid #EF4444;
+        }
+        
+        .btn-delete:hover:not(:disabled) {
+            background: #EF4444;
+            color: white;
+        }
+        
+        /* 전체 관리 섹션 */
+        .full-management-section {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .full-management-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .full-btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .full-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .full-btn-backup {
+            background: #10B981;
+            color: white;
+        }
+        
+        .full-btn-restore {
+            background: #8B5CF6;
+            color: white;
+        }
+        
+        .full-btn-reset {
+            background: #DC2626;
+            color: white;
+        }
+        
+        /* 숨김 파일 입력 */
+        .hidden-file-input {
+            display: none;
+        }
+        
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 42px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- 공통 Header (JS로 자동 생성) -->
+    <div class="header"></div>
+
+    <div id="toast" class="toast"></div>
+
+    <main class="data-management-container">
+        <!-- 페이지 헤더 -->
+        <div class="page-header">
+            <div class="page-header-icon">📦</div>
+            <h1>데이터 관리</h1>
+            <p class="subtitle">
+                API 키, 설정, 보고서를 안전하게 백업하고 복원하세요
+            </p>
+        </div>
+        
+        <!-- 데이터 타입별 관리 -->
+        <div class="data-section">
+            <div class="section-title">🗂️ 데이터 타입별 관리</div>
+            <div class="data-grid">
+                <!-- API 키 관리 -->
+                <div class="data-type-card">
+                    <div class="card-header">
+                        <div class="card-icon">🔑</div>
+                        <div class="card-title">API 키 관리</div>
+                    </div>
+                    <div class="card-desc">
+                        저장된 API 키를 백업하고 복원하거나 삭제합니다
+                    </div>
+                    <div class="button-group">
+                        <button class="data-btn btn-backup" onclick="backupApiKeys()" id="backupApiBtn">
+                            백업하기
+                        </button>
+                        <button class="data-btn btn-restore" onclick="document.getElementById('restoreApiInput').click()">
+                            복원하기
+                        </button>
+                        <button class="data-btn btn-delete" onclick="deleteApiKeys()" id="deleteApiBtn">
+                            삭제하기
+                        </button>
+                    </div>
+                    <input type="file" id="restoreApiInput" class="hidden-file-input" accept=".json" onchange="restoreApiKeys(this.files[0])">
+                </div>
+                
+                <!-- 설정 모음 관리 -->
+                <div class="data-type-card">
+                    <div class="card-header">
+                        <div class="card-icon">⚙️</div>
+                        <div class="card-title">설정 모음 관리</div>
+                    </div>
+                    <div class="card-desc">
+                        저장된 설정 프리셋을 백업하고 복원하거나 삭제합니다
+                    </div>
+                    <div class="button-group">
+                        <button class="data-btn btn-backup" onclick="backupPresets()" id="backupPresetsBtn">
+                            백업하기
+                        </button>
+                        <button class="data-btn btn-restore" onclick="document.getElementById('restorePresetsInput').click()">
+                            복원하기
+                        </button>
+                        <button class="data-btn btn-delete" onclick="deletePresets()" id="deletePresetsBtn">
+                            삭제하기
+                        </button>
+                    </div>
+                    <input type="file" id="restorePresetsInput" class="hidden-file-input" accept=".json" onchange="restorePresets(this.files[0])">
+                </div>
+                
+                <!-- 보고서 관리 -->
+                <div class="data-type-card">
+                    <div class="card-header">
+                        <div class="card-icon">📋</div>
+                        <div class="card-title">보고서 관리</div>
+                    </div>
+                    <div class="card-desc">
+                        저장된 보고서를 백업하고 복원하거나 삭제합니다
+                    </div>
+                    <div class="button-group">
+                        <button class="data-btn btn-backup" onclick="backupReports()" id="backupReportsBtn">
+                            백업하기
+                        </button>
+                        <button class="data-btn btn-restore" onclick="document.getElementById('restoreReportsInput').click()">
+                            복원하기
+                        </button>
+                        <button class="data-btn btn-delete" onclick="deleteReports()" id="deleteReportsBtn">
+                            삭제하기
+                        </button>
+                    </div>
+                    <input type="file" id="restoreReportsInput" class="hidden-file-input" accept=".json" onchange="restoreReports(this.files[0])">
+                </div>
+            </div>
+        </div>
+        
+        <!-- 전체 데이터 관리 -->
+        <div class="full-management-section">
+            <div class="section-title">⚠️ 전체 데이터 관리</div>
+            <p style="color: var(--text-secondary); margin-bottom: 4px; font-size: 0.9em;">
+                모든 데이터를 한 번에 백업하거나 복원할 수 있습니다. 전체 초기화는 신중하게 사용하세요.
+            </p>
+            <div class="full-management-grid">
+                <button class="full-btn full-btn-backup" onclick="backupAll()">
+                    💾 전체 백업
+                </button>
+                <button class="full-btn full-btn-restore" onclick="document.getElementById('restoreAllInput').click()">
+                    📥 전체 복원
+                </button>
+                <button class="full-btn full-btn-reset" onclick="resetAll()">
+                    ⚠️ 전체 초기화
+                </button>
+            </div>
+            <input type="file" id="restoreAllInput" class="hidden-file-input" accept=".json" onchange="restoreAll(this.files[0])">
+        </div>
+        
+        <div class="page-footer">
+            <a href="index.html" class="btn-back">
+                <span>🏠</span>
+                <span>홈으로 돌아가기</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="js/browser-polyfills.js"></script>
+    <script src="js/common-components.js"></script>
+    <script src="js/security.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/data-management.js"></script>
+</body>
+</html>

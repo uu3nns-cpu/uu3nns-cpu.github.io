@@ -1,0 +1,46 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#1a1b26"/>
+  
+  <!-- Chatbot Window -->
+  <rect x="100" y="50" width="600" height="500" fill="#24283b" rx="12" stroke="#7aa2f7" stroke-width="2"/>
+  
+  <!-- Header -->
+  <rect x="100" y="50" width="600" height="60" fill="#7aa2f7" rx="12 12 0 0"/>
+  <text x="400" y="88" font-family="Malgun Gothic, sans-serif" font-size="20" fill="#ffffff" text-anchor="middle" font-weight="bold">
+    🤖 AI 챗봇
+  </text>
+  
+  <!-- Chat Messages -->
+  <rect x="120" y="140" width="460" height="70" fill="#1a1b26" rx="6"/>
+  <text x="135" y="165" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7" font-weight="bold">
+    사용자
+  </text>
+  <text x="135" y="190" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#a9b1d6">
+    문장을 좀 더 공식적으로 바꿔줘
+  </text>
+  
+  <rect x="220" y="230" width="460" height="100" fill="#7aa2f7" rx="6"/>
+  <text x="235" y="255" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#ffffff" font-weight="bold">
+    AI 어시스턴트
+  </text>
+  <text x="235" y="280" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#ffffff">
+    네, 더 공식적인 표현으로 수정하겠습니다.
+  </text>
+  <text x="235" y="305" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#ffffff">
+    "내담자는 학교생활에서의 어려움을..."
+  </text>
+  
+  <!-- Input Area -->
+  <rect x="120" y="460" width="460" height="50" fill="#1a1b26" rx="6" stroke="#565f89" stroke-width="1"/>
+  <text x="135" y="492" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#565f89">
+    메시지를 입력하세요...
+  </text>
+  <rect x="590" y="465" width="80" height="40" fill="#7aa2f7" rx="4"/>
+  <text x="630" y="492" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">
+    전송
+  </text>
+  
+  <text x="400" y="580" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#f7768e" text-anchor="middle">
+    ⚠️ 실제 스크린샷으로 교체 필요
+  </text>
+</svg>
