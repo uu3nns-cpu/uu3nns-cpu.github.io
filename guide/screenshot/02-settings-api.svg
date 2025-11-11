@@ -1,98 +1,75 @@
-<svg width="1200" height="900" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="900" fill="#1a1b26"/>
-  
-  <!-- Header -->
-  <rect x="0" y="0" width="1200" height="60" fill="#24283b"/>
-  <circle cx="40" cy="30" r="15" fill="#565f89"/>
-  <text x="40" y="37" font-family="Arial, sans-serif" font-size="18" fill="#a9b1d6" text-anchor="middle">🌙</text>
-  <circle cx="80" cy="30" r="15" fill="#565f89"/>
-  <text x="80" y="37" font-family="Arial, sans-serif" font-size="18" fill="#a9b1d6" text-anchor="middle">🏠</text>
-  <text x="600" y="40" font-family="Malgun Gothic, sans-serif" font-size="20" fill="#a9b1d6" text-anchor="middle" font-weight="bold">
-    RE: 설정
-  </text>
-  
-  <!-- Content Container -->
-  <rect x="100" y="100" width="1000" height="740" fill="#24283b" rx="12"/>
-  
-  <!-- Page Title -->
-  <text x="600" y="160" font-family="Malgun Gothic, sans-serif" font-size="28" fill="#a9b1d6" text-anchor="middle" font-weight="bold">
-    ⚙️ 설정
-  </text>
-  <text x="600" y="190" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#565f89" text-anchor="middle">
-    API 키 및 프롬프트 설정
-  </text>
-  
-  <!-- API Keys Section -->
-  <rect x="140" y="230" width="920" height="370" fill="#1a1b26" rx="8"/>
-  <text x="170" y="270" font-family="Malgun Gothic, sans-serif" font-size="20" fill="#a9b1d6" font-weight="bold">
-    🔑 API 키 설정
-  </text>
-  <text x="170" y="295" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#565f89">
-    AI 보고서 생성을 위해 API 키를 입력하세요
-  </text>
-  
-  <!-- Groq API Key -->
-  <rect x="170" y="320" width="860" height="100" fill="#24283b" rx="6"/>
-  <text x="190" y="350" font-family="Malgun Gothic, sans-serif" font-size="16" fill="#7aa2f7" font-weight="bold">
-    Groq API Key
-  </text>
-  <text x="980" y="350" font-family="Malgun Gothic, sans-serif" font-size="12" fill="#9ece6a">
-    ✓ 저장됨
-  </text>
-  <rect x="190" y="360" width="820" height="40" fill="#1a1b26" rx="4"/>
-  <text x="210" y="387" font-family="Courier New, monospace" font-size="13" fill="#a9b1d6">
-    gsk_••••••••••••••••••••••••••••••••••••••••1a2b
-  </text>
-  
-  <!-- GPT API Key -->
-  <rect x="170" y="440" width="860" height="100" fill="#24283b" rx="6"/>
-  <text x="190" y="470" font-family="Malgun Gothic, sans-serif" font-size="16" fill="#7aa2f7" font-weight="bold">
-    GPT API Key (선택)
-  </text>
-  <text x="980" y="470" font-family="Malgun Gothic, sans-serif" font-size="12" fill="#565f89">
-    미입력
-  </text>
-  <rect x="190" y="480" width="820" height="40" fill="#1a1b26" rx="4"/>
-  <text x="210" y="507" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#565f89">
-    sk-proj-••••••••••••••••••••••••••••
-  </text>
-  
-  <!-- Info Box -->
-  <rect x="170" y="560" width="860" height="25" fill="#2a3142" rx="4"/>
-  <text x="190" y="578" font-family="Malgun Gothic, sans-serif" font-size="12" fill="#7aa2f7">
-    💡 Groq는 무료이며, GPT는 유료입니다. Groq만으로도 충분히 사용 가능합니다.
-  </text>
-  
-  <!-- Prompt Settings Section -->
-  <rect x="140" y="630" width="920" height="180" fill="#1a1b26" rx="8"/>
-  <text x="170" y="670" font-family="Malgun Gothic, sans-serif" font-size="20" fill="#a9b1d6" font-weight="bold">
-    📝 프롬프트 설정
-  </text>
-  <text x="170" y="695" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#565f89">
-    보고서 작성 스타일 커스터마이징
-  </text>
-  
-  <!-- Prompt Textarea -->
-  <rect x="170" y="710" width="860" height="80" fill="#24283b" rx="6"/>
-  <text x="190" y="735" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#7aa2f7">
-    보고서는 다음 형식으로 작성해주세요:
-  </text>
-  <text x="190" y="755" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#7aa2f7">
-    - 상담 일시와 회기 정보
-  </text>
-  <text x="190" y="775" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#7aa2f7">
-    - 주 호소 문제 및 상담 과정...
-  </text>
-  
-  <!-- Save Button -->
-  <rect x="850" y="860" width="200" height="50" fill="#9ece6a" rx="6"/>
-  <text x="950" y="892" font-family="Malgun Gothic, sans-serif" font-size="16" fill="#1a1b26" text-anchor="middle" font-weight="bold">
-    💾 저장
-  </text>
-  
-  <!-- Back Button -->
-  <rect x="150" y="860" width="200" height="50" fill="#565f89" rx="6"/>
-  <text x="250" y="892" font-family="Malgun Gothic, sans-serif" font-size="16" fill="#a9b1d6" text-anchor="middle" font-weight="bold">
-    ← 대시보드
-  </text>
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="1200" height="800" fill="#ffffff"/>
+    
+    <!-- Header -->
+    <rect width="1200" height="60" fill="url(#headerGrad)"/>
+    <defs>
+        <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+        </linearGradient>
+        
+        <filter id="shadow">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.1"/>
+        </filter>
+    </defs>
+    <text x="30" y="38" font-family="Malgun Gothic, Arial" font-size="20" font-weight="bold" fill="white">RE: 설정</text>
+    
+    <!-- Content Container -->
+    <rect x="100" y="100" width="1000" height="640" rx="12" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="2"/>
+    
+    <!-- Page Title -->
+    <text x="600" y="160" font-family="Malgun Gothic, Arial" font-size="28" font-weight="bold" fill="#1f2937" text-anchor="middle">⚙️ 설정</text>
+    <text x="600" y="190" font-family="Malgun Gothic, Arial" font-size="14" fill="#6b7280" text-anchor="middle">API 키 및 프롬프트 설정</text>
+    
+    <!-- API Keys Section -->
+    <rect x="140" y="230" width="920" height="280" rx="10" fill="white" stroke="#e5e7eb" stroke-width="1" filter="url(#shadow)"/>
+    <text x="170" y="270" font-family="Malgun Gothic, Arial" font-size="20" font-weight="bold" fill="#1f2937">🔑 API 키 설정</text>
+    <text x="170" y="295" font-family="Malgun Gothic, Arial" font-size="13" fill="#6b7280">AI 보고서 생성을 위해 API 키를 입력하세요</text>
+    
+    <!-- Groq API Key -->
+    <rect x="170" y="320" width="860" height="80" rx="8" fill="#f8f9fa" stroke="#d1d5db" stroke-width="1"/>
+    <text x="190" y="350" font-family="Malgun Gothic, Arial" font-size="16" font-weight="bold" fill="#667eea">Groq API Key</text>
+    <rect x="970" y="332" width="50" height="22" rx="4" fill="#d1fae5"/>
+    <text x="995" y="348" font-family="Malgun Gothic, Arial" font-size="12" fill="#10b981" text-anchor="middle">✓ 저장됨</text>
+    <rect x="190" y="360" width="820" height="30" rx="6" fill="white" stroke="#d1d5db" stroke-width="1"/>
+    <text x="210" y="382" font-family="Courier New, monospace" font-size="13" fill="#374151">gsk_••••••••••••••••••••••••••••••••••••••••1a2b</text>
+    
+    <!-- OpenRouter API Key -->
+    <rect x="170" y="420" width="860" height="80" rx="8" fill="#f8f9fa" stroke="#d1d5db" stroke-width="1"/>
+    <text x="190" y="450" font-family="Malgun Gothic, Arial" font-size="16" font-weight="bold" fill="#667eea">OpenRouter API Key (선택)</text>
+    <rect x="980" y="432" width="40" height="22" rx="4" fill="#f3f4f6"/>
+    <text x="1000" y="448" font-family="Malgun Gothic, Arial" font-size="12" fill="#9ca3af" text-anchor="middle">미입력</text>
+    <rect x="190" y="460" width="820" height="30" rx="6" fill="white" stroke="#d1d5db" stroke-width="1"/>
+    <text x="210" y="482" font-family="Malgun Gothic, Arial" font-size="13" fill="#9ca3af">sk-or-v1-••••••••••••••••••••••••••••</text>
+    
+    <!-- Info Box -->
+    <rect x="170" y="520" width="860" height="35" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text x="190" y="542" font-family="Malgun Gothic, Arial" font-size="12" fill="#1e40af">💡 OpenRouter는 GPT-4o-mini를 사용할 수 있으며, Google 계정으로 $5 크레딧을 제공합니다.</text>
+    
+    <!-- Model Selection Section -->
+    <rect x="140" y="540" width="920" height="120" rx="10" fill="white" stroke="#e5e7eb" stroke-width="1" filter="url(#shadow)"/>
+    <text x="170" y="580" font-family="Malgun Gothic, Arial" font-size="20" font-weight="bold" fill="#1f2937">🤖 AI 모델 선택</text>
+    <text x="170" y="605" font-family="Malgun Gothic, Arial" font-size="13" fill="#6b7280">보고서 생성에 사용할 AI 모델을 선택하세요</text>
+    
+    <!-- Model Radio Buttons -->
+    <g transform="translate(190, 620)">
+        <circle cx="10" cy="10" r="8" fill="white" stroke="#667eea" stroke-width="2"/>
+        <circle cx="10" cy="10" r="4" fill="#667eea"/>
+        <text x="30" y="15" font-family="Malgun Gothic, Arial" font-size="14" fill="#1f2937">Groq (llama-3.3-70b)</text>
+    </g>
+    
+    <g transform="translate(450, 620)">
+        <circle cx="10" cy="10" r="8" fill="white" stroke="#d1d5db" stroke-width="2"/>
+        <text x="30" y="15" font-family="Malgun Gothic, Arial" font-size="14" fill="#6b7280">OpenRouter (GPT-4o-mini)</text>
+    </g>
+    
+    <!-- Save Button -->
+    <rect x="850" y="690" width="200" height="40" rx="8" fill="#10b981" filter="url(#shadow)"/>
+    <text x="950" y="715" font-family="Malgun Gothic, Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">💾 저장</text>
+    
+    <!-- Back Button -->
+    <rect x="150" y="690" width="150" height="40" rx="8" fill="white" stroke="#d1d5db" stroke-width="1"/>
+    <text x="225" y="715" font-family="Malgun Gothic, Arial" font-size="16" fill="#6b7280" text-anchor="middle">← 대시보드</text>
 </svg>

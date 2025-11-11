@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3. 고급 기능 - RE:  가이드</title>
+    <title>3. 고급 기능 - RE: 가이드</title>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
@@ -15,20 +15,53 @@
     </script>
     
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-9257454501555292"
          crossorigin="anonymous"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components-base.css">
-    <link rel="stylesheet" href="../css/components-layout.css">
-    <link rel="stylesheet" href="../css/browser-compatibility.css">
-    <link rel="stylesheet" href="../css/header-button-unify.css">
+    <link rel="stylesheet" href="../src/css/base/variables.css">
+    <link rel="stylesheet" href="../src/css/base/base.css">
+    <link rel="stylesheet" href="../src/css/base/layout.css">
+    <link rel="stylesheet" href="../src/css/components/components-base.css">
+    <link rel="stylesheet" href="../src/css/components/components-layout.css">
+    <link rel="stylesheet" href="../src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="../src/css/components/header-unified.css">
     <link rel="stylesheet" href="css/guide-common.css">
     
-
+    <style>
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .shortcut-table th {
+            text-align: left;
+            padding: 16px;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--border-color);
+            font-weight: 600;
+        }
+        .shortcut-table td {
+            padding: 14px 16px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .shortcut-table tr:last-child td {
+            border-bottom: none;
+        }
+        .shortcut-table code {
+            background: var(--bg-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--border-color);
+        }
+    </style>
 </head>
 <body>
     <div class="header"></div>
@@ -40,236 +73,124 @@
 
         <div class="guide-header">
             <div class="guide-number">3</div>
-            <h1>🎨 고급 기능</h1>
-            <p class="guide-header-desc">
-                AI 챗봇, 히스토리 관리 등 심화 기능을 배웁니다
-            </p>
-            <div class="guide-meta">
-                <div class="guide-meta-item">🎯 목표: 효율성 극대화</div>
-            </div>
+            <h1>고급 기능</h1>
+            <p class="guide-header-desc">AI 챗봇, 보고서 관리, 단축키</p>
         </div>
 
-        <!-- 섹션 1: AI 챗봇 -->
+        <!-- AI 챗봇 -->
         <div class="guide-section">
-            <h2>💬 AI 챗봇으로 보고서 수정하기</h2>
+            <h2>💬 AI 챗봇</h2>
             
-            <p>
-                보고서를 생성한 후 <strong>"이 부분만 바꿔줘"</strong> 같은 요청을 할 수 있는 기능입니다.
-                직접 수정하는 대신 AI에게 말로 지시할 수 있어요!
-            </p>
-
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <div class="feature-title">챗봇 사용법</div>
-                <div class="feature-desc">
-                    보고서 작성 페이지 오른쪽 하단의 <strong>🤖 챗봇</strong> 버튼을 클릭하면 챗봇 창이 열립니다. [닫기]는 챗봇 우측 상단
-                </div>
-            </div>
-
-            <h3>📝 챗봇 활용 예시</h3>
+            <p><strong>사용법:</strong> 오른쪽 하단 🤖 버튼 클릭 (단축키: Ctrl+B)</p>
             
-            <div class="example-box">
-                <div class="example-label">💬 사용자 요청</div>
-                <div class="example-text">
-                    "문장을 좀 더 공식적으로 바꿔줘"
-                </div>
-            </div>
-
-            <div class="example-box">
-                <div class="example-label">💬 사용자 요청</div>
-                <div class="example-text">
-                    "2번 문단에 '긍정적 변화'에 대한 내용을 추가해줘"
-                </div>
-            </div>
-
-            <div class="example-box">
-                <div class="example-label">💬 사용자 요청</div>
-                <div class="example-text">
-                    "현재 결과는 유지하면서 사례개념화를 추가로 400자 정도로 작성해줘"
-                </div>
-            </div>
+            <h3>📝 활용 예시</h3>
+            <ul style="line-height: 2;">
+                <li><strong>문체 변경:</strong> "문장을 더 공식적으로 바꿔줘"</li>
+                <li><strong>내용 추가:</strong> "2번 문단에 긍정적 변화 추가해줘"</li>
+                <li><strong>내용 수정:</strong> "마지막 문단을 100자로 줄여줘"</li>
+                <li><strong>설명 요청:</strong> "전문 용어를 쉽게 풀어서 설명해줘"</li>
+            </ul>
 
             <div class="info-box">
-                <h4>💡 챗봇 활용 팁</h4>
-                <ul>
-                    <li><strong>구체적으로:</strong> "좀 더 길게" 보다는 "100자 정도 추가해줘"</li>
-                    <li><strong>단계적으로:</strong> 한 번에 여러 요청보다 하나씩</li>
-                    <li><strong>예시 제공:</strong> "이런 식으로 바꿔줘" 하고 예시를 보여주기</li>
-                    <li><strong>실험 정신:</strong> 마음에 안 들면 다시 요청하기</li>
+                <h4>💡 효과적인 사용법</h4>
+                <ul style="margin-left: 20px;">
+                    <li>구체적으로 요청 ("100자 추가")</li>
+                    <li>단계적으로 수정</li>
+                    <li>예시 제공</li>
+                    <li>마음에 안 들면 재요청</li>
                 </ul>
-            </div>
-
-            <div class="screenshot">
-                <img src="screenshot/03-chatbot-interface.svg" alt="AI 챗봇 인터페이스" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
-                <div class="screenshot-caption">AI 챗봇 인터페이스</div>
             </div>
         </div>
 
-        <!-- 섹션 2: 히스토리 관리 -->
+        <!-- 보고서 관리 -->
         <div class="guide-section">
-            <h2>📚 히스토리 관리하기</h2>
+            <h2>📚 보고서 관리</h2>
             
-            <p>
-                RE는 최근 작성한 보고서를 <strong>최대 50개</strong>까지 자동 저장합니다.
-                언제든 불러와서 수정하거나 복사할 수 있어요.
-            </p>
-
-            <h3>히스토리 기능</h3>
-
-            <div class="feature-card">
-                <div class="feature-icon">💾</div>
-                <div class="feature-title">일시 자동 저장</div>
-                <div class="feature-desc">
-                    메모 작성 중, 다른 페이지로 넘어가거나 하더라도 작성 중 메모를 불러올 수 있습니다. <p> 작업 저장을 버튼을 눌러 메모와 함께 결과를 저장할 수 있으며 작업보기를 통해 언제든지 불러올 수 있습니다.</p>
-                    <small style="color: var(--text-tertiary);">단, 브라우저 데이터를 삭제하면 히스토리도 사라집니다</small>
-                </div>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🔍</div>
-                <div class="feature-title">검색 및 필터</div>
-                <div class="feature-desc">
-                    날짜별, 키워드별로 이전 보고서를 빠르게 찾을 수 있습니다.
-                </div>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">📤</div>
-                <div class="feature-title">내보내기 / 불러오기 (미구현 기능)</div>
-                <div class="feature-desc">
-                    <strong>내보내기:</strong> 히스토리 전체를 JSON 파일로 백업<br>
-                    <strong>불러오기:</strong> 다른 컴퓨터나 브라우저로 히스토리 이동
-                </div>
-            </div>
-
-            <h3>히스토리 활용법</h3>
-            <ol>
-                <li>대시보드에서 <strong>"📋 최근 작성 히스토리"</strong> 섹션 확인</li>
-                <li>원하는 보고서 클릭</li>
-                <li>내용 확인 후:
-                    <ul style="margin-left: 20px;">
-                        <li><strong>수정:</strong> 보고서 작성 페이지에서 다시 열기</li>
-                        <li><strong>복사:</strong> 클립보드로 복사</li>
-                        <li><strong>삭제:</strong> 불필요한 항목 제거</li>
-                    </ul>
-                </li>
-            </ol>
+            <p><strong>저장 방식</strong></p>
+            <ul style="line-height: 2;">
+                <li><strong>자동 저장:</strong> 작성 중 임시 저장</li>
+                <li><strong>작업 저장:</strong> 최대 50개 보관 (Ctrl+S)</li>
+            </ul>
 
             <div class="info-box warning">
-                <h4>⚠️ 백업 권장</h4>
-                <p>
-                    중요한 보고서는 정기적으로 <strong>"내보내기"</strong> 기능으로 백업하세요.
-                    브라우저 캐시를 지우거나 다른 컴퓨터로 이동할 때 유용합니다.
-                </p>
-            </div>
-        </div>
-
-        <!-- 섹션 3: 단축키 -->
-        <div class="guide-section">
-            <h2>⌨️ 단축키로 빠르게 작업하기</h2>
-            
-            <p>자주 사용하는 기능을 키보드로 빠르게 실행할 수 있습니다.</p>
-
-            <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 20px; margin: 24px 0;">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="border-bottom: 2px solid var(--border-color);">
-                            <th style="text-align: left; padding: 12px; color: var(--text-primary);">기능</th>
-                            <th style="text-align: left; padding: 12px; color: var(--text-primary);">단축키</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 12px; color: var(--text-secondary);">보고서 생성</td>
-                            <td style="padding: 12px; color: var(--text-secondary);"><code style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px;">Ctrl + Enter</code></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 12px; color: var(--text-secondary);">보고서 복사</td>
-                            <td style="padding: 12px; color: var(--text-secondary);"><code style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px;">Ctrl + Shift + C</code></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 12px; color: var(--text-secondary);">저장</td>
-                            <td style="padding: 12px; color: var(--text-secondary);"><code style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px;">Ctrl + S</code></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px; color: var(--text-secondary);">챗봇 열기/닫기</td>
-                            <td style="padding: 12px; color: var(--text-secondary);"><code style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px;">Ctrl + B</code></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="info-box">
-                <h4>💡 단축키 팁 (미구현 기능)</h4>
-                <p>설정 페이지에서 단축키를 커스터마이징할 수 있습니다!</p>
-            </div>
-        </div>
-
-        <!-- 섹션 4: 템플릿 -->
-        <div class="guide-section">
-            <h2>📋 템플릿 활용하기</h2>
-            
-            <p>
-                자주 사용하는 보고서 형식을 <strong>템플릿</strong>으로 저장해두면 매번 처음부터 작성할 필요가 없습니다.
-            </p>
-
-            <h3>템플릿 만들기</h3>
-            <ol>
-                <li>마음에 드는 보고서 작성</li>
-                <li><strong>"템플릿으로 저장"</strong> 버튼 클릭</li>
-                <li>템플릿 이름 입력 (예: "개인상담 보고서")</li>
-                <li>저장 완료!</li>
-            </ol>
-
-            <h3>템플릿 사용하기</h3>
-            <ol>
-                <li>보고서 작성 페이지에서</li>
-                <li><strong>"템플릿 불러오기"</strong> 버튼 클릭</li>
-                <li>원하는 템플릿 선택</li>
-                <li>필요한 부분만 수정</li>
-            </ol>
-
-            <div class="example-box">
-                <div class="example-label">📋 템플릿 예시</div>
-                <div class="example-text">
-                    <strong>개인상담 보고서 템플릿:</strong><br>
-                    - 회기 정보<br>
-                    - 주요 호소 문제<br>
-                    - 상담 내용<br>
-                    - 내담자 반응<br>
-                    - 다음 계획
-                </div>
-            </div>
-        </div>
-
-        <!-- 요약 -->
-        <div class="guide-section">
-            <h2>🎉 고급 기능 마스터!</h2>
-            
-            <div class="info-box success">
-                <h4>✅ 이 장에서 배운 내용</h4>
-                <ul>
-                    <li>AI 챗봇으로 보고서 수정하기</li>
-                    <li>히스토리 관리 및 백업</li>
-                    <li>단축키로 빠르게 작업하기</li>
-                    <li>템플릿 활용하기</li>
+                <h4>⚠️ 주의</h4>
+                <ul style="margin-left: 20px;">
+                    <li>브라우저 캐시 삭제 시 모두 사라짐</li>
+                    <li>50개 초과 시 오래된 것부터 자동 삭제</li>
+                    <li><strong>중요한 보고서는 TXT 다운로드 필수!</strong></li>
                 </ul>
             </div>
 
-            <p>다음 장에서는 가장 중요한 <strong>보안 & 개인정보</strong>에 대해 알아봅니다.</p>
+            <h3>🎯 주요 기능</h3>
+            <ul style="line-height: 2;">
+                <li><strong>검색 & 필터:</strong> 제목/내용/기간별 검색</li>
+                <li><strong>상담 일시:</strong> 실제 상담 날짜/시간 기록</li>
+                <li><strong>내보내기:</strong> TXT 파일로 다운로드</li>
+                <li><strong>편집/삭제:</strong> 카드에서 직접 실행</li>
+            </ul>
         </div>
 
-        <!-- Google AdSense 디스플레이 광고 -->
-        <div style="text-align: center; margin: 40px auto; max-width: 728px;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9257454501555292"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+        <!-- 단축키 -->
+        <div class="guide-section">
+            <h2>⌨️ 단축키</h2>
+            
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>단축키</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>보고서 생성</strong></td>
+                        <td><code>Ctrl + Enter</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>보고서 복사</strong></td>
+                        <td><code>Ctrl + Shift + C</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>작업 저장</strong></td>
+                        <td><code>Ctrl + S</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>챗봇 열기/닫기</strong></td>
+                        <td><code>Ctrl + B</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <h4>💡 Mac 사용자</h4>
+                <p><strong>Ctrl</strong> 대신 <strong>Cmd (⌘)</strong> 사용</p>
+            </div>
+        </div>
+
+        <!-- 실전 워크플로우 -->
+        <div class="guide-section">
+            <h2>🎯 추천 작업 흐름</h2>
+            
+            <ol style="font-size: 1.05em; line-height: 2;">
+                <li>메모 작성 (핵심만 간단히)</li>
+                <li>보고서 생성 (Ctrl+Enter)</li>
+                <li>챗봇 수정 (Ctrl+B)</li>
+                <li>즉시 저장 (Ctrl+S)</li>
+                <li>정기 백업 (TXT 다운로드)</li>
+            </ol>
+
+            <h3>💡 Pro 팁</h3>
+            <ul style="line-height: 2;">
+                <li><strong>비교:</strong> 같은 메모로 여러 버전 생성 후 선택</li>
+                <li><strong>정리:</strong> 상담 일시 바로 기록하는 습관</li>
+                <li><strong>관리:</strong> 주기적으로 불필요한 보고서 삭제</li>
+            </ul>
+        </div>
+
+        <!-- 완료 -->
+        <div class="info-box success">
+            <h4>✅ 3장 완료!</h4>
+            <p>AI 챗봇, 보고서 관리, 단축키를 익혔습니다. 다음 장에서 보안을 알아봅시다.</p>
         </div>
 
         <!-- 네비게이션 -->

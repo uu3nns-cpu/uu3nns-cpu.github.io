@@ -1,46 +1,57 @@
-<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="800" height="600" fill="#1a1b26"/>
-  
-  <!-- Chatbot Window -->
-  <rect x="100" y="50" width="600" height="500" fill="#24283b" rx="12" stroke="#7aa2f7" stroke-width="2"/>
-  
-  <!-- Header -->
-  <rect x="100" y="50" width="600" height="60" fill="#7aa2f7" rx="12 12 0 0"/>
-  <text x="400" y="88" font-family="Malgun Gothic, sans-serif" font-size="20" fill="#ffffff" text-anchor="middle" font-weight="bold">
-    🤖 AI 챗봇
-  </text>
-  
-  <!-- Chat Messages -->
-  <rect x="120" y="140" width="460" height="70" fill="#1a1b26" rx="6"/>
-  <text x="135" y="165" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7" font-weight="bold">
-    사용자
-  </text>
-  <text x="135" y="190" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#a9b1d6">
-    문장을 좀 더 공식적으로 바꿔줘
-  </text>
-  
-  <rect x="220" y="230" width="460" height="100" fill="#7aa2f7" rx="6"/>
-  <text x="235" y="255" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#ffffff" font-weight="bold">
-    AI 어시스턴트
-  </text>
-  <text x="235" y="280" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#ffffff">
-    네, 더 공식적인 표현으로 수정하겠습니다.
-  </text>
-  <text x="235" y="305" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#ffffff">
-    "내담자는 학교생활에서의 어려움을..."
-  </text>
-  
-  <!-- Input Area -->
-  <rect x="120" y="460" width="460" height="50" fill="#1a1b26" rx="6" stroke="#565f89" stroke-width="1"/>
-  <text x="135" y="492" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#565f89">
-    메시지를 입력하세요...
-  </text>
-  <rect x="590" y="465" width="80" height="40" fill="#7aa2f7" rx="4"/>
-  <text x="630" y="492" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">
-    전송
-  </text>
-  
-  <text x="400" y="580" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#f7768e" text-anchor="middle">
-    ⚠️ 실제 스크린샷으로 교체 필요
-  </text>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#ffffff"/>
+    
+    <!-- Main report page (blurred background) -->
+    <rect x="0" y="0" width="800" height="600" fill="#f8f9fa" opacity="0.7"/>
+    
+    <!-- Chatbot Panel (sliding from right) -->
+    <rect x="450" y="80" width="330" height="500" rx="16" fill="white" stroke="#667eea" stroke-width="3" filter="drop-shadow(0 10px 25px rgba(0,0,0,0.15))"/>
+    
+    <!-- Chatbot Header -->
+    <rect x="450" y="80" width="330" height="60" rx="16 16 0 0" fill="#667eea"/>
+    <text x="615" y="115" font-family="Malgun Gothic, Arial" font-size="18" font-weight="bold" fill="white" text-anchor="middle">🤖 AI 챗봇</text>
+    
+    <!-- Close button -->
+    <circle cx="750" cy="110" r="15" fill="rgba(255,255,255,0.3)"/>
+    <text x="750" y="116" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">✕</text>
+    
+    <!-- Chat messages area -->
+    <rect x="470" y="160" width="290" height="330" fill="#f8f9fa" rx="8"/>
+    
+    <!-- User message -->
+    <g transform="translate(0, 0)">
+        <rect x="490" y="180" width="250" height="70" rx="12" fill="#e5e7eb"/>
+        <text x="500" y="202" font-family="Malgun Gothic, Arial" font-size="12" font-weight="bold" fill="#6b7280">사용자</text>
+        <text x="500" y="225" font-family="Malgun Gothic, Arial" font-size="13" fill="#1f2937">문장을 좀 더 공식적으로</text>
+        <text x="500" y="243" font-family="Malgun Gothic, Arial" font-size="13" fill="#1f2937">바꿔줘</text>
+    </g>
+    
+    <!-- AI response -->
+    <g transform="translate(0, 0)">
+        <rect x="490" y="270" width="250" height="110" rx="12" fill="#667eea"/>
+        <text x="500" y="292" font-family="Malgun Gothic, Arial" font-size="12" font-weight="bold" fill="white">AI 어시스턴트</text>
+        <text x="500" y="315" font-family="Malgun Gothic, Arial" font-size="13" fill="white">네, 더 공식적인 표현으로</text>
+        <text x="500" y="333" font-family="Malgun Gothic, Arial" font-size="13" fill="white">수정하겠습니다.</text>
+        <text x="500" y="358" font-family="Malgun Gothic, Arial" font-size="13" fill="white">"내담자는 학교생활에서의</text>
+        <text x="500" y="376" font-family="Malgun Gothic, Arial" font-size="13" fill="white">어려움을..."</text>
+    </g>
+    
+    <!-- Loading indicator (typing) -->
+    <g transform="translate(0, 0)">
+        <circle cx="500" cy="410" r="4" fill="#9ca3af"/>
+        <circle cx="515" cy="410" r="4" fill="#9ca3af"/>
+        <circle cx="530" cy="410" r="4" fill="#9ca3af"/>
+    </g>
+    
+    <!-- Input area -->
+    <rect x="470" y="510" width="240" height="50" rx="25" fill="white" stroke="#d1d5db" stroke-width="1"/>
+    <text x="490" y="540" font-family="Malgun Gothic, Arial" font-size="13" fill="#9ca3af">메시지를 입력하세요...</text>
+    
+    <!-- Send button -->
+    <circle cx="730" cy="535" r="20" fill="#667eea"/>
+    <text x="730" y="542" font-family="Arial" font-size="16" fill="white" text-anchor="middle">➤</text>
+    
+    <!-- Hint text at bottom -->
+    <text x="615" y="575" font-family="Malgun Gothic, Arial" font-size="11" fill="#9ca3af" text-anchor="middle">💡 자연스럽게 대화하듯 요청하세요</text>
 </svg>

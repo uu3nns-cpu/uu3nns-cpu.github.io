@@ -140,8 +140,20 @@ function refreshStatus() {
         ? (totalSize / (1024 * 1024)).toFixed(2) + ' MB'
         : (totalSize / 1024).toFixed(2) + ' KB';
     
-    document.getElementById('totalSize').textContent = totalSizeStr;
-    document.getElementById('totalMeta').textContent = `전체 ${localStorage.length}개 항목`;
+    const totalSizeEl = document.getElementById('totalSize');
+    const totalMetaEl = document.getElementById('totalMeta');
+    
+    if (totalSizeEl) {
+        totalSizeEl.textContent = totalSizeStr;
+    } else {
+        console.warn('[Data Management] totalSize 요소를 찾을 수 없음');
+    }
+    
+    if (totalMetaEl) {
+        totalMetaEl.textContent = `전체 ${localStorage.length}개 항목`;
+    } else {
+        console.warn('[Data Management] totalMeta 요소를 찾을 수 없음');
+    }
     
     // ===== 버튼 상태 업데이트 =====
     const backupApiBtn = document.getElementById('backupApiBtn');
@@ -165,11 +177,21 @@ function updateStatusCard(type, count, metaText) {
     const valueEl = document.getElementById(`${type}Value`);
     const metaEl = document.getElementById(`${type}Meta`);
     
-    if (countEl) countEl.textContent = count;
+    if (countEl) {
+        countEl.textContent = count;
+    } else {
+        console.warn(`[Data Management] 요소를 찾을 수 없음: ${type}Count`);
+    }
+    
     if (valueEl) {
         valueEl.className = count > 0 ? 'status-value' : 'status-value empty';
     }
-    if (metaEl) metaEl.textContent = metaText;
+    
+    if (metaEl) {
+        metaEl.textContent = metaText;
+    } else {
+        console.warn(`[Data Management] 요소를 찾을 수 없음: ${type}Meta`);
+    }
 }
 
 function calculateSize(str) {

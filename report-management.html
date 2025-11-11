@@ -21,14 +21,14 @@
          crossorigin="anonymous"></script>
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components-base.css">
-    <link rel="stylesheet" href="css/components-layout.css">
-    <link rel="stylesheet" href="css/browser-compatibility.css">
-    <link rel="stylesheet" href="css/header-button-unify.css">
-    <link rel="stylesheet" href="css/report-management.css">
+    <link rel="stylesheet" href="src/css/base/variables.css">
+    <link rel="stylesheet" href="src/css/base/base.css">
+    <link rel="stylesheet" href="src/css/base/layout.css">
+    <link rel="stylesheet" href="src/css/components/components-base.css">
+    <link rel="stylesheet" href="src/css/components/components-layout.css">
+    <link rel="stylesheet" href="src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="src/css/components/header-unified.css">
+    <link rel="stylesheet" href="src/css/pages/report-management.css">
 </head>
 <body>
     <!-- Toast 알림 -->
@@ -164,6 +164,9 @@
     <script src="js/browser-polyfills.js"></script>
     <script src="js/usage-core.js"></script>
     <script src="js/common-components.js"></script>
+    <script src="js/security.js"></script>
+    <script src="js/config/app-constants.js?v=20251111001"></script>
+    <script src="js/config/model-configs.js?v=20251111001"></script>
     
     <!-- 공통 데이터 및 UI 유틸리티 -->
     <script src="js/report-data-manager.js"></script>
@@ -172,9 +175,7 @@
     <script src="js/autosave.js"></script>
     <script src="js/app.js"></script>
     
-    <!-- 분할된 보고서 관리 스크립트 -->
-    <script src="js/report-management-part1.js"></script>
-    <script src="js/report-management-part2.js"></script>
-    <script src="js/report-management-part3.js"></script>
+    <!-- 보고서 관리 통합 모듈 -->
+    <script src="js/features/report-management.js"></script>
 </body>
 </html>

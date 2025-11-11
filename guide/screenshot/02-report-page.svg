@@ -1,122 +1,40 @@
-<svg width="1400" height="900" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1400" height="900" fill="#1a1b26"/>
-  
-  <!-- Header -->
-  <rect x="0" y="0" width="1400" height="60" fill="#24283b"/>
-  <circle cx="40" cy="30" r="15" fill="#565f89"/>
-  <text x="40" y="37" font-family="Arial, sans-serif" font-size="18" fill="#a9b1d6" text-anchor="middle">🌙</text>
-  <circle cx="80" cy="30" r="15" fill="#565f89"/>
-  <text x="80" y="37" font-family="Arial, sans-serif" font-size="18" fill="#a9b1d6" text-anchor="middle">🏠</text>
-  <text x="700" y="40" font-family="Malgun Gothic, sans-serif" font-size="20" fill="#a9b1d6" text-anchor="middle" font-weight="bold">
-    RE: 보고서 작성
-  </text>
-  <circle cx="1320" cy="30" r="15" fill="#565f89"/>
-  <text x="1320" y="37" font-family="Arial, sans-serif" font-size="18" fill="#a9b1d6" text-anchor="middle">⚙️</text>
-  
-  <!-- Main Layout -->
-  <!-- Left Panel - Input -->
-  <rect x="30" y="90" width="680" height="750" fill="#24283b" rx="12"/>
-  <text x="370" y="130" font-family="Malgun Gothic, sans-serif" font-size="20" fill="#a9b1d6" text-anchor="middle" font-weight="bold">
-    📝 상담 내용 입력
-  </text>
-  
-  <!-- Preset Selector -->
-  <rect x="60" y="150" width="620" height="45" fill="#1a1b26" rx="6"/>
-  <text x="80" y="178" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#a9b1d6">
-    설정 프리셋: 기본 설정 ▼
-  </text>
-  
-  <!-- Textarea -->
-  <rect x="60" y="210" width="620" height="450" fill="#1a1b26" rx="6"/>
-  <text x="80" y="240" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    내담자명: 김OO (고2)
-  </text>
-  <text x="80" y="265" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    상담일시: 2024년 1월 15일
-  </text>
-  <text x="80" y="290" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    회기: 5회기
-  </text>
-  <text x="80" y="315" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-  </text>
-  <text x="80" y="340" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    주 호소 문제:
-  </text>
-  <text x="80" y="365" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    - 최근 친구들과의 관계에서 오해가 발생
-  </text>
-  <text x="80" y="390" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    - 학교생활에 대한 스트레스 증가
-  </text>
-  <text x="80" y="415" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    - 감정 표현의 어려움
-  </text>
-  <text x="80" y="440" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-  </text>
-  <text x="80" y="465" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    상담 내용:
-  </text>
-  <text x="80" y="490" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    - 친구 관계에서의 갈등 상황 탐색
-  </text>
-  <text x="80" y="515" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    - 감정 인식 및 표현 방법 연습
-  </text>
-  <text x="80" y="540" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#7aa2f7">
-    - 긍정적 대처 전략 수립...
-  </text>
-  
-  <!-- Generate Button -->
-  <rect x="60" y="680" width="620" height="55" fill="#667eea" rx="6"/>
-  <text x="370" y="715" font-family="Malgun Gothic, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="bold">
-    ✨ 보고서 작성 (Ctrl+Enter)
-  </text>
-  
-  <!-- Character Count -->
-  <text x="370" y="770" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#565f89" text-anchor="middle">
-    352자 / 최소 100자 이상 권장
-  </text>
-  
-  <!-- Right Panel - Output -->
-  <rect x="730" y="90" width="640" height="750" fill="#24283b" rx="12"/>
-  
-  <!-- Tab Selector -->
-  <rect x="760" y="120" width="290" height="45" fill="#667eea" rx="6"/>
-  <text x="905" y="148" font-family="Malgun Gothic, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold">
-    📄 Groq 결과
-  </text>
-  <rect x="1060" y="120" width="290" height="45" fill="#1a1b26" rx="6"/>
-  <text x="1205" y="148" font-family="Malgun Gothic, sans-serif" font-size="16" fill="#565f89" text-anchor="middle" font-weight="bold">
-    📄 GPT 결과
-  </text>
-  
-  <!-- Output Area -->
-  <rect x="760" y="185" width="580" height="550" fill="#1a1b26" rx="6"/>
-  <text x="1050" y="400" font-family="Malgun Gothic, sans-serif" font-size="48" fill="#565f89" text-anchor="middle">✨</text>
-  <text x="1050" y="450" font-family="Malgun Gothic, sans-serif" font-size="16" fill="#565f89" text-anchor="middle">
-    상담 내용을 입력하고
-  </text>
-  <text x="1050" y="475" font-family="Malgun Gothic, sans-serif" font-size="16" fill="#565f89" text-anchor="middle">
-    보고서 작성 버튼을 클릭하세요
-  </text>
-  
-  <!-- Action Buttons -->
-  <rect x="760" y="755" width="180" height="45" fill="#9ece6a" rx="6"/>
-  <text x="850" y="783" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#1a1b26" text-anchor="middle" font-weight="bold">
-    📋 복사
-  </text>
-  
-  <rect x="950" y="755" width="180" height="45" fill="#7aa2f7" rx="6"/>
-  <text x="1040" y="783" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold">
-    💾 저장
-  </text>
-  
-  <rect x="1140" y="755" width="200" height="45" fill="#565f89" rx="6"/>
-  <text x="1240" y="783" font-family="Malgun Gothic, sans-serif" font-size="14" fill="#a9b1d6" text-anchor="middle" font-weight="bold">
-    🔄 새 보고서
-  </text>
-  
-  <!-- Settings Panel Toggle -->
-  <circle cx="1320" cy="450" r="30" fill="#667eea"/>
-  <text x="1320" y="460" font-family="Arial, sans-serif" font-size="24" fill="#ffffff" text-anchor="middle">⚙️</text>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#ffffff"/>
+    
+    <!-- Header -->
+    <rect width="800" height="60" fill="#f8f9fa"/>
+    <rect width="800" height="60" fill="url(#headerGrad)"/>
+    <defs>
+        <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <text x="30" y="38" font-family="Malgun Gothic, Arial" font-size="20" font-weight="bold" fill="white">RE: 보고서 작성</text>
+    
+    <!-- Settings button -->
+    <rect x="700" y="15" width="80" height="30" rx="6" fill="rgba(255,255,255,0.2)"/>
+    <text x="740" y="35" font-family="Arial" font-size="14" fill="white" text-anchor="middle">⚙️ 설정</text>
+    
+    <!-- Main Container -->
+    <rect x="50" y="90" width="700" height="480" rx="12" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="2"/>
+    
+    <!-- Input Section -->
+    <text x="70" y="120" font-family="Malgun Gothic, Arial" font-size="16" font-weight="bold" fill="#1f2937">✍️ 상담 메모</text>
+    <rect x="70" y="130" width="660" height="180" rx="8" fill="white" stroke="#d1d5db" stroke-width="1"/>
+    <text x="85" y="155" font-family="Malgun Gothic, Arial" font-size="13" fill="#6b7280">오늘 내담자와 5회기 상담 진행. 요즘 학교생활이 힘들다고 함.</text>
+    <text x="85" y="175" font-family="Malgun Gothic, Arial" font-size="13" fill="#6b7280">친구들과의 관계에서 오해가 생겨 스트레스를 많이 받는 것 같음.</text>
+    <text x="85" y="195" font-family="Malgun Gothic, Arial" font-size="13" fill="#6b7280">자신의 감정을 표현하는 것을 어려워하는 모습.</text>
+    <text x="85" y="215" font-family="Malgun Gothic, Arial" font-size="13" fill="#6b7280">다음 시간에는 감정 표현 연습을 해보기로 함.</text>
+    
+    <!-- Generate Button -->
+    <rect x="280" y="330" width="240" height="50" rx="10" fill="#667eea"/>
+    <text x="400" y="361" font-family="Malgun Gothic, Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">🚀 보고서 생성</text>
+    
+    <!-- Output Section -->
+    <text x="70" y="410" font-family="Malgun Gothic, Arial" font-size="16" font-weight="bold" fill="#1f2937">📋 생성된 보고서</text>
+    <rect x="70" y="420" width="660" height="130" rx="8" fill="white" stroke="#d1d5db" stroke-width="1"/>
+    <text x="85" y="445" font-family="Malgun Gothic, Arial" font-size="13" fill="#9ca3af" text-anchor="middle">보고서 생성 버튼을 눌러주세요</text>
+    <text x="400" y="500" font-family="Malgun Gothic, Arial" font-size="13" fill="#9ca3af" text-anchor="middle">AI가 전문적인 보고서를 작성해드립니다 ✨</text>
 </svg>

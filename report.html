@@ -21,18 +21,18 @@
          crossorigin="anonymous"></script>
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components-base.css">
-    <link rel="stylesheet" href="css/components-layout.css">
-    <link rel="stylesheet" href="css/browser-compatibility.css">
-    <link rel="stylesheet" href="css/header-button-unify.css">
-    <link rel="stylesheet" href="css/chatbot.css">
-    <link rel="stylesheet" href="css/markdown-and-usage.css">
-    <link rel="stylesheet" href="css/buttons-unified.css?v=20251109003">
+    <link rel="stylesheet" href="src/css/base/variables.css">
+    <link rel="stylesheet" href="src/css/base/base.css">
+    <link rel="stylesheet" href="src/css/base/layout.css">
+    <link rel="stylesheet" href="src/css/components/components-base.css">
+    <link rel="stylesheet" href="src/css/components/components-layout.css">
+    <link rel="stylesheet" href="src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="src/css/components/header-unified.css">
+    <link rel="stylesheet" href="src/css/components/chatbot.css">
+    <link rel="stylesheet" href="src/css/components/markdown-and-usage.css">
+    <link rel="stylesheet" href="src/css/components/buttons-unified.css?v=20251109003">
     <!-- 통합 report.html 전용 스타일 - 가장 마지막에 로드하여 우선순위 확보 -->
-    <link rel="stylesheet" href="css/report-unified.css?v=20251109007">
+    <link rel="stylesheet" href="src/css/pages/report-unified.css?v=20251109007">
     
     <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -736,6 +736,8 @@
     <!-- 핵심 기능 -->
     <script src="js/common-components.js?v=20251109001"></script>
     <script src="js/security.js?v=20251109001"></script>
+    <script src="js/config/app-constants.js?v=20251111001"></script>
+    <script src="js/config/model-configs.js?v=20251111001"></script>
     <script src="js/preset-manager.js?v=20251109001"></script>
     
     <!-- 공통 데이터 및 UI 유틸리티 (다른 스크립트보다 먼저 로드) -->

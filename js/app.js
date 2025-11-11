@@ -3,196 +3,13 @@
  * Firefox localStorage 문제 근본 해결: 보안 함수 통합
  */
 
-// ==================== [중요] 보안 함수 (Firefox 독립 실행 보장) ====================
-// security.js의 함수들을 여기에 통합하여 로드 순서 문제 해결
-
-// 간단한 암호화 (Base64 + 간단한 치환) - Firefox 호환
-function encodeApiKey(key) {
-    if (!key) return '';
-    try {
-        const utf8Bytes = new TextEncoder().encode(key);
-        const base64 = btoa(String.fromCharCode.apply(null, utf8Bytes));
-        return base64.split('').reverse().join('');
-    } catch (e) {
-        console.error('[Security] API 키 인코딩 실패:', e);
-        return key;
-    }
-}
-
-// 복호화 - Firefox 호환
-function decodeApiKey(encoded) {
-    if (!encoded) return '';
-    try {
-        const base64 = encoded.split('').reverse().join('');
-        const binaryString = atob(base64);
-        const bytes = new Uint8Array(binaryString.length);
-        for (let i = 0; i < binaryString.length; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-        }
-        return new TextDecoder().decode(bytes);
-    } catch (e) {
-        console.warn('[Security] 새로운 디코딩 실패, 레거시 시도:', e);
-        try {
-            const base64 = encoded.split('').reverse().join('');
-            return decodeURIComponent(escape(atob(base64)));
-        } catch (e2) {
-            console.warn('[Security] 레거시도 실패, 평문 반환:', e2);
-            return encoded;
-        }
-    }
-}
-
-// localStorage에 안전하게 저장
-function saveApiKeySafely(keyName, keyValue) {
-    try {
-        if (!keyValue || !keyValue.trim()) {
-            localStorage.removeItem(keyName);
-            console.log('[Security] API 키 삭제됨:', keyName);
-            return;
-        }
-        const encoded = encodeApiKey(keyValue.trim());
-        localStorage.setItem(keyName, encoded);
-        console.log('[Security] API 키 저장 성공:', keyName, '(인코딩 길이: ' + encoded.length + ')');
-    } catch (error) {
-        console.error('[Security] API 키 저장 실패:', keyName, error);
-        throw error;
-    }
-}
-
-// localStorage에서 안전하게 불러오기
-function loadApiKeySafely(keyName) {
-    try {
-        const encoded = localStorage.getItem(keyName);
-        if (!encoded) {
-            console.warn('[Security] localStorage에 키 없음:', keyName);
-            return '';
-        }
-        console.log('[Security] localStorage에서 읽음:', keyName, '(인코딩 길이: ' + encoded.length + ')');
-        const decoded = decodeApiKey(encoded);
-        if (decoded) {
-            console.log('[Security] API 키 복호화 성공:', keyName, '(복호화 길이: ' + decoded.length + ')');
-        } else {
-            console.error('[Security] API 키 복호화 실패 - 빈 문자열:', keyName);
-        }
-        return decoded;
-    } catch (error) {
-        console.error('[Security] API 키 로드 실패:', keyName, error);
-        return '';
-    }
-}
-
-// API 키 형식 검증
-function validateApiKeyFormat(key, type) {
-    if (!key || !key.trim()) return { valid: false, message: 'API 키를 입력해주세요.' };
-    const trimmedKey = key.trim();
-    if (type === 'groq') {
-        if (!trimmedKey.startsWith('gsk_')) {
-            return { valid: false, message: 'Groq API 키는 "gsk_"로 시작해야 합니다.' };
-        }
-        if (trimmedKey.length < 20) {
-            return { valid: false, message: 'Groq API 키가 너무 짧습니다.' };
-        }
-    } else if (type === 'gpt') {
-        if (!trimmedKey.startsWith('sk-or-v1-')) {
-            return { valid: false, message: 'OpenRouter API 키는 "sk-or-v1-"로 시작해야 합니다.' };
-        }
-        if (trimmedKey.length < 30) {
-            return { valid: false, message: 'OpenRouter API 키가 너무 짧습니다.' };
-        }
-    }
-    return { valid: true };
-}
+// ==================== [중요] 보안 함수 ====================
+// ⚠️ 보안 함수는 security.js에 정의되어 있습니다.
+// encodeApiKey, decodeApiKey, saveApiKeySafely, loadApiKeySafely, validateApiKeyFormat
 
 // ==================== 설정 상수 ====================
-const DEFAULT_API_KEYS = {
-    groq: '',
-    gpt: ''
-};
-
-const STORAGE_KEYS = {
-    GROQ_API: 'groqApiKey',
-    GPT_API: 'gptApiKey',
-    CUSTOM_PROMPT: 'customPrompt',
-    STYLE_SETTINGS: 'styleSettings',
-    FORMAT_OPTIONS: 'formatOptions',
-    THEME: 'theme',
-    FONT_SIZE: 'fontSize',
-    DETAIL_LEVEL: 'detailLevel'
-};
-
-const SECTION_NAMES = {
-    datetime: '상담 일시/회기',
-    issue: '주 호소 문제',
-    goal: '상담 목표',
-    process: '상담 과정/내용',
-    technique: '사용한 기법',
-    plan: '다음 회기 계획'
-};
-
-const STYLE_IDS = [
-    'length', 'terminology', 'expression', 'focus', 'technique', 
-    'emotion', 'counselor', 'structure', 'plan', 'audience', 'approach'
-];
-
-const FORMAT_IDS = [
-    'datetime', 'issue', 'goal', 'process', 'technique', 'plan'
-];
-
-const STYLE_DESCRIPTIONS = {
-    length: {
-        '간결하게': '핵심 내용만 간결하게 요약하여 작성한다. 불필요한 세부사항은 제외한다.',
-        '상세하게': '구체적이고 상세하게 서술한다. 맥락과 뉘앙스를 충분히 담아 풍부하게 작성한다.'
-    },
-    terminology: {
-        '전문적': '전문 심리학 용어를 적극 사용한다. 이론적 개념과 전문 용어를 포함한다.',
-        '평이함': '누구나 이해할 수 있는 쉬운 표현을 사용한다. 전문 용어를 최대한 배제한다.'
-    },
-    expression: {
-        '직접인용': '내담자의 실제 발언을 인용부호로 표시하여 포함한다. 내담자가 한 말을 그대로 인용한다.',
-        '관찰위주': '상담사의 관찰과 해석을 중심으로 작성한다. 직접 인용은 최소화하고 분석적 관점을 강조한다.'
-    },
-    focus: {
-        '강점중심': '내담자의 강점, 자원, 긍정적 측면을 강조한다. 어려움도 성장의 기회로 재구성한다.',
-        '문제중심': '호소 문제, 증상, 어려움에 초점을 맞춘다. 문제를 직접적이고 철저하게 다룬다.'
-    },
-    technique: {
-        '기법명시': '사용한 상담 기법을 명확히 명시한다 (예: "인지적 재구성(Cognitive Restructuring)", "공감적 경청"). 이론적 근거도 밝힌다.',
-        '과정중심': '회기의 흐름과 내담자 반응을 중심으로 서술한다. 기법 이름보다는 실제 과정을 상세히 기술한다.'
-    },
-    emotion: {
-        '정서강조': '정서 표현을 상세히 기술한다. 감정의 변화와 강도를 세밀하게 추적한다.',
-        '객관적': '객관적 사실과 관찰 가능한 행동에 집중한다. 주관적 정서 표현은 최소화한다.'
-    },
-    counselor: {
-        '반응포함': '상담사의 반응, 역전이, 치료 과정에 대한 성찰을 포함한다.',
-        '내담자만': '내담자에게 주로 초점을 맞춘다. 상담사의 반응은 배경으로 처리한다.'
-    },
-    structure: {
-        '시간순': '회기의 시간 순서대로 구성한다. 처음부터 끝까지 순차적으로 기술한다.',
-        '주제별': '주제별로 내용을 묶어서 구성한다. 발생 시점과 무관하게 관련 내용을 함께 배치한다.'
-    },
-    plan: {
-        '구체적': '구체적이고 실행 가능한 계획을 수립한다. 목표, 방법, 과제를 명확히 제시한다.',
-        '방향성': '전반적인 방향과 큰 틀의 목표만 제시한다. 유연하고 탐색적인 계획을 세운다.'
-    },
-    audience: {
-        '슈퍼비전': '슈퍼비전을 위해 작성한다. 상담사의 개입, 고민, 질문을 포함한다.',
-        '학부모': '학부모/보호자를 위해 작성한다. 쉽고 이해하기 쉬운 언어로, 실용적 정보에 초점을 맞춘다.',
-        '기관': '기관 제출용으로 작성한다. 객관적이고 전문적인 톤으로 필요한 정보를 모두 포함한다.'
-    },
-    approach: {
-        '인지행동': '인지행동치료(CBT) 관점을 적용한다. 생각-감정-행동의 연결에 주목하고 인지행동치료 개념을 활용한다.',
-        '정신역동': '정신역동적 관점을 적용한다. 무의식적 과정, 방어기제, 전이/역전이를 고려한다.',
-        '인간중심': '인간중심 상담 관점을 적용한다. 공감, 무조건적 긍정적 존중, 진솔성을 강조한다.',
-        '발달심리': '발달심리학적 관점을 적용한다. 연령에 적합한 과업, 발달 단계, 이정표를 고려한다.',
-        '해결중심': '해결중심 단기치료 관점을 적용한다. 강점, 예외 상황, 미래 해결책에 초점을 맞춘다.',
-        '게슈탈트': '게슈탈트 치료 관점을 적용한다. 현재 자각, 접촉, 경험적 과정을 중시한다.',
-        '가족체계': '가족체계 치료 관점을 적용한다. 관계 패턴, 경계, 체계적 역동을 고려한다.',
-        '애착이론': '애착이론 관점을 적용한다. 애착 패턴, 관계 역동, 애착 안정성에 주목한다.',
-        '현실치료': '현실치료 관점을 적용한다. 선택, 책임, 현재의 행동을 강조한다.',
-        '통합적': '통합적 접근을 사용한다. 내담자 필요에 따라 여러 이론적 관점을 유연하게 결합한다.'
-    }
-};
+// ⚠️ 상수는 js/config/app-constants.js에 정의되어 있습니다.
+// DEFAULT_API_KEYS, STORAGE_KEYS, SECTION_NAMES, STYLE_IDS, FORMAT_IDS, STYLE_DESCRIPTIONS
 
 // ==================== LocalStorage 관련 ====================
 function loadSettings() {
@@ -799,46 +616,9 @@ function handleKeyDown(event) {
 
 // ==================== API 호출 ====================
 
-// 모델별 설정
-const MODEL_CONFIGS = {
-    groq: {
-        name: 'Groq',
-        displayName: 'Groq',
-        url: 'https://api.groq.com/openai/v1/chat/completions',
-        model: 'llama-3.3-70b-versatile',
-        temperature: 0.75,
-        max_tokens: 3000,
-        top_p: 0.92,
-        outputId: 'groqOutput',
-        loadingId: 'groqLoading',
-        copyBtnId: 'groqCopyBtn',
-        usageId: 'groqUsage',
-        countId: 'groqCount',
-        headers: (apiKey) => ({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
-        })
-    },
-    gpt: {
-        name: 'GPT',
-        displayName: 'GPT-4o-mini',
-        url: 'https://openrouter.ai/api/v1/chat/completions',
-        model: 'openai/gpt-4o-mini',
-        temperature: 0.7,
-        max_tokens: 3000,
-        outputId: 'gptOutput',
-        loadingId: 'gptLoading',
-        copyBtnId: 'gptCopyBtn',
-        usageId: 'gptUsage',
-        countId: 'gptCount',
-        headers: (apiKey) => ({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`,
-            'HTTP-Referer': 'https://counseling-journal.app',
-            'X-Title': 'Counseling Journal Tool'
-        })
-    }
-};
+// ⚠️ 모델 설정은 js/config/model-configs.js에 정의되어 있습니다.
+// MODEL_CONFIGS.groq, MODEL_CONFIGS.gpt
+
 function buildPrompt(input) {
     const customPrompt = getCustomPrompt();
     const formatOptions = getFormatOptions();
@@ -2135,13 +1915,14 @@ async function generateJournals(event) {
 
 // ==================== 초기화 ====================
 function initialize() {
-    // UsageCounter 초기화 (최우선)
+    // UsageCounter 초기화 (최우선) - report.html에서만 실행
     if (typeof UsageCounter !== 'undefined' && typeof UsageCounter.init === 'function') {
         console.log('[App] UsageCounter 초기화 시작');
         UsageCounter.init();
         console.log('[App] UsageCounter 초기화 완료');
-    } else {
-        console.error('[App] UsageCounter를 찾을 수 없습니다!');
+    } else if (document.getElementById('generateBtn')) {
+        // generateBtn이 있는 페이지(report.html)에서만 경고
+        console.warn('[App] UsageCounter를 찾을 수 없습니다!');
     }
     
     // 설정 페이지에서만 loadSettings 호출

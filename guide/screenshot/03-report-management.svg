@@ -1,0 +1,128 @@
+<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="1000" height="700" fill="#ffffff"/>
+    
+    <!-- Header -->
+    <rect width="1000" height="60" fill="url(#headerGrad)"/>
+    <defs>
+        <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <text x="30" y="38" font-family="Malgun Gothic, Arial" font-size="20" font-weight="bold" fill="white">RE: 저장된 보고서 관리</text>
+    <rect x="850" y="15" width="130" height="30" rx="6" fill="rgba(255,255,255,0.2)"/>
+    <text x="915" y="35" font-family="Malgun Gothic, Arial" font-size="14" fill="white" text-anchor="middle">🏠 홈으로</text>
+    
+    <!-- Page Header -->
+    <g transform="translate(0, 80)">
+        <text x="500" y="30" font-family="Arial" font-size="40" text-anchor="middle">📋</text>
+        <text x="500" y="75" font-family="Malgun Gothic, Arial" font-size="26" font-weight="bold" fill="#1f2937" text-anchor="middle">저장된 보고서 관리</text>
+        <text x="500" y="100" font-family="Malgun Gothic, Arial" font-size="14" fill="#6b7280" text-anchor="middle">저장된 모든 보고서를 확인하고 관리하세요</text>
+    </g>
+    
+    <!-- Filter Bar -->
+    <rect x="50" y="220" width="900" height="60" rx="10" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="1"/>
+    
+    <!-- Search input -->
+    <rect x="70" y="235" width="250" height="35" rx="6" fill="white" stroke="#d1d5db" stroke-width="1"/>
+    <text x="85" y="258" font-family="Malgun Gothic, Arial" font-size="13" fill="#9ca3af">🔍 제목, 내용 검색...</text>
+    
+    <!-- Date filter -->
+    <text x="350" y="250" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">기간</text>
+    <rect x="350" y="255" width="120" height="25" rx="4" fill="white" stroke="#d1d5db" stroke-width="1"/>
+    <text x="365" y="273" font-family="Malgun Gothic, Arial" font-size="12" fill="#374151">전체 ▼</text>
+    
+    <!-- Sort -->
+    <text x="500" y="250" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">정렬</text>
+    <rect x="500" y="255" width="120" height="25" rx="4" fill="white" stroke="#d1d5db" stroke-width="1"/>
+    <text x="515" y="273" font-family="Malgun Gothic, Arial" font-size="12" fill="#374151">최신순 ▼</text>
+    
+    <!-- Status -->
+    <text x="830" y="258" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">현재 15개 / 전체 50개</text>
+    
+    <!-- Report Cards Grid -->
+    <!-- Card 1 -->
+    <g transform="translate(50, 300)">
+        <rect width="280" height="140" rx="10" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+        <text x="15" y="30" font-family="Malgun Gothic, Arial" font-size="15" font-weight="bold" fill="#1f2937">5회기 개인상담 - 학교생활...</text>
+        <rect x="210" y="10" width="55" height="20" rx="4" fill="#dbeafe"/>
+        <text x="237" y="24" font-family="Malgun Gothic, Arial" font-size="11" fill="#1e40af" text-anchor="middle">2개 결과</text>
+        <text x="15" y="50" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">오늘 내담자와 5회기 상담 진행...</text>
+        <text x="15" y="67" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">요즘 학교생활이 힘들다고 함...</text>
+        
+        <!-- Bottom actions -->
+        <text x="15" y="105" font-family="Malgun Gothic, Arial" font-size="11" fill="#667eea">📅 2025. 01. 16. 오후 2:00</text>
+        <text x="15" y="125" font-family="Malgun Gothic, Arial" font-size="11" fill="#9ca3af">💾 오늘 오후 3:45</text>
+        
+        <circle cx="235" cy="118" r="15" fill="#f3f4f6"/>
+        <text x="235" y="124" font-family="Arial" font-size="14" text-anchor="middle">📄</text>
+        
+        <circle cx="260" cy="118" r="15" fill="#f3f4f6"/>
+        <text x="260" y="124" font-family="Arial" font-size="14" text-anchor="middle">✏️</text>
+    </g>
+    
+    <!-- Card 2 -->
+    <g transform="translate(350, 300)">
+        <rect width="280" height="140" rx="10" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+        <text x="15" y="30" font-family="Malgun Gothic, Arial" font-size="15" font-weight="bold" fill="#1f2937">진로상담 3회기</text>
+        <rect x="210" y="10" width="55" height="20" rx="4" fill="#dbeafe"/>
+        <text x="237" y="24" font-family="Malgun Gothic, Arial" font-size="11" fill="#1e40af" text-anchor="middle">1개 결과</text>
+        <text x="15" y="50" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">진로에 대한 고민을 나누었으며...</text>
+        <text x="15" y="67" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">관심 분야를 탐색하는 시간...</text>
+        
+        <text x="15" y="105" font-family="Malgun Gothic, Arial" font-size="11" fill="#9ca3af" opacity="0.7">📅 상담일시 미지정</text>
+        <text x="15" y="125" font-family="Malgun Gothic, Arial" font-size="11" fill="#9ca3af">💾 어제 오전 10:20</text>
+        
+        <circle cx="235" cy="118" r="15" fill="#f3f4f6"/>
+        <text x="235" y="124" font-family="Arial" font-size="14" text-anchor="middle">📄</text>
+        
+        <circle cx="260" cy="118" r="15" fill="#f3f4f6"/>
+        <text x="260" y="124" font-family="Arial" font-size="14" text-anchor="middle">✏️</text>
+    </g>
+    
+    <!-- Card 3 -->
+    <g transform="translate(650, 300)">
+        <rect width="280" height="140" rx="10" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+        <text x="15" y="30" font-family="Malgun Gothic, Arial" font-size="15" font-weight="bold" fill="#1f2937">부모상담 - 양육 스트레스</text>
+        <rect x="210" y="10" width="55" height="20" rx="4" fill="#dbeafe"/>
+        <text x="237" y="24" font-family="Malgun Gothic, Arial" font-size="11" fill="#1e40af" text-anchor="middle">2개 결과</text>
+        <text x="15" y="50" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">부모의 양육 스트레스와 자녀...</text>
+        <text x="15" y="67" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">와의 관계 개선 방법 논의...</text>
+        
+        <text x="15" y="105" font-family="Malgun Gothic, Arial" font-size="11" fill="#667eea">📅 2025. 01. 15. 오전 11:00</text>
+        <text x="15" y="125" font-family="Malgun Gothic, Arial" font-size="11" fill="#9ca3af">💾 2일 전</text>
+        
+        <circle cx="235" cy="118" r="15" fill="#f3f4f6"/>
+        <text x="235" y="124" font-family="Arial" font-size="14" text-anchor="middle">📄</text>
+        
+        <circle cx="260" cy="118" r="15" fill="#f3f4f6"/>
+        <text x="260" y="124" font-family="Arial" font-size="14" text-anchor="middle">✏️</text>
+    </g>
+    
+    <!-- Card 4 -->
+    <g transform="translate(50, 460)">
+        <rect width="280" height="140" rx="10" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+        <text x="15" y="30" font-family="Malgun Gothic, Arial" font-size="15" font-weight="bold" fill="#1f2937">집단상담 1회기</text>
+        <rect x="210" y="10" width="55" height="20" rx="4" fill="#dbeafe"/>
+        <text x="237" y="24" font-family="Malgun Gothic, Arial" font-size="11" fill="#1e40af" text-anchor="middle">1개 결과</text>
+        <text x="15" y="50" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">또래 관계 개선 집단상담...</text>
+        <text x="15" y="67" font-family="Malgun Gothic, Arial" font-size="12" fill="#6b7280">자기소개와 프로그램 안내...</text>
+        
+        <text x="15" y="105" font-family="Malgun Gothic, Arial" font-size="11" fill="#667eea">📅 2025. 01. 14. 오후 3:00</text>
+        <text x="15" y="125" font-family="Malgun Gothic, Arial" font-size="11" fill="#9ca3af">💾 3일 전</text>
+        
+        <circle cx="235" cy="118" r="15" fill="#f3f4f6"/>
+        <text x="235" y="124" font-family="Arial" font-size="14" text-anchor="middle">📄</text>
+        
+        <circle cx="260" cy="118" r="15" fill="#f3f4f6"/>
+        <text x="260" y="124" font-family="Arial" font-size="14" text-anchor="middle">✏️</text>
+    </g>
+    
+    <!-- Scroll indicator -->
+    <text x="500" y="650" font-family="Malgun Gothic, Arial" font-size="12" fill="#9ca3af" text-anchor="middle">↓ 스크롤하여 더 보기</text>
+    
+    <!-- Floating scroll to top button -->
+    <circle cx="940" cy="630" r="25" fill="#667eea" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.1))"/>
+    <text x="940" y="638" font-family="Arial" font-size="20" fill="white" text-anchor="middle" font-weight="bold">↑</text>
+</svg>

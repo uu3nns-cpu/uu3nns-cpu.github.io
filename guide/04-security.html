@@ -15,20 +15,18 @@
     </script>
     
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-9257454501555292"
          crossorigin="anonymous"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components-base.css">
-    <link rel="stylesheet" href="../css/components-layout.css">
-    <link rel="stylesheet" href="../css/browser-compatibility.css">
-    <link rel="stylesheet" href="../css/header-button-unify.css">
+    <link rel="stylesheet" href="../src/css/base/variables.css">
+    <link rel="stylesheet" href="../src/css/base/base.css">
+    <link rel="stylesheet" href="../src/css/base/layout.css">
+    <link rel="stylesheet" href="../src/css/components/components-base.css">
+    <link rel="stylesheet" href="../src/css/components/components-layout.css">
+    <link rel="stylesheet" href="../src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="../src/css/components/header-unified.css">
     <link rel="stylesheet" href="css/guide-common.css">
-    
-
 </head>
 <body>
     <div class="header"></div>
@@ -40,326 +38,150 @@
 
         <div class="guide-header">
             <div class="guide-number">4</div>
-            <h1>🔒 보안 & 개인정보</h1>
-            <p class="guide-header-desc">RE를 안전하게 사용하는 방법을 알아봅니다 (모든 사용자 필독!)</p>
-            <div class="guide-meta">
-                <div class="guide-meta-item">⭐ 필독 권장</div>
-            </div>
+            <h1>보안 & 개인정보</h1>
+            <p class="guide-header-desc">데이터 처리 방식과 안전한 사용법</p>
         </div>
 
         <div class="info-box warning">
-            <h4>⚠️ 이 페이지는 꼭 읽어주세요!</h4>
-            <p>RE는 상담 내용을 다루는 만큼 개인정보 보호가 매우 중요합니다. 이 페이지에서는 데이터가 어떻게 처리되는지, 무엇을 주의해야 하는지 투명하게 설명합니다.</p>
+            <h4>⚠️ 필독</h4>
+            <p>개인정보를 다루는 만큼 이 페이지는 꼭 읽어주세요.</p>
         </div>
 
+        <!-- 데이터 저장 위치 -->
         <div class="guide-section">
-            <h2>📊 데이터는 어디에 저장되나요?</h2>
-            <p>RE는 여러분의 데이터를 <strong>다른 곳</strong>에 저장합니다. 무엇이 어디에 저장되는지 정확히 알려드립니다.</p>
-
+            <h2>💾 데이터 저장 위치</h2>
+            
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th style="width: 20%;">항목</th>
-                        <th style="width: 20%;">저장 위치</th>
-                        <th style="width: 15%;">인터넷 전송</th>
-                        <th style="width: 45%;">설명</th>
+                        <th>항목</th>
+                        <th>저장 위치</th>
+                        <th>인터넷 전송</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="label-col">🔑 API 키</td>
-                        <td>💻 사용자 컴퓨터</td>
-                        <td class="icon-no">❌ 없음</td>
-                        <td>브라우저의 저장공간(LocalStorage)에 암호화되어 저장</td>
+                        <td><strong>API 키</strong></td>
+                        <td>사용자 컴퓨터</td>
+                        <td class="icon-no">없음</td>
                     </tr>
                     <tr>
-                        <td class="label-col">📝 상담 메모</td>
-                        <td>💻 사용자 컴퓨터</td>
-                        <td class="icon-no">❌ 없음</td>
-                        <td>브라우저에만 저장, 외부로 전송되지 않음</td>
+                        <td><strong>상담 메모</strong></td>
+                        <td>사용자 컴퓨터</td>
+                        <td class="icon-no">없음</td>
                     </tr>
                     <tr>
-                        <td class="label-col">📋 작성 히스토리</td>
-                        <td>💻 사용자 컴퓨터</td>
-                        <td class="icon-no">❌ 없음</td>
-                        <td>최대 50개까지 로컬(사용자 컴퓨터)에만 저장</td>
+                        <td><strong>작성 히스토리</strong></td>
+                        <td>사용자 컴퓨터</td>
+                        <td class="icon-no">없음</td>
                     </tr>
                     <tr>
-                        <td class="label-col">⚙️ 설정값</td>
-                        <td>💻 사용자 컴퓨터</td>
-                        <td class="icon-no">❌ 없음</td>
-                        <td>스타일 설정 등 브라우저에만 저장</td>
-                    </tr>
-                    <tr>
-                        <td class="label-col">📄 보고서 생성</td>
-                        <td>🌐 AI 서버</td>
-                        <td class="icon-yes">✅ 임시 전송</td>
-                        <td>생성 시에만 임시로 전송되고, 처리 후 <strong>즉시 삭제</strong></td>
-                    </tr>
-                    <tr>
-                        <td class="label-col">💬 AI 챗봇</td>
-                        <td>🌐 AI 서버</td>
-                        <td class="icon-yes">✅ 임시 전송</td>
-                        <td>수정 요청 시에만 임시 전송 후 <strong>즉시 삭제</strong></td>
+                        <td><strong>보고서 생성</strong></td>
+                        <td>AI 서버</td>
+                        <td class="icon-yes">임시 (즉시 삭제)</td>
                     </tr>
                 </tbody>
             </table>
 
             <div class="info-box">
-                <h4>💡 용어 설명</h4>
-                <ul>
-                    <li><strong>💻 사용자 컴퓨터:</strong> 여러분이 지금 사용 중인 컴퓨터의 브라우저 저장공간 (LocalStorage)</li>
-                    <li><strong>🌐 AI 서버:</strong> 인터넷 너머에 있는 AI 프로그램이 실행되는 컴퓨터 (Groq, OpenRouter)</li>
-                    <li><strong>임시 전송:</strong> 처리를 위해 잠깐 보냈다가 결과를 받으면 즉시 삭제됨</li>
-                    <li><strong>LocalStorage:</strong> 브라우저가 제공하는 저장공간으로, 해당 컴퓨터에서만 접근 가능</li>
-                </ul>
+                <h4>💡 핵심</h4>
+                <p>대부분의 데이터는 <strong>여러분의 컴퓨터에만</strong> 저장됩니다. AI 서버로 전송되는 데이터는 <strong>처리 후 즉시 삭제</strong>됩니다.</p>
             </div>
         </div>
 
-        <!-- 왜 안전한지 쉬운 설명 -->
+        <!-- 왜 안전한가? -->
         <div class="guide-section">
-            <h2>🔒 왜 이 툴은 안전할 수밖에 없나요?</h2>
+            <h2>🛡️ 왜 안전한가?</h2>
             
-            <div class="info-box">
-                <h4>🎯 핵심 원리: "중앙 서버가 없다"</h4>
-                <p>
-                    RE는 <strong>네이버, 카카오, 구글처럼 중앙 서버에 데이터를 모으지 않습니다.</strong> 
-                    대신 여러분의 컴퓨터에서 직접 AI 서비스(Groq/OpenRouter)를 호출하는 방식입니다.
-                </p>
-            </div>
+            <h3>핵심 원리: 중앙 서버 없음</h3>
+            <p>RE는 네이버, 카카오처럼 중앙 서버에 데이터를 모으지 않습니다. 여러분의 컴퓨터에서 직접 AI 서비스를 호출합니다.</p>
 
-            <h3>💡 실생활 비유로 이해하기</h3>
-            
-            <div class="two-column">
-                <div class="column-box" style="background: #fff3cd; border-left: 4px solid #ffc107;">
-                    <h4>❌ 일반 서비스 (위험할 수 있음)</h4>
-                    <p style="font-size: 14px; line-height: 1.6;">
-                        <strong>비유:</strong> 식당에 가서 주문하기<br>
-                        → 주문 내역이 <strong>식당 컴퓨터에 저장</strong>됨<br>
-                        → 식당이 망하거나 해킹당하면 <strong>내 정보도 유출</strong>
-                    </p>
-                    <p style="font-size: 13px; margin-top: 10px; color: #666;">
-                        예: 네이버, 카카오 등 대부분의 서비스<br>
-                        ✓ 편리하지만 데이터가 계속 남음<br>
-                        ✗ 회사가 해킹당하면 내 데이터도 위험
-                    </p>
-                </div>
-                
-                <div class="column-box" style="background: #d4edda; border-left: 4px solid #28a745;">
-                    <h4>✅ RE 방식 (안전)</h4>
-                    <p style="font-size: 14px; line-height: 1.6;">
-                        <strong>비유:</strong> 집에서 직접 배달앱으로 주문하기<br>
-                        → 주문 정보가 <strong>바로 식당으로만</strong> 전달<br>
-                        → 식당은 음식만 만들고 <strong>주문서를 버림</strong>
-                    </p>
-                    <p style="font-size: 13px; margin-top: 10px; color: #666;">
-                        RE는 중간 서버 없이 직접 AI에 연결<br>
-                        ✓ RE 서버에는 아무것도 저장 안됨<br>
-                        ✓ AI는 처리 후 즉시 데이터 삭제
-                    </p>
-                </div>
-            </div>
+            <h3>3가지 안전 장치</h3>
+            <ol style="line-height: 2;">
+                <li><strong>RE 서버는 데이터를 보지도, 저장하지도 못함</strong></li>
+                <li><strong>AI 서버도 처리 후 즉시 삭제</strong> (GDPR 준수)</li>
+                <li><strong>여러분만 데이터를 소유하고 통제</strong></li>
+            </ol>
 
-            <h3 style="margin-top: 30px;">🔐 3가지 안전 장치</h3>
-            
-            <div class="checklist" style="margin-top: 15px;">
-                <div class="checklist-item">
-                    <div class="checklist-icon">1️⃣</div>
-                    <div class="checklist-text">
-                        <strong>RE 서버는 데이터를 보지도, 저장하지도 못함</strong><br>
-                        <span style="font-size: 13px; color: #666;">
-                            여러분 컴퓨터 → (RE 웹사이트는 그냥 통과) → AI 서버<br>
-                            마치 편지를 우체부가 읽지 않고 배달만 하는 것과 같습니다.
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="checklist-item">
-                    <div class="checklist-icon">2️⃣</div>
-                    <div class="checklist-text">
-                        <strong>AI 서버도 데이터를 저장하지 않음</strong><br>
-                        <span style="font-size: 13px; color: #666;">
-                            Groq, OpenRouter는 GDPR(유럽 개인정보법) 준수 기업<br>
-                            API 방식은 처리 후 즉시 삭제가 법적으로 보장됩니다.
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="checklist-item">
-                    <div class="checklist-icon">3️⃣</div>
-                    <div class="checklist-text">
-                        <strong>여러분만 데이터를 소유하고 통제함</strong><br>
-                        <span style="font-size: 13px; color: #666;">
-                            히스토리, 메모는 100% 여러분 컴퓨터에만 저장<br>
-                            브라우저 데이터 삭제 = 모든 기록 완전 제거
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-box success" style="margin-top: 25px;">
-                <h4>✅ 결론: 물리적으로 저장할 곳이 없음</h4>
-                <p style="font-size: 14px; line-height: 1.7;">
-                    RE는 여러분의 데이터를 <strong>저장할 서버 자체가 없습니다.</strong><br>
-                    AI는 계산기처럼 "계산만 하고 결과만 돌려주는" 역할입니다.<br>
-                    <strong>따라서 해킹이나 유출이 구조적으로 불가능합니다.</strong>
-                </p>
-            </div>
-
-            <div class="info-box warning" style="margin-top: 15px;">
-                <h4>⚠️ 그래도 조심해야 할 것</h4>
-                <ul style="font-size: 14px;">
-                    <li><strong>API 키 보호:</strong> 은행 비밀번호처럼 절대 공유 금지</li>
-                    <li><strong>공용 PC:</strong> 브라우저에 데이터가 남을 수 있음 (시크릿 모드 권장)</li>
-                    <li><strong>개인정보 최소화:</strong> 실명보다는 "A씨", "내담자" 사용</li>
-                </ul>
+            <div class="info-box success">
+                <h4>✅ 결론</h4>
+                <p>RE는 데이터를 <strong>저장할 서버 자체가 없습니다.</strong> 해킹이나 유출이 구조적으로 불가능합니다.</p>
             </div>
         </div>
 
+        <!-- 보안 체크리스트 -->
         <div class="guide-section">
-            <h2>🔐 보안 체크리스트</h2>
+            <h2>✅ 보안 체크리스트</h2>
             
-            <div class="checklist">
-                <div class="checklist-title">✅ 안전하게 사용하기</div>
-                
-                <div class="checklist-item">
-                    <div class="checklist-icon">🔑</div>
-                    <div class="checklist-text">
-                        <strong>API 키 보호:</strong> API 키는 절대 다른 사람과 공유하지 마세요. 누출되면 즉시 Groq/OpenRouter 콘솔에서 키를 삭제하고 새로 발급받으세요.
-                    </div>
-                </div>
-                
-                <div class="checklist-item">
-                    <div class="checklist-icon">🏢</div>
-                    <div class="checklist-text">
-                        <strong>공용 PC 주의:</strong> 공용 컴퓨터 사용 후에는 반드시 브라우저 캐시와 쿠키를 삭제하세요. 또는 시크릿 모드(Incognito)로 사용하세요.
-                    </div>
-                </div>
-                
-                <div class="checklist-item">
-                    <div class="checklist-icon">🔍</div>
-                    <div class="checklist-text">
-                        <strong>개인정보 최소화:</strong> 보고서에 실명, 주민번호, 연락처 등은 최대한 쓰지 마세요. "A씨", "내담자" 같은 익명 표현을 사용하세요.
-                    </div>
-                </div>
-                
-                <div class="checklist-item">
-                    <div class="checklist-icon">💾</div>
-                    <div class="checklist-text">
-                        <strong>정기 백업:</strong> 중요한 보고서는 "내보내기" 기능으로 정기적으로 백업하세요. USB나 클라우드에 안전하게 보관하세요.
-                    </div>
-                </div>
-                
-                <div class="checklist-item">
-                    <div class="checklist-icon">🌐</div>
-                    <div class="checklist-text">
-                        <strong>안전한 네트워크:</strong> 카페나 공공 Wi-Fi보다는 집이나 직장의 안전한 네트워크에서 사용하세요.
-                    </div>
-                </div>
-            </div>
+            <ol style="line-height: 2;">
+                <li><strong>API 키 보호:</strong> 절대 공유 금지, 누출 시 즉시 재발급</li>
+                <li><strong>공용 PC 주의:</strong> 사용 후 브라우저 캐시 삭제 또는 시크릿 모드 사용</li>
+                <li><strong>개인정보 최소화:</strong> 실명, 주민번호, 연락처 최소화</li>
+                <li><strong>정기 백업:</strong> 중요 보고서는 TXT 다운로드</li>
+                <li><strong>안전한 네트워크:</strong> 공공 Wi-Fi 대신 안전한 네트워크 사용</li>
+            </ol>
         </div>
 
+        <!-- FAQ -->
         <div class="guide-section">
-            <h2>❓ 보안 관련 자주 묻는 질문</h2>
+            <h2>❓ 자주 묻는 질문</h2>
             
             <h3>Q1. AI 서버에서 정말 즉시 삭제되나요?</h3>
-            <p>
-                <strong>네!</strong> Groq와 OpenRouter 모두 API 호출 완료 후 데이터를 즉시 삭제한다고 공식적으로 명시하고 있습니다. 
-                이들은 GDPR, HIPAA 등 국제 개인정보 보호 규정을 준수합니다.
-            </p>
+            <p><strong>네.</strong> Groq와 OpenRouter는 GDPR, HIPAA 준수 기업으로 API 호출 완료 후 데이터를 즉시 삭제합니다.</p>
             
-            <h3>Q2. API 키가 유출되면 어떻게 되나요?</h3>
-            <p>
-                누군가 여러분의 API 키를 알게 되면:
-            </p>
-            <ul>
-                <li>💰 <strong>Groq:</strong> 무료 한도를 소진할 수 있음 (금전적 손실은 없음)</li>
-                <li>💰 <strong>OpenRouter:</strong> 여러분 계정으로 AI 사용료가 청구됨 (금전적 손실 발생)</li>
+            <h3>Q2. API 키가 유출되면?</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Groq:</strong> 무료 한도 소진 (금전적 손실 없음)</li>
+                <li><strong>OpenRouter:</strong> 사용료 청구 (금전적 손실 발생)</li>
             </ul>
-            <p>
-                <strong>해결:</strong> 즉시 해당 서비스 콘솔에서 키를 삭제하고 새로 발급받으세요.
-            </p>
+            <p><strong>해결:</strong> 즉시 해당 서비스에서 키 삭제 후 재발급</p>
             
-            <h3>Q3. 회사/기관 보안 정책에 위배되지 않나요?</h3>
-            <p>
-                이는 <strong>각 기관의 정책에 따라 다릅니다.</strong> 사용 전에:
-            </p>
-            <ul>
-                <li>소속 기관의 개인정보 보호 담당자에게 문의</li>
-                <li>RE: 의 데이터 처리 방식 설명 (이 페이지 참고)</li>
-                <li>필요시 기관 내부 승인 절차 진행</li>
-            </ul>
+            <h3>Q3. 기관 보안 정책 위배 여부는?</h3>
+            <p>각 기관 정책에 따라 다릅니다. 사용 전 기관 담당자에게 문의하세요.</p>
             
-            <h3>Q4. 브라우저 데이터를 삭제하면?</h3>
-            <p>
-                브라우저 캐시/쿠키를 삭제하면 <strong>히스토리와 설정이 모두 사라집니다.</strong> 중요한 데이터는 반드시 "내보내기"로 백업하세요.
-            </p>
+            <h3>Q4. 브라우저 데이터 삭제 시?</h3>
+            <p>히스토리와 설정이 모두 사라집니다. <strong>중요 데이터는 반드시 백업하세요.</strong></p>
         </div>
 
+        <!-- 권장 vs 금지 -->
         <div class="guide-section">
-            <h2>📋 권장사항 vs 금지사항</h2>
+            <h2>⚖️ 권장 vs 금지</h2>
             
             <div class="two-column">
                 <div class="column-box do">
-                    <h4>✅ 이렇게 하세요</h4>
+                    <h4>✅ 권장</h4>
                     <ul style="margin-left: 20px;">
-                        <li>익명화된 표현 사용 ("내담자 A")</li>
-                        <li>개인 컴퓨터에서 사용</li>
+                        <li>익명 표현 ("내담자 A")</li>
+                        <li>개인 컴퓨터 사용</li>
                         <li>정기적 백업</li>
-                        <li>안전한 네트워크 사용</li>
-                        <li>API 키 안전하게 보관</li>
+                        <li>안전한 네트워크</li>
                     </ul>
                 </div>
                 
                 <div class="column-box dont">
-                    <h4>❌ 이런 것은 피하세요</h4>
+                    <h4>❌ 금지</h4>
                     <ul style="margin-left: 20px;">
-                        <li>실명, 주민번호, 연락처 기재</li>
+                        <li>실명, 주민번호 기재</li>
                         <li>공용 PC 무분별 사용</li>
-                        <li>API 키 타인 공유</li>
-                        <li>공공 Wi-Fi에서 사용</li>
+                        <li>API 키 공유</li>
+                        <li>공공 Wi-Fi 사용</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="guide-section">
-            <h2>🎯 요약: 핵심만 기억하세요</h2>
-            
-            <div class="info-box success">
-                <h4>✅ 안전한 점</h4>
-                <ul>
-                    <li>대부분의 데이터는 <strong>사용자 컴퓨터에만</strong> 저장됩니다</li>
-                    <li>AI 서버로 전송되는 데이터는 <strong>즉시 삭제</strong>됩니다</li>
-                    <li>모든 통신은 <strong>HTTPS 암호화</strong>로 보호됩니다</li>
-                    <li>데이터는 AI 학습에 <strong>사용되지 않습니다</strong></li>
-                </ul>
-            </div>
-            
-            <div class="info-box warning">
-                <h4>⚠️ 주의할 점</h4>
-                <ul>
-                    <li>보고서 생성 시 메모가 <strong>AI 서버로 임시 전송</strong>됩니다</li>
-                    <li><strong>개인식별정보</strong>는 최소화하세요 (이름, 주민번호, 연락처 등)</li>
-                    <li><strong>Beta Test 단계</strong>로 기능 및 보완이 완벽히 구현되어 있지 않으니, 개인정보에 유의하세요</li>
-                    <li>중요한 데이터는 <strong>별도로 백업</strong>하세요</li>
-                </ul>
-            </div>
+        <!-- 요약 -->
+        <div class="info-box success">
+            <h4>📌 핵심 요약</h4>
+            <ul style="margin-left: 20px;">
+                <li>대부분 데이터는 <strong>사용자 컴퓨터에만</strong> 저장</li>
+                <li>AI 전송 데이터는 <strong>즉시 삭제</strong></li>
+                <li>개인식별정보 <strong>최소화</strong></li>
+                <li>중요 데이터는 <strong>별도 백업</strong></li>
+            </ul>
         </div>
 
-        <!-- Google AdSense 디스플레이 광고 -->
-        <div style="text-align: center; margin: 40px auto; max-width: 728px;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9257454501555292"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
+        <!-- 네비게이션 -->
         <div class="guide-navigation">
             <a href="03-advanced.html" class="guide-nav-btn">
                 <div class="guide-nav-icon">←</div>

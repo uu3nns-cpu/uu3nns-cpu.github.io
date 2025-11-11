@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1. 시작하기 - RE:  가이드</title>
+    <title>1. 시작하기 - RE: 가이드</title>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
@@ -19,175 +19,82 @@
          crossorigin="anonymous"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components-base.css">
-    <link rel="stylesheet" href="../css/components-layout.css">
-    <link rel="stylesheet" href="../css/browser-compatibility.css">
-    <link rel="stylesheet" href="../css/header-button-unify.css">
+    <link rel="stylesheet" href="../src/css/base/variables.css">
+    <link rel="stylesheet" href="../src/css/base/base.css">
+    <link rel="stylesheet" href="../src/css/base/layout.css">
+    <link rel="stylesheet" href="../src/css/components/components-base.css">
+    <link rel="stylesheet" href="../src/css/components/components-layout.css">
+    <link rel="stylesheet" href="../src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="../src/css/components/header-unified.css">
     <link rel="stylesheet" href="css/guide-common.css">
-    
-
 </head>
 <body>
-    <!-- 공통 Header -->
     <div class="header"></div>
 
     <div class="guide-page">
-        <!-- Breadcrumb -->
         <div class="guide-breadcrumb">
             <a href="index.html">📚 가이드 홈</a> / 1. 시작하기
         </div>
 
-        <!-- 헤더 -->
         <div class="guide-header">
             <div class="guide-number">1</div>
-            <h1>🚀 시작하기</h1>
-            <p class="guide-header-desc">
-                RE: 가 무엇인지, 어떻게 설치하고 실행하는지 알아봅니다
-            </p>
-            <div class="guide-meta">
-                <div class="guide-meta-item">🎯 목표: RE:  실행까지</div>
-            </div>
+            <h1>시작하기</h1>
+            <p class="guide-header-desc">RE: 핵심 개념 3분 이해</p>
         </div>
 
-        <!-- 섹션 1: RE가 뭔가요? -->
+        <!-- RE가 뭔가요? -->
         <div class="guide-section">
-            <h2>RE: 가 뭔가요?</h2>
-            
-            <p>
-                <strong>RE:</strong> 는 "간편해진 보고서 작성"이라는 뜻입니다. 
-                상담사들이 매일 작성하는 상담 보고서를 <strong>AI가 자동으로 작성</strong>해주는 도구입니다.
+            <h2>💡 RE: 란?</h2>
+            <p style="font-size: 1.2em; margin-bottom: 20px;">
+                <strong>상담 메모 → AI가 자동으로 보고서 작성</strong>
             </p>
-
-            <div class="info-box success">
-                <p style="font-size: 1.1em; font-weight: 600; text-align: center;">
-                    💬 상담 메모를 입력하면 → 🤖 AI가 전문적인 보고서로 작성
-                </p>
-            </div>
-
-            <!-- PC 최적화: 병렬 배치 -->
-            <div class="intro-grid">
-                <div>
-                    <h3>이런 분들이 사용하고 있어요</h3>
-                    <ul>
-                        <li><strong>심리상담사:</strong> 개인상담, 집단상담 기록</li>
-                        <li><strong>상담교사:</strong> Wee클래스/센터 상담 일지</li>
-                        <li><strong>청소년상담사:</strong> 청소년 상담 보고서, 보호자 면담 일지</li>
-                        <li><strong>임상심리사:</strong> 심리평가 소견서, 상담 기록</li>
-                        <li><strong>상담심리 대학원생/ 상담수련생:</strong> 상담 기록, 슈퍼비전 보고서</li>
-                    </ul>
-                </div>
-
-                <div class="diagram">
-                    <div class="diagram-title">RE: 의 작동 원리</div>
-                    <div class="diagram-flow">
-                        <div class="diagram-box">
-                            📝<br>메모 작성<br>
-                            <small style="font-size: 0.85em; color: var(--text-secondary);">두서없는 일지, 키워드 중심</small>
-                        </div>
-                        <div class="diagram-arrow">→</div>
-                        <div class="diagram-box">
-                            🤖<br>보고서 작성<br>
-                            <small style="font-size: 0.85em; color: var(--text-secondary);">정리된 보고서, AI 활용 수정</small>
-                        </div>
-                        <div class="diagram-arrow">→</div>
-                        <div class="diagram-box">
-                            📄<br>보고서 완성<br>
-                            <small style="font-size: 0.85em; color: var(--text-secondary);">작성 시간단축, 완성도 UP!</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p>간단한 메모만 입력하면 AI가 전문적인 상담 보고서로 변환해드립니다.</p>
         </div>
 
-        <!-- 섹션 2: 첫 화면 둘러보기 -->
+        <!-- 누가 사용하나요? -->
         <div class="guide-section">
-            <h2>첫 화면 둘러보기</h2>
-            
-            <div class="screenshot">
-                <img src="screenshot/01-dashboard-main.svg" alt="RE:  대시보드" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
-                <div class="screenshot-caption">RE:  대시보드 전체 화면</div>
-            </div>
-
-            <h3>주요 메뉴 소개</h3>
-            <ul>
-                <li><strong>📋 최근 작성 히스토리:</strong> 최근에 작성한 보고서 목록 (최대 8개 표시)</li>
-                <li><strong>✍️ 보고서 작성:</strong> 새 보고서를 작성하거나 저장된 보고서를 불러옵니다</li>
-                <li><strong>📖 사용 안내서:</strong> 지금 보고 계신 이 가이드입니다</li>
-                <li><strong>⚙️ 설정:</strong> API 키 설정 및 AI 요청사항을 구체적으로 설정합니다. (다음 장에서 자세히 설명)</li>
+            <h2>👥 누가 사용하나요?</h2>
+            <p>상담 보고서를 작성하는 모든 전문가</p>
+            <ul style="margin-top: 16px;">
+                <li>심리상담사</li>
+                <li>상담교사 (Wee클래스/센터)</li>
+                <li>청소년상담사</li>
+                <li>임상심리사</li>
+                <li>대학원생/수련생</li>
+                <li>EAP 상담사</li>
             </ul>
-
-            <h3>화면 구성</h3>
-            <div class="diagram">
-                <div class="diagram-title">RE:  웹 서비스 구조</div>
-                <p style="font-size: 0.95em; color: var(--text-secondary); margin-bottom: 20px;">
-                    웹브라우저에서 바로 접속하여 사용하는 클라우드 기반 서비스입니다
-                </p>
-                <div style="background: var(--bg-secondary); padding: 20px; border-radius: 8px; max-width: 700px; margin: 0 auto; border: 1px solid var(--border-color);">
-                    <div style="background: linear-gradient(135deg, var(--accent-primary) 0%, #9333ea 100%); color: white; padding: 14px; border-radius: 8px 8px 0 0; font-weight: 600; text-align: center; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);">
-                        🌐 RE: Report Effortless - Web Service
-                    </div>
-                    <div style="background: var(--bg-tertiary); padding: 24px;">
-                        <div style="display: grid; gap: 12px;">
-                            <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="font-weight: 600; color: var(--accent-primary); margin-bottom: 4px;">✍️ 보고서 작성</div>
-                                <div style="font-size: 0.85em; color: var(--text-secondary);">AI 기반 자동 보고서 생성</div>
-                            </div>
-                            <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #8b5cf6; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="font-weight: 600; color: #8b5cf6; margin-bottom: 4px;">📋 최근 작성 히스토리</div>
-                                <div style="font-size: 0.85em; color: var(--text-secondary);">작성한 보고서 관리</div>
-                            </div>
-                            <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #a855f7; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="font-weight: 600; color: #a855f7; margin-bottom: 4px;">⚙️ 설정</div>
-                                <div style="font-size: 0.85em; color: var(--text-secondary);">API 키 및 스타일 설정</div>
-                            </div>
-                            <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #c084fc; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="font-weight: 600; color: #c084fc; margin-bottom: 4px;">📖 사용 안내서</div>
-                                <div style="font-size: 0.85em; color: var(--text-secondary);">상세 가이드</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); padding: 12px; border-radius: 0 0 8px 8px; text-align: center; font-size: 0.85em; color: #6b21a8; font-weight: 500;">
-                        💡 언제 어디서나 웹브라우저만 있으면 OK!
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <!-- 다음 단계 안내 -->
+        <!-- 어떻게 작동하나요? -->
         <div class="guide-section">
-            <h2>🎉 축하합니다!</h2>
-            <p>
-                이제 RE: 를 실행할 수 있게 되었습니다! 다음 장에서는 본격적으로 API 키를 발급받고 첫 보고서를 작성해보겠습니다.
-            </p>
-            
-            <div class="info-box success">
-                <h4>✅ 이 장에서 배운 내용</h4>
-                <ul>
-                    <li>RE: 가 어떤 도구인지 이해했습니다</li>
-                    <li>RE: 를 설치하고 실행하는 방법을 배웠습니다</li>
-                    <li>첫 화면 구성을 알아봤습니다</li>
-                </ul>
-            </div>
+            <h2>⚙️ 작동 원리</h2>
+            <ol style="font-size: 1.05em; line-height: 2;">
+                <li><strong>웹 브라우저에서 실행</strong> - 설치 불필요</li>
+                <li><strong>데이터는 내 컴퓨터에 저장</strong> - 브라우저에만 보관</li>
+                <li><strong>AI가 보고서 생성</strong> - 처리 후 즉시 삭제</li>
+                <li><strong>완벽한 보안</strong> - 중앙 서버 없음</li>
+            </ol>
         </div>
 
-        <!-- Google AdSense 디스플레이 광고 -->
-        <div style="text-align: center; margin: 40px auto; max-width: 728px;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9257454501555292"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+        <!-- 주요 기능 -->
+        <div class="guide-section">
+            <h2>✨ 주요 기능</h2>
+            <ul style="font-size: 1.05em; line-height: 2;">
+                <li><strong>초고속 생성:</strong> 5~10초 만에 완성</li>
+                <li><strong>AI 챗봇:</strong> 실시간 수정 가능</li>
+                <li><strong>히스토리 관리:</strong> 최대 50개 저장</li>
+                <li><strong>스타일 커스터마이징:</strong> 원하는 대로 설정</li>
+            </ul>
+        </div>
+
+        <!-- 완료 -->
+        <div class="info-box success">
+            <h4>✅ 1장 완료!</h4>
+            <p>RE:가 무엇인지 이해했습니다. 다음 장에서 실제로 사용해봅시다.</p>
         </div>
 
         <!-- 네비게이션 -->
-        <div class="guide-navigation" style="margin-top: 32px; padding-top: 32px; border-top: none;">
+        <div class="guide-navigation">
             <a href="index.html" class="guide-nav-btn">
                 <div class="guide-nav-icon">←</div>
                 <div>
@@ -206,7 +113,6 @@
         </div>
     </div>
 
-    <!-- Polyfills -->
     <script src="../js/browser-polyfills.js"></script>
     <script src="../js/common-components.js"></script>
 </body>

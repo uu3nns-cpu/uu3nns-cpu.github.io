@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사용 안내서 - RE: </title>
+    <title>사용 안내서 - RE:</title>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
@@ -19,340 +19,324 @@
          crossorigin="anonymous"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components-base.css">
-    <link rel="stylesheet" href="../css/components-layout.css">
-    <link rel="stylesheet" href="../css/browser-compatibility.css">
-    <link rel="stylesheet" href="../css/header-button-unify.css">
+    <link rel="stylesheet" href="../src/css/base/variables.css">
+    <link rel="stylesheet" href="../src/css/base/base.css">
+    <link rel="stylesheet" href="../src/css/base/layout.css">
+    <link rel="stylesheet" href="../src/css/components/components-base.css">
+    <link rel="stylesheet" href="../src/css/components/components-layout.css">
+    <link rel="stylesheet" href="../src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="../src/css/components/header-unified.css">
     <link rel="stylesheet" href="css/guide-common.css">
     
     <style>
-        /* 가이드 공통 스타일 - 04-security.html 기준 통일 */
+        .guide-hero {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, #9333ea 100%);
+            border-radius: 20px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+        }
         
-        /* 가이드 네비게이션 */
-        .guide-nav {
+        .guide-hero h1 {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+        
+        .guide-hero-subtitle {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            margin: 0 auto;
+        }
+        
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 32px;
-        }
-        
-        .guide-nav-title {
-            font-size: 1.1em;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .guide-nav-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-        
-        @media (max-width: 1200px) {
-            .guide-nav-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .guide-nav-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .guide-nav-card {
-            background: var(--bg-tertiary);
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            padding: 20px;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .guide-nav-card:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .guide-nav-card-number {
-            display: inline-block;
-            background: var(--accent-primary);
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
+            border-radius: 16px;
+            padding: 24px;
             text-align: center;
-            line-height: 28px;
-            font-weight: 700;
-            font-size: 0.9em;
+        }
+        
+        .stat-icon {
+            font-size: 2.5em;
             margin-bottom: 12px;
         }
         
-        .guide-nav-card-title {
-            font-size: 1.1em;
-            font-weight: 700;
-            color: var(--text-primary);
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--accent-primary);
             margin-bottom: 8px;
         }
         
-        .guide-nav-card-desc {
-            font-size: 0.9em;
+        .stat-label {
+            font-size: 0.95em;
             color: var(--text-secondary);
-            line-height: 1.5;
+            font-weight: 500;
         }
         
-        .guide-nav-card-time {
-            font-size: 0.85em;
-            color: var(--text-tertiary);
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+        .guide-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin: 32px 0;
         }
         
-        .guide-nav-card.featured {
-            /* 색상 강조 제거 - 별표로 충분 */
-        }
-        
-        /* 가이드 인트로 섹션 - donate 스타일로 통일 */
-        .guide-intro {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--border-color);
-        }
-        
-        .guide-intro-icon {
-            font-size: 60px;
-            margin-bottom: 10px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .guide-intro h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-        
-        .guide-intro-desc {
-            font-size: 1em;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin: 0 auto 16px auto;
-        }
-        
-        .guide-intro-badges {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .guide-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
+        .guide-card {
             background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            font-size: 0.9em;
-            color: var(--text-primary);
-        }
-        
-        /* 학습 경로 섹션 */
-        .learning-path {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
             padding: 28px;
-            margin-bottom: 32px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
         }
         
-        .learning-path-title {
-            font-size: 1.2em;
+        .guide-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .card-number {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, #9333ea 100%);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3em;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+            flex-shrink: 0;
+        }
+        
+        .card-title {
+            font-size: 1.4em;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 20px;
+        }
+        
+        .card-description {
+            font-size: 1em;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        
+        .card-features {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             gap: 8px;
         }
         
-        .learning-scenarios {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-        
-        @media (max-width: 1200px) {
-            .learning-scenarios {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .learning-scenarios {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .scenario {
+        .feature-tag {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85em;
+            color: var(--text-tertiary);
+            font-weight: 500;
         }
         
-        .scenario-title {
+        .security-banner {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 3px solid #f59e0b;
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.25);
+        }
+        
+        .security-icon {
+            font-size: 48px;
+            flex-shrink: 0;
+        }
+        
+        .security-text h3 {
+            font-size: 1.4em;
+            color: #92400e;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+        
+        .security-text p {
             font-size: 1em;
-            font-weight: 700;
-            color: var(--accent-primary);
-            margin-bottom: 12px;
-        }
-        
-        .scenario-path {
-            font-size: 0.9em;
-            color: var(--text-secondary);
+            color: #78350f;
             line-height: 1.6;
         }
         
-        .scenario-arrow {
-            color: var(--accent-primary);
-            margin: 0 4px;
-        }
-        
-        /* changelog 스타일 버튼 */
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 18px 42px;
-            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+        .security-btn {
+            background: #f59e0b;
             color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 1.1em;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 1em;
             font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
-        .btn-back:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn-back:active {
-            transform: translateY(-1px);
+        .security-btn:hover {
+            background: #d97706;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <!-- 공통 Header -->
     <div class="header"></div>
 
     <div class="guide-container">
-        <!-- 인트로 -->
-        <div class="guide-intro">
-            <div class="guide-intro-icon">📖</div>
-            <h1>RE: 사용 안내서</h1>
-            <p class="guide-intro-desc">
-                RE: 는 상담사를 위한 AI 보고서 작성 도구입니다.<br>
-                이 가이드는 처음 사용하시는 분부터 고급 기능까지 단계별로 안내합니다.
+        <!-- Hero -->
+        <div class="guide-hero">
+            <h1>🚀 RE: 사용 안내서</h1>
+            <p class="guide-hero-subtitle">
+                상담사를 위한 AI 보고서 작성 도구<br>
+                5분이면 시작할 수 있습니다
             </p>
-            <div class="guide-intro-badges">
-                <span class="guide-badge">📖 5개 챕터</span>
-                <span class="guide-badge">🎯 단계별 학습</span>
+        </div>
+
+        <!-- Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-value">5분</div>
+                <div class="stat-label">설치 시간</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✍️</div>
+                <div class="stat-value">30초</div>
+                <div class="stat-label">보고서 생성</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value">무료</div>
+                <div class="stat-label">Groq 사용 시</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🔐</div>
+                <div class="stat-value">100%</div>
+                <div class="stat-label">로컬 저장</div>
             </div>
         </div>
 
-        <!-- 가이드 네비게이션 -->
-        <div class="guide-nav">
-            <div class="guide-nav-title">📑 가이드 목차</div>
-            <div class="guide-nav-grid">
-                <a href="01-start.html" class="guide-nav-card">
-                    <div class="guide-nav-card-number">1</div>
-                    <div class="guide-nav-card-title">🚀 시작하기</div>
-                    <div class="guide-nav-card-desc">
-                        RE: 가 무엇인지, 어떻게 설치하고 실행하는지 알아봅니다
+        <!-- Security Banner -->
+        <div class="security-banner">
+            <div class="security-icon">🛡️</div>
+            <div class="security-text">
+                <h3>보안이 가장 중요합니다</h3>
+                <p>데이터 처리 방식을 먼저 확인하세요. 개인정보 보호 가이드 필독!</p>
+            </div>
+            <a href="04-security.html" class="security-btn">보안 가이드 →</a>
+        </div>
+
+        <!-- Guide Cards -->
+        <div class="guide-section">
+            <h2 style="text-align: center; font-size: 1.8em; margin-bottom: 32px;">📚 가이드 목차</h2>
+            
+            <div class="guide-cards-grid">
+                <a href="01-start.html" class="guide-card">
+                    <div class="card-header">
+                        <div class="card-number">1</div>
+                        <div class="card-title">시작하기</div>
+                    </div>
+                    <div class="card-description">
+                        RE:가 무엇인지, 어떻게 작동하는지 알아봅니다
+                    </div>
+                    <div class="card-features">
+                        <span class="feature-tag">⏱️ 3분</span>
+                        <span class="feature-tag">🎯 초보자 필수</span>
                     </div>
                 </a>
                 
-                <a href="02-basic.html" class="guide-nav-card">
-                    <div class="guide-nav-card-number">2</div>
-                    <div class="guide-nav-card-title">✍️ 기본 사용법</div>
-                    <div class="guide-nav-card-desc">
-                        API 키 발급부터 첫 보고서 작성까지 실습합니다
+                <a href="02-basic.html" class="guide-card">
+                    <div class="card-header">
+                        <div class="card-number">2</div>
+                        <div class="card-title">기본 사용법</div>
+                    </div>
+                    <div class="card-description">
+                        API 키 발급부터 첫 보고서 작성까지
+                    </div>
+                    <div class="card-features">
+                        <span class="feature-tag">⏱️ 10분</span>
+                        <span class="feature-tag">🔑 API 키</span>
+                        <span class="feature-tag">✍️ 실습</span>
                     </div>
                 </a>
                 
-                <a href="03-advanced.html" class="guide-nav-card">
-                    <div class="guide-nav-card-number">3</div>
-                    <div class="guide-nav-card-title">🎨 고급 기능</div>
-                    <div class="guide-nav-card-desc">
-                        AI 챗봇, 스타일 조정, 히스토리 관리 등 심화 기능
+                <a href="03-advanced.html" class="guide-card">
+                    <div class="card-header">
+                        <div class="card-number">3</div>
+                        <div class="card-title">고급 기능</div>
+                    </div>
+                    <div class="card-description">
+                        AI 챗봇, 보고서 관리, 단축키 활용
+                    </div>
+                    <div class="card-features">
+                        <span class="feature-tag">⏱️ 5분</span>
+                        <span class="feature-tag">🤖 AI 챗봇</span>
+                        <span class="feature-tag">⌨️ 단축키</span>
                     </div>
                 </a>
                 
-                <a href="04-security.html" class="guide-nav-card featured">
-                    <div class="guide-nav-card-number">4</div>
-                    <div class="guide-nav-card-title">🔒 보안 & 개인정보 ⭐</div>
-                    <div class="guide-nav-card-desc">
-                        데이터는 어디에 저장될까? 안전하게 사용하는 방법 (필독!)
+                <a href="05-troubleshoot.html" class="guide-card">
+                    <div class="card-header">
+                        <div class="card-number">4</div>
+                        <div class="card-title">문제 해결</div>
                     </div>
-                </a>
-                
-                <a href="05-troubleshoot.html" class="guide-nav-card">
-                    <div class="guide-nav-card-number">5</div>
-                    <div class="guide-nav-card-title">🔧 문제 해결</div>
-                    <div class="guide-nav-card-desc">
-                        자주 묻는 질문과 에러 해결 방법
+                    <div class="card-description">
+                        자주 발생하는 문제와 해결 방법, FAQ
+                    </div>
+                    <div class="card-features">
+                        <span class="feature-tag">⏱️ 필요시</span>
+                        <span class="feature-tag">❓ FAQ</span>
+                        <span class="feature-tag">🔧 트러블슈팅</span>
                     </div>
                 </a>
             </div>
         </div>
 
-        <!-- 하단 홈으로 돌아가기 -->
-        <div style="text-align: center; margin-top: 60px; padding-top: 40px; border-top: 2px solid var(--border-color);">
+        <!-- CTA -->
+        <div style="text-align: center; margin-top: 48px; padding: 40px; background: var(--bg-secondary); border-radius: 20px; border: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.6em; margin-bottom: 12px; color: var(--text-primary);">🎯 지금 바로 시작하세요!</h3>
+            <p style="font-size: 1.05em; color: var(--text-secondary); margin-bottom: 24px;">5분만 투자하면 RE:를 완전히 이해하고 사용할 수 있습니다</p>
+            <a href="01-start.html" class="btn-back">1장부터 시작하기 →</a>
+        </div>
+
+        <!-- Home -->
+        <div style="text-align: center; margin-top: 48px; padding-top: 32px; border-top: 2px solid var(--border-color);">
             <a href="../index.html" class="btn-back">
-                <span>🏠</span>
-                <span>홈으로 돌아가기</span>
+                <span>🏠 홈으로 돌아가기</span>
             </a>
-        </div>
-        
-        <!-- Google AdSense 디스플레이 광고 -->
-        <div style="text-align: center; margin: 40px auto; max-width: 728px;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9257454501555292"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
     </div>
 
-    <!-- Polyfills -->
     <script src="../js/browser-polyfills.js"></script>
     <script src="../js/common-components.js"></script>
 </body>
