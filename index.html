@@ -34,7 +34,7 @@
         /* 대시보드 전용 스타일 */
         
         .dashboard-container {
-            max-width: 2200px;
+            max-width: 1600px !important;
             width: 100%;
             margin: 0 auto;
             padding: 20px 40px 40px 40px;
@@ -45,20 +45,77 @@
         
         /* 섹션 그리드 */
         .sections-grid {
-            display: grid;
-            grid-template-columns: 364px 1fr 364px;
-            grid-template-rows: 1fr 1fr;
+            display: grid !important;
+            grid-template-columns: 350px 1fr 350px !important;
+            grid-template-rows: auto auto;
             gap: 20px;
-            max-width: 2340px;
+            max-width: 1560px !important;
+            width: 100% !important;
             margin-left: auto;
             margin-right: auto;
-            height: calc(100vh - 140px);
+            min-height: calc(100vh - 140px);
         }
         
-        @media (max-width: 1200px) {
+        /* 비디오 섹션 스타일 */
+        .video-section {
+            grid-column: 2 / 3 !important;
+            grid-row: 1 / 2 !important;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 20px !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+        }
+        
+        .video-section h3 {
+            text-align: center;
+            margin-top: 16px;
+            margin-bottom: 0;
+            color: var(--text-primary);
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+        
+        .video-responsive {
+            position: relative;
+            padding-bottom: 45%; /* 20% 축소 (56.25% -> 45%) */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            background: #000;
+        }
+        
+        .video-responsive video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        @media (max-width: 1400px) {
             .sections-grid {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
+            }
+            
+            .video-section {
+                grid-column: 1 / 2 !important;
+                grid-row: 1 / 2 !important;
+            }
+            
+            .notice-card {
+                grid-column: 1 / 2 !important;
+                grid-row: 2 / 3 !important;
+            }
+            
+            .create-report-card {
+                grid-column: 1 / 2 !important;
+                grid-row: 3 / 4 !important;
             }
         }
         
@@ -579,44 +636,29 @@
     <div class="dashboard-container">
         <!-- 섹션 그리드 -->
         <div class="sections-grid">
+            <!-- 빠른 시작 가이드 영상 -->
+            <div class="video-section">
+                <div class="video-responsive">
+                    <video 
+                        controls
+                        preload="metadata">
+                        <source src="guidevideo/ReportPage.mp4" type="video/mp4">
+                        브라우저가 비디오 태그를 지원하지 않습니다.
+                    </video>
+                </div>
+                <h3>RE: 보고서 작성 영상</h3>
+            </div>
+            
             <!-- 공지사항 -->
-            <div class="notice-card" onclick="window.location.href='notice.html'">
+            <div class="notice-card" onclick="window.location.href='notice.html'" style="grid-column: 1 / 2; grid-row: 1 / 2;">
                 <div class="notice-card-content">
                     <div class="notice-card-icon">📢</div>
                     <div class="notice-card-title">공지사항</div>
                 </div>
             </div>
             
-            <!-- 최근 작성 히스토리 -->
-            <div class="section-card" style="grid-row: span 2;">
-                <div class="section-header">
-                    <h2 class="section-title">📋 저장된 보고서 목록</h2>
-                    <a href="report-management.html" class="section-more">전체보기</a>
-                </div>
-                <div class="section-content">
-                    <!-- 검색 및 필터 섹션 -->
-                    <div class="history-filters">
-                        <input type="text" id="searchInput" placeholder="🔍 검색 (제목, 내용)..." oninput="renderFilteredHistory()">
-                        <select id="dateFilter" onchange="renderFilteredHistory()">
-                            <option value="all">전체 기간</option>
-                            <option value="today">오늘</option>
-                            <option value="week">이번 주</option>
-                            <option value="month">이번 달</option>
-                        </select>
-                        <select id="sortType" onchange="renderFilteredHistory()">
-                            <option value="newest">최신순</option>
-                            <option value="oldest">오래된순</option>
-                        </select>
-                        <span class="filter-status" id="filterStatus"></span>
-                    </div>
-                    <div id="recentHistory">
-                        <!-- 히스토리 아이템 (JS로 동적 생성) -->
-                    </div>
-                </div>
-            </div>
-            
             <!-- 보고서 작성 카드 -->
-            <div class="create-report-card" onclick="window.location.href='report.html'">
+            <div class="create-report-card" onclick="window.location.href='report.html'" style="grid-column: 3 / 4; grid-row: 1 / 2;">
                 <div class="create-report-content">
                     <div class="create-report-icon">✍️</div>
                     <div class="create-report-title">보고서 작성</div>
@@ -624,7 +666,7 @@
             </div>
             
             <!-- 빠른 링크 -->
-            <div class="section-card">
+            <div class="section-card" style="grid-column: 1 / 2; grid-row: 2 / 3;">
                 <div class="section-header">
                     <h2 class="section-title">🔗 빠른링크</h2>
                 </div>
@@ -662,8 +704,36 @@
                 </div>
             </div>
             
+            <!-- 최근 작성 히스토리 -->
+            <div class="section-card" style="grid-column: 2 / 3; grid-row: 2 / 3;">
+                <div class="section-header">
+                    <h2 class="section-title">📋 저장된 보고서 목록</h2>
+                    <a href="report-management.html" class="section-more">전체보기</a>
+                </div>
+                <div class="section-content">
+                    <!-- 검색 및 필터 섹션 -->
+                    <div class="history-filters">
+                        <input type="text" id="searchInput" placeholder="🔍 검색 (제목, 내용)..." oninput="renderFilteredHistory()">
+                        <select id="dateFilter" onchange="renderFilteredHistory()">
+                            <option value="all">전체 기간</option>
+                            <option value="today">오늘</option>
+                            <option value="week">이번 주</option>
+                            <option value="month">이번 달</option>
+                        </select>
+                        <select id="sortType" onchange="renderFilteredHistory()">
+                            <option value="newest">최신순</option>
+                            <option value="oldest">오래된순</option>
+                        </select>
+                        <span class="filter-status" id="filterStatus"></span>
+                    </div>
+                    <div id="recentHistory">
+                        <!-- 히스토리 아이템 (JS로 동적 생성) -->
+                    </div>
+                </div>
+            </div>
+            
             <!-- 사용 안내서 카드 -->
-            <div class="guide-card" onclick="window.location.href='guide/index.html'">
+            <div class="guide-card" onclick="window.location.href='guide/index.html'" style="grid-column: 3 / 4; grid-row: 2 / 3;">
                 <div class="guide-card-content">
                     <div class="guide-card-icon">📖</div>
                     <div class="guide-card-title">사용안내서</div>

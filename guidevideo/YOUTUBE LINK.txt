@@ -1,0 +1,4 @@
+RE: 간편해진 보고서 작성 - 보고서 작성 예제 : https://youtu.be/vikv9VoZ1vs
+Groq api key 얻는 법 : https://youtu.be/Jc2WmLiXyjg
+GTP-4o-mini API 키 얻는 법 : https://youtu.be/u9Aplb30JPE
+사례개념화 예시 : https://youtu.be/Rgp4HFhJ1YA

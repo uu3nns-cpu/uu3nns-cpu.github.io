@@ -118,17 +118,10 @@
     color: white;
 }
 
-/* API 가이드 (접힌 상태) */
+/* API 가이드 (항상 펼쳐진 상태) */
 .api-guide-collapsed {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    margin-top: 0;
-}
-
-.api-guide-collapsed.active {
-    max-height: 300px;
     margin-top: 15px;
+    overflow: visible;
 }
 
 .api-guide-inner {
@@ -165,6 +158,55 @@
 
 .guide-col a:hover {
     text-decoration: underline;
+}
+
+/* API 비디오 탭 스타일 */
+.api-video-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.api-video-tab {
+    flex: 1;
+    padding: 10px 16px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.api-video-tab:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent-primary);
+}
+
+.api-video-tab.active {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.api-video-container {
+    border-radius: var(--radius-btn);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.api-video-container iframe {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .api-video-container iframe {
+        height: 280px;
+    }
 }
 
 /* ==================== 화면 설정 & 보고서 설정 (Risk Meter 스타일) ==================== */

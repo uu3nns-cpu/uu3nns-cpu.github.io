@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YouTube Embed Test - vikv9VoZ1vs</title>
+  <style>
+    body { font-family: system-ui; padding: 20px; background: #f5f5f5; }
+    .wrap { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; }
+    .ratio { position: relative; width: 100%; padding-top: 56.25%; margin: 20px 0; }
+    .ratio > iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      border: 0;
+    }
+    .test-section { margin: 30px 0; padding: 20px; border: 2px solid #ddd; border-radius: 8px; }
+    .test-section h3 { margin-top: 0; color: #333; }
+    .status { padding: 10px; border-radius: 6px; margin: 10px 0; }
+    .success { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>🎬 YouTube 임베드 테스트</h1>
+    <p><strong>영상 ID:</strong> vikv9VoZ1vs</p>
+    
+    <div class="test-section">
+      <h3>테스트 1: 기본 임베드 (si 파라미터 없음)</h3>
+      <div class="ratio">
+        <iframe
+          src="https://www.youtube.com/embed/vikv9VoZ1vs"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="status" id="status1">로딩 중...</div>
+    </div>
+
+    <div class="test-section">
+      <h3>테스트 2: si 파라미터 포함</h3>
+      <div class="ratio">
+        <iframe
+          src="https://www.youtube.com/embed/vikv9VoZ1vs?si=c0f-s6eEpb7ZbYCc"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="status" id="status2">로딩 중...</div>
+    </div>
+
+    <div class="test-section">
+      <h3>테스트 3: youtube-nocookie.com</h3>
+      <div class="ratio">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/vikv9VoZ1vs"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="status" id="status3">로딩 중...</div>
+    </div>
+
+    <div class="test-section">
+      <h3>진단 정보</h3>
+      <ul>
+        <li><strong>프로토콜:</strong> <span id="protocol"></span></li>
+        <li><strong>User Agent:</strong> <span id="ua"></span></li>
+        <li><strong>콘솔 에러:</strong> F12 개발자 도구에서 확인하세요</li>
+      </ul>
+    </div>
+
+    <div class="test-section">
+      <h3>💡 문제 해결 가이드</h3>
+      <p><strong>영상이 하나도 안 보인다면:</strong></p>
+      <ol>
+        <li>F12 개발자 도구 열기 → Console 탭 확인</li>
+        <li>"외부 재생 불가" 메시지가 보이면 → 영상 업로더가 차단 설정함</li>
+        <li>Mixed Content 에러 → HTTPS 확인</li>
+        <li>X-Frame-Options 에러 → CSP 설정 문제</li>
+      </ol>
+      <p><strong>하나라도 보인다면:</strong></p>
+      <ul>
+        <li>보이는 버전을 index.html에 적용하세요</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('protocol').textContent = window.location.protocol;
+    document.getElementById('ua').textContent = navigator.userAgent.substring(0, 80) + '...';
+
+    // iframe 로드 확인
+    setTimeout(() => {
+      const iframes = document.querySelectorAll('iframe');
+      iframes.forEach((iframe, index) => {
+        const statusDiv = document.getElementById(`status${index + 1}`);
+        try {
+          if (iframe.contentWindow) {
+            statusDiv.textContent = '✅ iframe 로드됨 (재생 가능 여부는 직접 확인)';
+            statusDiv.className = 'status success';
+          }
+        } catch (e) {
+          statusDiv.textContent = '❌ 보안 정책으로 접근 불가 (정상일 수 있음)';
+          statusDiv.className = 'status';
+        }
+      });
+    }, 2000);
+
+    // 콘솔 에러 캐치
+    window.addEventListener('error', (e) => {
+      console.error('페이지 에러:', e);
+    });
+  </script>
+</body>
+</html>
