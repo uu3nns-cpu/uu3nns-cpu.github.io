@@ -510,13 +510,13 @@
     overflow: hidden;
 }
 
-/* 출력 탭 헤더 */
+/* 출력 탭 헤더 - 다크모드 */
 .report-layout .output-tabs-header {
     display: flex;
     justify-content: stretch;
     gap: 0;
     padding: 12px 20px;
-    background: var(--bg-tertiary);
+    background: #1a1a1a;
     border-bottom: 2px solid var(--border-color);
     flex-shrink: 0;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -524,12 +524,17 @@
     box-sizing: border-box;
 }
 
+/* 라이트 모드 - 탭 헤더 */
+body.light-mode .report-layout .output-tabs-header {
+    background: #f5f5f5;
+}
+
 .report-layout .output-tab {
     padding: 6px 16px;
-    background: transparent;
+    background: #2a2a2a;
     border: none;
     border-bottom: 3px solid transparent;
-    color: var(--text-secondary);
+    color: #ffffff;
     font-size: 0.9em;
     font-weight: 600;
     cursor: pointer;
@@ -541,6 +546,12 @@
     text-align: center;
 }
 
+/* 라이트 모드 - 비활성 탭 */
+body.light-mode .report-layout .output-tab {
+    background: #e0e0e0;
+    color: #333333;
+}
+
 /* 비교 탭은 더 넓게 */
 .report-layout .output-tab[data-tab="compare"] {
     flex: 1.5;
@@ -548,14 +559,26 @@
 }
 
 .report-layout .output-tab:hover {
-    color: var(--text-primary);
-    background: var(--bg-secondary);
+    color: #ffffff;
+    background: #3a3a3a;
+}
+
+/* 라이트 모드 - 탭 호버 */
+body.light-mode .report-layout .output-tab:hover {
+    background: #d0d0d0;
+    color: #000000;
 }
 
 .report-layout .output-tab.active {
     color: var(--accent-primary);
     border-bottom-color: var(--accent-primary);
-    background: var(--bg-secondary);
+    background: #1a1a1a;
+}
+
+/* 라이트 모드 - 활성 탭 */
+body.light-mode .report-layout .output-tab.active {
+    background: #ffffff;
+    color: var(--accent-primary);
 }
 
 /* 출력 탭 패널 */

@@ -86,10 +86,10 @@
         }
 
         /* ============================================
-           카드형 탭 디자인 (옵션 2)
+           탭 디자인 - 다크/라이트 모드 지원
            ============================================ */
         
-        /* 탭 헤더 컨테이너 */
+        /* 탭 헤더 컨테이너 - 다크모드 */
         .output-tabs-header {
             background: #1a1a1a !important;
             padding: 8px 8px 0 8px !important;
@@ -97,11 +97,16 @@
             border-radius: 12px 12px 0 0 !important;
         }
         
-        /* 기본 탭 스타일 (비활성) */
+        /* 라이트 모드 - 탭 헤더 */
+        body.light-mode .output-tabs-header {
+            background: #f5f5f5 !important;
+        }
+        
+        /* 기본 탭 스타일 (비활성) - 다크모드 */
         .output-tab {
             padding: 12px 24px !important;
             background: #2a2a2a !important;
-            color: #888 !important;
+            color: #ffffff !important;
             border: none !important;
             border-radius: 8px 8px 0 0 !important;
             font-weight: 500 !important;
@@ -113,15 +118,27 @@
             transform: translateY(0) !important;
         }
         
-        /* 호버 효과 (비활성 탭) */
+        /* 라이트 모드 - 비활성 탭 */
+        body.light-mode .output-tab {
+            background: #e0e0e0 !important;
+            color: #333333 !important;
+        }
+        
+        /* 호버 효과 (비활성 탭) - 다크모드 */
         .output-tab:not(.active):hover {
             background: #3a3a3a !important;
-            color: #aaa !important;
+            color: #ffffff !important;
             transform: translateY(-2px) !important;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
         }
         
-        /* 활성 탭 스타일 - 카드형 */
+        /* 라이트 모드 - 탭 호버 */
+        body.light-mode .output-tab:not(.active):hover {
+            background: #d0d0d0 !important;
+            color: #000000 !important;
+        }
+        
+        /* 활성 탭 스타일 */
         .output-tab.active {
             background: #ffffff !important;
             color: #1a1a1a !important;
@@ -131,6 +148,15 @@
                 0 -2px 8px rgba(0, 0, 0, 0.1),
                 0 4px 12px rgba(0, 0, 0, 0.15) !important;
             z-index: 10 !important;
+        }
+        
+        /* 라이트 모드 - 활성 탭 */
+        body.light-mode .output-tab.active {
+            background: #ffffff !important;
+            color: #1a1a1a !important;
+            box-shadow: 
+                0 -2px 8px rgba(0, 0, 0, 0.08),
+                0 4px 12px rgba(0, 0, 0, 0.1) !important;
         }
         
         /* 활성 탭 하단 보라색 강조선 제거 */
@@ -178,9 +204,9 @@
             margin-bottom: 0 !important;
         }
         
-        /* C안: 카드 border 색상 투명화 */
+        /* C안: 카드 border 완전 제거 */
         .report-layout .compare-content {
-            border-color: transparent !important;
+            border: none !important;
         }
         
         /* 출력창 하단 회색 가로선 제거 - 모든 border 속성 */
@@ -234,37 +260,7 @@
             border: none !important;
         }
 
-        /* ============================================
-           라이트 모드 대응 - 강제 적용
-           ============================================ */
-        
-        /* body에 light-mode 클래스가 있을 때 */
-        body.light-mode .output-tabs-header,
-        .light-mode .output-tabs-header {
-            background: #f5f5f5 !important;
-        }
-        
-        body.light-mode .output-tab,
-        .light-mode .output-tab {
-            background: #e0e0e0 !important;
-            color: #666 !important;
-        }
-        
-        body.light-mode .output-tab:not(.active):hover,
-        .light-mode .output-tab:not(.active):hover {
-            background: #d0d0d0 !important;
-            color: #444 !important;
-        }
-        
-        body.light-mode .output-tab.active,
-        .light-mode .output-tab.active {
-            background: #ffffff !important;
-            color: #1a1a1a !important;
-            box-shadow: 
-                0 -2px 8px rgba(0, 0, 0, 0.08),
-                0 4px 12px rgba(0, 0, 0, 0.1) !important;
-        }
-        
+
         /* ============================================
            UI 개선 - 비교 패널 자연스러운 연결
            ============================================ */
@@ -298,54 +294,25 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
         }
         
-        /* 라이트 모드 대응 */
-        @media (prefers-color-scheme: light) {
-            .report-layout .compare-content {
-                background: #ffffff !important;
-            }
-            .report-layout .compare-panel-header {
-                border-bottom-color: rgba(0, 0, 0, 0.05) !important;
-            }
+
+        /* ============================================
+           텍스트 가독성 개선 - 다크/라이트 모드
+           ============================================ */
+        
+        /* 출력 콘텐츠 텍스트 색상 - 다크모드 */
+        .report-layout .output-content,
+        .report-layout .compare-content {
+            color: #e0e0e0 !important;
         }
         
-        body.light-mode .report-layout .compare-content,
-        .light-mode .report-layout .compare-content {
-            background: #ffffff !important;
+        /* 라이트 모드 - 콘텐츠 텍스트 */
+        body.light-mode .report-layout .output-content,
+        body.light-mode .report-layout .compare-content {
+            color: #1f2937 !important;
         }
         
-        body.light-mode .report-layout .compare-panel-header,
-        .light-mode .report-layout .compare-panel-header {
-            border-bottom-color: rgba(0, 0, 0, 0.05) !important;
-        }
-        
-        /* 시스템 테마 감지 - prefers-color-scheme */
-        @media (prefers-color-scheme: light) {
-            /* 탭 헤더 컨테이너 - 밝은 배경 */
-            .output-tabs-header {
-                background: #f5f5f5 !important;
-            }
-            
-            /* 비활성 탭 - 중간 밝기 */
-            .output-tab {
-                background: #e0e0e0 !important;
-                color: #666 !important;
-            }
-            
-            /* 비활성 탭 호버 */
-            .output-tab:not(.active):hover {
-                background: #d0d0d0 !important;
-                color: #444 !important;
-            }
-            
-            /* 활성 탭 - 흰색 유지하되 그림자 조정 */
-            .output-tab.active {
-                background: #ffffff !important;
-                color: #1a1a1a !important;
-                box-shadow: 
-                    0 -2px 8px rgba(0, 0, 0, 0.08),
-                    0 4px 12px rgba(0, 0, 0, 0.1) !important;
-            }
-        }
+
+
     </style>
 </head>
 
