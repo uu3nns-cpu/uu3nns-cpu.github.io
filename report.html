@@ -33,10 +33,10 @@
     <link rel="stylesheet" href="src/css/components/markdown-and-usage.css">
     <link rel="stylesheet" href="src/css/components/buttons-unified.css?v=20251117001">
     <link rel="stylesheet" href="src/css/components/toast.css">
-    <link rel="stylesheet" href="src/css/pages/report-unified.css?v=20251117008">
-    <link rel="stylesheet" href="src/css/pages/report-unified-override.css?v=20251117004">
+    <link rel="stylesheet" href="src/css/pages/report-unified.css?v=20251118002">
+    <link rel="stylesheet" href="src/css/pages/report-unified-override.css?v=20251118012">
     <link rel="stylesheet" href="src/css/pages/report-theme.css">
-    <link rel="stylesheet" href="src/css/components/glass-theme-fix.css?v=20241118003">
+    <link rel="stylesheet" href="src/css/components/chatbot-redesigned.css?v=20251118008">
 
     <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -51,47 +51,7 @@
     <!-- 헤더 (JS에서 주입) -->
     <div class="header"></div>
 
-    <!-- 챗봇 모달 -->
-    <div class="chatbot-modal" id="chatbotModal">
-        <div class="chatbot-header">
-            <h3>AI 챗봇</h3>
-            <button class="chatbot-close-btn" id="chatbotCloseBtn" title="닫기">×</button>
-        </div>
-        <div class="chatbot-messages" id="chatbotMessages">
-            <div class="chat-welcome-message">
-                <p>안녕하세요, 상담 보고서 작성을 돕는 AI 챗봇입니다.</p>
-                <p>필요한 템플릿, 말투, 구조 등을 자연어로 요청해 주세요.</p>
-                <p class="chat-welcome-example">예시: "개입 기법 섹션을 좀 더 구체적으로 설명해줘"</p>
-            </div>
-        </div>
-        <div class="chatbot-input-area">
-            <textarea
-                id="chatbotInput"
-                placeholder="요청 내용을 입력하세요. (예: '상담 과정을 더 자세하게 정리해줘')"
-                rows="3"
-                maxlength="500"></textarea>
-            <div class="chatbot-controls">
-                <div class="chatbot-toggles">
-                    <label class="chatbot-toggle-switch" title="Groq 모델 사용">
-                        <input type="checkbox" id="toggleGroq" checked>
-                        <span class="chatbot-toggle-slider"></span>
-                        <span class="chatbot-toggle-label">Groq</span>
-                    </label>
-                    <label class="chatbot-toggle-switch" title="GPT 모델 사용">
-                        <input type="checkbox" id="toggleGPT" checked>
-                        <span class="chatbot-toggle-slider"></span>
-                        <span class="chatbot-toggle-label">GPT</span>
-                    </label>
-                </div>
-                <button class="chatbot-send-btn" id="btnSendChat">
-                    <span class="send-text">요청</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 챗봇 오버레이 -->
-    <div class="chatbot-overlay" id="chatbotOverlay"></div>
+    <!-- 챗봇은 JS로 동적 생성됩니다 -->
 
     <!-- 메인 레이아웃 -->
     <main class="page-container report-page">
@@ -174,8 +134,8 @@
                             <button class="btn btn--secondary btn--small" onclick="saveReport()" title="현재 작업을 안전하게 저장합니다.">💾</button>
                             <button class="btn btn--secondary btn--small" onclick="showReportHistory()" title="저장된 보고서를 확인합니다.">📋</button>
                             <button class="btn btn--secondary btn--small" onclick="showKeyboardShortcuts()" title="단축키 안내">💡</button>
+                            <button class="btn btn--secondary btn--small" onclick="toggleChatbot()" title="AI 챗봇으로 보고서 개선하기">🤖</button>
                             <button class="btn btn--danger btn--small" onclick="clearInput()" title="입력 내용 지우기" style="margin-left: auto;">🗑️</button>
-                            <button class="btn btn--primary btn--small" id="chatbotToggleBtn" onclick="toggleChatbot()" title="AI 챗봇 열기">🤖</button>
                         </div>
                     </div>
                     <div class="error-message" id="errorMessage"></div>
@@ -220,20 +180,20 @@
     <script src="js/ui-utils.js?v=20251109001"></script>
     <script src="js/modules/settings-storage.js"></script>
     <script src="js/modules/ui-controls.js"></script>
-    <script src="js/app.js?v=20251109001"></script>
+    <script src="js/app.js?v=20251118010"></script>
     <script src="js/autosave.js?v=20251109001"></script>
     <script src="js/ui-enhancements.js?v=20251109001"></script>
     <script src="js/settings-preview.js?v=20251109001"></script>
     <script src="js/report-adapter.js?v=20251109001"></script>
     <script src="js/resize-handler.js?v=20251109001"></script>
-    <script src="js/chatbot.js?v=20251109001"></script>
+    <script src="js/chatbot-redesigned.js?v=20251118007"></script>
     <script src="js/report-ui.js?v=20251109001"></script>
     <script src="js/markdown-renderer.js?v=20251109001"></script>
     <script src="js/compare-tab-fix.js?v=20251112001"></script>
     <script src="js/input-validation.js?v=20251109001"></script>
     <script src="js/usage-bridge.js?v=20251109004"></script>
 
-    <!-- 챗봇 토글 함수 -->
+    <!-- 단축키 모달 전용 함수 -->
     <script>
         function showKeyboardShortcuts() {
             toggleShortcutsModal();
@@ -283,63 +243,6 @@
             `;
             document.body.insertAdjacentHTML('beforeend', html);
         }
-        
-        function toggleChatbot() {
-            const chatbotModal = document.getElementById('chatbotModal');
-            const overlay = document.getElementById('chatbotOverlay');
-
-            if (!chatbotModal) return;
-
-            const isActive = chatbotModal.classList.contains('active');
-
-            if (isActive) {
-                // 챗봇 닫기
-                chatbotModal.classList.remove('active');
-                if (overlay) overlay.classList.remove('active');
-            } else {
-                // 챗봇 열기
-                chatbotModal.classList.add('active');
-                if (overlay) overlay.classList.add('active');
-
-                // 입력 필드 포커스
-                const input = document.getElementById('chatbotInput');
-                if (input && !input.disabled) {
-                    setTimeout(() => input.focus(), 100);
-                }
-            }
-        }
-        
-        function closeChatbot() {
-            const modal = document.getElementById('chatbotModal');
-            const overlay = document.getElementById('chatbotOverlay');
-            if (modal) modal.classList.remove('active');
-            if (overlay) overlay.classList.remove('active');
-        }
-        
-        // 이벤트 리스너 등록
-        document.addEventListener('DOMContentLoaded', function() {
-            // 챗봇 닫기 버튼
-            const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
-            if (chatbotCloseBtn) {
-                chatbotCloseBtn.addEventListener('click', closeChatbot);
-            }
-            
-            // 오버레이 클릭시 챗봇 닫기
-            const overlay = document.getElementById('chatbotOverlay');
-            if (overlay) {
-                overlay.addEventListener('click', closeChatbot);
-            }
-            
-            // ESC 키로 챗봇 닫기
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    const modal = document.getElementById('chatbotModal');
-                    if (modal && modal.classList.contains('active')) {
-                        closeChatbot();
-                    }
-                }
-            });
-        });
     </script>
 </body>
 </html>

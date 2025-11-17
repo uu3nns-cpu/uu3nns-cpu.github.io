@@ -874,9 +874,23 @@ async function generateWithGroq(input, apiKey, retryCount = 0) {
         return;
     }
 
+    // 🔥 즉시 로딩 표시 (DOM 강제 렌더링)
     outputDiv.classList.add('is-hidden');
+    outputDiv.style.display = 'none';
+    
+    loading.classList.remove('is-hidden');
     loading.classList.add('active');
-    if (loadingCompare) loadingCompare.classList.remove('is-hidden');
+    loading.style.display = 'flex';  // 명시적 표시
+    
+    if (loadingCompare) {
+        loadingCompare.classList.remove('is-hidden');
+        loadingCompare.classList.add('active');
+        loadingCompare.style.display = 'flex';
+    }
+    
+    // DOM 강제 렌더링 (브라우저가 즉시 표시)
+    void loading.offsetHeight;
+    
     copyBtn.disabled = true;
     if (usageDiv) usageDiv.textContent = '';
     
@@ -1143,7 +1157,13 @@ ${customPrompt}
     } finally {
         clearInterval(messageInterval);
         loading.classList.remove('active');
-        if (loadingCompare) loadingCompare.classList.add('is-hidden');
+        loading.classList.add('is-hidden');
+        loading.style.display = 'none';  // 명시적 숨김
+        if (loadingCompare) {
+            loadingCompare.classList.remove('active');
+            loadingCompare.classList.add('is-hidden');
+            loadingCompare.style.display = 'none';
+        }
     }
 }
 
@@ -1276,9 +1296,23 @@ async function generateWithGPT(input, apiKey, retryCount = 0) {
         return;
     }
 
+    // 🔥 즉시 로딩 표시 (DOM 강제 렌더링)
     outputDiv.classList.add('is-hidden');
+    outputDiv.style.display = 'none';
+    
+    loading.classList.remove('is-hidden');
     loading.classList.add('active');
-    if (loadingCompare) loadingCompare.classList.remove('is-hidden');
+    loading.style.display = 'flex';  // 명시적 표시
+    
+    if (loadingCompare) {
+        loadingCompare.classList.remove('is-hidden');
+        loadingCompare.classList.add('active');
+        loadingCompare.style.display = 'flex';
+    }
+    
+    // DOM 강제 렌더링 (브라우저가 즉시 표시)
+    void loading.offsetHeight;
+    
     copyBtn.disabled = true;
     if (usageDiv) usageDiv.textContent = '';
     
@@ -1537,7 +1571,13 @@ ${customPrompt}
     } finally {
         clearInterval(messageInterval);
         loading.classList.remove('active');
-        if (loadingCompare) loadingCompare.classList.add('is-hidden');
+        loading.classList.add('is-hidden');
+        loading.style.display = 'none';  // 명시적 숨김
+        if (loadingCompare) {
+            loadingCompare.classList.remove('active');
+            loadingCompare.classList.add('is-hidden');
+            loadingCompare.style.display = 'none';
+        }
     }
 }
 

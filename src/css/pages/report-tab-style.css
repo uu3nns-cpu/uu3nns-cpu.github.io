@@ -1,0 +1,101 @@
+/* ============================================
+   탭 스타일 개선 - 미니멀 디자인
+   - 보라색 제거, 중성적인 블루-그레이 계열
+   - 깔끔한 언더라인 방식의 active 표시
+   - 부드러운 애니메이션
+   ============================================ */
+
+/* 탭 헤더 컨테이너 */
+.report-layout .output-tabs-header {
+    display: flex;
+    justify-content: center;
+    background: transparent !important;
+    padding: 0 0 var(--space-sm) 0 !important;
+    gap: var(--space-sm) !important;
+    border-radius: 0 !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08) !important;
+    position: relative;
+}
+
+/* 탭 버튼 - 미니멀 스타일 */
+.report-layout .output-tab {
+    flex: 1;
+    padding: 12px 20px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    color: var(--text-tertiary) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: none !important;
+    position: relative;
+    letter-spacing: 0.3px;
+}
+
+/* 탭 버튼 하단 라인 (기본 상태 - 숨김) */
+.report-layout .output-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px 2px 0 0;
+}
+
+/* 호버 상태 */
+.report-layout .output-tab:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: var(--text-secondary) !important;
+    transform: none !important;
+}
+
+.report-layout .output-tab:hover::after {
+    background: rgba(100, 116, 139, 0.3);
+}
+
+/* Active 상태 - 블루-그레이 라인 */
+.report-layout .output-tab.active {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.report-layout .output-tab.active::after {
+    background: linear-gradient(90deg, #64748b, #475569);
+    box-shadow: 0 0 12px rgba(100, 116, 139, 0.4);
+}
+
+/* 다크모드 - 약간 밝은 라인 */
+html[data-theme="dark"] .report-layout .output-tab.active::after {
+    background: linear-gradient(90deg, #94a3b8, #64748b);
+    box-shadow: 0 0 12px rgba(148, 163, 184, 0.3);
+}
+
+/* 라이트모드 - 약간 어두운 라인 */
+html[data-theme="light"] .report-layout .output-tab.active::after {
+    background: linear-gradient(90deg, #475569, #334155);
+    box-shadow: 0 0 8px rgba(71, 85, 105, 0.3);
+}
+
+/* 라이트모드 탭 배경 */
+html[data-theme="light"] .report-layout .output-tabs-header {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+html[data-theme="light"] .report-layout .output-tab:hover {
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* 반응형 - 모바일 */
+@media (max-width: 768px) {
+    .report-layout .output-tab {
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+    }
+}

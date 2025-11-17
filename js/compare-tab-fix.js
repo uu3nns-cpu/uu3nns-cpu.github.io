@@ -1,42 +1,99 @@
 /**
- * 비교 탭 - 단순화된 동기화 로직
- * - Groq/GPT 생성 함수가 이미 비교 탭에도 직접 렌더링하므로
- * - 탭 전환 시 자연스러운 표시만 보장
- * - 로딩 상태 실시간 동기화 추가
+ * 비교 탭 - 마크다운 렌더링 보호 로직 (개선 버전)
+ * - 탭 전환 시 마크다운 렌더링 강제 유지
+ * - 로딩 상태 실시간 동기화
  * 
- * @author 김도현
- * @since 2025-01-17 (개선)
+ * @author 김해현
+ * @since 2025-11-18 (마크다운 보호 강화)
  */
 
 (function() {
     'use strict';
     
-    console.log('[Compare-Tab] 초기화 시작 - 단순화된 버전 v2');
+    console.log('[Compare-Tab] 초기화 시작 - 마크다운 강제 유지 버전');
     
     /**
-     * 비교 탭으로 전환 시 올바른 표시 보장
-     * - 이미 렌더링된 결과를 표시만 함
-     * - 추가 API 호출이나 렌더링 없음
+     * 비교 탭의 마크다운 렌더링 강제 적용
      */
-    function ensureCompareTabVisibility() {
+    function forceMarkdownRenderingInCompareTab() {
         const groqOutputCompare = document.getElementById('groqOutputCompare');
         const gptOutputCompare = document.getElementById('gptOutputCompare');
         
-        // 이미 내용이 있으면 표시 상태 보장
-        if (groqOutputCompare && groqOutputCompare.getAttribute('data-raw-text')) {
-            groqOutputCompare.classList.remove('is-hidden');
-            groqOutputCompare.style.display = '';
+        // Groq 출력 확인 및 렌더링
+        if (groqOutputCompare) {
+            const rawText = groqOutputCompare.getAttribute('data-raw-text');
+            if (rawText && rawText.trim()) {
+                console.log('[Compare-Tab] Groq 마크다운 렌더링 강제 적용');
+                
+                // 마크다운 렌더링 적용
+                if (typeof renderMarkdown === 'function') {
+                    const renderedHtml = renderMarkdown(rawText);
+                    if (typeof setSafeHtml === 'function') {
+                        setSafeHtml(groqOutputCompare, renderedHtml);
+                    } else {
+                        groqOutputCompare.innerHTML = renderedHtml;
+                    }
+                    groqOutputCompare.classList.add('markdown-rendered');
+                }
+                
+                // 표시 상태 보장
+                groqOutputCompare.classList.remove('is-hidden');
+                groqOutputCompare.style.display = '';
+            }
         }
         
-        if (gptOutputCompare && gptOutputCompare.getAttribute('data-raw-text')) {
-            gptOutputCompare.classList.remove('is-hidden');
-            gptOutputCompare.style.display = '';
+        // GPT 출력 확인 및 렌더링
+        if (gptOutputCompare) {
+            const rawText = gptOutputCompare.getAttribute('data-raw-text');
+            if (rawText && rawText.trim()) {
+                console.log('[Compare-Tab] GPT 마크다운 렌더링 강제 적용');
+                
+                // 마크다운 렌더링 적용
+                if (typeof renderMarkdown === 'function') {
+                    const renderedHtml = renderMarkdown(rawText);
+                    if (typeof setSafeHtml === 'function') {
+                        setSafeHtml(gptOutputCompare, renderedHtml);
+                    } else {
+                        gptOutputCompare.innerHTML = renderedHtml;
+                    }
+                    gptOutputCompare.classList.add('markdown-rendered');
+                }
+                
+                // 표시 상태 보장
+                gptOutputCompare.classList.remove('is-hidden');
+                gptOutputCompare.style.display = '';
+            }
         }
     }
     
     /**
+     * 탭 전환 이벤트 리스너 등록
+     */
+    function initTabSwitchListener() {
+        // 모든 탭 버튼 찾기
+        const tabButtons = document.querySelectorAll('.output-tab');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                if (tabName === 'compare') {
+                    // 비교 탭으로 전환 시 마크다운 렌더링 강제 적용
+                    console.log('[Compare-Tab] 비교 탭으로 전환 감지');
+                    
+                    // 약간의 지연 후 렌더링 적용 (DOM 업데이트 대기)
+                    setTimeout(() => {
+                        forceMarkdownRenderingInCompareTab();
+                    }, 50);
+                }
+            });
+        });
+        
+        console.log('[Compare-Tab] 탭 전환 리스너 등록 완료');
+    }
+    
+    /**
      * 로딩 상태 실시간 동기화
-     * - 단독 탭의 로딩 상태를 비교 탭에도 반영
      */
     function syncLoadingStates() {
         // Groq 로딩 상태 감지
@@ -47,8 +104,10 @@
             const observer = new MutationObserver(() => {
                 if (groqLoading.classList.contains('active')) {
                     groqLoadingCompare.classList.remove('is-hidden');
+                    groqLoadingCompare.classList.add('active');
                 } else {
                     groqLoadingCompare.classList.add('is-hidden');
+                    groqLoadingCompare.classList.remove('active');
                 }
             });
             
@@ -66,8 +125,10 @@
             const observer = new MutationObserver(() => {
                 if (gptLoading.classList.contains('active')) {
                     gptLoadingCompare.classList.remove('is-hidden');
+                    gptLoadingCompare.classList.add('active');
                 } else {
                     gptLoadingCompare.classList.add('is-hidden');
+                    gptLoadingCompare.classList.remove('active');
                 }
             });
             
@@ -81,22 +142,69 @@
     }
     
     /**
-     * 탭 전환 이벤트 리스너 등록
+     * 비교 탭 출력 내용 변경 감지 및 자동 렌더링
      */
-    function initTabSwitchListener() {
-        // 비교 탭 버튼 찾기
-        const compareTabButton = document.querySelector('[data-tab="compare"]');
+    function watchCompareTabContent() {
+        const groqOutputCompare = document.getElementById('groqOutputCompare');
+        const gptOutputCompare = document.getElementById('gptOutputCompare');
         
-        if (compareTabButton) {
-            compareTabButton.addEventListener('click', function() {
-                // 탭 전환 직후 가시성 보장 (비동기로 실행)
-                requestAnimationFrame(ensureCompareTabVisibility);
+        if (groqOutputCompare) {
+            const observer = new MutationObserver((mutations) => {
+                // data-raw-text가 설정되었는지 확인
+                const rawText = groqOutputCompare.getAttribute('data-raw-text');
+                if (rawText && !groqOutputCompare.classList.contains('markdown-rendered')) {
+                    console.log('[Compare-Tab] Groq 내용 변경 감지 - 마크다운 렌더링 적용');
+                    
+                    if (typeof renderMarkdown === 'function') {
+                        const renderedHtml = renderMarkdown(rawText);
+                        if (typeof setSafeHtml === 'function') {
+                            setSafeHtml(groqOutputCompare, renderedHtml);
+                        } else {
+                            groqOutputCompare.innerHTML = renderedHtml;
+                        }
+                        groqOutputCompare.classList.add('markdown-rendered');
+                    }
+                }
             });
             
-            console.log('[Compare-Tab] 탭 전환 리스너 등록 완료');
-        } else {
-            console.warn('[Compare-Tab] 비교 탭 버튼을 찾을 수 없습니다');
+            observer.observe(groqOutputCompare, {
+                attributes: true,
+                attributeFilter: ['data-raw-text'],
+                childList: true,
+                characterData: true,
+                subtree: true
+            });
         }
+        
+        if (gptOutputCompare) {
+            const observer = new MutationObserver((mutations) => {
+                // data-raw-text가 설정되었는지 확인
+                const rawText = gptOutputCompare.getAttribute('data-raw-text');
+                if (rawText && !gptOutputCompare.classList.contains('markdown-rendered')) {
+                    console.log('[Compare-Tab] GPT 내용 변경 감지 - 마크다운 렌더링 적용');
+                    
+                    if (typeof renderMarkdown === 'function') {
+                        const renderedHtml = renderMarkdown(rawText);
+                        if (typeof setSafeHtml === 'function') {
+                            setSafeHtml(gptOutputCompare, renderedHtml);
+                        } else {
+                            gptOutputCompare.innerHTML = renderedHtml;
+                        }
+                        gptOutputCompare.classList.add('markdown-rendered');
+                    }
+                }
+            });
+            
+            observer.observe(gptOutputCompare, {
+                attributes: true,
+                attributeFilter: ['data-raw-text'],
+                childList: true,
+                characterData: true,
+                subtree: true
+            });
+        }
+        
+        console.log('[Compare-Tab] 내용 변경 감지 시작');
     }
     
     // DOM 로드 완료 후 초기화
@@ -104,11 +212,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             initTabSwitchListener();
             syncLoadingStates();
+            watchCompareTabContent();
         });
     } else {
         initTabSwitchListener();
         syncLoadingStates();
+        watchCompareTabContent();
     }
     
-    console.log('[Compare-Tab] 초기화 완료 - 단순 동기화 + 로딩 상태 추적');
+    console.log('[Compare-Tab] 초기화 완료 - 마크다운 강제 유지 + 자동 렌더링');
 })();

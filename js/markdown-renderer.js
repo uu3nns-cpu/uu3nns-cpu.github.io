@@ -107,6 +107,8 @@ function applyMarkdownRendering(outputId) {
     
     // 마크다운 스타일 클래스 추가
     outputDiv.classList.add('markdown-rendered');
+    
+    console.log('[Markdown] 렌더링 적용:', outputId, '- HTML 길이:', html.length);
 }
 
 /**

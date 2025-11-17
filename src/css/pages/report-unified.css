@@ -195,28 +195,25 @@
 /* 탭 헤더 - 글래스 효과 */
 .report-layout .output-tabs-header {
     display: flex;
-    justify-content: center;
+    gap: 12px;
     background: transparent !important;
     padding: 0 !important;
-    gap: var(--space-xs) !important;
-    border-radius: 0 !important;
-    border-bottom: none !important;
 }
 
 
 /* 탭 버튼 - 글래스 스타일 */
 .report-layout .output-tab {
     flex: 1;
-    padding: 10px 18px !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: none !important;
-    border-radius: 999px !important;
+    padding: 12px 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(10px) !important;
     color: var(--text-secondary) !important;
     font-size: 14px !important;
     font-weight: 500 !important;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 
 
@@ -228,10 +225,11 @@
 
 
 .report-layout .output-tab.active {
-    background: linear-gradient(120deg, rgba(147, 51, 234, 0.85), rgba(79, 70, 229, 0.9)) !important;
-    color: #fff !important;
-    box-shadow: 0 10px 30px rgba(80, 70, 229, 0.35) !important;
-    transform: translateY(-2px) !important;
+    background: rgba(59, 130, 246, 0.2) !important;
+    backdrop-filter: blur(20px) !important;
+    border-color: rgba(59, 130, 246, 0.5) !important;
+    color: #3b82f6 !important;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25) !important;
 }
 
 
@@ -455,28 +453,47 @@
     background: rgba(147, 51, 234, 0.5);
 }
 
-/* 로딩 */
+/* 로딩 - 우선순위 강화 */
 .report-layout .loading {
-    display: none;
+    display: none !important;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: var(--space-3xl);
     gap: var(--space-md);
+    color: var(--text-primary);
 }
 
 .report-layout .loading.active {
-    display: flex;
+    display: flex !important;
 }
 
 .report-layout .loading.is-hidden {
-    display: none;
+    display: none !important;
+}
+
+/* 로딩 텍스트 - 명시적 스타일 */
+.report-layout .loading span {
+    color: var(--text-primary) !important;
+    font-size: 0.95rem;
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+}
+
+.report-layout .loading #groqLoadingText,
+.report-layout .loading #gptLoadingText,
+.report-layout .loading #groqLoadingTextCompare,
+.report-layout .loading #gptLoadingTextCompare {
+    color: var(--text-primary) !important;
+    font-size: 0.95rem;
+    font-weight: var(--font-weight-medium);
+    display: block !important;
 }
 
 .report-layout .spinner {
     width: 40px;
     height: 40px;
-    border: 3px solid var(--surface-border);
+    border: 3px solid rgba(255, 255, 255, 0.1);
     border-top-color: var(--accent-primary);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
@@ -960,35 +977,7 @@
     display: none;
 }
 
-.chatbot-toggle-slider {
-    position: relative;
-    width: 38px;
-    height: 20px;
-    border-radius: 999px;
-    background: var(--surface-3);
-    transition: background 0.3s ease;
-}
-
-.chatbot-toggle-slider::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--text-tertiary);
-    transition: all 0.3s ease;
-}
-
-.chatbot-toggle-switch input:checked + .chatbot-toggle-slider {
-    background: rgba(var(--accent-primary-rgb), 0.5);
-}
-
-.chatbot-toggle-switch input:checked + .chatbot-toggle-slider::after {
-    transform: translateX(18px);
-    background: var(--accent-primary);
-}
+/* 토글 스타일은 chatbot-redesigned.css에서 관리합니다 */
 
 .chatbot-toggle-label {
     font-size: 0.8rem;
