@@ -439,18 +439,16 @@ function loadPreset(presetId) {
         return;
     }
     
-    if (confirm(`"${preset.name}" 프리셋을 불러오시겠습니까?\n현재 설정이 변경됩니다.`)) {
-        applySettings(preset.settings);
-        setActivePreset(presetId);
-        
-        // 사용 횟수 증가
-        preset.useCount = (preset.useCount || 0) + 1;
-        preset.lastUsed = new Date().toISOString();
-        localStorage.setItem(PRESETS_KEY, JSON.stringify(presets));
-        
-        showToast(`✅ "${preset.name}" 프리셋을 적용했습니다.`, 2000);
-        renderPresetList();
-    }
+    applySettings(preset.settings);
+    setActivePreset(presetId);
+    
+    // 사용 횟수 증가
+    preset.useCount = (preset.useCount || 0) + 1;
+    preset.lastUsed = new Date().toISOString();
+    localStorage.setItem(PRESETS_KEY, JSON.stringify(presets));
+    
+    showToast(`✅ "${preset.name}" 프리셋을 적용했습니다.`, 2000);
+    renderPresetList();
 }
 
 // 프리셋 삭제
@@ -504,7 +502,7 @@ function editPreset(presetId, event) {
     renderPresetList();
 }
 
-// 프리셋 목록 렌더링
+// 프리셋 목록 렌더링 - 간소화된 한 줄 레이아웃
 function renderPresetList() {
     const container = document.getElementById('presetList');
     const countElement = document.getElementById('presetCount');
@@ -533,36 +531,20 @@ function renderPresetList() {
     
     container.innerHTML = presets.map(preset => {
         const isActive = preset.id === activeId;
-        const useCountText = preset.useCount > 0 ? `사용 ${preset.useCount}회` : '미사용';
-        const lastUsedText = preset.lastUsed 
-            ? `최근: ${new Date(preset.lastUsed).toLocaleDateString()}`
-            : '';
         
         return `
-            <div class="preset-card ${isActive ? 'active' : ''}" onclick="loadPreset(${preset.id})">
-                <div class="preset-header">
-                    <div class="preset-name-group">
-                        <span class="preset-icon">${preset.icon}</span>
-                        <span class="preset-name">${preset.name}</span>
-                        ${preset.isDefault ? '<span class="preset-badge">기본</span>' : ''}
-                        ${isActive ? '<span class="preset-badge" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">적용중</span>' : ''}
-                    </div>
-                    <div class="preset-actions">
-                        <button class="preset-action-btn edit" onclick="editPreset(${preset.id}, event)" title="이름 변경">
-                            ✏️
-                        </button>
-                        <button class="preset-action-btn delete" onclick="deletePreset(${preset.id})" title="삭제">
-                            🗑️
-                        </button>
-                    </div>
+            <div class="btn-card preset-item ${isActive ? 'active' : ''}" onclick="loadPreset(${preset.id})">
+                <div class="preset-info-compact">
+                    <span class="preset-icon">${preset.icon}</span>
+                    <span class="preset-name-text">${preset.name}</span>
+                    ${preset.isDefault ? '<span class="preset-badge-compact">기본</span>' : ''}
+                    ${isActive ? '<span class="preset-badge-compact preset-badge-active">적용중</span>' : ''}
                 </div>
-                ${preset.description ? `<div class="preset-description">${preset.description}</div>` : ''}
-                <div class="preset-meta">
-                    <div class="preset-stats">
-                        <span>${useCountText}</span>
-                        ${lastUsedText ? `<span>${lastUsedText}</span>` : ''}
-                    </div>
-                </div>
+                <button class="btn-delete-preset" onclick="event.stopPropagation(); deletePreset(${preset.id})" title="삭제">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.5 2V1.5C6.5 1.22386 6.72386 1 7 1H9C9.27614 1 9.5 1.22386 9.5 1.5V2M2 4H14M12.5 4V13C12.5 13.8284 11.8284 14.5 11 14.5H5C4.17157 14.5 3.5 13.8284 3.5 13V4M6.5 7V11M9.5 7V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
         `;
     }).join('');

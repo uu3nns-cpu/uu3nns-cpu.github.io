@@ -21,49 +21,487 @@
          crossorigin="anonymous"></script>
     
     <!-- CSS - 새 시스템 적용 -->
-    <link rel="stylesheet" href="src/css/base/variables.css">
-    <link rel="stylesheet" href="src/css/base/base.css">
-    <link rel="stylesheet" href="src/css/base/layout.css">
-    <link rel="stylesheet" href="src/css/components/components-base.css">
-    <link rel="stylesheet" href="src/css/components/components-layout.css">
-    <link rel="stylesheet" href="src/css/base/browser-compatibility.css">
-    <link rel="stylesheet" href="src/css/components/header-unified.css">
-    <link rel="stylesheet" href="src/css/pages/settings.css">
-    <link rel="stylesheet" href="src/css/pages/settings-layout.css">
+    <link rel="stylesheet" href="src/css/base/variables.css?v=20241118003">
+    <link rel="stylesheet" href="src/css/base/base.css?v=20241118003">
+    <link rel="stylesheet" href="src/css/base/layout.css?v=20241118003">
+    <link rel="stylesheet" href="src/css/components/components-base.css?v=20241118003">
+    <link rel="stylesheet" href="src/css/components/buttons-unified.css?v=20241118002">
+    <link rel="stylesheet" href="src/css/base/browser-compatibility.css?v=20241118002">
+    <link rel="stylesheet" href="src/css/components/header-unified.css?v=20241118002">
+    <link rel="stylesheet" href="src/css/components/toast.css">
+    <link rel="stylesheet" href="src/css/pages/settings.css?v=20241118002">
+    <link rel="stylesheet" href="src/css/pages/settings-refactored.css?v=20241118002">
+    <link rel="stylesheet" href="src/css/components/glass-theme-fix.css?v=20241118003">
+    <style>
+        /* 강제 적용 - 캐시 우회 */
+        body {
+            background: var(--surface-1);
+            background-image: var(--gradient-hero);
+            background-attachment: fixed;
+        }
+        
+        .settings-container {
+            width: min(1440px, calc(100% - clamp(1.25rem, 3vw, 3.5rem) * 2)) !important;
+            max-width: 1440px !important;
+            margin: 0 auto !important;
+            padding: clamp(32px, 4vw, 64px) 0 64px !important;
+        }
+        
+        .settings-section-compact {
+            background: var(--surface-glass) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid var(--surface-border) !important;
+            border-radius: 20px !important;
+            padding: 16px !important;
+            margin-bottom: 16px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+        }
+        
+        .settings-section-compact:hover {
+            transform: translateY(-2px) !important;
+            border-color: rgba(var(--accent-primary-rgb), 0.4) !important;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+        }
+        
+        .settings-row-three-column {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+            gap: 20px !important;
+        }
+        
+        .settings-grid-main {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+            gap: 20px !important;
+        }
+        
+        .preset-list {
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(250px, 1fr)) !important;
+            gap: 12px !important;
+            max-height: none !important;
+            overflow-y: visible !important;
+        }
+        
+        /* 반응형 - 프리셋 리스트 */
+        @media (max-width: 1200px) {
+            .preset-list {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .preset-list {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* 빈 상태 예외 처리 */
+        .preset-list:not(:empty) {
+            display: grid !important;
+        }
+        .preset-item {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 14px 18px !important;
+            background: var(--surface-glass) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border: 2px solid var(--surface-border) !important;
+            border-radius: 12px !important;
+            cursor: pointer !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            min-height: 64px !important;
+            gap: 12px !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+        }
+        
+        .preset-item:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+            border-color: rgba(var(--accent-primary-rgb), 0.4) !important;
+            background: var(--surface-2) !important;
+        }
+        
+        .preset-item:active {
+            transform: translateY(0) !important;
+        }
+        
+        .preset-info-compact {
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            flex: 1 !important;
+            min-width: 0 !important;
+        }
+        
+        .preset-icon {
+            font-size: 24px !important;
+            flex-shrink: 0 !important;
+        }
+        
+        .preset-name-text {
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            color: var(--text-primary) !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+        
+        .preset-badge-compact {
+            display: inline-flex !important;
+            align-items: center !important;
+            padding: 3px 10px !important;
+            border-radius: 12px !important;
+            font-size: 11px !important;
+            font-weight: 600 !important;
+            background: rgba(var(--accent-primary-rgb), 0.2) !important;
+            color: var(--accent-primary) !important;
+            border: 1px solid rgba(var(--accent-primary-rgb), 0.4) !important;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+        }
+        
+        .preset-badge-active {
+            background: linear-gradient(120deg, rgba(var(--accent-primary-rgb), 0.3), rgba(75, 214, 229, 0.3)) !important;
+            color: var(--accent-secondary) !important;
+            border: 1px solid rgba(75, 214, 229, 0.5) !important;
+            box-shadow: 0 0 12px rgba(75, 214, 229, 0.3) !important;
+        }
+        
+        .settings-column {
+            background: var(--surface-glass) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid var(--surface-border) !important;
+            border-radius: 20px !important;
+            padding: 16px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+        }
+        
+        /* Footer 버튼 레이아웃은 settings-refactored.css로 이동 */
+        
+        /* 2열 레이아웃 */
+        .settings-two-column-layout {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 20px !important;
+            margin-bottom: 20px !important;
+        }
+        
+        .settings-left-column,
+        .settings-right-column {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 20px !important;
+        }
+        
+        /* 3칼럼 레이아웃 */
+        .settings-three-column-layout {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px !important;
+            margin-bottom: 20px !important;
+        }
+        
+        /* 반응형 - 3칼럼 */
+        @media (max-width: 1400px) {
+            .settings-three-column-layout {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* 반응형 - 2열 레이아웃 */
+        @media (max-width: 1200px) {
+            .settings-two-column-layout {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* 보고서 기술 설정 - 2칼럼 그리드 */
+        .style-selects {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+        }
+        
+        /* 반응형 - 보고서 기술 설정 */
+        @media (max-width: 900px) {
+            .style-selects {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* 보고서 구조 설정 - 2칼럼 그리드 */
+        .format-toggles {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important;
+        }
+        
+        /* 반응형 - 보고서 구조 설정 */
+        @media (max-width: 768px) {
+            .format-toggles {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* 3칼럼 레이아웃 - 최상단 설정들 */
+        .settings-row-three-column {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 16px !important;
+            margin-bottom: 20px !important;
+        }
+        
+        .settings-row-three-column .settings-section-compact {
+            margin-bottom: 0 !important;
+        }
+        
+        /* 반응형 - 3칼럼 */
+        @media (max-width: 1024px) {
+            .settings-row-three-column {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+        }
+        
+        /* 모델 토글 간격 축소 */
+        .model-toggles {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important;
+        }
+        
+        .model-toggle-item {
+            margin: 0 !important;
+        }
+        
+        .setting-item-row {
+            margin-bottom: 12px !important;
+        }
+        
+        .info-box {
+            margin-top: 6px !important;
+            padding: 8px 12px !important;
+            font-size: 0.8rem !important;
+        }
+        
+        /* 슬라이더 영역 축소 */
+        .risk-meter-container {
+            margin-top: 6px !important;
+            margin-bottom: 12px !important;
+        }
+        
+        .slider-labels {
+            margin-top: 6px !important;
+        }
+        
+        .slider-labels span {
+            font-size: 0.75rem !important;
+        }
+        
+        /* 섹션 타이틀 간격 축소 */
+        .section-title-compact {
+            margin-bottom: 10px !important;
+            font-size: 1.05rem !important;
+        }
+        
+        .section-header-row {
+            margin-bottom: 10px !important;
+        }
+        
+        .column-header h3 {
+            font-size: 1.05rem !important;
+            margin-bottom: 10px !important;
+        }
+        
+        /* select 간격 축소 */
+        .select-group {
+            margin-bottom: 0 !important;
+        }
+        
+        .select-group .label {
+            margin-bottom: 6px !important;
+            font-size: 0.9rem !important;
+        }
+        
+        .select-help {
+            margin-top: 4px !important;
+            font-size: 0.75rem !important;
+        }
+        
+        /* API 키 섹션 - 전체 너비 활용 레이아웃 */
+        .api-keys-compact {
+            background: var(--surface-glass) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid var(--surface-border) !important;
+            border-radius: 20px !important;
+            padding: 20px !important;
+            margin-bottom: 16px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+        }
+        
+        .api-keys-single-row {
+            display: grid !important;
+            grid-template-columns: 2fr 2fr 1fr 1fr 1.5fr !important;
+            gap: 12px !important;
+            align-items: center !important;
+        }
+        
+        .api-inline-group {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+        
+        .api-inline-group .label {
+            font-size: 0.85rem !important;
+            font-weight: 600 !important;
+            color: var(--text-secondary) !important;
+            margin-bottom: 0 !important;
+            white-space: nowrap !important;
+            min-width: 90px !important;
+        }
+        
+        .api-inline-group .input {
+            flex: 1 !important;
+            height: 40px !important;
+            font-size: 0.85rem !important;
+        }
+        
+        .api-inline-group .btn {
+            flex-shrink: 0 !important;
+            min-height: 40px !important;
+            height: 40px !important;
+            padding: 0 16px !important;
+            font-size: 0.85rem !important;
+            white-space: nowrap !important;
+        }
+        
+        .api-guide-toggle-inline {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+        }
+        
+        .api-guide-toggle-inline #apiGuideToggleIcon {
+            font-size: 0.75rem !important;
+        }
+        
+        /* 반응형 - API 키 섹션 */
+        @media (max-width: 1400px) {
+            .api-keys-single-row {
+                grid-template-columns: 1fr 1fr !important;
+            }
+            
+            .api-guide-toggle-inline {
+                grid-column: 1 / -1 !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .api-keys-single-row {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .api-inline-group .label {
+                min-width: 80px !important;
+            }
+        }
+        
+        /* 반응형 - API 키 섹션 */
+        @media (max-width: 1200px) {
+            .api-keys-row {
+                flex-wrap: wrap !important;
+            }
+            
+            .api-key-item {
+                min-width: calc(50% - 6px) !important;
+            }
+            
+            .api-key-actions {
+                width: 100% !important;
+                justify-content: flex-start !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .api-keys-row {
+                flex-direction: column !important;
+            }
+            
+            .api-key-item {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+        }
+        /* 
+         * ⚠️ 인라인 스타일 제거 완료 ⚠️
+         * 모든 스타일은 settings-refactored.css로 이동되었습니다.
+         * 이 style 태그는 다음 단계에서 완전히 제거될 예정입니다.
+         */
+    </style>
 </head>
 <body>
+    <script>
+        // CSS 캐시 강제 삭제
+        const timestamp = new Date().getTime();
+        const links = document.querySelectorAll('link[rel="stylesheet"]');
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.includes('src/css/')) {
+                link.setAttribute('href', href.split('?')[0] + '?v=' + timestamp);
+            }
+        });
+    </script>
     <div id="toast" class="toast"></div>
 
     <!-- 공통 Header (JS로 자동 생성) -->
     <div class="header"></div>
 
     <div class="settings-container">
-        <!-- API 키 설정 (최소 구성) -->
+        <!-- API 키 설정 (개선된 레이아웃) -->
         <div class="settings-section-compact api-keys-compact">
             <div class="section-title-compact">API 키 설정</div>
-            <div class="api-keys-row">
-                <div class="api-key-item">
+            <div class="api-keys-grid">
+                <!-- Groq -->
+                <div class="api-key-group">
                     <label class="label">Groq</label>
-                    <input type="password" id="groqApiKey" class="input input--monospace input--small" placeholder="gsk_...">
-                    <button class="btn btn--small" onclick="toggleApiKeyVisibility('groq')">표시</button>
+                    <div class="api-key-input-wrapper">
+                        <input type="password" id="groqApiKey" class="input input--monospace" placeholder="gsk_...">
+                        <button class="btn btn--small" onclick="toggleApiKeyVisibility('groq')">표시</button>
+                    </div>
                 </div>
-                <div class="api-key-item">
+                
+                <!-- GPT -->
+                <div class="api-key-group">
                     <label class="label">GPT-4o-mini</label>
-                    <input type="password" id="gptApiKey" class="input input--monospace input--small" placeholder="sk-or-v1-...">
-                    <button class="btn btn--small" onclick="toggleApiKeyVisibility('gpt')">표시</button>
+                    <div class="api-key-input-wrapper">
+                        <input type="password" id="gptApiKey" class="input input--monospace" placeholder="sk-or-v1-...">
+                        <button class="btn btn--small" onclick="toggleApiKeyVisibility('gpt')">표시</button>
+                    </div>
                 </div>
-                <div class="api-key-actions">
+                
+                <!-- 버튼 그룹 -->
+                <div class="api-action-buttons">
                     <button class="btn btn--small" onclick="window.open('guide/02-basic.html', '_blank')">발급방법</button>
                     <button class="btn btn--small" onclick="window.location.href='data-management.html'" title="데이터 관리 페이지에서 백업/복원을 관리하세요">백업·복원</button>
+                    <button class="btn btn--small api-guide-toggle-btn" onclick="toggleApiGuide()">
+                        <span id="apiGuideToggleText">API 발급 영상 가이드 보기</span>
+                        <span id="apiGuideToggleIcon">▼</span>
+                    </button>
                 </div>
             </div>
             
-            <!-- API 발급 영상 가이드 -->
-            <button class="api-guide-toggle" onclick="toggleApiGuide()">
-                <span id="apiGuideToggleText">API 발급 영상 가이드 보기</span>
-                <span id="apiGuideToggleIcon">▼</span>
-            </button>
-            <div class="api-guide-collapsed" id="apiGuideContent" style="display: none;">
+            <!-- API 발급 영상 가이드 (토글 컨텐츠) -->
+            <div class="api-guide-content is-hidden" id="apiGuideContent">
                 <div class="api-videos-grid">
                     <div class="api-video-item">
                         <h4 class="api-video-title">Groq API 키 발급 영상</h4>
@@ -106,21 +544,18 @@
                     <div class="section-title-compact">사용할 AI 모델</div>
                 </div>
                 
-                <div class="setting-item-row">
-                    <div class="model-toggles">
-                        <label class="model-toggle-item">
-                            <input type="checkbox" id="useGroq" checked>
-                            <span class="toggle-ui"></span>
-                            <span class="model-label">Groq</span>
-                        </label>
-                        <label class="model-toggle-item">
-                            <input type="checkbox" id="useGPT" checked>
-                            <span class="toggle-ui"></span>
-                            <span class="model-label">GPT-4o-mini</span>
-                        </label>
-                    </div>
+                <div class="model-toggles">
+                    <label class="model-toggle-item">
+                        <input type="checkbox" id="useGroq" checked>
+                        <span class="toggle-ui"></span>
+                        <span class="model-label">Groq</span>
+                    </label>
+                    <label class="model-toggle-item">
+                        <input type="checkbox" id="useGPT" checked>
+                        <span class="toggle-ui"></span>
+                        <span class="model-label">GPT-4o-mini</span>
+                    </label>
                 </div>
-                <div class="info-box">최소 1개 이상의 모델을 선택해야 합니다.</div>
             </div>
 
             <!-- 2. 화면 설정 -->
@@ -130,28 +565,25 @@
                 </div>
                 
                 <!-- 글씨 크기 -->
-                <div class="setting-item-row">
-                    <div class="setting-label">글씨 크기</div>
-                    <div class="risk-meter-container">
-                        <input type="range" 
-                               id="fontSizeSlider" 
-                               class="risk-meter-slider"
-                               min="12" 
-                               max="20" 
-                               value="16" 
-                               step="1">
-                        <div class="risk-meter-track"></div>
-                        <div class="slider-labels font-labels">
-                            <span data-value="12">12px</span>
-                            <span data-value="13">13px</span>
-                            <span data-value="14">14px</span>
-                            <span data-value="15">15px</span>
-                            <span data-value="16" class="label-default">16px</span>
-                            <span data-value="17">17px</span>
-                            <span data-value="18">18px</span>
-                            <span data-value="19">19px</span>
-                            <span data-value="20">20px</span>
-                        </div>
+                <div class="risk-meter-container" style="margin-top: 0; margin-bottom: 0;">
+                    <input type="range" 
+                           id="fontSizeSlider" 
+                           class="risk-meter-slider"
+                           min="12" 
+                           max="20" 
+                           value="16" 
+                           step="1">
+                    <div class="risk-meter-track"></div>
+                    <div class="slider-labels font-labels">
+                        <span data-value="12">12px</span>
+                        <span data-value="13">13px</span>
+                        <span data-value="14">14px</span>
+                        <span data-value="15">15px</span>
+                        <span data-value="16" class="label-default">16px</span>
+                        <span data-value="17">17px</span>
+                        <span data-value="18">18px</span>
+                        <span data-value="19">19px</span>
+                        <span data-value="20">20px</span>
                     </div>
                 </div>
             </div>
@@ -161,32 +593,29 @@
                 <div class="section-header-row">
                     <div class="section-title-compact">보고서 설정</div>
                 </div>
-                <div class="setting-item-row">
-                    <div class="setting-label">분량 / 상세도</div>
-                    <div class="risk-meter-container">
-                        <input type="range" 
-                               id="detailLevelSlider" 
-                               class="risk-meter-slider"
-                               min="-45" 
-                               max="45" 
-                               step="15" 
-                               value="0">
-                        <div class="risk-meter-track"></div>
-                        <div class="slider-labels detail-labels">
-                            <span data-value="-45">최소</span>
-                            <span data-value="-30">간결</span>
-                            <span data-value="-15">약간<br>간결</span>
-                            <span data-value="0" class="label-default">표준</span>
-                            <span data-value="15">약간<br>상세</span>
-                            <span data-value="30">상세</span>
-                            <span data-value="45">최대</span>
-                        </div>
+                <div class="risk-meter-container" style="margin-top: 0; margin-bottom: 0;">
+                    <input type="range" 
+                           id="detailLevelSlider" 
+                           class="risk-meter-slider"
+                           min="-45" 
+                           max="45" 
+                           step="15" 
+                           value="0">
+                    <div class="risk-meter-track"></div>
+                    <div class="slider-labels detail-labels">
+                        <span data-value="-45">최소</span>
+                        <span data-value="-30">간결</span>
+                        <span data-value="-15">약간<br>간결</span>
+                        <span data-value="0" class="label-default">표준</span>
+                        <span data-value="15">약간<br>상세</span>
+                        <span data-value="30">상세</span>
+                        <span data-value="45">최대</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 나의 설정 모음 -->
+        <!-- 나의 설정 모음 (가로 1줄) -->
         <div class="settings-section-compact preset-manager">
             <div class="section-title-compact">나의 설정 모음</div>
             <div class="preset-info">
@@ -198,8 +627,8 @@
             </div>
         </div>
 
-        <!-- 메인 설정 (3열 그리드) -->
-        <div class="settings-grid-main">
+        <!-- 3열 레이아웃: 나만의 작성 규칙 | 보고서 구조 설정 | 보고서 기술 설정 -->
+        <div class="settings-three-column-layout">
             <!-- 1열: 나만의 작성 규칙 -->
             <div class="settings-column">
                 <div class="column-header">
@@ -219,27 +648,33 @@
                 <div class="format-toggles">
                     <label class="toggle-item">
                         <span>상담 일시 / 회기</span>
-                        <input type="checkbox" id="format_datetime"><span class="toggle-ui"></span>
+                        <input type="checkbox" id="format_datetime">
+                        <span class="toggle-ui"></span>
                     </label>
                     <label class="toggle-item">
                         <span>주 호소 문제</span>
-                        <input type="checkbox" id="format_issue"><span class="toggle-ui"></span>
+                        <input type="checkbox" id="format_issue">
+                        <span class="toggle-ui"></span>
                     </label>
                     <label class="toggle-item">
                         <span>상담 목표</span>
-                        <input type="checkbox" id="format_goal"><span class="toggle-ui"></span>
+                        <input type="checkbox" id="format_goal">
+                        <span class="toggle-ui"></span>
                     </label>
                     <label class="toggle-item">
                         <span>상담 과정 / 내용</span>
-                        <input type="checkbox" id="format_process"><span class="toggle-ui"></span>
+                        <input type="checkbox" id="format_process">
+                        <span class="toggle-ui"></span>
                     </label>
                     <label class="toggle-item">
                         <span>사용한 기법</span>
-                        <input type="checkbox" id="format_technique"><span class="toggle-ui"></span>
+                        <input type="checkbox" id="format_technique">
+                        <span class="toggle-ui"></span>
                     </label>
                     <label class="toggle-item">
                         <span>다음 회기 계획</span>
-                        <input type="checkbox" id="format_plan"><span class="toggle-ui"></span>
+                        <input type="checkbox" id="format_plan">
+                        <span class="toggle-ui"></span>
                     </label>
                 </div>
                 <div class="info-box">활성화한 항목만 보고서에 포함됩니다.</div>
@@ -258,7 +693,6 @@
                             <option value="전문적" title="심리학 전문용어와 학술적 표현 사용">전문적</option>
                             <option value="평이함" title="일상적 언어로 쉽게 풀어서 설명">평이함</option>
                         </select>
-                        <small class="select-help">전문적: 학술 용어 · 평이함: 쉬운 표현</small>
                     </div>
                     <div class="select-group">
                         <label class="label" title="내담자의 말과 행동을 어떻게 기록할지 선택합니다">내담자 표현</label>
@@ -267,7 +701,6 @@
                             <option value="직접인용" title="내담자의 말을 인용부호로 직접 인용">직접인용</option>
                             <option value="관찰위주" title="상담자가 관찰한 내용 중심으로 서술">관찰위주</option>
                         </select>
-                        <small class="select-help">직접인용: 내담자 말 그대로 · 관찰위주: 행동 중심</small>
                     </div>
                     <div class="select-group">
                         <label class="label" title="보고서에서 강조할 관점을 선택합니다">관점 / 초점</label>
@@ -276,7 +709,6 @@
                             <option value="강점중심" title="내담자의 자원과 긍정적 변화 강조">강점중심</option>
                             <option value="문제중심" title="해결해야 할 문제와 어려움 중심으로 서술">문제중심</option>
                         </select>
-                        <small class="select-help">강점중심: 자원·변화 강조 · 문제중심: 어려움 중심</small>
                     </div>
                     <div class="select-group">
                         <label class="label" title="상담 기법을 어떻게 기록할지 선택합니다">기법 서술</label>
@@ -285,7 +717,6 @@
                             <option value="기법명시" title="사용한 상담기법의 명칭을 명확히 기재">기법명시</option>
                             <option value="과정중심" title="기법보다 상담 과정과 상호작용 중심">과정중심</option>
                         </select>
-                        <small class="select-help">기법명시: 기법 이름 명시 · 과정중심: 상호작용 중심</small>
                     </div>
                     <div class="select-group">
                         <label class="label" title="정서 표현의 상세도를 조절합니다">정서 표현</label>
@@ -294,7 +725,6 @@
                             <option value="정서강조" title="내담자의 정서와 감정 변화를 상세히 묘사">정서강조</option>
                             <option value="객관적" title="정서보다 사실과 행동을 객관적으로 기술">객관적</option>
                         </select>
-                        <small class="select-help">정서강조: 감정 상세 묘사 · 객관적: 사실 중심 기술</small>
                     </div>
                     <div class="select-group">
                         <label class="label" title="상담자의 개입과 반응을 포함할지 선택합니다">상담자 반응</label>
@@ -303,7 +733,6 @@
                             <option value="반응포함" title="상담자의 개입과 반응을 상세히 기록">반응포함</option>
                             <option value="내담자만" title="내담자의 말과 행동에만 초점">내담자만</option>
                         </select>
-                        <small class="select-help">반응포함: 상담자 개입 기록 · 내담자만: 내담자 중심</small>
                     </div>
                     <div class="select-group">
                         <label class="label" title="보고서 내용의 구성 방식을 선택합니다">구성 방식</label>
@@ -312,7 +741,6 @@
                             <option value="시간순" title="상담이 진행된 순서대로 기술">시간순</option>
                             <option value="주제별" title="논의된 주제를 중심으로 재구성">주제별</option>
                         </select>
-                        <small class="select-help">시간순: 진행 순서대로 · 주제별: 내용별 분류</small>
                     </div>
                     <div class="select-group">
                         <label class="label" title="다음 회기 계획의 상세도를 조절합니다">회기 계획</label>
@@ -321,7 +749,6 @@
                             <option value="구체적" title="구체적인 활동과 목표를 상세히 명시">구체적</option>
                             <option value="방향성" title="전반적인 방향과 초점만 간략히 제시">방향성</option>
                         </select>
-                        <small class="select-help">구체적: 활동 상세 명시 · 방향성: 방향만 제시</small>
                     </div>
                     <div class="select-group">
                         <label class="label" title="보고서를 읽을 대상에 맞춰 작성합니다">보고서 독자</label>
@@ -331,7 +758,6 @@
                             <option value="학부모" title="학부모가 이해하기 쉬운 설명적 보고서">학부모</option>
                             <option value="기관" title="기관 보고 및 기록용 공식 문서">기관</option>
                         </select>
-                        <small class="select-help">독자 수준에 맞는 용어와 설명 방식 조절</small>
                     </div>
                     <div class="select-group">
                         <label class="label" title="보고서에 반영할 이론적 관점을 선택합니다">이론적 관점</label>
@@ -348,7 +774,6 @@
                             <option value="현실치료" title="선택과 책임, 현실 인식 중심">현실치료</option>
                             <option value="통합적" title="다양한 관점을 통합적으로 활용">통합적</option>
                         </select>
-                        <small class="select-help">선택한 이론 관점의 개념과 용어로 해석</small>
                     </div>
                 </div>
             </div>
@@ -381,6 +806,8 @@
     <script src="js/config/app-constants.js?v=20251111001"></script>
     <script src="js/config/model-configs.js?v=20251111001"></script>
     <script src="js/preset-manager.js"></script>
+    <script src="js/modules/settings-storage.js"></script>
+    <script src="js/modules/ui-controls.js"></script>
     <script src="js/app.js"></script>
     <script>
         // 분량/상세도 슬라이더 설정 (7단계)
@@ -474,14 +901,18 @@
             const content = document.getElementById('apiGuideContent');
             const text = document.getElementById('apiGuideToggleText');
             const icon = document.getElementById('apiGuideToggleIcon');
+            const button = document.querySelector('.api-guide-toggle');
             
-            if (content.style.display === 'none') {
-                content.style.display = 'block';
-                text.textContent = 'API 발급 영상 가이드 숨기기';
+            const isHidden = content.classList.toggle('is-hidden');
+            if (button) {
+                button.classList.toggle('active', !isHidden);
+            }
+            
+            if (!isHidden) {
+                text.textContent = 'API 발급 영상 안내 닫기';
                 icon.textContent = '▲';
             } else {
-                content.style.display = 'none';
-                text.textContent = 'API 발급 영상 가이드 보기';
+                text.textContent = 'API 발급 영상 안내 보기';
                 icon.textContent = '▼';
             }
         }

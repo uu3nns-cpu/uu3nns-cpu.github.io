@@ -1,527 +1,612 @@
-/* ============================================
-   통합 버튼 스타일 시스템
-   모든 버튼 스타일을 이 파일에서 관리
-   ============================================ */
+/* ==========================================================================
+   통합 버튼 시스템 v2.1
+   6개 버튼 타입으로 모든 UI 커버
+   
+   1. 표준 액션 버튼 (.btn)
+   2. 탭 버튼 (.btn-tab)
+   3. 카드형 버튼 (.btn-card)
+   4. 컴팩트 버튼 (.btn-compact)
+   5. 플로팅 버튼 (.btn-floating)
+   6. 홈 버튼 (.btn-home) - NEW
+   ========================================================================== */
 
-/* ===========================================
-   1. 기본 버튼 스타일
-   =========================================== */
+/* ==========================================================================
+   1. 표준 액션 버튼 (.btn)
+   ========================================================================== */
 
-.btn-action {
-    box-sizing: border-box;
+/* --------------------------------------------------------------------------
+   기본 버튼
+   -------------------------------------------------------------------------- */
+.btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-
-    /* 기본 스타일 */
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    border-radius: var(--radius-btn);
-    
-    padding: 10px 16px;
+    gap: var(--space-xs);
     min-height: 44px;
-    font-size: 0.95em;
-    font-weight: 600;
-    letter-spacing: 0.01em;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--surface-border);
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
     cursor: pointer;
-
-    transition: all 0.2s ease;
-}
-
-.btn-action:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.btn-action:active:not(:disabled) {
-    transform: translateY(0);
-}
-
-.btn-action:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.btn-action:focus-visible {
-    outline: 2px solid var(--accent-primary);
-    outline-offset: 2px;
-}
-
-/* ===========================================
-   2. 툴바 버튼 (저장, 보기, 지우기, 설정, 챗봇)
-   20% 축소 + 덜 진한 색상 + 이모지 10% 크기 증가
-   =========================================== */
-
-.input-actions-compact .btn-action {
-    /* 20% 축소: 44px -> 35px, 110px -> 88px */
-    min-height: 35px;
-    min-width: 88px;
-    max-width: 88px;
-    padding: 8px 14px;
-    font-size: 0.76em; /* 0.95em * 0.8 */
+    transition: all var(--transition-smooth);
     white-space: nowrap;
-    flex: 0 0 auto;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
-/* 이모지 크기 10% 증가 (모든 툴바 버튼) */
-.input-actions-compact .btn-action::before {
-    font-size: 1.1em; /* 이모지만 10% 크게 */
-}
-
-/* 💾 저장 버튼 - 연한 파란색 */
-.btn-action[onclick*="saveReport"] {
-    background: #60a5fa !important; /* 기존 #3b82f6 -> 밝은 파란색 */
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 2px 8px rgba(96, 165, 250, 0.3) !important;
-}
-
-.btn-action[onclick*="saveReport"]:hover:not(:disabled) {
-    background: #3b82f6 !important; /* 호버 시 원래 색상 */
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4) !important;
-}
-
-/* 📂 보기 버튼 - 연한 초록색 */
-.btn-action[onclick*="showReportHistory"] {
-    background: #34d399 !important; /* 기존 #10b981 -> 밝은 초록색 */
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 2px 8px rgba(52, 211, 153, 0.3) !important;
-}
-
-.btn-action[onclick*="showReportHistory"]:hover:not(:disabled) {
-    background: #10b981 !important; /* 호버 시 원래 색상 */
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4) !important;
-}
-
-/* 🔄 지우기 버튼 - 연한 빨간색 */
-.btn-action[onclick*="clearInput"] {
-    background: #f87171 !important; /* 기존 #ef4444 -> 밝은 빨간색 */
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 2px 8px rgba(248, 113, 113, 0.3) !important;
-}
-
-.btn-action[onclick*="clearInput"]:hover:not(:disabled) {
-    background: #ef4444 !important; /* 호버 시 원래 색상 */
-    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4) !important;
-}
-
-/* 📌 나의 설정 버튼 - 밝은 주황색 */
-#sidebarFloatingToggle,
-#sidebarFloatingToggle.btn-action,
-button#sidebarFloatingToggle {
-    background: #fb923c !important; /* 밝은 주황색 */
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 2px 8px rgba(251, 146, 60, 0.4) !important;
-    min-height: 35px !important;
-    min-width: 97px !important; /* 88px * 1.1 = 96.8px ≈ 97px */
-    max-width: 97px !important;
-    padding: 8px 14px !important;
-    font-size: 0.76em !important;
-    border-radius: var(--radius-btn) !important;
-}
-
-#sidebarFloatingToggle:hover:not(:disabled),
-#sidebarFloatingToggle.btn-action:hover:not(:disabled),
-button#sidebarFloatingToggle:hover:not(:disabled) {
-    background: #f97316 !important; /* 호버 시 더 진한 주황색 */
-    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.5) !important;
-}
-
-/* 나의 설정 버튼 - 기존 이모지 제거 방지 (새 이모지 📌 사용) */
-#sidebarFloatingToggle::before,
-#sidebarFloatingToggle.btn-action::before {
-    content: none !important;
-}
-
-/* 🤖 챗봇 버튼 - 시그니처 그라데이션 + 애니메이션 */
-#chatbotFloatingBtn,
-#chatbotFloatingBtn.btn-action,
-button#chatbotFloatingBtn,
-.input-actions-compact #chatbotFloatingBtn,
-.button-group-right #chatbotFloatingBtn {
-    background: linear-gradient(
-        135deg, 
-        #667eea 0%, 
-        #764ba2 25%,
-        #f093fb 50%,
-        #4facfe 75%,
-        #667eea 100%
-    ) !important;
-    background-size: 200% 200% !important;
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
-    min-height: 35px !important;
-    min-width: 97px !important; /* 88px * 1.1 = 96.8px ≈ 97px */
-    max-width: 97px !important;
-    padding: 8px 14px !important;
-    font-size: 0.76em !important;
-    border-radius: var(--radius-btn) !important;
-    animation: chatbotGradientMove 3s ease infinite !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-/* 그라데이션 이동 애니메이션 - 챗봇 전용 */
-@keyframes chatbotGradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-#chatbotFloatingBtn:hover:not(:disabled),
-#chatbotFloatingBtn.btn-action:hover:not(:disabled),
-button#chatbotFloatingBtn:hover:not(:disabled),
-.input-actions-compact #chatbotFloatingBtn:hover:not(:disabled),
-.button-group-right #chatbotFloatingBtn:hover:not(:disabled) {
-    background: linear-gradient(
-        135deg, 
-        #667eea 0%, 
-        #764ba2 25%,
-        #f093fb 50%,
-        #4facfe 75%,
-        #667eea 100%
-    ) !important;
-    background-size: 200% 200% !important;
-    transform: translateY(-2px) scale(1.05) !important;
-    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6) !important;
-    animation: chatbotGradientMove 1.5s ease infinite !important;
-}
-
-/* 챗봇 버튼 - 기존 이모지 제거 방지 (이모지 🤖 사용) */
-#chatbotFloatingBtn::before,
-#chatbotFloatingBtn.btn-action::before {
-    content: none !important;
-}
-
-/* ===========================================
-   3. 보고서 작성 버튼 (메인 CTA)
-   가로 길이만 30% 축소: 400px -> 280px
-   =========================================== */
-
-.btn-generate {
-    box-sizing: border-box;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    
-    background: #4338ca !important; /* 더 어두운 보라색으로 변경 */
-    color: white !important;
-    border: none !important;
-    border-radius: var(--radius-btn);
-    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.4) !important;
-    
-    width: 100%;
-    max-width: 280px; /* 400px * 0.7 = 280px */
-    min-height: 50px;
-    font-size: 1em;
-    font-weight: 600;
-    padding: 14px 24px;
-    cursor: pointer;
-    
-    transition: all 0.2s ease;
-}
-
-.btn-generate::before {
-    content: '✍️';
-    font-size: 1.1em;
-}
-
-.btn-generate:hover:not(:disabled) {
-    background: #5b21b6 !important; /* 더 어두운 호버 색상 */
+.btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(67, 56, 202, 0.6) !important;
+    border-color: rgba(var(--accent-primary-rgb), 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-.btn-generate:active:not(:disabled) {
+.btn:active:not(:disabled) {
     transform: translateY(0);
-    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.5) !important;
 }
 
-.btn-generate:disabled {
-    opacity: 0.6;
+.btn:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
-.btn-generate:focus-visible {
-    outline: 2px solid var(--accent-primary);
+.btn:focus-visible {
+    outline: 2px solid rgba(var(--accent-primary-rgb), 0.4);
     outline-offset: 2px;
 }
 
-/* ===========================================
-   4. 하위 호환성 (기존 클래스명 지원)
-   =========================================== */
-
-.btn-generate-large {
-    /* .btn-generate와 동일하게 작동 */
-    box-sizing: border-box;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    
-    background: #4338ca !important; /* 더 어두운 보라색으로 변경 */
-    color: white !important;
-    border: none !important;
-    border-radius: var(--radius-btn);
-    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.4) !important;
-    
-    width: 100%;
-    max-width: 280px; /* 400px * 0.7 = 280px */
-    min-height: 50px;
-    font-size: 1em;
-    font-weight: 600;
-    padding: 14px 24px;
-    cursor: pointer;
-    
-    transition: all 0.2s ease;
-}
-
-.btn-generate-large::before {
-    content: '✍️';
-    font-size: 1.1em;
-}
-
-.btn-generate-large:hover:not(:disabled) {
-    background: #5b21b6 !important; /* 더 어두운 호버 색상 */
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(67, 56, 202, 0.6) !important;
-}
-
-.btn-generate-large:active:not(:disabled) {
-    transform: translateY(0);
-    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.5) !important;
-}
-
-.btn-generate-large:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* 툴바 내 btn-generate-large (사용되지 않을 수 있지만 안전장치) */
-.input-actions-compact .btn-generate-large {
-    min-height: 40px;
-    padding: 10px 16px;
-    font-size: 0.9em;
-    max-width: 120px;
-}
-
-/* ===========================================
-   5. 작은 버튼 (복사, 기타 액션)
-   =========================================== */
-
+/* --------------------------------------------------------------------------
+   크기 변형
+   -------------------------------------------------------------------------- */
 .btn--small {
-    min-height: 32px;
-    padding: 6px 12px;
-    font-size: 0.85em;
+    min-height: 36px;
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.85rem;
+}
+
+.btn--medium {
+    min-height: 48px;
+    padding: var(--space-sm) var(--space-xl);
+    font-size: 0.95rem;
+}
+
+.btn--large {
+    min-height: 52px;
+    padding: var(--space-md) var(--space-xl);
+    font-size: 1rem;
+}
+
+.btn--full-width {
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   스타일 변형
+   -------------------------------------------------------------------------- */
+.btn--primary {
+    background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary));
+    border: none;
+    color: var(--surface-1);
+    box-shadow: 0 4px 12px rgba(75, 214, 229, 0.25);
+}
+
+.btn--primary:hover:not(:disabled) {
+    background: linear-gradient(120deg, var(--accent-hover), var(--accent-secondary));
+    box-shadow: 0 8px 20px rgba(75, 214, 229, 0.4);
+}
+
+.btn--secondary {
+    background: var(--surface-glass);
+    border: 1px solid var(--surface-border);
+    color: var(--text-primary);
+}
+
+.btn--secondary:hover:not(:disabled) {
+    background: var(--surface-2);
 }
 
 .btn--success {
-    background: #10b981;
-    color: white;
+    background: var(--success);
     border: none;
+    color: white;
+    box-shadow: 0 4px 12px rgba(61, 213, 152, 0.25);
 }
 
 .btn--success:hover:not(:disabled) {
-    background: #059669;
+    background: var(--success-hover);
+    box-shadow: 0 8px 20px rgba(61, 213, 152, 0.4);
 }
 
-/* ===========================================
-   6. 라이트 모드 대응 (개선됨)
-   =========================================== */
-
-/* 라이트 모드 - 일반 버튼 스타일 (색상 버튼 제외) */
-body.light-mode .btn-action:not([onclick*="saveReport"]):not([onclick*="showReportHistory"]):not([onclick*="clearInput"]):not(#sidebarFloatingToggle):not(#chatbotFloatingBtn) {
-    background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(0,0,0,0.03)), #ffffff;
-    border: 2px solid rgba(0, 0, 0, 0.12);
-    color: #1f2937;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+.btn--danger {
+    background: var(--error);
+    border: none;
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 107, 129, 0.25);
 }
 
-body.light-mode .btn-action:not([onclick*="saveReport"]):not([onclick*="showReportHistory"]):not([onclick*="clearInput"]):not(#sidebarFloatingToggle):not(#chatbotFloatingBtn):hover:not(:disabled) {
-    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(0,0,0,0.05)), #f9fafb;
-    border-color: rgba(99, 102, 241, 0.4);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+.btn--danger:hover:not(:disabled) {
+    background: #e64a5f;
+    box-shadow: 0 8px 20px rgba(255, 107, 129, 0.4);
 }
 
-/* 라이트 모드 - 색상 버튼은 연한 색상 유지 */
+.btn--ghost {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-secondary);
+    box-shadow: none;
+}
 
-/* 💾 저장 버튼 - 라이트 모드 (연한 파란색) */
-body.light-mode .btn-action[onclick*="saveReport"] {
-    background: #60a5fa !important;
+.btn--ghost:hover:not(:disabled) {
+    border-color: var(--surface-border);
+    color: var(--text-primary);
+    background: var(--surface-glass);
+}
+
+/* --------------------------------------------------------------------------
+   아이콘 버튼
+   -------------------------------------------------------------------------- */
+.btn--icon {
+    width: 42px;
+    min-height: 42px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.btn--icon.btn--small {
+    width: 36px;
+    min-height: 36px;
+}
+
+.btn--icon.btn--large {
+    width: 52px;
+    min-height: 52px;
+}
+
+/* --------------------------------------------------------------------------
+   라이트 모드
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .btn {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(15, 23, 42, 0.12);
+    color: var(--text-primary);
+}
+
+html[data-theme="light"] .btn:hover:not(:disabled) {
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+    border-color: rgba(var(--accent-primary-rgb), 0.4);
+}
+
+html[data-theme="light"] .btn--secondary {
+    background: rgba(248, 250, 252, 0.98);
+}
+
+html[data-theme="light"] .btn--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+html[data-theme="light"] .btn--ghost:hover:not(:disabled) {
+    background: rgba(248, 250, 252, 0.98);
+    color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   특수 버튼 (settings.html 전용)
+   -------------------------------------------------------------------------- */
+
+/* 프리셋 삭제 버튼 */
+.btn-delete-preset {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 !important;
+    background: var(--error-bg) !important;
+    border: 1px solid var(--error) !important;
+    border-radius: 8px !important;
+    color: var(--error) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    flex-shrink: 0 !important;
+}
+
+.btn-delete-preset:hover {
+    background: var(--error) !important;
+    border-color: var(--error) !important;
     color: white !important;
+    transform: scale(1.05) !important;
+}
+
+.btn-delete-preset:active {
+    transform: scale(0.95) !important;
+}
+
+.btn-delete-preset svg {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* 프리셋 추가 버튼 */
+.btn-add-preset {
+    min-height: 52px !important;
+    padding: var(--space-md) var(--space-xl) !important;
+    font-size: 1rem !important;
+    font-weight: var(--font-weight-bold) !important;
+    background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary)) !important;
     border: none !important;
-    box-shadow: 0 2px 8px rgba(96, 165, 250, 0.3) !important;
+    color: var(--surface-1) !important;
+    box-shadow: 0 4px 12px rgba(75, 214, 229, 0.25) !important;
+    transition: all var(--transition-smooth) !important;
 }
 
-body.light-mode .btn-action[onclick*="saveReport"]:hover:not(:disabled) {
-    background: #3b82f6 !important;
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4) !important;
+.btn-add-preset:hover:not(:disabled) {
+    background: linear-gradient(120deg, var(--accent-hover), var(--accent-secondary)) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(75, 214, 229, 0.4) !important;
 }
 
-/* 📂 보기 버튼 - 라이트 모드 (연한 초록색) */
-body.light-mode .btn-action[onclick*="showReportHistory"] {
-    background: #34d399 !important;
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 2px 8px rgba(52, 211, 153, 0.3) !important;
+.btn-add-preset:active:not(:disabled) {
+    transform: translateY(0) !important;
 }
 
-body.light-mode .btn-action[onclick*="showReportHistory"]:hover:not(:disabled) {
-    background: #10b981 !important;
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4) !important;
+/* ==========================================================================
+   2. 탭 버튼 (.btn-tab)
+   ========================================================================== */
+
+.btn-tab {
+    flex: 1;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* 🔄 지우기 버튼 - 라이트 모드 (연한 빨간색) */
-body.light-mode .btn-action[onclick*="clearInput"] {
-    background: #f87171 !important;
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 2px 8px rgba(248, 113, 113, 0.3) !important;
+.btn-tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    transform: translateY(-1px);
 }
 
-body.light-mode .btn-action[onclick*="clearInput"]:hover:not(:disabled) {
-    background: #ef4444 !important;
-    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4) !important;
+.btn-tab.active {
+    background: linear-gradient(120deg, rgba(147, 51, 234, 0.85), rgba(79, 70, 229, 0.9));
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(80, 70, 229, 0.35);
+    transform: translateY(-2px);
 }
 
-/* 📌 나의 설정 버튼 - 라이트 모드 (밝은 주황색) */
-body.light-mode #sidebarFloatingToggle,
-body.light-mode #sidebarFloatingToggle.btn-action,
-body.light-mode button#sidebarFloatingToggle {
-    background: #fb923c !important;
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 2px 8px rgba(251, 146, 60, 0.4) !important;
-    min-width: 97px !important; /* 88px * 1.1 = 96.8px ≈ 97px */
-    max-width: 97px !important;
+/* 라이트 모드 */
+html[data-theme="light"] .btn-tab {
+    background: rgba(15, 23, 42, 0.05);
+    color: var(--text-secondary);
 }
 
-body.light-mode #sidebarFloatingToggle:hover:not(:disabled),
-body.light-mode #sidebarFloatingToggle.btn-action:hover:not(:disabled),
-body.light-mode button#sidebarFloatingToggle:hover:not(:disabled) {
-    background: #f97316 !important;
-    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.5) !important;
+html[data-theme="light"] .btn-tab:hover:not(.active) {
+    background: rgba(15, 23, 42, 0.1);
 }
 
-/* 🤖 챗봇 버튼 - 라이트 모드 (동일한 그라데이션) */
-body.light-mode #chatbotFloatingBtn,
-body.light-mode #chatbotFloatingBtn.btn-action,
-body.light-mode button#chatbotFloatingBtn,
-body.light-mode .input-actions-compact #chatbotFloatingBtn,
-body.light-mode .button-group-right #chatbotFloatingBtn {
-    background: linear-gradient(
-        135deg, 
-        #667eea 0%, 
-        #764ba2 25%,
-        #f093fb 50%,
-        #4facfe 75%,
-        #667eea 100%
-    ) !important;
-    background-size: 200% 200% !important;
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5) !important;
-    animation: chatbotGradientMove 3s ease infinite !important;
-    min-width: 97px !important; /* 88px * 1.1 = 96.8px ≈ 97px */
-    max-width: 97px !important;
+html[data-theme="light"] .btn-tab.active {
+    background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
 }
 
-body.light-mode #chatbotFloatingBtn:hover:not(:disabled),
-body.light-mode #chatbotFloatingBtn.btn-action:hover:not(:disabled),
-body.light-mode button#chatbotFloatingBtn:hover:not(:disabled),
-body.light-mode .input-actions-compact #chatbotFloatingBtn:hover:not(:disabled),
-body.light-mode .button-group-right #chatbotFloatingBtn:hover:not(:disabled) {
-    background: linear-gradient(
-        135deg, 
-        #667eea 0%, 
-        #764ba2 25%,
-        #f093fb 50%,
-        #4facfe 75%,
-        #667eea 100%
-    ) !important;
-    background-size: 200% 200% !important;
-    transform: translateY(-2px) scale(1.05) !important;
-    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.7) !important;
-    animation: chatbotGradientMove 1.5s ease infinite !important;
+/* ==========================================================================
+   3. 카드형 버튼 (.btn-card)
+   ========================================================================== */
+
+.btn-card {
+    display: flex;
+    align-items: center;
+    padding: var(--space-lg);
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    text-decoration: none;
+    color: inherit;
 }
 
-/* 라이트 모드 - 생성 버튼 */
-body.light-mode .btn-generate,
-body.light-mode .btn-generate-large {
-    background: #4338ca !important; /* 더 어두운 보라색 */
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 4px 16px rgba(67, 56, 202, 0.5) !important;
+.btn-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(var(--accent-primary-rgb), 0.5);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-body.light-mode .btn-generate:hover:not(:disabled),
-body.light-mode .btn-generate-large:hover:not(:disabled) {
-    background: #5b21b6 !important; /* 더 어두운 호버 색상 */
-    box-shadow: 0 8px 32px rgba(67, 56, 202, 0.7) !important;
+.btn-card:active {
+    transform: translateY(-2px);
 }
 
-/* ===========================================
-   7. 모션 감소 설정
-   =========================================== */
-
-@media (prefers-reduced-motion: reduce) {
-    .btn-action,
-    .btn-generate,
-    .btn-generate-large,
-    .btn--small {
-        transition: none;
-    }
+.btn-card.active {
+    border-color: var(--accent-primary);
+    background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.1), var(--surface-glass));
+    box-shadow: 0 8px 24px rgba(var(--accent-primary-rgb), 0.3);
 }
 
-/* ===========================================
-   8. 반응형 대응
-   =========================================== */
+/* 링크 형태 카드 */
+.btn-card--link {
+    gap: var(--space-md);
+}
+
+.btn-card--link:hover {
+    transform: translateX(4px);
+}
+
+/* 라이트 모드 */
+html[data-theme="light"] .btn-card {
+    background: linear-gradient(150deg, rgba(255, 255, 255, 0.98), rgba(249, 250, 251, 0.98));
+    border: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme="light"] .btn-card:hover {
+    background: rgba(248, 250, 252, 0.98);
+    border-color: rgba(var(--accent-primary-rgb), 0.3);
+}
+
+html[data-theme="light"] .btn-card.active {
+    border-color: var(--accent-primary);
+    background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.05), rgba(255, 255, 255, 0.98));
+}
+
+/* ==========================================================================
+   4. 컴팩트 버튼 (.btn-compact)
+   ========================================================================== */
+
+.btn-compact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xs);
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-compact:hover:not(:disabled) {
+    background: rgba(var(--accent-primary-rgb), 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-compact:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* 변형 */
+.btn-compact--success {
+    background: rgba(61, 213, 152, 0.15);
+    color: var(--success);
+}
+
+.btn-compact--success:hover:not(:disabled) {
+    background: rgba(61, 213, 152, 0.3);
+}
+
+.btn-compact--danger {
+    background: rgba(255, 107, 129, 0.15);
+    color: var(--error);
+}
+
+.btn-compact--danger:hover:not(:disabled) {
+    background: rgba(255, 107, 129, 0.3);
+}
+
+/* 라이트 모드 */
+html[data-theme="light"] .btn-compact {
+    background: rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme="light"] .btn-compact:hover:not(:disabled) {
+    background: rgba(var(--accent-primary-rgb), 0.2);
+}
+
+/* ==========================================================================
+   5. 플로팅 버튼 (.btn-floating)
+   ========================================================================== */
+
+.btn-floating {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary));
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-floating:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.btn-floating:active {
+    transform: scale(1.05);
+}
+
+/* 라이트 모드 */
+html[data-theme="light"] .btn-floating {
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25);
+}
+
+html[data-theme="light"] .btn-floating:hover {
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.35);
+}
+
+/* ==========================================================================
+   6. 홈 버튼 (.btn-home) - NEW
+   페이지 하단 중앙에 위치하는 돌아가기 버튼
+   ========================================================================== */
+
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 14px 40px;
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid var(--surface-border);
+    border-radius: 999px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 홈 아이콘 ::before */
+.btn-home::before {
+    content: '🏠';
+    font-size: 1.3em;
+    transition: transform 0.3s;
+}
+
+.btn-home:hover {
+    transform: translateY(-3px);
+    border-color: rgba(var(--accent-primary-rgb), 0.6);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(var(--accent-primary-rgb), 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.btn-home:hover::before {
+    transform: translateX(-3px);
+}
+
+.btn-home:active {
+    transform: translateY(-1px);
+}
+
+/* 배경 그라디언트 효과 (호버 시) */
+.btn-home::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, 
+        rgba(var(--accent-primary-rgb), 0.15), 
+        rgba(75, 214, 229, 0.1));
+    opacity: 0;
+    transition: opacity 0.4s;
+    border-radius: 999px;
+    z-index: -1;
+}
+
+.btn-home:hover::after {
+    opacity: 1;
+}
+
+/* 라이트 모드 */
+html[data-theme="light"] .btn-home {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.95), 
+        rgba(248, 250, 252, 0.98));
+    border-color: rgba(15, 23, 42, 0.15);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="light"] .btn-home:hover {
+    background: linear-gradient(160deg, 
+        rgba(248, 250, 252, 0.98), 
+        rgba(241, 245, 249, 0.98));
+    border-color: rgba(93, 95, 234, 0.4);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18),
+                0 0 0 1px rgba(93, 95, 234, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* ==========================================================================
+   반응형
+   ========================================================================== */
 
 @media (max-width: 768px) {
-    .input-actions-compact .btn-action {
-        /* 모바일에서는 더 작게 (20% 축소 유지) */
-        min-width: 76px; /* 95px * 0.8 */
-        max-width: 76px;
-        min-height: 32px; /* 40px * 0.8 */
-        font-size: 0.72em; /* 0.9em * 0.8 */
-        padding: 6px 11px;
+    /* 버튼 크기 조정 */
+    .btn {
+        min-height: 42px;
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.9rem;
     }
     
-    /* 모바일에서도 이모지 10% 크게 */
-    .input-actions-compact .btn-action::before {
-        font-size: 1.1em;
+    .btn--large {
+        min-height: 48px;
+        padding: var(--space-sm) var(--space-lg);
     }
     
-    #sidebarFloatingToggle,
-    #sidebarFloatingToggle.btn-action,
-    button#sidebarFloatingToggle,
-    #chatbotFloatingBtn,
-    #chatbotFloatingBtn.btn-action,
-    button#chatbotFloatingBtn {
-        min-width: 84px !important; /* 모바일: 76px * 1.1 = 83.6px ≈ 84px */
-        max-width: 84px !important;
-        min-height: 32px !important;
-        font-size: 0.72em !important;
-        padding: 6px 11px !important;
+    /* 탭 버튼 */
+    .btn-tab {
+        padding: 8px 14px;
+        font-size: 13px;
     }
     
-    .btn-generate,
-    .btn-generate-large {
-        font-size: 0.95em;
-        min-height: 46px;
-        padding: 12px 20px;
-        max-width: 240px; /* 모바일에서도 30% 축소 유지 */
+    /* 카드형 버튼 */
+    .btn-card {
+        padding: var(--space-md);
+    }
+    
+    /* 플로팅 버튼 */
+    .btn-floating {
+        bottom: 20px;
+        right: 20px;
+        width: 52px;
+        height: 52px;
+        font-size: 1.3rem;
+    }
+    
+    /* 홈 버튼 */
+    .btn-home {
+        min-height: 48px;
+        padding: 12px 32px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 작은 화면에서 풀너비 */
+    .btn--large {
+        width: 100%;
+    }
+    
+    /* 홈 버튼 */
+    .btn-home {
+        padding: 12px 28px;
+        font-size: 0.9rem;
     }
 }

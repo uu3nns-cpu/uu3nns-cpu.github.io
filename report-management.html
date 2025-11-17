@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="copyright" content="Copyright (c) 2025 김도현. All Rights Reserved.">
     <meta name="author" content="김도현">
-    <title>저장된 보고서 관리 - RE</title>
+    <title>저장된 보고서 관리 - RE:</title>
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
@@ -28,7 +28,13 @@
     <link rel="stylesheet" href="src/css/components/components-layout.css">
     <link rel="stylesheet" href="src/css/base/browser-compatibility.css">
     <link rel="stylesheet" href="src/css/components/header-unified.css">
+    <link rel="stylesheet" href="src/css/components/buttons-unified.css">
+    <link rel="stylesheet" href="src/css/components/glass-effects.css">
+    <link rel="stylesheet" href="src/css/components/toast.css">
+    <link rel="stylesheet" href="src/css/components/common-page-layout.css">
     <link rel="stylesheet" href="src/css/pages/report-management.css">
+    <link rel="stylesheet" href="src/css/pages/report-management-glass-override.css">
+    <link rel="stylesheet" href="src/css/components/glass-theme-fix.css">
 </head>
 <body>
     <!-- Toast 알림 -->
@@ -39,7 +45,7 @@
     
     <!-- 상세보기 모달 -->
     <div class="detail-modal" id="detailModal" onclick="closeDetailModal(event)">
-        <div class="detail-modal-content" onclick="event.stopPropagation()">
+        <div class="detail-modal-content glass-modal" onclick="event.stopPropagation()">
             <div class="detail-modal-header">
                 <div class="detail-modal-title" id="detailTitle">보고서 상세보기</div>
                 <button class="detail-modal-close" onclick="closeDetailModal()">✕</button>
@@ -48,16 +54,16 @@
                 <!-- 동적으로 채워짐 -->
             </div>
             <div class="detail-modal-footer">
-                <button class="btn-rm secondary" onclick="closeDetailModal()">닫기</button>
-                <button class="btn-rm primary" onclick="loadReportFromDetail()">✏️ 편집하기</button>
-                <button class="btn-rm success" onclick="exportCurrentReport('text')">📄 TXT로 내려받기</button>
+                <button class="btn btn-secondary" onclick="closeDetailModal()">닫기</button>
+                <button class="btn btn-primary" onclick="loadReportFromDetail()">✏️ 편집하기</button>
+                <button class="btn btn-success" onclick="exportCurrentReport('text')">📄 TXT로 내려받기</button>
             </div>
         </div>
     </div>
     
     <!-- 상담 일시 입력 모달 -->
     <div class="datetime-modal" id="datetimeModal" onclick="closeDatetimeModal(event)">
-        <div class="datetime-modal-content" onclick="event.stopPropagation()">
+        <div class="datetime-modal-content glass-modal" onclick="event.stopPropagation()">
             <div class="datetime-modal-header">
                 <div class="datetime-modal-title">📅 상담 일시 입력</div>
                 <button class="datetime-modal-close" onclick="closeDatetimeModal()">✕</button>
@@ -77,8 +83,8 @@
                 </div>
             </div>
             <div class="datetime-modal-footer">
-                <button class="btn-rm secondary" onclick="closeDatetimeModal()">취소</button>
-                <button class="btn-rm primary" onclick="applyDatetime()">적용</button>
+                <button class="btn btn-secondary" onclick="closeDatetimeModal()">취소</button>
+                <button class="btn btn-primary" onclick="applyDatetime()">적용</button>
             </div>
         </div>
     </div>
@@ -94,7 +100,7 @@
         </div>
         
         <!-- 통합 필터바 (한 줄) -->
-        <div class="filter-bar">
+        <div class="filter-bar glass-panel">
             <!-- 검색 -->
             <input 
                 type="text" 
@@ -147,11 +153,8 @@
         </div>
         
         <!-- 홈으로 돌아가기 버튼 -->
-        <div class="management-footer">
-            <a href="index.html" class="btn-back">
-                <span>🏠</span>
-                <span>홈으로 돌아가기</span>
-            </a>
+        <div class="page-footer">
+            <a href="index.html" class="btn-home">홈으로 돌아가기</a>
         </div>
     </div>
 
@@ -173,6 +176,8 @@
     <script src="js/ui-utils.js"></script>
     
     <script src="js/autosave.js"></script>
+    <script src="js/modules/settings-storage.js"></script>
+    <script src="js/modules/ui-controls.js"></script>
     <script src="js/app.js"></script>
     
     <!-- 보고서 관리 통합 모듈 -->

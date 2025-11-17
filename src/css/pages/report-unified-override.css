@@ -1,0 +1,168 @@
+/* ============================================
+   입출력 영역 완전 통일 - 오버라이드 CSS
+   목적: 입력창과 출력창의 완벽한 시각적 통일성
+   ============================================ */
+
+/* ============================================
+   1. 컨테이너 스타일 통일
+   ============================================ */
+
+/* 출력 영역 - 패딩 추가로 입력 영역과 동일하게 */
+.report-layout .output-area-compact {
+    padding: 24px !important;
+}
+
+/* ============================================
+   2. 텍스트 스타일 완전 통일
+   ============================================ */
+
+/* 출력 콘텐츠 - 입력창과 완전히 동일한 스타일 */
+.report-layout .output-content,
+.report-layout .compare-content {
+    padding: 20px !important;
+    line-height: 1.8 !important;
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
+    color: var(--text-primary) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 입력 textarea - 출력창과 완전히 동일한 스타일 */
+.report-layout .input-textarea-compact {
+    padding: 20px !important;
+    line-height: 1.8 !important;
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
+    color: var(--text-primary) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ============================================
+   3. 헤더 스타일 통일
+   ============================================ */
+
+.report-layout .output-header-compact,
+.report-layout .compare-panel-header {
+    padding: 16px 20px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-radius: 12px !important;
+    margin-bottom: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ============================================
+   4. 버튼 스타일 통일
+   ============================================ */
+
+.report-layout .output-header-compact .btn,
+.report-layout .compare-panel-header .btn,
+.report-layout .output-header-compact button,
+.report-layout .compare-panel-header button {
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
+   5. 글자 수 카운터 스타일 통일
+   ============================================ */
+
+.report-layout .output-count {
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    color: var(--text-tertiary) !important;
+}
+
+/* ============================================
+   6. 마크다운 텍스트 통일
+   ============================================ */
+
+.report-layout .output-content h1,
+.report-layout .output-content h2,
+.report-layout .output-content h3,
+.report-layout .compare-content h1,
+.report-layout .compare-content h2,
+.report-layout .compare-content h3 {
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+}
+
+.report-layout .output-content p,
+.report-layout .compare-content p {
+    font-weight: 400 !important;
+    line-height: 1.8 !important;
+}
+
+/* ============================================
+   7. 스크롤바 통일
+   ============================================ */
+
+.report-layout .output-content::-webkit-scrollbar,
+.report-layout .compare-content::-webkit-scrollbar,
+.report-layout .input-textarea-compact::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+.report-layout .output-content::-webkit-scrollbar-track,
+.report-layout .compare-content::-webkit-scrollbar-track,
+.report-layout .input-textarea-compact::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-radius: 3px !important;
+}
+
+.report-layout .output-content::-webkit-scrollbar-thumb,
+.report-layout .compare-content::-webkit-scrollbar-thumb,
+.report-layout .input-textarea-compact::-webkit-scrollbar-thumb {
+    background: rgba(147, 51, 234, 0.3) !important;
+    border-radius: 3px !important;
+}
+
+.report-layout .output-content::-webkit-scrollbar-thumb:hover,
+.report-layout .compare-content::-webkit-scrollbar-thumb:hover,
+.report-layout .input-textarea-compact::-webkit-scrollbar-thumb:hover {
+    background: rgba(147, 51, 234, 0.5) !important;
+}
+
+/* ============================================
+   8. 포커스 상태 통일
+   ============================================ */
+
+.report-layout .input-textarea-compact:focus {
+    border-color: rgba(147, 51, 234, 0.4) !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.15), inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ============================================
+   9. 비교 패널 간격 조정
+   ============================================ */
+
+.report-layout .output-compare-panel {
+    padding: 16px !important;
+}
+
+.report-layout .output-compare-panel:first-child {
+    padding-right: 16px !important;
+}
+
+.report-layout .output-compare-panel:last-child {
+    padding-left: 16px !important;
+}

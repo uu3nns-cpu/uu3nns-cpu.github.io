@@ -18,6 +18,11 @@ function clearInput() {
     const sidebar = document.getElementById('settingsSidebar');
     const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
     
+    // 요소가 없으면 함수 종료
+    if (!floatingBtn || !sidebar) {
+        return;
+    }
+    
     let isSidebarOpen = false;
     
     // 사이드바 열기/닫기 함수
@@ -29,15 +34,15 @@ function clearInput() {
         
         if (isSidebarOpen) {
             sidebar.classList.add('open');
-            mainArea.classList.add('sidebar-open');
+            if (mainArea) mainArea.classList.add('sidebar-open');
             // 챗봇 닫기
             if (chatbotModal && chatbotModal.classList.contains('active')) {
                 chatbotModal.classList.remove('active');
-                mainArea.classList.remove('chatbot-open');
+                if (mainArea) mainArea.classList.remove('chatbot-open');
             }
         } else {
             sidebar.classList.remove('open');
-            mainArea.classList.remove('sidebar-open');
+            if (mainArea) mainArea.classList.remove('sidebar-open');
         }
     }
     
@@ -80,6 +85,8 @@ function switchOutputTab(tabName) {
         const gptOutputCompare = document.getElementById('gptOutputCompare');
         const groqCountCompare = document.getElementById('groqCountCompare');
         const gptCountCompare = document.getElementById('gptCountCompare');
+        const groqCopyBtnCompare = document.getElementById('groqCopyBtnCompare');
+        const gptCopyBtnCompare = document.getElementById('gptCopyBtnCompare');
         
         if (groqOutput && groqOutputCompare) {
             // 원본 텍스트가 있으면 마크다운 렌더링 다시 적용
@@ -92,6 +99,10 @@ function switchOutputTab(tabName) {
                 } else {
                     groqOutputCompare.innerHTML = groqOutput.innerHTML;
                 }
+                // is-hidden 클래스 제거 및 표시
+                groqOutputCompare.classList.remove('is-hidden');
+                groqOutputCompare.style.display = '';
+                if (groqCopyBtnCompare) groqCopyBtnCompare.disabled = false;
             } else {
                 groqOutputCompare.innerHTML = groqOutput.innerHTML;
             }
@@ -111,6 +122,10 @@ function switchOutputTab(tabName) {
                 } else {
                     gptOutputCompare.innerHTML = gptOutput.innerHTML;
                 }
+                // is-hidden 클래스 제거 및 표시
+                gptOutputCompare.classList.remove('is-hidden');
+                gptOutputCompare.style.display = '';
+                if (gptCopyBtnCompare) gptCopyBtnCompare.disabled = false;
             } else {
                 gptOutputCompare.innerHTML = gptOutput.innerHTML;
             }
@@ -129,37 +144,29 @@ function initOutputTabsObserver() {
     
     // 보고서 생성 후 탭 표시 리스너 추가
     const observer = new MutationObserver(() => {
-        const groqHasContent = document.getElementById('groqOutput').style.display === 'block';
-        const gptHasContent = document.getElementById('gptOutput').style.display === 'block';
+        const groqHasContent = !document.getElementById('groqOutput').classList.contains('is-hidden');
+        const gptHasContent = !document.getElementById('gptOutput').classList.contains('is-hidden');
         
         if (groqHasContent || gptHasContent) {
-            emptyState.style.display = 'none';
-            outputTabs.style.display = 'flex';
+            emptyState.classList.add('is-hidden');
+            outputTabs.classList.remove('is-hidden');
         }
     });
     
     observer.observe(document.getElementById('groqOutput'), {
         attributes: true,
-        attributeFilter: ['style']
+        attributeFilter: ['class']
     });
     observer.observe(document.getElementById('gptOutput'), {
         attributes: true,
-        attributeFilter: ['style']
+        attributeFilter: ['class']
     });
 }
 
-// 비교 탭 강제 새로고침 함수
+// 비교 탭 강제 새로고침 함수 (더 이상 필요 없음 - app.js에서 자동 동기화)
 function refreshCompareTab() {
-    const activeTab = document.querySelector('.output-tab.active');
-    const isCompareTab = activeTab && activeTab.getAttribute('data-tab') === 'compare';
-    
-    // 현재 비교 탭이 활성화되어 있으면 강제로 새로고침
-    if (isCompareTab) {
-        // 50ms 딕레이 후 비교 탭 재렌더링
-        setTimeout(() => {
-            switchOutputTab('compare');
-        }, 50);
-    }
+    // 비교 탭은 switchOutputTab('compare') 호출 시 자동 동기화
+    console.log('[Compare-Tab] refreshCompareTab 호출됨 - 자동 동기화로 인해 별도 작업 불필요');
 }
 
 // 현재 프리셋 표시 업데이트
@@ -181,6 +188,30 @@ function updateCurrentPresetDisplay() {
         presetNameElement.textContent = `${preset.icon} ${preset.name}`;
     } else {
         presetNameElement.textContent = '수동 설정';
+    }
+}
+
+// 비교 탭 로딩 상태 동기화
+function syncCompareLoadingState() {
+    const groqLoading = document.getElementById('groqLoading');
+    const gptLoading = document.getElementById('gptLoading');
+    const groqLoadingCompare = document.getElementById('groqLoadingCompare');
+    const gptLoadingCompare = document.getElementById('gptLoadingCompare');
+    
+    if (groqLoading && groqLoadingCompare) {
+        if (groqLoading.classList.contains('active')) {
+            groqLoadingCompare.classList.remove('is-hidden');
+        } else {
+            groqLoadingCompare.classList.add('is-hidden');
+        }
+    }
+    
+    if (gptLoading && gptLoadingCompare) {
+        if (gptLoading.classList.contains('active')) {
+            gptLoadingCompare.classList.remove('is-hidden');
+        } else {
+            gptLoadingCompare.classList.add('is-hidden');
+        }
     }
 }
 

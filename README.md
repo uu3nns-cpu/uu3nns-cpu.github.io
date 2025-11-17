@@ -8,6 +8,10 @@
 
 ---
 
+## 문서 안내
+- [Design Guide](DESIGN_GUIDE.md)
+- [Google Services Integration](docs/guides/Google_Services_Integration_Standard.md)
+
 ## 📖 목차
 
 - [개요](#-개요)
@@ -90,7 +94,7 @@
 
 ### 1. 다운로드 및 실행
 
-웹사이트 접속 : https://re-beta2.netlify.app/report.html
+웹사이트 접속 : https://uu3nns-cpu.github.io/report.html
 
 ### 2. API 키 설정
 
@@ -126,22 +130,56 @@ RE/
 ├── changelog.html             # 업데이트 내역
 ├── donate.html                # 후원하기
 ├── data-management.html       # 데이터 관리
+├── report-management.html     # 보고서 관리
+├── privacy.html               # 개인정보처리방침
+├── sitemap.html               # 사이트맵
 ├── guide.html                 # 리다이렉트 (guide/로 이동)
 │
-├── css/
-│   ├── variables.css          # CSS 변수 (색상, 간격)
-│   ├── base.css               # 기본 스타일
-│   ├── layout.css             # 레이아웃 시스템
-│   ├── components-base.css    # 공통 컴포넌트
-│   ├── components-layout.css  # 레이아웃 전용 컴포넌트
-│   ├── browser-compatibility.css  # 브라우저 호환성
-│   ├── header-button-unify.css    # 헤더 버튼 통일
-│   ├── improvements.css       # UI 개선
-│   ├── report-sidebar.css     # 보고서 사이드바
-│   ├── settings.css           # 설정 페이지
-│   └── chatbot.css            # 챗봇 UI
+├── src/
+│   └── css/
+│       ├── base/             # 기본 스타일
+│       │   ├── variables.css       # CSS 변수 (색상, 간격)
+│       │   ├── base.css            # 기본 스타일
+│       │   ├── layout.css          # 레이아웃 시스템
+│       │   └── browser-compatibility.css  # 브라우저 호환성
+│       ├── components/       # 공통 컴포넌트
+│       │   ├── components-base.css
+│       │   ├── components-layout.css
+│       │   ├── header-unified.css
+│       │   ├── buttons-unified.css
+│       │   ├── cards-unified.css
+│       │   ├── glass-effects.css
+│       │   ├── glass-theme-fix.css
+│       │   ├── chatbot.css
+│       │   ├── cookie-consent.css
+│       │   ├── toast.css
+│       │   ├── markdown-and-usage.css
+│       │   └── common-page-layout.css
+│       └── pages/            # 페이지별 스타일
+│           ├── home-improved.css
+│           ├── settings.css
+│           ├── settings-refactored.css
+│           ├── report-unified.css
+│           ├── report-unified-override.css
+│           ├── report-theme.css
+│           ├── report-management.css
+│           ├── report-management-glass-override.css
+│           ├── data-management.css
+│           ├── donate-refactored.css
+│           ├── changelog.css
+│           └── document-pages.css
 │
 ├── js/
+│   ├── config/               # 설정 파일
+│   │   ├── app-constants.js        # 앱 상수
+│   │   └── model-configs.js        # 모델 설정
+│   ├── modules/              # 모듈
+│   │   ├── settings-storage.js     # 설정 저장/로드
+│   │   └── ui-controls.js          # UI 컨트롤
+│   ├── features/             # 기능별 모듈
+│   │   └── report-management.js    # 보고서 관리
+│   ├── browser-polyfills.js   # 브라우저 호환성
+│   ├── error-handler.js       # 에러 처리
 │   ├── common-components.js   # 공통 컴포넌트 (헤더, 푸터)
 │   ├── security.js            # API 키 암호화/복호화
 │   ├── app.js                 # 메인 로직 (보고서 생성)
@@ -150,20 +188,55 @@ RE/
 │   ├── ui-enhancements.js     # UI 개선
 │   ├── settings-preview.js    # 설정 미리보기
 │   ├── report-adapter.js      # 보고서 어댑터
+│   ├── report-data-manager.js # 보고서 데이터 관리
+│   ├── report-ui.js           # 보고서 UI
 │   ├── resize-handler.js      # 리사이즈 핸들러
 │   ├── chatbot.js             # AI 챗봇
+│   ├── markdown-renderer.js   # 마크다운 렌더러
+│   ├── compare-tab-fix.js     # 비교 탭 수정
+│   ├── input-validation.js    # 입력 검증
+│   ├── usage-core.js          # 사용량 관리 (핵심)
+│   ├── usage-bridge.js        # 사용량 브리지
+│   ├── ui-utils.js            # UI 유틸리티
 │   ├── data-management.js     # 데이터 관리
-│   └── browser-polyfills.js   # 브라우저 호환성
+│   └── cookie-consent.js      # 쿠키 동의
 │
-├── guide/                     # 사용 안내서
-│   ├── index.html             # 가이드 메인
-│   ├── 01-start.html          # 시작하기
-│   ├── 02-basic.html          # 기본 사용법
-│   ├── 03-advanced.html       # 고급 기능
-│   ├── 04-security.html       # 보안 가이드
-│   └── 05-troubleshoot.html   # 문제 해결
+├── guide/                    # 사용 안내서
+│   ├── css/
+│   │   └── guide-common.css
+│   ├── screenshot/
+│   │   └── README.md
+│   ├── index.html            # 가이드 메인
+│   ├── 01-start.html         # 시작하기
+│   ├── 02-basic.html         # 기본 사용법
+│   ├── 03-advanced.html      # 고급 기능
+│   ├── 04-security.html      # 보안 가이드
+│   └── 05-troubleshoot.html  # 문제 해결
 │
-└── README.md                  # 이 파일
+├── guidevideo/               # 가이드 영상
+│   ├── CaseFormulation.mp4
+│   ├── GPTAPI2.mp4
+│   ├── GroqAPI1.mp4
+│   └── ReportPage.mp4
+│
+├── image/                    # 이미지 리소스
+│   └── DESIGN_GUIDE/
+│       └── 1763178269151.png
+│
+├── docs/                     # 개발 문서
+│   ├── guides/
+│   │   ├── Google_Services_Integration_Standard.md
+│   │   └── Google_Services_Integration_Report.md
+│   ├── plans/
+│   │   ├── active/          # 진행 중인 계획
+│   │   └── completed/       # 완료된 계획
+│   └── refactoring/         # 리팩토링 문서
+│
+├── archive/                  # 보관 파일
+│
+├── README.md                 # 이 파일
+├── DESIGN_GUIDE.md          # 디자인 가이드
+└── LICENSE                   # 라이선스
 ```
 
 ---
@@ -182,6 +255,11 @@ RE/
 ### 저장소
 - **LocalStorage**: 모든 데이터 로컬 저장
 - **암호화**: API 키 Base64 인코딩
+
+### 추적 및 분석
+- **Google Analytics**: gtag.js (측정 ID: G-RWS3BEEQ84)
+- **Google AdSense**: 게시자 ID: ca-pub-9257454501555292
+- **Google Search Console**: Analytics를 통한 자동 인증
 
 ---
 
@@ -282,12 +360,13 @@ RE/
 
 ## 👨‍💻 개발자 가이드
 
-### ⚠️ **중요: Google Analytics 필수 포함**
+### ⚠️ 중요: Google 서비스 표준 코드
 
-**모든 HTML 페이지를 생성하거나 수정할 때는 반드시 Google Analytics 추적 코드를 포함해야 합니다.**
+모든 HTML 페이지를 생성하거나 수정할 때는 **반드시 Google Analytics와 AdSense 코드를 포함**해야 합니다.
 
+#### Google Analytics (gtag.js) - 필수
 ```html
-<!-- Google Analytics - 모든 페이지 <head> 섹션 내 필수 포함 -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -297,55 +376,23 @@ RE/
 </script>
 ```
 
-**적용 규칙:**
-- ✅ 신규 HTML 페이지 생성 시 반드시 포함
-- ✅ 기존 HTML 페이지 수정 시 코드 유지
-- ✅ `<head>` 태그 내부, 다른 스크립트보다 먼저 배치
-- ✅ 모든 페이지에 동일한 추적 ID 사용
-- ⚠️ 이 코드가 없으면 페이지 방문 통계가 수집되지 않음
-
-**체크리스트:**
-```bash
-# 새 페이지 생성 전
-□ Google Analytics 코드 준비
-□ <head> 섹션에 추가
-□ 추적 ID 확인
-
-# 페이지 수정 전
-□ 기존 Analytics 코드 존재 여부 확인
-□ 수정 후에도 코드 유지 확인
-```
-
----
-
-### ⚠️ **중요: Google AdSense 필수 포함**
-
-**모든 HTML 페이지를 생성하거나 수정할 때는 반드시 Google AdSense 광고 코드를 포함해야 합니다.**
-
+#### Google AdSense - 필수
 ```html
-<!-- Google AdSense - 모든 페이지 <head> 섹션 내 필수 포함 -->
+<!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
      crossorigin="anonymous"></script>
 ```
 
+#### Google Search Console 연동
+별도의 메타 태그 불필요. Google Analytics를 통한 자동 인증 방식 사용.
+
 **적용 규칙:**
-- ✅ 신규 HTML 페이지 생성 시 반드시 포함
-- ✅ 기존 HTML 페이지 수정 시 코드 유지
-- ✅ `<head>` 태그 내부에 배치
-- ✅ 모든 페이지에 동일한 AdSense 코드 사용
-- ⚠️ 이 코드가 없으면 광고가 표시되지 않음
+- ✅ `<head>` 태그 내부, 다른 스크립트보다 먼저 배치
+- ✅ Analytics → AdSense 순서로 배치
+- ✅ 모든 HTML 페이지에 동일한 코드 사용
+- ⚠️ 이 코드가 없으면 추적 및 광고가 작동하지 않음
 
-**체크리스트:**
-```bash
-# 새 페이지 생성 전
-□ Google AdSense 코드 준비
-□ <head> 섹션에 추가
-□ client ID 확인
-
-# 페이지 수정 전
-□ 기존 AdSense 코드 존재 여부 확인
-□ 수정 후에도 코드 유지 확인
-```
+자세한 내용은 [Google Services Integration Standard](docs/guides/Google_Services_Integration_Standard.md) 문서를 참고하세요.
 
 ---
 
@@ -395,12 +442,12 @@ highlightChanges()         // 변경 사항 하이라이트
 ### CSS 변수 커스터마이징
 
 ```css
-/* variables.css */
+/* src/css/base/variables.css */
 :root {
   /* 색상 */
-  --accent-primary: #667eea;
-  --success: #10b981;
-  --error: #ef4444;
+  --accent-primary: #9b8bff;
+  --success: #3dd598;
+  --error: #ff6b81;
   
   /* 간격 */
   --space-sm: 12px;
@@ -497,7 +544,7 @@ console.log(loadSettings()) // 현재 설정 확인
 - **개발자**: 김도현
 - **이메일**: o7some@naver.com
 - **버전**: 0.9.1
-- **최종 업데이트**: 2025-11-11
+- **최종 업데이트**: 2025-11-17
 
 ---
 

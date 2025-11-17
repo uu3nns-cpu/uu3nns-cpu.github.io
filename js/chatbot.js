@@ -1,9 +1,8 @@
 /* ============================================
-   챗봇 입력란 활성화/비활성화 관리
-   ============================================ */
+   梨쀫큸 ?낅젰? ?쒖꽦??鍮꾪솢?깊솕 愿由?   ============================================ */
 
 /**
- * 보고서 결과가 있는지 확인
+ * 蹂닿퀬??寃곌낵媛 ?덈뒗吏 ?뺤씤
  */
 function hasReportResults() {
     const groqOutput = document.getElementById('groqOutput');
@@ -20,7 +19,7 @@ function hasReportResults() {
 }
 
 /**
- * 챗봇 입력란 활성화/비활성화
+ * 梨쀫큸 ?낅젰? ?쒖꽦??鍮꾪솢?깊솕
  */
 function updateChatbotInputState() {
     const chatInput = document.getElementById('chatbotInput');
@@ -33,19 +32,18 @@ function updateChatbotInputState() {
     const hasResults = hasReportResults();
     
     if (hasResults) {
-        // 결과 있음: 활성화
-        chatInput.disabled = false;
+        // 寃곌낵 ?덉쓬: ?쒖꽦??        chatInput.disabled = false;
         chatInput.style.opacity = '1';
-        chatInput.placeholder = '수정 요청을 입력하세요... (예: "상담 과정을 더 상세하게")';
+        chatInput.placeholder = '?섏젙 ?붿껌???낅젰?섏꽭??.. (?? "?곷떞 怨쇱젙?????곸꽭?섍쾶")';
         
         if (sendBtn) sendBtn.disabled = false;
         if (toggleGroq) toggleGroq.disabled = false;
         if (toggleGPT) toggleGPT.disabled = false;
     } else {
-        // 결과 없음: 비활성화
+        // 寃곌낵 ?놁쓬: 鍮꾪솢?깊솕
         chatInput.disabled = true;
         chatInput.style.opacity = '0.5';
-        chatInput.placeholder = '보고서를 먼저 생성해주세요';
+        chatInput.placeholder = '蹂닿퀬?쒕? 癒쇱? ?앹꽦?댁＜?몄슂';
         chatInput.value = '';
         
         if (sendBtn) sendBtn.disabled = true;
@@ -55,13 +53,13 @@ function updateChatbotInputState() {
 }
 
 /**
- * 챗봇 입력란 상태 감시 시작
+ * 梨쀫큸 ?낅젰? ?곹깭 媛먯떆 ?쒖옉
  */
 function startChatbotStateMonitoring() {
-    // 초기 상태 설정
+    // 珥덇린 ?곹깭 ?ㅼ젙
     updateChatbotInputState();
     
-    // 출력 영역 변화 감지 (MutationObserver)
+    // 異쒕젰 ?곸뿭 蹂??媛먯? (MutationObserver)
     const outputIds = ['groqOutput', 'gptOutput', 'groqOutputCompare', 'gptOutputCompare'];
     const observer = new MutationObserver(function() {
         updateChatbotInputState();
@@ -78,11 +76,11 @@ function startChatbotStateMonitoring() {
         }
     });
     
-    // 주기적으로도 체크 (fallback)
+    // 二쇨린?곸쑝濡쒕룄 泥댄겕 (fallback)
     setInterval(updateChatbotInputState, 2000);
 }
 
-// 페이지 로드 시 감시 시작
+// ?섏씠吏 濡쒕뱶 ??媛먯떆 ?쒖옉
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(startChatbotStateMonitoring, 500);
@@ -92,8 +90,7 @@ if (document.readyState === 'loading') {
 }
 
 /* ============================================
-   챗봇 기능 - Floating 버튼 드래그
-   ============================================ */
+   梨쀫큸 湲곕뒫 - Floating 踰꾪듉 ?쒕옒洹?   ============================================ */
 
 // Floating 버튼 초기화
 function initChatbotFloatingButton() {
@@ -103,7 +100,7 @@ function initChatbotFloatingButton() {
     let isDragging = false;
     let startX, startY, initialX, initialY;
     
-    // 저장된 위치 복원
+    // ??λ맂 ?꾩튂 蹂듭썝
     const savedPos = localStorage.getItem('chatbotBtnPos');
     if (savedPos) {
         try {
@@ -111,11 +108,11 @@ function initChatbotFloatingButton() {
             btn.style.right = pos.right;
             btn.style.bottom = pos.bottom;
         } catch (e) {
-            console.error('챗봇 버튼 위치 복원 오류:', e);
+            console.error('梨쀫큸 踰꾪듉 ?꾩튂 蹂듭썝 ?ㅻ쪟:', e);
         }
     }
     
-    // 마우스 다운
+    // 留덉슦???ㅼ슫
     btn.addEventListener('mousedown', function(e) {
         isDragging = false;
         startX = e.clientX;
@@ -135,7 +132,7 @@ function initChatbotFloatingButton() {
         const moveX = Math.abs(e.clientX - startX);
         const moveY = Math.abs(e.clientY - startY);
         
-        // 5px 이상 움직이면 드래그로 간주
+        // 5px ?댁긽 ?吏곸씠硫??쒕옒洹몃줈 媛꾩＜
         if (moveX > 5 || moveY > 5) {
             isDragging = true;
             btn.classList.add('dragging');
@@ -148,7 +145,7 @@ function initChatbotFloatingButton() {
             const newLeft = initialX + deltaX;
             const newTop = initialY + deltaY;
             
-            // 화면 밖으로 나가지 않도록 제한
+            // ?붾㈃ 諛뽰쑝濡??섍?吏 ?딅룄濡??쒗븳
             const maxX = window.innerWidth - btn.offsetWidth;
             const maxY = window.innerHeight - btn.offsetHeight;
             
@@ -167,8 +164,7 @@ function initChatbotFloatingButton() {
         document.removeEventListener('mouseup', onMouseUp);
         
         if (isDragging) {
-            // 위치 저장
-            const rect = btn.getBoundingClientRect();
+            // ?꾩튂 ???            const rect = btn.getBoundingClientRect();
             const right = window.innerWidth - rect.right;
             const bottom = window.innerHeight - rect.bottom;
             
@@ -182,52 +178,48 @@ function initChatbotFloatingButton() {
                 isDragging = false;
             }, 100);
         } else {
-            // 클릭 (드래그 아님) - 챗봇 열기
+            // ?대┃ (?쒕옒洹??꾨떂) - 梨쀫큸 ?닿린
             toggleChatbot();
         }
     }
 }
 
-// 페이지 로드 시 초기화
-if (document.readyState === 'loading') {
+// ?섏씠吏 濡쒕뱶 ??珥덇린??if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initChatbotFloatingButton);
 } else {
     initChatbotFloatingButton();
 }
 
 /* ============================================
-   챗봇 사이드바 열기/닫기 - 설정 사이드바와 배타적
-   ============================================ */
+   梨쀫큸 ?ъ씠?쒕컮 ?닿린/?リ린 - ?ㅼ젙 ?ъ씠?쒕컮? 諛고???   ============================================ */
 
-// 챗봇 사이드바 토글 - 본문을 밀어내는 형태
+// 梨쀫큸 ?ъ씠?쒕컮 ?좉? - 蹂몃Ц??諛?대궡???뺥깭
 function toggleChatbot() {
     const chatbotModal = document.getElementById('chatbotModal');
     const settingsSidebar = document.getElementById('settingsSidebar');
     const mainArea = document.querySelector('.main-area');
-    
+    const overlay = document.getElementById('chatbotOverlay');
+
     if (!chatbotModal) return;
-    
+
     const isActive = chatbotModal.classList.contains('active');
-    
+
     if (isActive) {
-        // 챗봇 닫기
         chatbotModal.classList.remove('active');
         if (mainArea) mainArea.classList.remove('chatbot-open');
+        if (overlay) overlay.classList.remove('active');
     } else {
-        // 챗봇 열기
         chatbotModal.classList.add('active');
         if (mainArea) mainArea.classList.add('chatbot-open');
-        
-        // 설정 사이드바 닫기
+        if (overlay) overlay.classList.add('active');
+
         if (settingsSidebar && settingsSidebar.classList.contains('open')) {
             settingsSidebar.classList.remove('open');
             if (mainArea) mainArea.classList.remove('sidebar-open');
         }
-        
-        // 입력란 상태 업데이트
+
         updateChatbotInputState();
-        
-        // 입력창 포커스 (활성화되어 있을 때만)
+
         const input = document.getElementById('chatbotInput');
         if (input && !input.disabled) {
             setTimeout(() => input.focus(), 33);
@@ -235,23 +227,24 @@ function toggleChatbot() {
     }
 }
 
-// 챗봇 닫기
 function closeChatbot() {
     const modal = document.getElementById('chatbotModal');
     const mainArea = document.querySelector('.main-area');
+    const overlay = document.getElementById('chatbotOverlay');
     if (modal) modal.classList.remove('active');
     if (mainArea) mainArea.classList.remove('chatbot-open');
+    if (overlay) overlay.classList.remove('active');
 }
 
-// 이벤트 리스너 등록
+// ?대깽??由ъ뒪???깅줉
 function initChatbotEvents() {
-    // X 버튼 클릭
+    // X 踰꾪듉 ?대┃
     const closeBtn = document.getElementById('chatbotCloseBtn');
     if (closeBtn) {
         closeBtn.addEventListener('click', closeChatbot);
     }
     
-    // ESC 키로 닫기
+    // ESC ?ㅻ줈 ?リ린
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             const modal = document.getElementById('chatbotModal');
@@ -262,7 +255,7 @@ function initChatbotEvents() {
     });
 }
 
-// 페이지 로드 시 이벤트 리스너 등록
+// ?섏씠吏 濡쒕뱶 ???대깽??由ъ뒪???깅줉
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initChatbotEvents);
 } else {
@@ -270,58 +263,56 @@ if (document.readyState === 'loading') {
 }
 
 /* ============================================
-   메시지 전송 이벤트
-   ============================================ */
+   硫붿떆吏 ?꾩넚 ?대깽??   ============================================ */
 
-// 메시지 전송 처리
+// 硫붿떆吏 ?꾩넚 泥섎━
 function handleChatSend() {
     const groqEnabled = document.getElementById('toggleGroq').checked;
     const gptEnabled = document.getElementById('toggleGPT').checked;
     const messageInput = document.getElementById('chatbotInput');
     const message = messageInput.value.trim();
     
-    // 검증 1: 둘 다 OFF인 경우
+    // 寃利?1: ????OFF??寃쎌슦
     if (!groqEnabled && !gptEnabled) {
-        showToast('⚠️ 명령 받을 대상을 선택해주세요', 2000);
+        showToast('?좑툘 紐낅졊 諛쏆쓣 ??곸쓣 ?좏깮?댁＜?몄슂', 2000);
         return;
     }
     
-    // 검증 2: 메시지 비어있는지 확인
+    // 寃利?2: 硫붿떆吏 鍮꾩뼱?덈뒗吏 ?뺤씤
     if (!message) {
-        showToast('⚠️ 메시지를 입력해주세요', 2000);
+        showToast('?좑툘 硫붿떆吏瑜??낅젰?댁＜?몄슂', 2000);
         messageInput.focus();
         return;
     }
     
-    // 검증 3: 보고서 결과 확인 (입력란이 활성화되어 있다는 것은 결과가 있다는 의미)
+    // 寃利?3: 蹂닿퀬??寃곌낵 ?뺤씤 (?낅젰????쒖꽦?붾릺???덈떎??寃껋? 寃곌낵媛 ?덈떎???섎?)
     if (!hasReportResults()) {
-        showToast('⚠️ 보고서를 먼저 생성해주세요', 2500);
+        showToast('?좑툘 蹂닿퀬?쒕? 癒쇱? ?앹꽦?댁＜?몄슂', 2500);
         return;
     }
     
-    // 사용자 메시지 표시
+    // ?ъ슜??硫붿떆吏 ?쒖떆
     addChatMessage('user', message);
     
-    // 입력창 초기화
-    clearChatInput();
+    // ?낅젰李?珥덇린??    clearChatInput();
     
-    // 로딩 상태 설정
+    // 濡쒕뵫 ?곹깭 ?ㅼ젙
     setLoadingState(true);
     
-    // 전송 로직
+    // ?꾩넚 濡쒖쭅
     if (groqEnabled && gptEnabled) {
-        // 둘 다 전송
+        // ?????꾩넚
         sendToBoth(message);
     } else if (groqEnabled) {
-        // Groq만 전송
+        // Groq留??꾩넚
         sendToGroq(message);
     } else if (gptEnabled) {
-        // GPT만 전송
+        // GPT留??꾩넚
         sendToGPT(message);
     }
 }
 
-// 전송 버튼 이벤트 등록
+// ?꾩넚 踰꾪듉 ?대깽???깅줉
 function initSendButtonEvent() {
     const sendBtn = document.getElementById('btnSendChat');
     if (sendBtn) {
@@ -329,7 +320,7 @@ function initSendButtonEvent() {
     }
 }
 
-// 페이지 로드 시 전송 버튼 이벤트 등록
+// ?섏씠吏 濡쒕뱶 ???꾩넚 踰꾪듉 ?대깽???깅줉
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initSendButtonEvent);
 } else {
@@ -337,17 +328,17 @@ if (document.readyState === 'loading') {
 }
 
 /* ============================================
-   Phase 2.3 - 메시지 추가 함수
+   Phase 2.3 - 硫붿떆吏 異붽? ?⑥닔
    ============================================ */
 
-// HTML 이스케이프 (XSS 방지)
+// HTML ?댁뒪耳?댄봽 (XSS 諛⑹?)
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
-// 채팅 메시지 추가
+// 梨꾪똿 硫붿떆吏 異붽?
 function addChatMessage(role, content, model = '') {
     const messagesContainer = document.getElementById('chatbotMessages');
     if (!messagesContainer) return;
@@ -356,7 +347,7 @@ function addChatMessage(role, content, model = '') {
     messageDiv.className = `chat-message chat-message--${role}`;
     
     if (role === 'ai') {
-        // AI 메시지: badge + content
+        // AI 硫붿떆吏: badge + content
         const badge = document.createElement('div');
         badge.className = 'message-badge';
         badge.textContent = model || 'AI';
@@ -364,14 +355,13 @@ function addChatMessage(role, content, model = '') {
         
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
-        contentDiv.innerHTML = content; // AI 응답은 HTML 포함 가능
-        messageDiv.appendChild(contentDiv);
+        contentDiv.innerHTML = content; // AI ?묐떟? HTML ?ы븿 媛??        messageDiv.appendChild(contentDiv);
         
     } else if (role === 'user') {
-        // 사용자 메시지: content + time
+        // ?ъ슜??硫붿떆吏: content + time
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
-        contentDiv.textContent = content; // 사용자 입력은 텍스트만
+        contentDiv.textContent = content; // ?ъ슜???낅젰? ?띿뒪?몃쭔
         messageDiv.appendChild(contentDiv);
         
         const timeDiv = document.createElement('div');
@@ -383,40 +373,39 @@ function addChatMessage(role, content, model = '') {
         messageDiv.appendChild(timeDiv);
         
     } else if (role === 'system') {
-        // 시스템 메시지: content만
-        const contentDiv = document.createElement('div');
+        // ?쒖뒪??硫붿떆吏: content留?        const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
         contentDiv.innerHTML = content;
         messageDiv.appendChild(contentDiv);
     }
     
-    // 메시지 추가
+    // 硫붿떆吏 異붽?
     messagesContainer.appendChild(messageDiv);
     
-    // 자동 스크롤
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    // ?먮룞 ?ㅽ겕濡?    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
 /* ============================================
-   Phase 2.4 - Enter 키 처리
+   Phase 2.4 - Enter ??泥섎━
    ============================================ */
 
 // Enter 키 처리 초기화
 function initEnterKeyHandler() {
+    
     const input = document.getElementById('chatbotInput');
     if (!input) return;
     
     input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
-            // Enter만 누르면 전송
+            // Enter留??꾨Ⅴ硫??꾩넚
             e.preventDefault();
             handleChatSend();
         }
-        // Shift+Enter는 기본 동작 (줄바꿈) 유지
+        // Shift+Enter??湲곕낯 ?숈옉 (以꾨컮轅? ?좎?
     });
 }
 
-// 페이지 로드 시 Enter 키 핸들러 등록
+// ?섏씠吏 濡쒕뱶 ??Enter ???몃뱾???깅줉
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initEnterKeyHandler);
 } else {
@@ -424,8 +413,7 @@ if (document.readyState === 'loading') {
 }
 
 /* ============================================
-   Phase 4.4 - 입력창 초기화
-   ============================================ */
+   Phase 4.4 - ?낅젰李?珥덇린??   ============================================ */
 
 function clearChatInput() {
     const input = document.getElementById('chatbotInput');
@@ -436,11 +424,10 @@ function clearChatInput() {
 }
 
 /* ============================================
-   Phase 4.1 - 로딩 상태 관리 - 애니메이션 중 입력 차단
+   Phase 4.1 - 濡쒕뵫 ?곹깭 愿由?- ?좊땲硫붿씠??以??낅젰 李⑤떒
    ============================================ */
 
-let isAnimating = false; // 전역 변수로 애니메이션 상태 관리
-
+let isAnimating = false; // ?꾩뿭 蹂?섎줈 ?좊땲硫붿씠???곹깭 愿由?
 function setLoadingState(isLoading) {
     const sendBtn = document.getElementById('btnSendChat');
     const chatInput = document.getElementById('chatbotInput');
@@ -448,13 +435,13 @@ function setLoadingState(isLoading) {
     const gptToggle = document.getElementById('toggleGPT');
     
     if (isLoading) {
-        // 로딩 시작
+        // 濡쒕뵫 ?쒖옉
         isAnimating = true;
         
         if (sendBtn) {
             sendBtn.disabled = true;
             sendBtn.classList.add('loading');
-            // 스피너 추가
+            // ?ㅽ뵾??異붽?
             const spinner = document.createElement('span');
             spinner.className = 'spinner';
             sendBtn.insertBefore(spinner, sendBtn.firstChild);
@@ -463,27 +450,26 @@ function setLoadingState(isLoading) {
         if (chatInput) {
             chatInput.disabled = true;
             chatInput.style.opacity = '0.6';
-            chatInput.placeholder = '수정 중입니다...';
+            chatInput.placeholder = '?섏젙 以묒엯?덈떎...';
         }
         
         if (groqToggle) groqToggle.disabled = true;
         if (gptToggle) gptToggle.disabled = true;
         
     } else {
-        // 로딩 종료
+        // 濡쒕뵫 醫낅즺
         isAnimating = false;
         
         if (sendBtn) {
             sendBtn.disabled = false;
             sendBtn.classList.remove('loading');
-            // 스피너 제거
+            // ?ㅽ뵾???쒓굅
             const spinner = sendBtn.querySelector('.spinner');
             if (spinner) spinner.remove();
         }
         
         if (chatInput) {
-            // 로딩 종료 후 상태는 updateChatbotInputState에서 관리
-            updateChatbotInputState();
+            // 濡쒕뵫 醫낅즺 ???곹깭??updateChatbotInputState?먯꽌 愿由?            updateChatbotInputState();
         }
         
         if (groqToggle) groqToggle.disabled = false;
@@ -492,50 +478,44 @@ function setLoadingState(isLoading) {
 }
 
 /* ============================================
-   Phase 3 - AI 연동 함수
+   Phase 3 - AI ?곕룞 ?⑥닔
    ============================================ */
 
-// Phase 3.1 - 프롬프트 생성
+// Phase 3.1 - ?꾨＼?꾪듃 ?앹꽦
 function buildChatPrompt(userMessage, currentReport) {
-    return `당신은 상담보고서를 수정하는 AI 어시스턴트입니다.
+    return `?뱀떊? ?곷떞蹂닿퀬?쒕? ?섏젙?섎뒗 AI ?댁떆?ㅽ꽩?몄엯?덈떎.
 
-[현재 보고서]
+[?꾩옱 蹂닿퀬??
 ${currentReport}
 
-[수정 지침]
-1. 사용자의 요청을 정확히 반영하세요
-2. 수정하지 않는 부분은 원본 그대로 유지하세요
-3. 전문적이고 객관적인 어조를 유지하세요
-4. 수정된 전체 보고서를 반환하세요
-5. 설명이나 주석 없이 보고서 내용만 반환하세요
-6. 보고서 형식(섹션 구조)을 유지하세요
-7. **마크다운 형식으로 작성하세요**:
-   - 섹션 제목: ## 제목
-   - 하위 제목: ### 하위제목
-   - 강조: **중요한 내용**
-   - 목록: - 항목 또는 1. 순서
+[?섏젙 吏移?
+1. ?ъ슜?먯쓽 ?붿껌???뺥솗??諛섏쁺?섏꽭??2. ?섏젙?섏? ?딅뒗 遺遺꾩? ?먮낯 洹몃?濡??좎??섏꽭??3. ?꾨Ц?곸씠怨?媛앷??곸씤 ?댁“瑜??좎??섏꽭??4. ?섏젙???꾩껜 蹂닿퀬?쒕? 諛섑솚?섏꽭??5. ?ㅻ챸?대굹 二쇱꽍 ?놁씠 蹂닿퀬???댁슜留?諛섑솚?섏꽭??6. 蹂닿퀬???뺤떇(?뱀뀡 援ъ“)???좎??섏꽭??7. **留덊겕?ㅼ슫 ?뺤떇?쇰줈 ?묒꽦?섏꽭??*:
+   - ?뱀뀡 ?쒕ぉ: ## ?쒕ぉ
+   - ?섏쐞 ?쒕ぉ: ### ?섏쐞?쒕ぉ
+   - 媛뺤“: **以묒슂???댁슜**
+   - 紐⑸줉: - ??ぉ ?먮뒗 1. ?쒖꽌
 
-[사용자 요청]
+[?ъ슜???붿껌]
 ${userMessage}
 
-[수정된 보고서]`;
+[?섏젙??蹂닿퀬??`;
 }
 
-// Phase 3.2 - 변경 하이라이트 (간이 알고리즘)
+// Phase 3.2 - 蹂寃??섏씠?쇱씠??(媛꾩씠 ?뚭퀬由ъ쬁)
 function highlightModifiedText(originalText, modifiedText) {
     const originalWords = originalText.split(/\s+/);
     const modifiedWords = modifiedText.split(/\s+/);
     let result = '';
     const modifiedIndices = new Set();
     
-    // 변경된 단어 인덱스 찾기
+    // 蹂寃쎈맂 ?⑥뼱 ?몃뜳??李얘린
     for (let i = 0; i < modifiedWords.length; i++) {
         if (originalWords[i] !== modifiedWords[i]) {
             modifiedIndices.add(i);
         }
     }
     
-    // HTML 생성
+    // HTML ?앹꽦
     for (let i = 0; i < modifiedWords.length; i++) {
         const word = modifiedWords[i] || '';
         if (modifiedIndices.has(i)) {
@@ -548,54 +528,53 @@ function highlightModifiedText(originalText, modifiedText) {
     return result.trim();
 }
 
-// Phase 3.3 - 타이핑 애니메이션 (typing-animation.js에서 공용 함수 사용)
+// Phase 3.3 - ??댄븨 ?좊땲硫붿씠??(typing-animation.js?먯꽌 怨듭슜 ?⑥닔 ?ъ슜)
 async function typeModifiedText(element, htmlContent) {
     if (typeof typeHtmlWithAnimation === 'function') {
         await typeHtmlWithAnimation(element, htmlContent);
     } else {
-        // fallback: 즉시 표시
+        // fallback: 利됱떆 ?쒖떆
         element.innerHTML = htmlContent;
     }
 }
 
-// Phase 3.7 - 결과 반영 (타이핑) - 비교 탭에도 애니메이션 적용, 마크다운 렌더링 포함
+// Phase 3.7 - 寃곌낵 諛섏쁺 (??댄븨) - 鍮꾧탳 ??뿉???좊땲硫붿씠???곸슜, 留덊겕?ㅼ슫 ?뚮뜑留??ы븿
 async function updateReportWithTyping(model, highlightedHtml, plainText) {
     const outputId = (model === 'groq') ? 'groqOutput' : 'gptOutput';
     const out = document.getElementById(outputId);
     
     if (!out) return;
     
-    // 원본 텍스트 저장 (복사 기능을 위해)
+    // ?먮낯 ?띿뒪?????(蹂듭궗 湲곕뒫???꾪빐)
     out.setAttribute('data-raw-text', plainText);
     
-    // 글자수 먼저 업데이트
+    // 湲?먯닔 癒쇱? ?낅뜲?댄듃
     const count = plainText.length;
     const countElem = document.getElementById(`${model}Count`);
-    if (countElem) countElem.textContent = `${count}자`;
+    if (countElem) countElem.textContent = `${count}??;
     
     const cmpCountElem = document.getElementById(`${model}CountCompare`);
-    if (cmpCountElem) cmpCountElem.textContent = `${count}자`;
+    if (cmpCountElem) cmpCountElem.textContent = `${count}??;
     
-    // 복사 버튼 활성화
-    const copyBtn = document.getElementById(`${model}CopyBtn`);
+    // 蹂듭궗 踰꾪듉 ?쒖꽦??    const copyBtn = document.getElementById(`${model}CopyBtn`);
     if (copyBtn) copyBtn.disabled = false;
     
     const copyBtn2 = document.getElementById(`${model}CopyBtnCompare`);
     if (copyBtn2) copyBtn2.disabled = false;
     
-    // 마크다운 렌더링 적용
+    // 留덊겕?ㅼ슫 ?뚮뜑留??곸슜
     let finalHtml = highlightedHtml;
     if (typeof renderMarkdown === 'function') {
         finalHtml = renderMarkdown(plainText);
         out.classList.add('markdown-rendered');
     }
     
-    // 현재 탭 확인
+    // ?꾩옱 ???뺤씤
     const activeTab = document.querySelector('.output-tab.active');
     const activeTabName = activeTab ? activeTab.getAttribute('data-tab') : 'compare';
     
     if (activeTabName === 'compare') {
-        // 비교 모드: 비교 탭에 애니메이션 적용
+        // 鍮꾧탳 紐⑤뱶: 鍮꾧탳 ??뿉 ?좊땲硫붿씠???곸슜
         const cmpId = (model === 'groq') ? 'groqOutputCompare' : 'gptOutputCompare';
         const cmp = document.getElementById(cmpId);
         if (cmp) {
@@ -606,14 +585,14 @@ async function updateReportWithTyping(model, highlightedHtml, plainText) {
             }
             await typeModifiedText(cmp, finalHtml);
         }
-        // 개별 탭에는 즉시 반영 (애니메이션 없음)
+        // 媛쒕퀎 ??뿉??利됱떆 諛섏쁺 (?좊땲硫붿씠???놁쓬)
         out.style.display = 'block';
         out.innerHTML = finalHtml;
     } else {
-        // 개별 탭 모드: 해당 탭에 애니메이션 적용
+        // 媛쒕퀎 ??紐⑤뱶: ?대떦 ??뿉 ?좊땲硫붿씠???곸슜
         out.style.display = 'block';
         await typeModifiedText(out, finalHtml);
-        // 비교 탭에는 즉시 반영 (애니메이션 없음)
+        // 鍮꾧탳 ??뿉??利됱떆 諛섏쁺 (?좊땲硫붿씠???놁쓬)
         const cmpId = (model === 'groq') ? 'groqOutputCompare' : 'gptOutputCompare';
         const cmp = document.getElementById(cmpId);
         if (cmp) {
@@ -626,7 +605,7 @@ async function updateReportWithTyping(model, highlightedHtml, plainText) {
     }
 }
 
-// API 키 가져오기 (app.js의 함수 활용)
+// API ??媛?몄삤湲?(app.js???⑥닔 ?쒖슜)
 function getGroqApiKey() {
     if (typeof loadApiKeySafely === 'function') {
         return loadApiKeySafely('groqApiKey');
@@ -641,27 +620,26 @@ function getGPTApiKey() {
     return '';
 }
 
-// Phase 3.4 - Groq 전송
+// Phase 3.4 - Groq ?꾩넚
 async function sendToGroq(message) {
-    addChatMessage('system', '💭 Groq가 보고서를 수정하고 있습니다...', 'Groq');
+    addChatMessage('system', '?뮡 Groq媛 蹂닿퀬?쒕? ?섏젙?섍퀬 ?덉뒿?덈떎...', 'Groq');
     
     try {
         const apiKey = getGroqApiKey();
         if (!apiKey) {
-            throw new Error('Groq API 키가 설정되지 않았습니다');
+            throw new Error('Groq API ?ㅺ? ?ㅼ젙?섏? ?딆븯?듬땲??);
         }
         
-        // 현재 보고서 가져오기
-        const groqOutput = document.getElementById('groqOutput');
+        // ?꾩옱 蹂닿퀬??媛?몄삤湲?        const groqOutput = document.getElementById('groqOutput');
         if (!groqOutput || !groqOutput.textContent.trim()) {
-            throw new Error('Groq 보고서가 없습니다. 먼저 보고서를 생성해주세요.');
+            throw new Error('Groq 蹂닿퀬?쒓? ?놁뒿?덈떎. 癒쇱? 蹂닿퀬?쒕? ?앹꽦?댁＜?몄슂.');
         }
         const currentReport = groqOutput.textContent;
         
-        // 프롬프트 생성
+        // ?꾨＼?꾪듃 ?앹꽦
         const prompt = buildChatPrompt(message, currentReport);
         
-        // API 호출
+        // API ?몄텧
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -683,50 +661,49 @@ async function sendToGroq(message) {
         
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            throw new Error(`API 오류 (${response.status}): ${errorData.error?.message || response.statusText}`);
+            throw new Error(`API ?ㅻ쪟 (${response.status}): ${errorData.error?.message || response.statusText}`);
         }
         
         const data = await response.json();
         const updatedReport = data.choices[0].message.content;
         
-        // 변경 하이라이트 적용
+        // 蹂寃??섏씠?쇱씠???곸슜
         const highlightedHtml = highlightModifiedText(currentReport, updatedReport);
         
-        // 타이핑 애니메이션으로 결과 반영
+        // ??댄븨 ?좊땲硫붿씠?섏쑝濡?寃곌낵 諛섏쁺
         await updateReportWithTyping('groq', highlightedHtml, updatedReport);
         
-        // 성공 메시지
-        addChatMessage('ai', '✅ Groq가 보고서를 수정했습니다.', 'Groq');
+        // ?깃났 硫붿떆吏
+        addChatMessage('ai', '??Groq媛 蹂닿퀬?쒕? ?섏젙?덉뒿?덈떎.', 'Groq');
         
     } catch (error) {
         console.error('Groq Error:', error);
-        addChatMessage('system', `❌ Groq 오류: ${error.message}`, 'Groq');
+        addChatMessage('system', `??Groq ?ㅻ쪟: ${error.message}`, 'Groq');
     } finally {
         setLoadingState(false);
     }
 }
 
-// Phase 3.5 - GPT 전송
+// Phase 3.5 - GPT ?꾩넚
 async function sendToGPT(message) {
-    addChatMessage('system', '💭 GPT가 보고서를 수정하고 있습니다...', 'GPT');
+    addChatMessage('system', '?뮡 GPT媛 蹂닿퀬?쒕? ?섏젙?섍퀬 ?덉뒿?덈떎...', 'GPT');
     
     try {
         const apiKey = getGPTApiKey();
         if (!apiKey) {
-            throw new Error('GPT API 키가 설정되지 않았습니다');
+            throw new Error('GPT API ?ㅺ? ?ㅼ젙?섏? ?딆븯?듬땲??);
         }
         
-        // 현재 보고서 가져오기
-        const gptOutput = document.getElementById('gptOutput');
+        // ?꾩옱 蹂닿퀬??媛?몄삤湲?        const gptOutput = document.getElementById('gptOutput');
         if (!gptOutput || !gptOutput.textContent.trim()) {
-            throw new Error('GPT 보고서가 없습니다. 먼저 보고서를 생성해주세요.');
+            throw new Error('GPT 蹂닿퀬?쒓? ?놁뒿?덈떎. 癒쇱? 蹂닿퀬?쒕? ?앹꽦?댁＜?몄슂.');
         }
         const currentReport = gptOutput.textContent;
         
-        // 프롬프트 생성
+        // ?꾨＼?꾪듃 ?앹꽦
         const prompt = buildChatPrompt(message, currentReport);
         
-        // API 호출
+        // API ?몄텧
         const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -750,37 +727,38 @@ async function sendToGPT(message) {
         
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            throw new Error(`API 오류 (${response.status}): ${errorData.error?.message || response.statusText}`);
+            throw new Error(`API ?ㅻ쪟 (${response.status}): ${errorData.error?.message || response.statusText}`);
         }
         
         const data = await response.json();
         const updatedReport = data.choices[0].message.content;
         
-        // 변경 하이라이트 적용
+        // 蹂寃??섏씠?쇱씠???곸슜
         const highlightedHtml = highlightModifiedText(currentReport, updatedReport);
         
-        // 타이핑 애니메이션으로 결과 반영
+        // ??댄븨 ?좊땲硫붿씠?섏쑝濡?寃곌낵 諛섏쁺
         await updateReportWithTyping('gpt', highlightedHtml, updatedReport);
         
-        // 성공 메시지
-        addChatMessage('ai', '✅ GPT가 보고서를 수정했습니다.', 'GPT');
+        // ?깃났 硫붿떆吏
+        addChatMessage('ai', '??GPT媛 蹂닿퀬?쒕? ?섏젙?덉뒿?덈떎.', 'GPT');
         
     } catch (error) {
         console.error('GPT Error:', error);
-        addChatMessage('system', `❌ GPT 오류: ${error.message}`, 'GPT');
+        addChatMessage('system', `??GPT ?ㅻ쪟: ${error.message}`, 'GPT');
     } finally {
         setLoadingState(false);
     }
 }
 
-// Phase 3.6 - 동시 전송
+// Phase 3.6 - ?숈떆 ?꾩넚
 async function sendToBoth(message) {
-    addChatMessage('system', '💭 Groq와 GPT가 동시에 수정 중...', 'Both');
+    addChatMessage('system', '?뮡 Groq? GPT媛 ?숈떆???섏젙 以?..', 'Both');
     
     await Promise.all([
         sendToGroq(message),
         sendToGPT(message)
     ]);
     
-    addChatMessage('system', '✅ 두 모델 모두 수정 완료!', 'Both');
+    addChatMessage('system', '????紐⑤뜽 紐⑤몢 ?섏젙 ?꾨즺!', 'Both');
 }
+

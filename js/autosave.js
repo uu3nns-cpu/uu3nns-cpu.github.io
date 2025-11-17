@@ -252,7 +252,14 @@ function loadReport(reportId) {
             }
             
             groqDiv.classList.remove('empty');
-            groqDiv.style.display = 'block';
+            groqDiv.classList.remove('is-hidden');
+            groqDiv.style.display = '';
+        }
+        
+        // 로딩 인디케이터 숨기기
+        const groqLoading = document.getElementById('groqLoading');
+        if (groqLoading) {
+            groqLoading.classList.remove('active');
         }
         
         safelySetButtonState('groqCopyBtn', false);
@@ -269,7 +276,16 @@ function loadReport(reportId) {
             } else {
                 groqCompare.textContent = report.groqOutput;
             }
+            groqCompare.classList.remove('is-hidden');
+            groqCompare.style.display = '';
         }
+        
+        // 로딩 인디케이터 숨기기
+        const groqLoadingCompare = document.getElementById('groqLoadingCompare');
+        if (groqLoadingCompare) {
+            groqLoadingCompare.classList.add('is-hidden');
+        }
+        
         safelySetTextContent('groqCountCompare', report.groqOutput.length + '자');
         safelySetButtonState('groqCopyBtnCompare', false);
         safelySetButtonState('groqExportBtnCompare', false);
@@ -289,7 +305,14 @@ function loadReport(reportId) {
             }
             
             gptDiv.classList.remove('empty');
-            gptDiv.style.display = 'block';
+            gptDiv.classList.remove('is-hidden');
+            gptDiv.style.display = '';
+        }
+        
+        // 로딩 인디케이터 숨기기
+        const gptLoading = document.getElementById('gptLoading');
+        if (gptLoading) {
+            gptLoading.classList.remove('active');
         }
         
         safelySetButtonState('gptCopyBtn', false);
@@ -306,7 +329,16 @@ function loadReport(reportId) {
             } else {
                 gptCompare.textContent = report.gptOutput;
             }
+            gptCompare.classList.remove('is-hidden');
+            gptCompare.style.display = '';
         }
+        
+        // 로딩 인디케이터 숨기기
+        const gptLoadingCompare = document.getElementById('gptLoadingCompare');
+        if (gptLoadingCompare) {
+            gptLoadingCompare.classList.add('is-hidden');
+        }
+        
         safelySetTextContent('gptCountCompare', report.gptOutput.length + '자');
         safelySetButtonState('gptCopyBtnCompare', false);
         safelySetButtonState('gptExportBtnCompare', false);
@@ -315,8 +347,14 @@ function loadReport(reportId) {
     // UI 업데이트
     const emptyState = document.getElementById('emptyState');
     const outputTabs = document.getElementById('outputTabs');
-    if (emptyState) emptyState.style.display = 'none';
-    if (outputTabs) outputTabs.style.display = 'flex';
+    if (emptyState) {
+        emptyState.classList.add('is-hidden');
+        emptyState.style.display = 'none';
+    }
+    if (outputTabs) {
+        outputTabs.classList.remove('is-hidden');
+        outputTabs.style.display = '';
+    }
     
     if (typeof switchOutputTab === 'function') {
         switchOutputTab('compare');

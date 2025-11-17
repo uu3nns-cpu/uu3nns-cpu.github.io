@@ -15,9 +15,10 @@
     </script>
     
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-9257454501555292"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
          crossorigin="anonymous"></script>
     
+
     <!-- CSS -->
     <link rel="stylesheet" href="../src/css/base/variables.css">
     <link rel="stylesheet" href="../src/css/base/base.css">
@@ -26,80 +27,24 @@
     <link rel="stylesheet" href="../src/css/components/components-layout.css">
     <link rel="stylesheet" href="../src/css/base/browser-compatibility.css">
     <link rel="stylesheet" href="../src/css/components/header-unified.css">
+    <link rel="stylesheet" href="../src/css/components/buttons-unified.css">
+    <link rel="stylesheet" href="../src/css/components/glass-effects.css">
+    <link rel="stylesheet" href="../src/css/components/toast.css">
     <link rel="stylesheet" href="css/guide-common.css">
-    
-    <style>
-        /* 비디오 스타일 */
-        .video-embed-compact {
-            margin: 16px 0 24px 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            background: #000;
-        }
-        
-        .video-embed-compact video {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-        
-        @media (max-width: 768px) {
-            .video-embed-compact video {
-                max-height: 300px;
-            }
-        }
-        
-        .shortcut-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 24px 0;
-            background: var(--bg-tertiary);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .shortcut-table th {
-            text-align: left;
-            padding: 16px;
-            color: var(--text-primary);
-            background: var(--bg-secondary);
-            border-bottom: 2px solid var(--border-color);
-            font-weight: 600;
-        }
-        .shortcut-table td {
-            padding: 14px 16px;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .shortcut-table tr:last-child td {
-            border-bottom: none;
-        }
-        .shortcut-table code {
-            background: var(--bg-primary);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-family: 'Consolas', monospace;
-            font-size: 0.9em;
-            border: 1px solid var(--border-color);
-        }
-    </style>
+    <link rel="stylesheet" href="../src/css/components/glass-theme-fix.css">
 </head>
 <body>
     <div class="header"></div>
 
     <div class="guide-page">
-        <div class="guide-breadcrumb">
-            <a href="index.html">📚 가이드 홈</a> / 3. 고급 기능
-        </div>
-
-        <div class="guide-header">
+        <div class="guide-header glass-section">
             <div class="guide-number">3</div>
             <h1>고급 기능</h1>
-            <p class="guide-header-desc">AI 챗봇, 보고서 관리, 단축키</p>
+            <p class="guide-header-desc">AI 챗봇과 보고서 관리</p>
         </div>
 
         <!-- AI 챗봇 -->
-        <div class="guide-section">
+        <div class="guide-section glass-card">
             <h2>💬 AI 챗봇</h2>
             
             <p><strong>사용법:</strong> 오른쪽 하단 🤖 버튼 클릭 (단축키: Ctrl+B)</p>
@@ -124,7 +69,7 @@
         </div>
 
         <!-- 보고서 관리 -->
-        <div class="guide-section">
+        <div class="guide-section glass-card">
             <h2>📚 보고서 관리</h2>
             
             <p><strong>저장 방식</strong></p>
@@ -151,45 +96,10 @@
             </ul>
         </div>
 
-        <!-- 단축키 -->
-        <div class="guide-section">
-            <h2>⌨️ 단축키</h2>
-            
-            <table class="shortcut-table">
-                <thead>
-                    <tr>
-                        <th>기능</th>
-                        <th>단축키</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>보고서 생성</strong></td>
-                        <td><code>Ctrl + Enter</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>보고서 복사</strong></td>
-                        <td><code>Ctrl + Shift + C</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>작업 저장</strong></td>
-                        <td><code>Ctrl + S</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>챗봇 열기/닫기</strong></td>
-                        <td><code>Ctrl + B</code></td>
-                    </tr>
-                </tbody>
-            </table>
 
-            <div class="info-box">
-                <h4>💡 Mac 사용자</h4>
-                <p><strong>Ctrl</strong> 대신 <strong>Cmd (⌘)</strong> 사용</p>
-            </div>
-        </div>
 
         <!-- 실전 워크플로우 -->
-        <div class="guide-section">
+        <div class="guide-section glass-card">
             <h2>🎯 추천 작업 흐름</h2>
             
             <ol style="font-size: 1.05em; line-height: 2;">
@@ -209,7 +119,7 @@
         </div>
 
         <!-- 사례개념화 예시 -->
-        <div class="guide-section">
+        <div class="guide-section glass-card">
             <h2>🎬 사례개념화 예시</h2>
             <p style="margin-bottom: 20px;">사례개념화 보고서를 작성하는 방법을 영상으로 확인하세요.</p>
             <div class="video-embed-compact">

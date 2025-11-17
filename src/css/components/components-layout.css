@@ -3,7 +3,7 @@
 /* ==================== 헤더 ==================== */
 .header {
     background: var(--bg-secondary);
-    padding: 12px 20px;
+    padding: var(--space-sm) var(--space-lg);
     border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
@@ -15,7 +15,7 @@
 
 .header-left {
     display: flex;
-    gap: 8px;
+    gap: var(--space-xs);
     align-items: center;
     flex-shrink: 0;
 }
@@ -39,14 +39,14 @@
 
 .header-controls {
     display: flex;
-    gap: 8px;
+    gap: var(--space-xs);
     align-items: center;
     flex-shrink: 0;
 }
 
 .font-size-controls {
     display: flex;
-    gap: 4px;
+    gap: var(--space-2xs);
 }
 
 /* ==================== 설정 패널 ==================== */
@@ -64,13 +64,13 @@
 }
 
 .settings-content {
-    padding: 28px 32px;
+    padding: var(--space-xl) var(--space-2xl);
 }
 
 .settings-section {
-    margin-bottom: 24px;
-    padding: 20px;
-    border-radius: 8px;
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
     border: 1.5px solid var(--border-color);
 }
 
@@ -81,24 +81,24 @@
 
 .settings-compact {
     background: var(--bg-primary);
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
 }
 
 /* 3열 그리드 컨테이너 */
 .settings-grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: var(--space-lg);
     margin-bottom: 140px;
     align-items: start;
 }
 
 .settings-grid-item {
     margin-bottom: 0;
-    padding: 20px;
+    padding: var(--space-lg);
     border: 1.5px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     display: flex;
     flex-direction: column;
     position: relative;
@@ -119,8 +119,8 @@
     display: flex;
     align-items: flex-start;
     gap: 0;
-    margin-bottom: 12px;
-    padding-bottom: 10px;
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-sm);
     border-bottom: 1.5px solid var(--border-color);
 }
 
@@ -128,7 +128,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--space-2xs);
 }
 
 .settings-title-main {
@@ -150,17 +150,17 @@
     font-size: 1em;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 16px;
+    margin-bottom: var(--space-md);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-xs);
     justify-content: space-between;
 }
 
 .settings-title-left {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-xs);
 }
 
 /* 설정 액션 버튼 */
@@ -168,15 +168,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    margin-top: 24px;
-    padding-top: 24px;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
     border-top: 1px solid var(--border-color);
 }
 
 .settings-actions-right {
     display: flex;
-    gap: 10px;
+    gap: var(--space-sm);
 }
 
 /* ==================== API 가이드 ==================== */

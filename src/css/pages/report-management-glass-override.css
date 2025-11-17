@@ -1,0 +1,60 @@
+/* ====================================
+   GLASS EFFECTS - 라이트모드 지원 추가 (report-management용)
+   ==================================== */
+
+/* 필터바 - Glass Effect 제거 */
+.filter-bar {
+    /* Glass는 glass-effects.css에서 처리 */
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-xl);
+    display: flex;
+    gap: var(--space-lg);
+    align-items: center;
+}
+
+/* 보고서 카드 - Glass Effect 제거 */
+.report-card {
+    /* Glass는 glass-effects.css에서 처리 */
+    padding: var(--space-lg);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    min-height: 224px;
+    display: flex;
+    flex-direction: column;
+}
+
+.report-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+    padding: 2px;
+    background: linear-gradient(135deg, 
+        rgba(var(--accent-primary-rgb), 0) 0%, 
+        rgba(var(--accent-primary-rgb), 0.3) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+                  linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.report-card:hover {
+    /* Glass hover는 glass-effects.css에서 처리 */
+}
+
+.report-card:hover::before {
+    opacity: 1;
+}
+
+/* 모달 - Glass Effect 제거 */
+.detail-modal-content,
+.datetime-modal-content {
+    /* Glass는 glass-effects.css에서 처리 */
+}
+
+/* 라이트모드 하드코딩 제거 */
+/* 모든 라이트모드 스타일은 glass-effects.css에서 처리됩니다 */

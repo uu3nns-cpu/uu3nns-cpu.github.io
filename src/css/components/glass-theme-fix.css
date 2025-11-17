@@ -1,0 +1,626 @@
+/* ============================================
+   Glass Theme Fix v2 - 라이트모드 투명도 개선
+   라이트모드에서 투명도를 낮춰 더 선명하고 읽기 쉽게 수정
+   ============================================ */
+
+/* ===========================================
+   1. 전역 배경 및 기본 설정
+   =========================================== */
+body {
+    background: var(--bg-primary) !important;
+    background-image: var(--gradient-hero) !important;
+    background-attachment: fixed !important;
+    color: var(--text-primary) !important;
+}
+
+/* ===========================================
+   2. 모든 카드/섹션 요소에 글래스 효과 강제 적용
+   =========================================== */
+
+/* 기본 섹션 */
+.settings-section-compact,
+.settings-column,
+.api-keys-compact,
+.preset-manager,
+.model-settings,
+.screen-settings,
+.report-settings {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid var(--surface-border) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 호버 효과 */
+.settings-section-compact:hover,
+.settings-column:hover {
+    transform: translateY(-2px) !important;
+    border-color: rgba(var(--accent-primary-rgb), 0.4) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+/* 기능 카드 */
+.feature-card,
+.glass-card,
+.quick-link-item,
+.notice-item {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 2px solid var(--surface-border) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+}
+
+.feature-card:hover,
+.glass-card:hover,
+.quick-link-item:hover,
+.notice-item:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(var(--accent-primary-rgb), 0.5) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+/* 섹션 (큰 영역) */
+.video-section,
+.quick-links-section,
+.glass-section {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid var(--surface-border) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+}
+
+/* notice-section은 제외 - 텍스트 일체감을 위해 */
+.notice-section {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+/* ===========================================
+   3. 입력 요소 및 버튼
+   =========================================== */
+
+/* Input 필드 */
+.input,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+    background: var(--surface-2) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--surface-border) !important;
+    border-radius: 12px !important;
+}
+
+.input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    background: var(--surface-3) !important;
+    border-color: var(--accent-primary) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.2) !important;
+}
+
+/* 아이콘 래퍼 */
+.feature-icon,
+.quick-link-icon {
+    background: var(--surface-2) !important;
+    border: 2px solid var(--surface-border) !important;
+    border-radius: var(--radius-md) !important;
+}
+
+/* ===========================================
+   4. 프리셋 아이템
+   =========================================== */
+.preset-item {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 2px solid var(--surface-border) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+}
+
+.preset-item:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(var(--accent-primary-rgb), 0.4) !important;
+    background: var(--surface-2) !important;
+}
+
+/* ===========================================
+   5. 리포트 페이지 전용
+   =========================================== */
+.output-area-compact,
+.input-area-compact,
+.output-tab-panel,
+.output-compare-panel {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid var(--surface-border) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+}
+
+.output-content {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+}
+
+/* ===========================================
+   6. 챗봇 모달
+   =========================================== */
+.chatbot-modal {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border: 1px solid var(--surface-border) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6), 
+                inset 0 2px 0 rgba(255, 255, 255, 0.03) !important;
+}
+
+.chatbot-header {
+    background: var(--surface-3) !important;
+    border-bottom: 1px solid var(--surface-border) !important;
+}
+
+.chatbot-messages {
+    background: transparent !important;
+}
+
+.chat-message {
+    background: var(--surface-2) !important;
+    border: 1px solid var(--surface-border) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+}
+
+.chat-message.user {
+    background: linear-gradient(120deg, 
+        rgba(var(--accent-primary-rgb), 0.2), 
+        rgba(var(--accent-secondary-rgb, 75, 214, 229), 0.2)) !important;
+    border-color: rgba(var(--accent-primary-rgb), 0.4) !important;
+}
+
+/* ===========================================
+   7. 텍스트 색상 강제 적용
+   =========================================== */
+h1, h2, h3, h4, h5, h6,
+.section-title-compact,
+.column-header h3,
+.feature-title,
+.hero-title,
+.notice-title,
+.quick-link-title {
+    color: var(--text-primary) !important;
+}
+
+p,
+.feature-description,
+.hero-description,
+.notice-date,
+.quick-link-desc,
+label,
+.label {
+    color: var(--text-secondary) !important;
+}
+
+/* ===========================================
+   8. 헤더 및 네비게이션
+   =========================================== */
+.header,
+.glass-header {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border-bottom: 1px solid var(--surface-border) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ===========================================
+   9. 모달 및 오버레이
+   =========================================== */
+.feedback-modal {
+    background: rgba(5, 8, 20, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+html[data-theme="light"] .feedback-modal {
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+
+.feedback-modal-content {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid var(--surface-border) !important;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.2), 
+                inset 0 2px 0 rgba(255, 255, 255, 0.03) !important;
+}
+
+.feedback-modal-header {
+    background: var(--surface-3) !important;
+    border-bottom: 1px solid var(--surface-border) !important;
+}
+
+/* ===========================================
+   10. 토글 및 체크박스
+   =========================================== */
+.toggle-ui {
+    background: var(--surface-2) !important;
+    border: 2px solid var(--surface-border) !important;
+}
+
+input:checked + .toggle-ui {
+    background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary)) !important;
+    border-color: var(--accent-primary) !important;
+}
+
+/* ===========================================
+   11. 뱃지 및 레이블
+   =========================================== */
+.hero-badge,
+.badge-new,
+.notice-badge,
+.glass-badge,
+.preset-badge-compact {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(12px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+    border: 1px solid var(--surface-border) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.badge-new {
+    background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary)) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.preset-badge-active {
+    background: linear-gradient(120deg, 
+        rgba(var(--accent-primary-rgb), 0.3), 
+        rgba(75, 214, 229, 0.3)) !important;
+    color: var(--accent-secondary) !important;
+    border: 1px solid rgba(75, 214, 229, 0.5) !important;
+    box-shadow: 0 0 12px rgba(75, 214, 229, 0.3) !important;
+}
+
+/* ===========================================
+   12. 비디오 컨테이너
+   =========================================== */
+.video-wrapper,
+.api-video-container {
+    background: var(--surface-1) !important;
+    border: 2px solid var(--surface-border) !important;
+    border-radius: var(--radius-md) !important;
+}
+
+/* ===========================================
+   13. 인포 박스
+   =========================================== */
+.info-box {
+    background: var(--info-bg) !important;
+    color: var(--info-text) !important;
+    border: 1px solid rgba(var(--accent-primary-rgb), 0.3) !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+.info-box--primary {
+    background: rgba(var(--accent-primary-rgb), 0.15) !important;
+    border-color: rgba(var(--accent-primary-rgb), 0.4) !important;
+}
+
+/* ===========================================
+   14. 라이트모드 전용 - 투명도 대폭 감소 (0.9~0.95)
+   =========================================== */
+html[data-theme="light"] body {
+    background: var(--surface-1) !important;
+    background-image: var(--gradient-hero) !important;
+}
+
+/* 라이트모드 Glass 효과 - 투명도 극대화 + 강력한 블러 */
+html[data-theme="light"] .settings-section-compact,
+html[data-theme="light"] .settings-column,
+html[data-theme="light"] .api-keys-compact,
+html[data-theme="light"] .preset-manager,
+html[data-theme="light"] .model-settings,
+html[data-theme="light"] .screen-settings,
+html[data-theme="light"] .report-settings {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.90), 
+        rgba(250, 250, 250, 0.92)) !important;
+    backdrop-filter: blur(40px) saturate(180%) brightness(1.01) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.01) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05),
+                0 1px 4px rgba(0, 0, 0, 0.03),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+html[data-theme="light"] .feature-card,
+html[data-theme="light"] .glass-card {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.92), 
+        rgba(250, 250, 250, 0.95)) !important;
+    backdrop-filter: blur(32px) saturate(170%) brightness(1.01) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(170%) brightness(1.01) !important;
+    border: 2px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                0 1px 4px rgba(0, 0, 0, 0.03),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+html[data-theme="light"] .glass-section,
+html[data-theme="light"] .video-section,
+html[data-theme="light"] .quick-links-section {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.90), 
+        rgba(250, 250, 250, 0.92)) !important;
+    backdrop-filter: blur(40px) saturate(180%) brightness(1.01) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.01) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05),
+                0 1px 4px rgba(0, 0, 0, 0.03),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 라이트모드 notice-section도 투명하게 */
+html[data-theme="light"] .notice-section {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+html[data-theme="light"] .feature-card:hover,
+html[data-theme="light"] .glass-card:hover {
+    border-color: rgba(93, 95, 234, 0.6) !important;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12),
+                0 4px 16px rgba(93, 95, 234, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 1) !important;
+}
+
+html[data-theme="light"] .preset-item,
+html[data-theme="light"] .quick-link-item,
+html[data-theme="light"] .notice-item {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.88), 
+        rgba(250, 250, 250, 0.90)) !important;
+    backdrop-filter: blur(32px) saturate(170%) brightness(1.01) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(170%) brightness(1.01) !important;
+    border: 2px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05),
+                0 1px 3px rgba(0, 0, 0, 0.03),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+html[data-theme="light"] .preset-item:hover,
+html[data-theme="light"] .quick-link-item:hover,
+html[data-theme="light"] .notice-item:hover {
+    border-color: rgba(93, 95, 234, 0.55) !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1),
+                0 4px 12px rgba(93, 95, 234, 0.2) !important;
+}
+
+/* 라이트모드 리포트 페이지 */
+html[data-theme="light"] .output-area-compact,
+html[data-theme="light"] .input-area-compact,
+html[data-theme="light"] .output-tab-panel,
+html[data-theme="light"] .output-compare-panel {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.90), 
+        rgba(250, 250, 250, 0.92)) !important;
+    backdrop-filter: blur(40px) saturate(180%) brightness(1.01) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.01) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05),
+                0 1px 4px rgba(0, 0, 0, 0.03),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 라이트모드 Input - 투명하게 */
+html[data-theme="light"] .input,
+html[data-theme="light"] input[type="text"],
+html[data-theme="light"] input[type="password"],
+html[data-theme="light"] input[type="email"],
+html[data-theme="light"] input[type="number"],
+html[data-theme="light"] textarea,
+html[data-theme="light"] select {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(24px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+    border: 1px solid rgba(0, 0, 0, 0.10) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04),
+                0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+html[data-theme="light"] .input:focus,
+html[data-theme="light"] input:focus,
+html[data-theme="light"] textarea:focus,
+html[data-theme="light"] select:focus {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-color: rgba(93, 95, 234, 0.7) !important;
+    box-shadow: 0 0 0 3px rgba(93, 95, 234, 0.15),
+                inset 0 2px 4px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* 라이트모드 헤더 */
+html[data-theme="light"] .header,
+html[data-theme="light"] .glass-header {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.92), 
+        rgba(250, 250, 250, 0.95)) !important;
+    backdrop-filter: blur(48px) saturate(180%) brightness(1.01) !important;
+    -webkit-backdrop-filter: blur(48px) saturate(180%) brightness(1.01) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.09) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 라이트모드 챗봇 */
+html[data-theme="light"] .chatbot-modal {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.92), 
+        rgba(250, 250, 250, 0.94)) !important;
+    backdrop-filter: blur(48px) saturate(180%) brightness(1.01) !important;
+    -webkit-backdrop-filter: blur(48px) saturate(180%) brightness(1.01) !important;
+    border: 1px solid rgba(0, 0, 0, 0.09) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08),
+                0 8px 24px rgba(0, 0, 0, 0.05),
+                inset 0 2px 2px rgba(255, 255, 255, 0.9) !important;
+}
+
+html[data-theme="light"] .chatbot-header {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+html[data-theme="light"] .chat-message {
+    background: rgba(255, 255, 255, 0.88) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 라이트모드 피드백 모달 */
+html[data-theme="light"] .feedback-modal-content {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.92), 
+        rgba(250, 250, 250, 0.94)) !important;
+    backdrop-filter: blur(48px) saturate(180%) brightness(1.01) !important;
+    -webkit-backdrop-filter: blur(48px) saturate(180%) brightness(1.01) !important;
+    border: 1px solid rgba(0, 0, 0, 0.09) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08),
+                0 8px 24px rgba(0, 0, 0, 0.05),
+                inset 0 2px 2px rgba(255, 255, 255, 0.9) !important;
+}
+
+html[data-theme="light"] .feedback-modal-header {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 라이트모드 아이콘 래퍼 */
+html[data-theme="light"] .feature-icon,
+html[data-theme="light"] .quick-link-icon {
+    background: rgba(255, 255, 255, 0.90) !important;
+    border: 2px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 라이트모드 뱃지 */
+html[data-theme="light"] .hero-badge,
+html[data-theme="light"] .glass-badge,
+html[data-theme="light"] .preset-badge-compact {
+    background: rgba(255, 255, 255, 0.90) !important;
+    backdrop-filter: blur(12px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+    border: 1px solid rgba(200, 210, 230, 0.5) !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* ===========================================
+   15. 특수 요소 수정
+   =========================================== */
+
+/* Empty State */
+.output-empty-state {
+    background: transparent !important;
+}
+
+.empty-hero {
+    color: var(--text-primary) !important;
+}
+
+.empty-title {
+    color: var(--text-primary) !important;
+}
+
+.empty-description,
+.empty-subdescription {
+    color: var(--text-secondary) !important;
+}
+
+/* Divider */
+.input-divider,
+.empty-divider {
+    background: var(--surface-border) !important;
+}
+
+/* 슬라이더 */
+.risk-meter-slider {
+    background: var(--surface-2) !important;
+}
+
+.risk-meter-track {
+    background: linear-gradient(90deg, 
+        var(--accent-primary), 
+        var(--accent-secondary)) !important;
+}
+
+.slider-labels span {
+    color: var(--text-tertiary) !important;
+}
+
+.slider-labels span.active {
+    color: var(--accent-primary) !important;
+    font-weight: 700 !important;
+}
+
+/* ===========================================
+   16. 반응형 최적화 유지
+   =========================================== */
+@media (max-width: 768px) {
+    .settings-section-compact,
+    .settings-column,
+    .feature-card,
+    .glass-card {
+        padding: 16px !important;
+        border-radius: 12px !important;
+    }
+    
+    .video-section,
+    .quick-links-section,
+    .glass-section {
+        padding: 20px !important;
+        border-radius: 16px !important;
+    }
+}
+
+/* ===========================================
+   17. 애니메이션 부드럽게 - 전역 선택자 제거
+   =========================================== */
+/* 전역 트랜지션 제거 - 아코디언 등 동적 요소 충돌 방지 */
+
+/* 트랜지션 제외할 요소 */
+input[type="range"],
+.spinner,
+.loading *,
+.accordion-content,
+.version-accordion {
+    /* 개별 요소에서 트랜지션 관리 */
+}

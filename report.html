@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="copyright" content="Copyright (c) 2025 김도현. All Rights Reserved.">
-    <meta name="author" content="김도현">
+    <meta name="copyright" content="Copyright (c) 2025 김해현. All Rights Reserved.">
+    <meta name="author" content="김해현">
     <title>RE: 간편해진 보고서 작성</title>
-    
-    <!-- Google Analytics -->
+
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -20,733 +20,207 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
          crossorigin="anonymous"></script>
     
+
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="src/css/base/variables.css">
+    <link rel="stylesheet" href="src/css/base/variables.css?v=20241118003">
     <link rel="stylesheet" href="src/css/base/base.css">
     <link rel="stylesheet" href="src/css/base/layout.css">
-    <link rel="stylesheet" href="src/css/components/components-base.css">
+    <link rel="stylesheet" href="src/css/components/components-base.css?v=20241118003">
     <link rel="stylesheet" href="src/css/components/components-layout.css">
     <link rel="stylesheet" href="src/css/base/browser-compatibility.css">
     <link rel="stylesheet" href="src/css/components/header-unified.css">
-    <link rel="stylesheet" href="src/css/components/chatbot.css">
+    <link rel="stylesheet" href="src/css/components/glass-effects.css">
     <link rel="stylesheet" href="src/css/components/markdown-and-usage.css">
-    <link rel="stylesheet" href="src/css/components/buttons-unified.css?v=20251109003">
-    <!-- 통합 report.html 전용 스타일 - 가장 마지막에 로드하여 우선순위 확보 -->
-    <link rel="stylesheet" href="src/css/pages/report-unified.css?v=20251109007">
-    
+    <link rel="stylesheet" href="src/css/components/buttons-unified.css?v=20251117001">
+    <link rel="stylesheet" href="src/css/components/toast.css">
+    <link rel="stylesheet" href="src/css/pages/report-unified.css?v=20251117008">
+    <link rel="stylesheet" href="src/css/pages/report-unified-override.css?v=20251117004">
+    <link rel="stylesheet" href="src/css/pages/report-theme.css">
+    <link rel="stylesheet" href="src/css/components/glass-theme-fix.css?v=20241118003">
+
     <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-    <!-- Critical Inline Styles -->
-    <style>
-        /* 플로팅 버튼 초기 숨김 */
-        .sidebar-floating-toggle,
-        .chatbot-floating-btn {
-            opacity: 0 !important;
-            pointer-events: none !important;
-        }
-
-        /* 에디터 버튼 스타일 */
-        .editor-buttons .action-btn {
-            background: #29232c;
-        }
-
-        /* output-tabs-header 탭 균등 분배 */
-        .output-tabs-header {
-            display: flex !important;
-            width: 100% !important;
-        }
-        
-        .output-tab {
-            flex: 1 !important;
-            min-width: 0 !important;
-            text-align: center !important;
-        }
-
-        /* 상담메모 textarea 높이 - 최대로 확장 */
-        #inputText,
-        .input-textarea-compact,
-        textarea#inputText {
-            flex: 1 !important;
-            min-height: 300px !important;
-            height: auto !important;
-        }
-        
-        /* textarea-wrapper도 flex로 확장 */
-        .textarea-wrapper {
-            flex: 1 !important;
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        
-        /* input-area-compact가 flex 컨테이너가 되도록 */
-        .input-area-compact {
-            display: flex !important;
-            flex-direction: column !important;
-        }
-
-        /* ============================================
-           탭 디자인 - 다크/라이트 모드 지원
-           ============================================ */
-        
-        /* 탭 헤더 컨테이너 - 다크모드 */
-        .output-tabs-header {
-            background: #1a1a1a !important;
-            padding: 8px 8px 0 8px !important;
-            gap: 8px !important;
-            border-radius: 12px 12px 0 0 !important;
-        }
-        
-        /* 라이트 모드 - 탭 헤더 */
-        body.light-mode .output-tabs-header {
-            background: #f5f5f5 !important;
-        }
-        
-        /* 기본 탭 스타일 (비활성) - 다크모드 */
-        .output-tab {
-            padding: 12px 24px !important;
-            background: #2a2a2a !important;
-            color: #ffffff !important;
-            border: none !important;
-            border-radius: 8px 8px 0 0 !important;
-            font-weight: 500 !important;
-            font-size: 14px !important;
-            cursor: pointer !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            position: relative !important;
-            box-shadow: none !important;
-            transform: translateY(0) !important;
-        }
-        
-        /* 라이트 모드 - 비활성 탭 */
-        body.light-mode .output-tab {
-            background: #e0e0e0 !important;
-            color: #333333 !important;
-        }
-        
-        /* 호버 효과 (비활성 탭) - 다크모드 */
-        .output-tab:not(.active):hover {
-            background: #3a3a3a !important;
-            color: #ffffff !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-        }
-        
-        /* 라이트 모드 - 탭 호버 */
-        body.light-mode .output-tab:not(.active):hover {
-            background: #d0d0d0 !important;
-            color: #000000 !important;
-        }
-        
-        /* 활성 탭 스타일 */
-        .output-tab.active {
-            background: #ffffff !important;
-            color: #1a1a1a !important;
-            font-weight: 600 !important;
-            transform: translateY(-4px) !important;
-            box-shadow: 
-                0 -2px 8px rgba(0, 0, 0, 0.1),
-                0 4px 12px rgba(0, 0, 0, 0.15) !important;
-            z-index: 10 !important;
-        }
-        
-        /* 라이트 모드 - 활성 탭 */
-        body.light-mode .output-tab.active {
-            background: #ffffff !important;
-            color: #1a1a1a !important;
-            box-shadow: 
-                0 -2px 8px rgba(0, 0, 0, 0.08),
-                0 4px 12px rgba(0, 0, 0, 0.1) !important;
-        }
-        
-        /* 활성 탭 하단 보라색 강조선 제거 */
-        .output-tab.active::after {
-            display: none !important;
-        }
-        
-        /* 포커스 스타일 (접근성) */
-        .output-tab:focus-visible {
-            outline: 2px solid #7c3aed !important;
-            outline-offset: 2px !important;
-        }
-        
-        /* 탭 패널과의 연결 부분 매끄럽게 */
-        .output-tab-panel {
-            border-radius: 0 0 12px 12px !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-        }
-        
-        /* 모바일 반응형 */
-        @media (max-width: 768px) {
-            .output-tab {
-                padding: 10px 16px !important;
-                font-size: 13px !important;
-            }
-            
-            .output-tab.active {
-                transform: translateY(-2px) !important;
-            }
-        }
-
-        /* ============================================
-           compare 탭 회색 1px 헤어라인 버그 수정
-           - grid gap이 border-color를 노출시키는 문제 해결
-           ============================================ */
-        
-        /* A안: grid gap 제거 및 배경색 변경 */
-        .report-layout .output-compare-container {
-            gap: 0 !important;
-            background: var(--bg-secondary) !important;
-        }
-        
-        /* B안: 카드 하단 여백 제거 */
-        .report-layout .compare-content {
-            margin-bottom: 0 !important;
-        }
-        
-        /* C안: 카드 border 완전 제거 */
-        .report-layout .compare-content {
-            border: none !important;
-        }
-        
-        /* 출력창 하단 회색 가로선 제거 - 모든 border 속성 */
-        .output-tabs-container,
-        .output-tabs-container *,
-        .output-tab-panel,
-        .output-tab-panel *,
-        .output-compare-container,
-        .output-compare-container *,
-        .output-compare-panel,
-        .output-compare-panel *,
-        .output-panel-content,
-        .output-panel-content *,
-        .output-content,
-        .output-content *,
-        .compare-content,
-        .compare-content * {
-            border: none !important;
-            border-top: none !important;
-            border-bottom: none !important;
-            border-left: none !important;
-            border-right: none !important;
-            outline: none !important;
-            box-shadow: none !important;
-        }
-        
-        /* 비교 패널 간 구분선 제거 */
-        .output-compare-panel:first-child {
-            border-right: none !important;
-            margin-right: 0 !important;
-            padding-right: 8px !important;
-        }
-        
-        .output-compare-panel:last-child {
-            border-left: none !important;
-            margin-left: 0 !important;
-            padding-left: 8px !important;
-        }
-        
-        /* 가상 요소로 추가된 border도 제거 */
-        .output-tabs-container::before,
-        .output-tabs-container::after,
-        .output-tab-panel::before,
-        .output-tab-panel::after,
-        .output-compare-container::before,
-        .output-compare-container::after,
-        .output-compare-panel::before,
-        .output-compare-panel::after {
-            display: none !important;
-            content: none !important;
-            border: none !important;
-        }
-
-
-        /* ============================================
-           UI 개선 - 비교 패널 자연스러운 연결
-           ============================================ */
-        
-        /* 비교 컨테이너 배경 투명화 */
-        .report-layout .output-compare-container {
-            background: transparent !important;
-        }
-        
-        /* 비교 패널 간격 최소화 */
-        .report-layout .output-compare-panel:first-child {
-            padding-right: 4px !important;
-        }
-        
-        .report-layout .output-compare-panel:last-child {
-            padding-left: 4px !important;
-        }
-        
-        /* 콘텐츠 카드 배경 통일 및 여백 제거 */
-        .report-layout .compare-content {
-            background: var(--bg-primary, #1a1a1a) !important;
-            margin: 0 !important;
-            padding: 20px !important;
-            border-radius: 0 !important;
-        }
-        
-        /* 패널 헤더 구분선 */
-        .report-layout .compare-panel-header {
-            margin-bottom: 12px !important;
-            padding-bottom: 8px !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-        }
-        
-
-        /* ============================================
-           텍스트 가독성 개선 - 다크/라이트 모드
-           ============================================ */
-        
-        /* 출력 콘텐츠 텍스트 색상 - 다크모드 */
-        .report-layout .output-content,
-        .report-layout .compare-content {
-            color: #e0e0e0 !important;
-        }
-        
-        /* 라이트 모드 - 콘텐츠 텍스트 */
-        body.light-mode .report-layout .output-content,
-        body.light-mode .report-layout .compare-content {
-            color: #1f2937 !important;
-        }
-        
-
-
-    </style>
+    
+    <!-- 인라인 스타일 제거 완료 - report-theme.css로 이동 -->
 </head>
 
 <body>
     <!-- Toast 알림 -->
     <div id="toast" class="toast"></div>
 
-    <!-- 헤더 (JavaScript로 자동 생성) -->
+    <!-- 헤더 (JS에서 주입) -->
     <div class="header"></div>
-    
-    <!-- ==============================================
-         플로팅 버튼 (JavaScript로 액션바로 이동됨)
-         ============================================== -->
-    <div class="sidebar-floating-toggle" id="sidebarFloatingToggle">⭐</div>
-    <div class="chatbot-floating-btn" id="chatbotFloatingBtn" title="AI 챗봇으로 보고서 수정"></div>
 
-    <!-- ==============================================
-         챗봇 모달
-         ============================================== -->
+    <!-- 챗봇 모달 -->
     <div class="chatbot-modal" id="chatbotModal">
-        <!-- 챗봇 헤더 -->
         <div class="chatbot-header">
             <h3>AI 챗봇</h3>
-            <button class="chatbot-close-btn" id="chatbotCloseBtn" title="닫기">✕</button>
+            <button class="chatbot-close-btn" id="chatbotCloseBtn" title="닫기">×</button>
         </div>
-        
-        <!-- 챗봇 메시지 영역 -->
         <div class="chatbot-messages" id="chatbotMessages">
             <div class="chat-welcome-message">
-                <p>안녕하세요! AI 챗봇입니다.</p>
-                <p>생성된 보고서를 수정하고 싶으신가요?</p>
-                <p class="chat-welcome-example">
-                    예시: "개입 및 기법 섹션을 더 구체적으로 수정해줘"
-                </p>
+                <p>안녕하세요, 상담 보고서 작성을 돕는 AI 챗봇입니다.</p>
+                <p>필요한 템플릿, 말투, 구조 등을 자연어로 요청해 주세요.</p>
+                <p class="chat-welcome-example">예시: "개입 기법 섹션을 좀 더 구체적으로 설명해줘"</p>
             </div>
         </div>
-        
-        <!-- 챗봇 입력 영역 -->
         <div class="chatbot-input-area">
-            <textarea 
-                id="chatbotInput" 
-                placeholder="수정 요청을 입력하세요... (예: '상담 과정을 더 상세하게')"
+            <textarea
+                id="chatbotInput"
+                placeholder="요청 내용을 입력하세요. (예: '상담 과정을 더 자세하게 정리해줘')"
                 rows="3"
-                maxlength="500"
-            ></textarea>
-            
+                maxlength="500"></textarea>
             <div class="chatbot-controls">
-                <!-- AI 모델 선택 토글 -->
                 <div class="chatbot-toggles">
-                    <label class="chatbot-toggle-switch" title="Groq 모델로 수정">
+                    <label class="chatbot-toggle-switch" title="Groq 모델 사용">
                         <input type="checkbox" id="toggleGroq" checked>
                         <span class="chatbot-toggle-slider"></span>
                         <span class="chatbot-toggle-label">Groq</span>
                     </label>
-                    
-                    <label class="chatbot-toggle-switch" title="GPT 모델로 수정">
+                    <label class="chatbot-toggle-switch" title="GPT 모델 사용">
                         <input type="checkbox" id="toggleGPT" checked>
                         <span class="chatbot-toggle-slider"></span>
                         <span class="chatbot-toggle-label">GPT</span>
                     </label>
                 </div>
-                
-                <!-- 전송 버튼 -->
                 <button class="chatbot-send-btn" id="btnSendChat">
-                    <span class="send-icon"></span>
                     <span class="send-text">요청</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- 챗봇 모달 배경 오버레이 -->
+    <!-- 챗봇 오버레이 -->
     <div class="chatbot-overlay" id="chatbotOverlay"></div>
 
-    <!-- ==============================================
-         메인 레이아웃 (3단 구조)
-         ============================================== -->
-    <div class="report-layout" id="reportLayout">
-        
-        <!-- ==============================================
-             좌측 사이드바 - 설정 정보 표시
-             ============================================== -->
-        <aside class="settings-sidebar" id="settingsSidebar">
-            <!-- 사이드바 헤더 -->
-            <div class="sidebar-header">
-                <h3>현재 적용 설정</h3>
-                <button class="sidebar-close-btn" id="sidebarCloseBtn" title="닫기">✕</button>
-                
-                <!-- 현재 프리셋 표시 -->
-                <div class="current-preset-display" id="currentPresetDisplay">
-                    <span class="preset-label">나의 설정:</span>
-                    <span class="preset-value" id="currentPresetName">수동 설정</span>
-                    <a href="settings.html#presets" class="preset-change-link" title="설정 페이지로 이동">
-                        변경
-                    </a>
-                </div>
-            </div>
-
-            <!-- 보고서 설정 섹션 -->
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">보고서 설정</div>
-                <div class="sidebar-content">
-                    <div class="setting-preview-item">
-                        <span class="preview-value" id="previewDetailLevel">표준 (140%)</span>
-                        <span class="preview-description" id="previewDetailExample">
-                            예: 1000자 → 1400자
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 보고서 구조 설정 섹션 -->
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">보고서 구조 설정</div>
-                <div class="sidebar-content">
-                    <div class="format-preview-list" id="previewFormatList">
-                        <!-- JavaScript로 동적 생성 -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- 보고서 기술 설정 섹션 -->
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">보고서 기술 설정</div>
-                <div class="sidebar-content">
-                    <div class="style-preview-list" id="previewStyleList">
-                        <!-- JavaScript로 동적 생성 -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- 나만의 작성 규칙 섹션 -->
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">나만의 작성 규칙</div>
-                <div class="sidebar-content">
-                    <div class="custom-prompt-preview" id="previewCustomPrompt">
-                        설정되지 않음
-                    </div>
-                </div>
-            </div>
-
-            <!-- API 연결 상태 섹션 -->
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">API 연결 상태</div>
-                <div class="sidebar-content">
-                    <div class="api-status-container">
-                        <div class="api-status-item">
-                            <span class="status-badge" id="statusGroq">❌</span>
-                            <span>Groq</span>
-                        </div>
-                        <div class="api-status-item">
-                            <span class="status-badge" id="statusGPT">❌</span>
-                            <span>GPT-4o-mini</span>
+    <!-- 메인 레이아웃 -->
+    <main class="page-container report-page">
+        <div class="report-layout" id="reportLayout">
+            <!-- 메인 콘텐츠 -->
+            <div class="main-area report-workspace">
+                <!-- 출력 패널 -->
+                <section class="output-area-compact" id="outputArea">
+                    <div class="output-empty-state" id="emptyState">
+                        <div class="empty-hero">
+                            <h1 class="empty-title">RE:</h1>
+                            <div class="empty-divider"></div>
+                            <p class="empty-description">간편해진 보고서 작성</p>
+                            <p class="empty-subdescription">상담 메모가 전문 보고서로 변환됩니다.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- ==============================================
-             중앙 + 하단 영역 (출력 + 입력)
-             ============================================== -->
-        <div class="main-area">
-            
-            <!-- ==============================================
-                 출력 영역 - AI 생성 보고서 결과
-                 ============================================== -->
-            <section class="output-area-compact" id="outputArea">
-                
-                <!-- 생성 전 빈 상태 -->
-                <div class="output-empty-state" id="emptyState">
-                    <div class="empty-hero">
-                        <h1 class="empty-title">RE:</h1>
-                        <div class="empty-divider"></div>
-                        <p class="empty-description">간편해진 보고서 작성</p>
-                        <p class="empty-subdescription">상담 메모를 전문 보고서로 자동 변환</p>
-                    </div>
-                </div>
-
-                <!-- 탭 방식 결과 표시 영역 -->
-                <div class="output-tabs-container" id="outputTabs" style="display: none;">
-                    
-                    <!-- 탭 헤더 -->
-                    <div class="output-tabs-header">
-                        <button class="output-tab" data-tab="groq" onclick="switchOutputTab('groq')">
-                            Groq
-                        </button>
-                        <button class="output-tab active" data-tab="compare" onclick="switchOutputTab('compare')">
-                            비교
-                        </button>
-                        <button class="output-tab" data-tab="gpt" onclick="switchOutputTab('gpt')">
-                            GPT-4o-mini
-                        </button>
-                    </div>
-
-                    <!-- 비교 탭 패널 (나란히 보기) -->
-                    <div class="output-tab-panel active" id="tabCompare">
-                        <div class="output-compare-container">
-                            
-                            <!-- Groq 비교 패널 -->
-                            <div class="output-compare-panel">
-                                <div class="compare-panel-header">
-                                    <span class="output-count" id="groqCountCompare">0자</span>
-                                    <button 
-                                        class="btn btn--success btn--small" 
-                                        onclick="copyToClipboard('groq')" 
-                                        id="groqCopyBtnCompare" 
-                                        disabled
-                                    >
-                                        복사
-                                    </button>
-                                </div>
-                                
-                                <div class="loading" id="groqLoadingCompare" style="display: none;">
-                                    <div>
-                                        <span class="spinner"></span>
-                                        <span id="groqLoadingTextCompare">Groq AI가 보고서 작성 중...</span>
+                    <div class="output-tabs-container is-hidden" id="outputTabs">
+                        <div class="output-tabs-header">
+                            <button class="output-tab" data-tab="groq" onclick="switchOutputTab('groq')">Groq</button>
+                            <button class="output-tab active" data-tab="compare" onclick="switchOutputTab('compare')">비교</button>
+                            <button class="output-tab" data-tab="gpt" onclick="switchOutputTab('gpt')">GPT-4o-mini</button>
+                        </div>
+                        <div class="output-tab-panel active" id="tabCompare">
+                            <div class="output-compare-container">
+                                <div class="output-compare-panel">
+                                    <div class="output-header-compact">
+                                        <span class="output-count" id="groqCountCompare">0건</span>
+                                        <button class="btn btn--success btn--small" onclick="copyToClipboard('groq')" id="groqCopyBtnCompare" disabled>복사</button>
                                     </div>
-                                </div>
-                                
-                                <div class="output-content compare-content" id="groqOutputCompare">
-                                    <!-- Groq 결과가 여기에 표시됩니다 -->
-                                </div>
-                            </div>
-                            
-                            <!-- GPT 비교 패널 -->
-                            <div class="output-compare-panel">
-                                <div class="compare-panel-header">
-                                    <span class="output-count" id="gptCountCompare">0자</span>
-                                    <button 
-                                        class="btn btn--success btn--small" 
-                                        onclick="copyToClipboard('gpt')" 
-                                        id="gptCopyBtnCompare" 
-                                        disabled
-                                    >
-                                        복사
-                                    </button>
-                                </div>
-                                
-                                <div class="loading" id="gptLoadingCompare" style="display: none;">
-                                    <div>
+                                    <div class="loading is-hidden" id="groqLoadingCompare">
                                         <span class="spinner"></span>
-                                        <span id="gptLoadingTextCompare">GPT-4o-mini가 보고서 작성 중...</span>
+                                        <span id="groqLoadingTextCompare">Groq AI가 보고서를 생성하는 중입니다...</span>
                                     </div>
+                                    <div class="output-content is-hidden" id="groqOutputCompare"></div>
                                 </div>
-                                
-                                <div class="output-content compare-content" id="gptOutputCompare">
-                                    <!-- GPT 결과가 여기에 표시됩니다 -->
+                                <div class="output-compare-panel">
+                                    <div class="output-header-compact">
+                                        <span class="output-count" id="gptCountCompare">0건</span>
+                                        <button class="btn btn--success btn--small" onclick="copyToClipboard('gpt')" id="gptCopyBtnCompare" disabled>복사</button>
+                                    </div>
+                                    <div class="loading is-hidden" id="gptLoadingCompare">
+                                        <span class="spinner"></span>
+                                        <span id="gptLoadingTextCompare">GPT-4o-mini가 보고서를 작성하는 중입니다...</span>
+                                    </div>
+                                    <div class="output-content is-hidden" id="gptOutputCompare"></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Groq 단독 탭 패널 -->
-                    <div class="output-tab-panel" id="tabGroq">
-                        <div class="output-panel-content">
+                        <div class="output-tab-panel" id="tabGroq">
                             <div class="output-header-compact">
-                                <div class="output-info">
-                                    <span class="output-count" id="groqCount">0자</span>
-                                </div>
-                                <div class="output-actions">
-                                    <button 
-                                        class="btn btn--success btn--small" 
-                                        onclick="copyToClipboard('groq')" 
-                                        id="groqCopyBtn" 
-                                        disabled
-                                    >
-                                        복사
-                                    </button>
-                                </div>
+                                <span class="output-count" id="groqCount">0건</span>
+                                <button class="btn btn--success btn--small" onclick="copyToClipboard('groq')" id="groqCopyBtn" disabled>복사</button>
                             </div>
-                            
-                            <div class="loading" id="groqLoading" style="display: none;">
-                                <div>
-                                    <span class="spinner"></span>
-                                    <span id="groqLoadingText">Groq AI가 보고서 작성 중...</span>
-                                </div>
+                            <div class="loading is-hidden" id="groqLoading">
+                                <span class="spinner"></span>
+                                <span id="groqLoadingText">Groq AI가 보고서를 생성하는 중입니다...</span>
                             </div>
-                            
-                            <div class="output-content" id="groqOutput" style="display: none;">
-                                <!-- Groq 결과가 여기에 표시됩니다 -->
-                            </div>
+                            <div class="output-content is-hidden" id="groqOutput"></div>
                         </div>
-                    </div>
-
-                    <!-- GPT 단독 탭 패널 -->
-                    <div class="output-tab-panel" id="tabGpt">
-                        <div class="output-panel-content">
+                        <div class="output-tab-panel" id="tabGpt">
                             <div class="output-header-compact">
-                                <div class="output-info">
-                                    <span class="output-count" id="gptCount">0자</span>
-                                </div>
-                                <div class="output-actions">
-                                    <button 
-                                        class="btn btn--success btn--small" 
-                                        onclick="copyToClipboard('gpt')" 
-                                        id="gptCopyBtn" 
-                                        disabled
-                                    >
-                                        복사
-                                    </button>
-                                </div>
+                                <span class="output-count" id="gptCount">0건</span>
+                                <button class="btn btn--success btn--small" onclick="copyToClipboard('gpt')" id="gptCopyBtn" disabled>복사</button>
                             </div>
-                            
-                            <div class="loading" id="gptLoading" style="display: none;">
-                                <div>
-                                    <span class="spinner"></span>
-                                    <span id="gptLoadingText">GPT-4o-mini가 보고서 작성 중...</span>
-                                </div>
+                            <div class="loading is-hidden" id="gptLoading">
+                                <span class="spinner"></span>
+                                <span id="gptLoadingText">GPT-4o-mini가 보고서를 작성하는 중입니다...</span>
                             </div>
-                            
-                            <div class="output-content" id="gptOutput" style="display: none;">
-                                <!-- GPT 결과가 여기에 표시됩니다 -->
-                            </div>
+                            <div class="output-content is-hidden" id="gptOutput"></div>
                         </div>
                     </div>
+                </section>
 
-                </div>
-            </section>
-
-            <!-- ==============================================
-                 입력 영역 - 상담 메모 입력
-                 ============================================== -->
-            <section class="input-area-compact">
-                
-                <!-- 입력 영역 헤더 -->
-                <div class="input-header-compact">
-                    <div class="input-title">
-                        <!-- 상담 메모 타이틀 -->
+                <!-- 입력 패널 -->
+                <section class="input-area-compact">
+                    <div class="input-header-compact">
                         <h1 class="memo-title">상담 메모</h1>
-                    </div>
-                    
-                    <!-- 구분선 -->
-                    <div class="input-divider"></div>
-                    
-                    <div class="input-actions-compact">
-                        <div class="button-group-left">
-                            <button 
-                                class="btn-action" 
-                                onclick="saveReport()" 
-                                title="현재 작업을 저장합니다"
-                            >
-                                💾 저장
-                            </button>
-                            <button 
-                                class="btn-action" 
-                                onclick="showReportHistory()" 
-                                title="저장된 작업 목록 보기"
-                            >
-                                📂 보기
-                            </button>
-                            <button 
-                                class="btn-action" 
-                                onclick="clearInput()"
-                            >
-                                🔄 지우기
-                            </button>
-                        </div>
-                        <div class="button-group-middle">
-                            <!-- 중간 공간 -->
-                        </div>
-                        <div class="button-group-right">
-                            <!-- 나의 설정, 챗봇 버튼이 JavaScript로 여기에 추가됩니다 -->
+                        <div class="input-divider"></div>
+                        <div class="input-actions-compact">
+                            <button class="btn btn--secondary btn--small" onclick="saveReport()" title="현재 작업을 안전하게 저장합니다.">💾</button>
+                            <button class="btn btn--secondary btn--small" onclick="showReportHistory()" title="저장된 보고서를 확인합니다.">📋</button>
+                            <button class="btn btn--secondary btn--small" onclick="showKeyboardShortcuts()" title="단축키 안내">💡</button>
+                            <button class="btn btn--danger btn--small" onclick="clearInput()" title="입력 내용 지우기" style="margin-left: auto;">🗑️</button>
+                            <button class="btn btn--primary btn--small" id="chatbotToggleBtn" onclick="toggleChatbot()" title="AI 챗봇 열기">🤖</button>
                         </div>
                     </div>
-                </div>
-                
-                <!-- 에러 메시지 표시 영역 -->
-                <div class="error-message" id="errorMessage"></div>
-                
-                <!-- 텍스트 입력 영역 -->
-                <div class="textarea-wrapper">
-                    <textarea 
-                        class="input input--textarea input-textarea-compact"
-                        id="inputText" 
-                        placeholder="상담 중 작성한 메모나 내용을 자유롭게 입력하세요... (최대 6,000자)&#x0a;팁: Ctrl+Enter를 누르면 빠르게 보고서를 작성할 수 있습니다."
-                        maxlength="6000"
-                        oninput="updateCharCount()"
-                        onkeydown="handleKeyDown(event)"
-                    ></textarea>
-                    
-                    <!-- 글자 수 카운터 -->
-                    <div class="char-count-overlay">
-                        <span id="inputCount">0</span> / 6,000자
+                    <div class="error-message" id="errorMessage"></div>
+                    <div class="textarea-wrapper">
+                        <textarea
+                            class="input input--textarea input-textarea-compact"
+                            id="inputText"
+                            placeholder="상담 내용을 자유롭게 작성하세요. (최대 6,000자)"
+                            maxlength="6000"
+                            oninput="updateCharCount()"
+                            onkeydown="handleKeyDown(event)"></textarea>
+                        <div class="char-count-overlay">
+                            <span id="inputCount">0</span> / 6,000자
+                        </div>
                     </div>
-                </div>
-
-                <!-- 보고서 생성 버튼 -->
-                <div class="generate-button-area">
-                    <button 
-                        class="btn-action btn-generate" 
-                        onclick="generateJournals(event)" 
-                        id="generateBtn"
-                    >
-                        보고서 작성
-                    </button>
-                    
-                    <!-- 사용량 배지 -->
-                    <div class="usage-badge-inline" title="오늘 보고서 생성 횟수">
-                        <span class="usage-label">오늘:</span>
-                        <span class="usage-count" id="usageCountInline">0</span>
-                        <span class="usage-separator">/</span>
-                        <span class="usage-limit">30회</span>
+                    <div class="generate-button-area">
+                        <button
+                            class="btn btn--primary btn--large btn-generate"
+                            onclick="generateJournals(event)"
+                            id="generateBtn">보고서 생성</button>
+                        <div class="usage-badge-inline" title="오늘 생성 가능 횟수">
+                            <span class="usage-label">오늘:</span>
+                            <span class="usage-count" id="usageCountInline">0</span>
+                            <span class="usage-separator">/</span>
+                            <span class="usage-limit">30회</span>
+                        </div>
                     </div>
-                </div>
-            </section>
-            
+                </section>
+            </div>
         </div>
-    </div>
+    </main>
 
-    <!-- ==============================================
-         JavaScript 파일들
-         ============================================== -->
-    
-    <!-- 브라우저 호환성 -->
+    <!-- JavaScript 파일 -->
     <script src="js/browser-polyfills.js"></script>
-    
-    <!-- 사용량 관리 - SSOT (Single Source of Truth) -->
     <script src="js/usage-core.js?v=20251109004"></script>
-    
-    <!-- 핵심 기능 -->
     <script src="js/common-components.js?v=20251109001"></script>
     <script src="js/security.js?v=20251109001"></script>
     <script src="js/config/app-constants.js?v=20251111001"></script>
     <script src="js/config/model-configs.js?v=20251111001"></script>
     <script src="js/preset-manager.js?v=20251109001"></script>
-    
-    <!-- 공통 데이터 및 UI 유틸리티 (다른 스크립트보다 먼저 로드) -->
     <script src="js/report-data-manager.js?v=20251109001"></script>
     <script src="js/ui-utils.js?v=20251109001"></script>
-    
+    <script src="js/modules/settings-storage.js"></script>
+    <script src="js/modules/ui-controls.js"></script>
     <script src="js/app.js?v=20251109001"></script>
-    
-    <!-- UI 기능 -->
     <script src="js/autosave.js?v=20251109001"></script>
     <script src="js/ui-enhancements.js?v=20251109001"></script>
     <script src="js/settings-preview.js?v=20251109001"></script>
@@ -756,83 +230,116 @@
     <script src="js/report-ui.js?v=20251109001"></script>
     <script src="js/markdown-renderer.js?v=20251109001"></script>
     <script src="js/compare-tab-fix.js?v=20251112001"></script>
-    
-    <!-- 입력 검증 및 버튼 강화 - 최종 단계에서 로드 -->
     <script src="js/input-validation.js?v=20251109001"></script>
-    
-    <!-- 사용량 브리지 - UI 연결 (가장 마지막에 로드) -->
     <script src="js/usage-bridge.js?v=20251109004"></script>
-    
 
-    
-    <!-- 플로팅 버튼을 액션바로 이동하는 스크립트 -->
+    <!-- 챗봇 토글 함수 -->
     <script>
-        (function() {
-            /**
-             * 플로팅 버튼을 액션바로 이동
-             * - 사이드바 토글과 챗봇 버튼을 상단 액션바로 이동
-             * - 모바일 친화적인 레이아웃 구성
-             */
-            function moveFloatingButtons() {
-                // DOM이 준비될 때까지 대기
-                if (document.readyState !== 'loading') {
-                    initButtons();
-                } else {
-                    document.addEventListener('DOMContentLoaded', initButtons);
-                }
-            }
-
-            function initButtons() {
-                // 버튼 그룹 찾기 (우선순위: .button-group-right → .input-actions-compact → body)
-                const actionsBar = 
-                    document.querySelector('.button-group-right') || 
-                    document.querySelector('.input-actions-compact') || 
-                    document.body;
-                
-                const buttonIds = ['sidebarFloatingToggle', 'chatbotFloatingBtn'];
-                
-                buttonIds.forEach(function(buttonId) {
-                    const button = document.getElementById(buttonId);
-                    if (!button) return;
-                    
-                    // 플로팅 클래스 제거
-                    button.classList.remove('sidebar-floating-toggle', 'chatbot-floating-btn');
-                    
-                    // 버튼 스타일 적용
-                    if (document.querySelector('.btn-generate-large') || 
-                        getComputedStyle(document.documentElement).getPropertyValue('--accent-primary')) {
-                        button.classList.add('btn-generate-large');
-                    }
-                    
-                    // 접근성 속성 설정
-                    button.setAttribute('role', 'button');
-                    button.tabIndex = 0;
-                    
-                    // 인라인 스타일 제거
-                    button.removeAttribute('style');
-                    
-                    // 액션 버튼 스타일 적용
-                    button.classList.add('btn-action');
-                    
-                    // 버튼 텍스트 설정 (개선된 이모지 적용)
-                    if (buttonId === 'sidebarFloatingToggle') {
-                        button.textContent = '📌 나의 설정';
-                    }
-                    if (buttonId === 'chatbotFloatingBtn') {
-                        button.textContent = '🤖 챗봇';
-                    }
-                    
-                    // 액션바에 추가
-                    if (actionsBar) {
-                        actionsBar.appendChild(button);
-                    }
-                });
+        function showKeyboardShortcuts() {
+            toggleShortcutsModal();
+        }
+        
+        function toggleShortcutsModal() {
+            const existingModal = document.getElementById('shortcutsModal');
+            if (existingModal) {
+                existingModal.remove();
+                return;
             }
             
-            // 실행
-            moveFloatingButtons();
-        })();
-    </script>
+            const html = `
+                <div class="shortcuts-modal" id="shortcutsModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 10000; display: flex; align-items: center; justify-content: center;" onclick="if(event.target.id === 'shortcutsModal') this.remove();">
+                    <div class="shortcuts-content" style="background: var(--bg-secondary); border-radius: 12px; padding: 30px; max-width: 600px; max-height: 80vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" onclick="event.stopPropagation();">
+                        <div class="shortcuts-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px;">
+                            <h2 style="font-size: 1.5em; color: var(--text-primary); margin: 0;">💡 키보드 단축키</h2>
+                            <button onclick="document.getElementById('shortcutsModal').remove()" style="background: none; border: none; font-size: 1.5em; color: var(--text-tertiary); cursor: pointer; padding: 5px 10px;">✕</button>
+                        </div>
+                        <div class="shortcuts-list" style="display: flex; flex-direction: column; gap: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
+                                <kbd style="background: var(--bg-tertiary); padding: 6px 12px; border-radius: 6px; font-family: monospace; font-size: 0.9em; border: 1px solid var(--border-color);">Ctrl+Enter</kbd>
+                                <span style="color: var(--text-secondary); flex: 1; margin-left: 20px;">보고서 작성</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
+                                <kbd style="background: var(--bg-tertiary); padding: 6px 12px; border-radius: 6px; font-family: monospace; font-size: 0.9em; border: 1px solid var(--border-color);">Ctrl+1</kbd>
+                                <span style="color: var(--text-secondary); flex: 1; margin-left: 20px;">Groq 결과 복사</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
+                                <kbd style="background: var(--bg-tertiary); padding: 6px 12px; border-radius: 6px; font-family: monospace; font-size: 0.9em; border: 1px solid var(--border-color);">Ctrl+2</kbd>
+                                <span style="color: var(--text-secondary); flex: 1; margin-left: 20px;">GPT 결과 복사</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
+                                <kbd style="background: var(--bg-tertiary); padding: 6px 12px; border-radius: 6px; font-family: monospace; font-size: 0.9em; border: 1px solid var(--border-color);">Ctrl+/</kbd>
+                                <span style="color: var(--text-secondary); flex: 1; margin-left: 20px;">단축키 도움말</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
+                                <kbd style="background: var(--bg-tertiary); padding: 6px 12px; border-radius: 6px; font-family: monospace; font-size: 0.9em; border: 1px solid var(--border-color);">Escape</kbd>
+                                <span style="color: var(--text-secondary); flex: 1; margin-left: 20px;">모달 닫기</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color); color: var(--text-tertiary); font-size: 0.9em; text-align: center;">
+                            💡 팁: 이 도움말을 언제든 <kbd style="background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px;">Ctrl+/</kbd>로 다시 볼 수 있습니다.
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', html);
+        }
+        
+        function toggleChatbot() {
+            const chatbotModal = document.getElementById('chatbotModal');
+            const overlay = document.getElementById('chatbotOverlay');
 
+            if (!chatbotModal) return;
+
+            const isActive = chatbotModal.classList.contains('active');
+
+            if (isActive) {
+                // 챗봇 닫기
+                chatbotModal.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+            } else {
+                // 챗봇 열기
+                chatbotModal.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+
+                // 입력 필드 포커스
+                const input = document.getElementById('chatbotInput');
+                if (input && !input.disabled) {
+                    setTimeout(() => input.focus(), 100);
+                }
+            }
+        }
+        
+        function closeChatbot() {
+            const modal = document.getElementById('chatbotModal');
+            const overlay = document.getElementById('chatbotOverlay');
+            if (modal) modal.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
+        }
+        
+        // 이벤트 리스너 등록
+        document.addEventListener('DOMContentLoaded', function() {
+            // 챗봇 닫기 버튼
+            const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
+            if (chatbotCloseBtn) {
+                chatbotCloseBtn.addEventListener('click', closeChatbot);
+            }
+            
+            // 오버레이 클릭시 챗봇 닫기
+            const overlay = document.getElementById('chatbotOverlay');
+            if (overlay) {
+                overlay.addEventListener('click', closeChatbot);
+            }
+            
+            // ESC 키로 챗봇 닫기
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('chatbotModal');
+                    if (modal && modal.classList.contains('active')) {
+                        closeChatbot();
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

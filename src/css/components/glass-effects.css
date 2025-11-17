@@ -1,0 +1,483 @@
+/* ============================================
+   Glass Effects - 글래스모피즘 공통 컴포넌트
+   ============================================ */
+
+/* 기본 글래스 표면 */
+.glass-surface {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+}
+
+/* 글래스 카드 (기본) */
+.glass-card {
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid var(--surface-border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(var(--accent-primary-rgb), 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 글래스 카드 (작은 크기) */
+.glass-card-small {
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid var(--surface-border);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card-small:hover {
+    transform: translateY(-2px);
+    border-color: rgba(var(--accent-primary-rgb), 0.4);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* 글래스 섹션 (큰 영역용) */
+.glass-section {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 글래스 모달 */
+.glass-modal {
+    background: var(--surface-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--surface-border);
+    border-radius: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* 글래스 패널 (사이드바, 헤더 등) */
+.glass-panel {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 글래스 버튼 */
+.glass-button {
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid var(--surface-border);
+    border-radius: 12px;
+    padding: 12px 24px;
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glass-button:hover {
+    transform: translateY(-1px);
+    background: var(--surface-2);
+    border-color: rgba(var(--accent-primary-rgb), 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.glass-button:active {
+    transform: translateY(0);
+}
+
+/* 글래스 입력 필드 */
+.glass-input {
+    background: rgba(var(--bg-primary-rgb, 15, 23, 42), 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid var(--surface-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    transition: all 0.3s;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.glass-input:focus {
+    outline: none;
+    background: rgba(var(--bg-primary-rgb, 15, 23, 42), 0.5);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb), 0.3);
+}
+
+/* 글래스 뱃지 */
+.glass-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    background: var(--surface-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--surface-border);
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* 글래스 컨테이너 (페이지 전체 래퍼) */
+.glass-container {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 글래스 그리드 아이템 */
+.glass-grid-item {
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid var(--surface-border);
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glass-grid-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(var(--accent-primary-rgb), 0.4);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* 글래스 헤더 */
+.glass-header {
+    background: var(--surface-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--surface-border);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 글래스 사이드바 */
+.glass-sidebar {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid var(--surface-border);
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.2), 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 글래스 탭 */
+.glass-tab {
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 12px 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.glass-tab:hover {
+    background: rgba(var(--accent-primary-rgb), 0.1);
+    border-color: rgba(var(--accent-primary-rgb), 0.3);
+}
+
+.glass-tab.active {
+    background: var(--surface-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: rgba(var(--accent-primary-rgb), 0.5);
+    color: var(--accent-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 글래스 아코디언 */
+.glass-accordion {
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid var(--surface-border);
+    border-radius: 16px;
+    /* overflow: hidden 제거 - 아코디언 콘텐츠가 펼쳐지도록 */
+    transition: all 0.3s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glass-accordion:hover {
+    border-color: rgba(var(--accent-primary-rgb), 0.4);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* 라이트모드 지원 - Glass Effect 강화 버전 */
+
+/* 기본 Glass 요소들 - 진짜 Glass 느낌 */
+html[data-theme="light"] .glass-surface {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.7), 
+        rgba(248, 250, 252, 0.75));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12),
+                0 2px 8px rgba(15, 23, 42, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="light"] .glass-card {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.75), 
+        rgba(248, 250, 252, 0.8));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1),
+                0 2px 8px rgba(15, 23, 42, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+html[data-theme="light"] .glass-card:hover {
+    border-color: rgba(93, 95, 234, 0.5);
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.15),
+                0 4px 16px rgba(93, 95, 234, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+html[data-theme="light"] .glass-card-small {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.75), 
+        rgba(248, 250, 252, 0.8));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1),
+                0 2px 6px rgba(15, 23, 42, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+html[data-theme="light"] .glass-card-small:hover {
+    border-color: rgba(93, 95, 234, 0.45);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12),
+                0 4px 12px rgba(93, 95, 234, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+html[data-theme="light"] .glass-section {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.7), 
+        rgba(248, 250, 252, 0.75));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12),
+                0 2px 8px rgba(15, 23, 42, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="light"] .glass-modal {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.8), 
+        rgba(248, 250, 252, 0.85));
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 30px 90px rgba(15, 23, 42, 0.18),
+                0 10px 40px rgba(15, 23, 42, 0.12),
+                inset 0 2px 0 rgba(255, 255, 255, 1);
+}
+
+html[data-theme="light"] .glass-panel {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.72), 
+        rgba(248, 250, 252, 0.78));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12),
+                0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+html[data-theme="light"] .glass-container {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.72), 
+        rgba(248, 250, 252, 0.78));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 12px 48px rgba(15, 23, 42, 0.15),
+                0 4px 16px rgba(15, 23, 42, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+html[data-theme="light"] .glass-grid-item {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.75), 
+        rgba(248, 250, 252, 0.8));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1),
+                0 2px 6px rgba(15, 23, 42, 0.05);
+}
+
+html[data-theme="light"] .glass-grid-item:hover {
+    border-color: rgba(93, 95, 234, 0.45);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12),
+                0 4px 12px rgba(93, 95, 234, 0.15);
+}
+
+html[data-theme="light"] .glass-header {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.75), 
+        rgba(248, 250, 252, 0.8));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1);
+}
+
+html[data-theme="light"] .glass-sidebar {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.72), 
+        rgba(248, 250, 252, 0.78));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 4px 0 24px rgba(15, 23, 42, 0.1);
+}
+
+html[data-theme="light"] .glass-accordion {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.75), 
+        rgba(248, 250, 252, 0.8));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1),
+                0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+html[data-theme="light"] .glass-accordion:hover {
+    border-color: rgba(93, 95, 234, 0.45);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12),
+                0 4px 12px rgba(93, 95, 234, 0.15);
+}
+
+/* 버튼 */
+html[data-theme="light"] .glass-button {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.75), 
+        rgba(248, 250, 252, 0.8));
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1),
+                0 2px 6px rgba(15, 23, 42, 0.05);
+}
+
+html[data-theme="light"] .glass-button:hover {
+    background: linear-gradient(160deg, 
+        rgba(248, 250, 252, 0.8), 
+        rgba(241, 245, 249, 0.85));
+    border-color: rgba(93, 95, 234, 0.5);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15),
+                0 4px 12px rgba(93, 95, 234, 0.2);
+}
+
+/* 입력 필드 */
+html[data-theme="light"] .glass-input {
+    background: rgba(248, 250, 252, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.08),
+                0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="light"] .glass-input:focus {
+    background: rgba(241, 245, 249, 0.75);
+    border-color: rgba(93, 95, 234, 0.6);
+    box-shadow: 0 0 0 3px rgba(93, 95, 234, 0.2),
+                inset 0 2px 4px rgba(15, 23, 42, 0.08);
+}
+
+/* 뱃지 */
+html[data-theme="light"] .glass-badge {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1),
+                0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+/* 탭 */
+html[data-theme="light"] .glass-tab:hover {
+    background: rgba(93, 95, 234, 0.1);
+    border-color: rgba(93, 95, 234, 0.3);
+}
+
+html[data-theme="light"] .glass-tab.active {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.8), 
+        rgba(248, 250, 252, 0.85));
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-color: rgba(93, 95, 234, 0.5);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1),
+                0 2px 6px rgba(93, 95, 234, 0.2);
+}
+
+/* 애니메이션 헬퍼 */
+@keyframes glass-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glass-fade-in {
+    animation: glass-fade-in 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .glass-container {
+        padding: 24px;
+        border-radius: 16px;
+    }
+    
+    .glass-section {
+        padding: 20px;
+        border-radius: 16px;
+    }
+    
+    .glass-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+}

@@ -12,6 +12,8 @@
 // DEFAULT_API_KEYS, STORAGE_KEYS, SECTION_NAMES, STYLE_IDS, FORMAT_IDS, STYLE_DESCRIPTIONS
 
 // ==================== LocalStorage 관련 ====================
+// ========== 중복 제거 예정 (settings-storage.js에 존재) ==========
+/*
 function loadSettings() {
     // API 키 로드 (암호화된 형태로 저장되어 있음)
     const groqKey = loadApiKeySafely(STORAGE_KEYS.GROQ_API);
@@ -43,7 +45,9 @@ function loadSettings() {
         if (checkbox) checkbox.checked = true;
     });
 }
+*/
 
+/*
 function validateApiKeys() {
     const groqKey = document.getElementById('groqApiKey').value.trim();
     const gptKey = document.getElementById('gptApiKey').value.trim();
@@ -57,7 +61,9 @@ function validateApiKeys() {
     
     return { valid: true };
 }
+*/
 
+/*
 function saveSettingsToStorage() {
     // API 키 가져오기
     const groqInput = document.getElementById('groqApiKey');
@@ -130,48 +136,100 @@ function saveSettingsToStorage() {
 
     return true;
 }
+*/
 
+/*
 function getApiKeys() {
     return {
         groq: loadApiKeySafely(STORAGE_KEYS.GROQ_API),
         gpt: loadApiKeySafely(STORAGE_KEYS.GPT_API)
     };
 }
+*/
 
+/*
 function getCustomPrompt() {
     return localStorage.getItem(STORAGE_KEYS.CUSTOM_PROMPT) || '';
 }
+*/
 
+/*
 function getStyleSettings() {
     return JSON.parse(localStorage.getItem(STORAGE_KEYS.STYLE_SETTINGS) || '{}');
 }
+*/
 
+/*
 function getFormatOptions() {
     return JSON.parse(localStorage.getItem(STORAGE_KEYS.FORMAT_OPTIONS) || '[]');
 }
+*/
 
 function loadTheme() {
-    const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
-    const btns = document.querySelectorAll('.theme-toggle');
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-        btns.forEach(btn => {
-            btn.innerHTML = '☀️';
-            btn.title = '다크 모드';
-        });
-    } else {
-        btns.forEach(btn => {
-            btn.innerHTML = '🌙';
-            btn.title = '라이트 모드';
-        });
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.dataset.theme = savedTheme;
+    console.log('[Theme] 초기 테마 로드:', savedTheme);
+    
+    // 하위 호환성: initializeTheme 함수가 있으면 호출
+    if (typeof initializeTheme === 'function') {
+        initializeTheme();
     }
 }
 
+/*
 function loadFontSize() {
     const savedFontSize = localStorage.getItem(STORAGE_KEYS.FONT_SIZE);
     if (savedFontSize) {
         document.body.style.fontSize = savedFontSize + 'px';
     }
+}
+*/
+
+// ==================== 출력 보안 유틸 ====================
+function sanitizeHtml(html) {
+    if (!html) return '';
+    
+    const template = document.createElement('template');
+    template.innerHTML = html;
+    const blockedTags = new Set([
+        'script',
+        'style',
+        'iframe',
+        'object',
+        'embed',
+        'link',
+        'meta',
+        'base',
+        'form'
+    ]);
+    
+    template.content.querySelectorAll('*').forEach(node => {
+        const tagName = node.tagName.toLowerCase();
+        if (blockedTags.has(tagName)) {
+            node.remove();
+            return;
+        }
+        
+        [...node.attributes].forEach(attr => {
+            const name = attr.name.toLowerCase();
+            const value = attr.value || '';
+            if (
+                name.startsWith('on') ||
+                value.toLowerCase().includes('javascript:') ||
+                value.toLowerCase().includes('data:text/html')
+            ) {
+                node.removeAttribute(attr.name);
+            }
+        });
+    });
+    
+    return template.innerHTML;
+}
+
+function setSafeHtml(targetElement, html) {
+    if (!targetElement) return;
+    targetElement.innerHTML = sanitizeHtml(html);
 }
 
 // ==================== UI 조작 ====================
@@ -185,6 +243,8 @@ function showToast(message, duration = 2000) {
     }, duration);
 }
 
+// ========== 중복 제거 예정 (ui-controls.js에 존재) ==========
+/*
 function showError(message) {
     const errorDiv = document.getElementById('errorMessage');
     if (errorDiv) {
@@ -205,7 +265,9 @@ function showError(message) {
         showToast(message, 3000);
     }
 }
+*/
 
+/*
 function toggleApiKeyVisibility(type) {
     const inputId = type === 'groq' ? 'groqApiKey' : 'gptApiKey';
     const input = document.getElementById(inputId);
@@ -238,7 +300,9 @@ function toggleApiKeyVisibility(type) {
         if (button) button.textContent = '표시';
     }
 }
+*/
 
+/*
 function clearApiKey(type) {
     const inputId = type === 'groq' ? 'groqApiKey' : 'gptApiKey';
     const storageKey = type === 'groq' ? STORAGE_KEYS.GROQ_API : STORAGE_KEYS.GPT_API;
@@ -250,7 +314,9 @@ function clearApiKey(type) {
         showToast(`${keyName} API 키가 삭제되었습니다.`, 1500);
     }
 }
+*/
 
+/*
 function exportApiKeys() {
     const groqInput = document.getElementById('groqApiKey');
     const gptInput = document.getElementById('gptApiKey');
@@ -283,11 +349,15 @@ function exportApiKeys() {
     
     showToast('📥 API 키가 파일로 저장되었습니다.', 2000);
 }
+*/
 
+/*
 function importApiKeys() {
     document.getElementById('apiKeyFileInput').click();
 }
+*/
 
+/*
 function handleApiKeyFile(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -317,6 +387,7 @@ function handleApiKeyFile(event) {
     // 파일 입력 초기화 (같은 파일 다시 선택 가능하도록)
     event.target.value = '';
 }
+*/
 
 function resetSettings() {
     if (!confirm('API 키를 제외한 모든 설정을 초기화하시겠습니까?\n\n초기화되는 항목:\n- 나만의 작성 규칙\n- 보고서 기술 설정\n- 보고서 구조 설정\n- 화면 설정 (글씨 크기)\n- 보고서 설정 (분량/상세도)\n- 나의 설정 모음')) {
@@ -401,6 +472,7 @@ function resetSettings() {
     showToast('✅ 설정이 초기화되었습니다. (API 키는 유지)', 2000);
 }
 
+/*
 function toggleSettings() {
     const panel = document.getElementById('settingsPanel');
     const btn = document.getElementById('settingsBtn');
@@ -412,12 +484,16 @@ function toggleSettings() {
         loadSettings();
     }
 }
+*/
 
+/*
 function toggleApiGuide() {
     const guideContent = document.getElementById('apiGuideContent');
     guideContent.classList.toggle('active');
 }
+*/
 
+/*
 function saveSettings() {
     const success = saveSettingsToStorage();
     
@@ -429,38 +505,32 @@ function saveSettings() {
         }, 1000);
     }
 }
+*/
 
+/*
 function cancelSettings() {
     toggleSettings();
 }
+*/
 
+/*
 function resetToMain() {
     if (confirm('메인 화면으로 돌아가시겠습니까? 작성 중인 내용이 있다면 사라집니다.')) {
         location.reload();
     }
 }
+*/
 
+/*
 function toggleTheme() {
-    const body = document.body;
-    const btns = document.querySelectorAll('.theme-toggle');
-    
-    if (body.classList.contains('light-mode')) {
-        body.classList.remove('light-mode');
-        btns.forEach(btn => {
-            btn.innerHTML = '🌙';
-            btn.title = '라이트 모드';
-        });
-        localStorage.setItem(STORAGE_KEYS.THEME, 'dark');
-    } else {
-        body.classList.add('light-mode');
-        btns.forEach(btn => {
-            btn.innerHTML = '☀️';
-            btn.title = '다크 모드';
-        });
-        localStorage.setItem(STORAGE_KEYS.THEME, 'light');
+    const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    if (typeof applyTheme === 'function') {
+        applyTheme(nextTheme, true);
     }
 }
+*/
 
+/*
 function changeFontSize(delta) {
     const body = document.body;
     const currentSize = parseFloat(getComputedStyle(body).fontSize);
@@ -468,11 +538,14 @@ function changeFontSize(delta) {
     body.style.fontSize = newSize + 'px';
     localStorage.setItem(STORAGE_KEYS.FONT_SIZE, newSize);
 }
+*/
 
+/*
 function resetFontSize() {
     document.body.style.fontSize = '16px';
     localStorage.setItem(STORAGE_KEYS.FONT_SIZE, 16);
 }
+*/
 
 function toggleInputSection() {
     const mainContainer = document.querySelector('.main-container');
@@ -610,7 +683,11 @@ function copyToClipboard(model) {
 function handleKeyDown(event) {
     if (event.ctrlKey && event.key === 'Enter') {
         event.preventDefault();
-        generateJournals(event);
+        // generateBtn을 클릭하여 usage-bridge.js의 카운트 로직 활성화
+        const generateBtn = document.getElementById('generateBtn');
+        if (generateBtn && !generateBtn.disabled) {
+            generateBtn.click();
+        }
     }
 }
 
@@ -797,9 +874,9 @@ async function generateWithGroq(input, apiKey, retryCount = 0) {
         return;
     }
 
-    outputDiv.style.display = 'none';
+    outputDiv.classList.add('is-hidden');
     loading.classList.add('active');
-    if (loadingCompare) loadingCompare.style.display = 'block';
+    if (loadingCompare) loadingCompare.classList.remove('is-hidden');
     copyBtn.disabled = true;
     if (usageDiv) usageDiv.textContent = '';
     
@@ -998,14 +1075,16 @@ ${customPrompt}
         
         // 마크다운 렌더링 적용
         if (typeof renderMarkdown === 'function') {
-            outputDiv.innerHTML = renderMarkdown(result);
+            setSafeHtml(outputDiv, renderMarkdown(result));
             outputDiv.classList.add('markdown-rendered');
         } else {
             outputDiv.textContent = result;
         }
         
-        outputDiv.style.display = 'block';
+        // is-hidden 클래스 제거 및 표시
+        outputDiv.classList.remove('is-hidden');
         outputDiv.classList.remove('empty');
+        outputDiv.style.display = '';  // display 속성도 초기화
         copyBtn.disabled = false;
         
         // 내보내기 버튼 활성화
@@ -1024,12 +1103,13 @@ ${customPrompt}
         if (groqOutputCompare) {
             groqOutputCompare.setAttribute('data-raw-text', result);
             if (typeof renderMarkdown === 'function') {
-                groqOutputCompare.innerHTML = renderMarkdown(result);
+                setSafeHtml(groqOutputCompare, renderMarkdown(result));
                 groqOutputCompare.classList.add('markdown-rendered');
             } else {
                 groqOutputCompare.textContent = result;
             }
-            groqOutputCompare.style.display = 'block';
+            groqOutputCompare.classList.remove('is-hidden');
+            groqOutputCompare.style.display = '';  // display 속성도 초기화
         }
         
         // 비교 탭의 복사 버튼도 활성화
@@ -1059,11 +1139,11 @@ ${customPrompt}
         
         outputDiv.textContent = errorMessage + '\n\n브라우저 콘솔(F12)에서 상세 오류를 확인할 수 있습니다.';
         outputDiv.classList.add('empty');
-        outputDiv.style.display = 'block';
+        outputDiv.classList.remove('is-hidden');
     } finally {
         clearInterval(messageInterval);
         loading.classList.remove('active');
-        if (loadingCompare) loadingCompare.style.display = 'none';
+        if (loadingCompare) loadingCompare.classList.add('is-hidden');
     }
 }
 
@@ -1113,15 +1193,6 @@ function initKeyboardShortcuts() {
             return;
         }
         
-        // Ctrl+N: 새 보고서 (초기화)
-        if (e.ctrlKey && e.key === 'n') {
-            e.preventDefault();
-            if (confirm('새 보고서를 작성하시겠습니까?\n현재 내용이 저장되지 않았다면 사라집니다.')) {
-                resetToMain();
-            }
-            return;
-        }
-        
         // Escape: 모달 닫기
         if (e.key === 'Escape') {
             const shortcutsModal = document.getElementById('shortcutsModal');
@@ -1152,7 +1223,7 @@ function toggleShortcutsModal() {
         <div class="shortcuts-modal" id="shortcutsModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 10000; display: flex; align-items: center; justify-content: center;" onclick="if(event.target.id === 'shortcutsModal') this.remove();">
             <div class="shortcuts-content" style="background: var(--bg-secondary); border-radius: 12px; padding: 30px; max-width: 600px; max-height: 80vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" onclick="event.stopPropagation();">
                 <div class="shortcuts-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px;">
-                    <h2 style="font-size: 1.5em; color: var(--text-primary); margin: 0;">⌨️ 키보드 단축키</h2>
+                    <h2 style="font-size: 1.5em; color: var(--text-primary); margin: 0;">💡 키보드 단축키</h2>
                     <button onclick="document.getElementById('shortcutsModal').remove()" style="background: none; border: none; font-size: 1.5em; color: var(--text-tertiary); cursor: pointer; padding: 5px 10px;">✕</button>
                 </div>
                 <div class="shortcuts-list" style="display: flex; flex-direction: column; gap: 12px;">
@@ -1167,10 +1238,6 @@ function toggleShortcutsModal() {
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
                         <kbd style="background: var(--bg-tertiary); padding: 6px 12px; border-radius: 6px; font-family: monospace; font-size: 0.9em; border: 1px solid var(--border-color);">Ctrl+2</kbd>
                         <span style="color: var(--text-secondary); flex: 1; margin-left: 20px;">GPT 결과 복사</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
-                        <kbd style="background: var(--bg-tertiary); padding: 6px 12px; border-radius: 6px; font-family: monospace; font-size: 0.9em; border: 1px solid var(--border-color);">Ctrl+N</kbd>
-                        <span style="color: var(--text-secondary); flex: 1; margin-left: 20px;">새 보고서 (초기화)</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
                         <kbd style="background: var(--bg-tertiary); padding: 6px 12px; border-radius: 6px; font-family: monospace; font-size: 0.9em; border: 1px solid var(--border-color);">Escape</kbd>
@@ -1209,9 +1276,9 @@ async function generateWithGPT(input, apiKey, retryCount = 0) {
         return;
     }
 
-    outputDiv.style.display = 'none';
+    outputDiv.classList.add('is-hidden');
     loading.classList.add('active');
-    if (loadingCompare) loadingCompare.style.display = 'block';
+    if (loadingCompare) loadingCompare.classList.remove('is-hidden');
     copyBtn.disabled = true;
     if (usageDiv) usageDiv.textContent = '';
     
@@ -1402,14 +1469,16 @@ ${customPrompt}
         
         // 마크다운 렌더링 적용
         if (typeof renderMarkdown === 'function') {
-            outputDiv.innerHTML = renderMarkdown(result);
+            setSafeHtml(outputDiv, renderMarkdown(result));
             outputDiv.classList.add('markdown-rendered');
         } else {
             outputDiv.textContent = result;
         }
         
-        outputDiv.style.display = 'block';
+        // is-hidden 클래스 제거 및 표시
+        outputDiv.classList.remove('is-hidden');
         outputDiv.classList.remove('empty');
+        outputDiv.style.display = '';  // display 속성도 초기화
         copyBtn.disabled = false;
         
         // 내보내기 버튼 활성화
@@ -1428,12 +1497,13 @@ ${customPrompt}
         if (gptOutputCompare) {
             gptOutputCompare.setAttribute('data-raw-text', result);
             if (typeof renderMarkdown === 'function') {
-                gptOutputCompare.innerHTML = renderMarkdown(result);
+                setSafeHtml(gptOutputCompare, renderMarkdown(result));
                 gptOutputCompare.classList.add('markdown-rendered');
             } else {
                 gptOutputCompare.textContent = result;
             }
-            gptOutputCompare.style.display = 'block';
+            gptOutputCompare.classList.remove('is-hidden');
+            gptOutputCompare.style.display = '';  // display 속성도 초기화
         }
         
         // 비교 탭의 복사 버튼도 활성화
@@ -1463,11 +1533,11 @@ ${customPrompt}
         
         outputDiv.textContent = errorMessage + '\n\n브라우저 콘솔(F12)에서 상세 오류를 확인할 수 있습니다.';
         outputDiv.classList.add('empty');
-        outputDiv.style.display = 'block';
+        outputDiv.classList.remove('is-hidden');
     } finally {
         clearInterval(messageInterval);
         loading.classList.remove('active');
-        if (loadingCompare) loadingCompare.style.display = 'none';
+        if (loadingCompare) loadingCompare.classList.add('is-hidden');
     }
 }
 
@@ -1854,7 +1924,8 @@ async function generateJournals(event) {
         const groqOutput = document.getElementById('groqOutput');
         if (groqOutput) {
             groqOutput.textContent = '';
-            groqOutput.style.display = 'none';
+            groqOutput.classList.add('is-hidden');
+            groqOutput.style.display = 'none';  // 명시적으로 숨기기
         }
         const groqCount = document.getElementById('groqCount');
         if (groqCount) groqCount.textContent = '0자';
@@ -1871,7 +1942,8 @@ async function generateJournals(event) {
         const gptOutput = document.getElementById('gptOutput');
         if (gptOutput) {
             gptOutput.textContent = '';
-            gptOutput.style.display = 'none';
+            gptOutput.classList.add('is-hidden');
+            gptOutput.style.display = 'none';  // 명시적으로 숨기기
         }
         const gptCount = document.getElementById('gptCount');
         if (gptCount) gptCount.textContent = '0자';
@@ -1888,8 +1960,8 @@ async function generateJournals(event) {
     // 엠티 스테이트 숨기고 출력 탭 표시
     const emptyState = document.getElementById('emptyState');
     const outputTabs = document.getElementById('outputTabs');
-    if (emptyState) emptyState.style.display = 'none';
-    if (outputTabs) outputTabs.style.display = 'flex';
+    if (emptyState) emptyState.classList.add('is-hidden');
+    if (outputTabs) outputTabs.classList.remove('is-hidden');
 
     const generateBtn = document.getElementById('generateBtn');
     const originalBtnText = generateBtn.textContent;
@@ -1979,5 +2051,3 @@ if (document.readyState === 'loading') {
     // 이미 로드된 경우도 약간 대기
     setTimeout(initialize, 50);
 }
-
-

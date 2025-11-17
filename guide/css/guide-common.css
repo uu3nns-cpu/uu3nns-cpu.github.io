@@ -1,51 +1,10 @@
-/* 가이드 페이지 공통 스타일 - PC 최적화 & 다크모드 완벽 대응 */
-
-/* Body를 Flex Container로 만들어 Footer Sticky 구현 */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
+/* Guide layout */
 .guide-page,
 .guide-container {
-    flex: 1;
-}
-
-/* Footer를 하단에 고정 */
-.common-footer {
-    margin-top: auto !important;
-    position: sticky;
-    bottom: 0;
-    z-index: 100;
-}
-
-/* 기본 레이아웃 - PC 중심 (모든 페이지 통일) */
-.guide-page,
-.guide-container {
-    max-width: 1400px !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-    padding: 20px 60px 60px 60px;
+    width: min(1000px, 100% - (var(--container-gutter) * 2));
+    margin-inline: auto;
+    padding: clamp(var(--space-xl), 4vw, var(--space-3xl)) 0 var(--space-3xl);
     box-sizing: border-box;
-}
-
-/* Breadcrumb */
-.guide-breadcrumb {
-    font-size: 0.9em;
-    color: var(--text-tertiary);
-    margin-bottom: 20px;
-}
-
-.guide-breadcrumb a {
-    color: var(--accent-primary);
-    text-decoration: none;
-    transition: all 0.2s;
-}
-
-.guide-breadcrumb a:hover {
-    text-decoration: underline;
-    color: var(--accent-secondary);
 }
 
 /* 헤더 */
@@ -101,19 +60,102 @@ body {
     border-radius: 6px;
 }
 
-/* 섹션 - 카드형 강화 */
-.guide-section {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 36px;
-    margin-bottom: 32px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s;
+.guide-hero {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.guide-section:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+.guide-hero-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-sm);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.guide-hero h1 {
+    margin-bottom: var(--space-sm);
+}
+
+.guide-hero-subtitle {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.privacy-notice {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-lg), 3vw, var(--space-xl));
+    margin-bottom: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.privacy-notice-content {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+.privacy-notice-icon {
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+.privacy-notice-text p {
+    margin-bottom: var(--space-md);
+    color: var(--text-secondary);
+}
+
+.privacy-notice-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.8rem;
+    border-radius: var(--radius-btn);
+    background: linear-gradient(120deg, #9b8bff, #4bd6e5);
+    color: #050714;
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    width: fit-content;
+    box-shadow: 0 18px 36px rgba(75, 214, 229, 0.25);
+}
+
+.guide-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(var(--space-md), 2vw, var(--space-xl));
+}
+
+.guide-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-lg), 3vw, var(--space-2xl));
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.guide-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(var(--accent-primary-rgb), 0.3);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* 섹션 - 플랫 레이아웃 (외곽 카드 제거) */
+.guide-section {
+    margin-bottom: var(--space-2xl);
 }
 
 .guide-section h2 {
@@ -450,11 +492,18 @@ code {
 
 /* Column 박스 */
 .column-box {
-    background: var(--bg-tertiary);
-    border: 2px solid var(--border-color);
-    border-radius: 16px;
-    padding: 32px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-lg), 2.5vw, var(--space-2xl));
+    box-shadow: var(--shadow-card);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.column-box:hover {
+    transform: translateY(-3px);
+    border-color: rgba(var(--accent-primary-rgb), 0.35);
+    box-shadow: 0 24px 48px rgba(6, 10, 26, 0.45);
 }
 
 .column-box h4 {
@@ -967,4 +1016,186 @@ code {
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* Utility classes */
+.guide-lead {
+    font-size: 1.2rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+}
+
+.guide-spaced-list {
+    margin-top: var(--space-md);
+}
+
+.guide-readable-list {
+    font-size: 1.05rem;
+    line-height: 2;
+    color: var(--text-secondary);
+    margin-left: 1.2rem;
+}
+
+.guide-indent-list {
+    margin-left: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.guide-subtitle {
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: var(--space-lg) 0 var(--space-sm);
+}
+
+.column-box--accent {
+    border-color: rgba(var(--accent-primary-rgb), 0.6) !important;
+    background: rgba(var(--accent-primary-rgb), 0.08);
+}
+
+.column-title--accent {
+    color: var(--accent-primary);
+}
+
+.guide-home-nav {
+    text-align: center;
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.guide-home-nav .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+/* ========================================
+   비디오 임베드 (guide 페이지 공통)
+   ======================================== */
+
+.video-embed-compact {
+    margin: 24px 0 32px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    background: #000;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-embed-compact video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .video-embed-compact {
+        margin: 16px 0 24px 0;
+    }
+    
+    .video-embed-compact video {
+        max-height: 450px;
+    }
+}
+
+/* ========================================
+   단축키 테이블 (03-advanced.html)
+   ======================================== */
+
+.shortcut-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.shortcut-table th {
+    text-align: left;
+    padding: 16px;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border-bottom: 2px solid var(--border-color);
+    font-weight: 600;
+}
+
+.shortcut-table td {
+    padding: 14px 16px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.shortcut-table tr:last-child td {
+    border-bottom: none;
+}
+
+.shortcut-table code {
+    background: var(--bg-primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9em;
+    border: 1px solid var(--border-color);
+}
+
+/* ========================================
+   가이드 인덱스 페이지 전용 (index.html)
+   ======================================== */
+
+/* 카드 헤더 */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.card-number {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+.card-title {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.card-description {
+    font-size: 1em;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.card-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.feature-tag {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.85em;
+    color: var(--text-tertiary);
+    font-weight: 500;
 }

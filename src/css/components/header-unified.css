@@ -1,111 +1,247 @@
-/* ==================== 헤더 버튼 스타일 통일 (심플 & 플랫) ==================== */
+/* --------------------------------------------------------------------------
+   Header Controls
+   -------------------------------------------------------------------------- */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    width: 100%;
+    margin: 0;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-soft);
+}
 
-/* 모든 헤더 버튼을 카드 스타일처럼 심플하게 */
+.header-left,
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.header-brand .brand-mark {
+    font-size: 1.68rem;
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(120deg, #9b8bff, #4bd6e5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-brand .brand-copy {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.header-brand .brand-copy {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.header-brand .brand-copy strong {
+    font-size: 1.02rem;
+    color: var(--text-primary);
+}
+
+.header-brand .brand-copy span {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+
 .header .btn,
-.header .btn--icon,
 .header button,
 .header a.btn {
-    /* 카드와 동일한 심플 디자인 */
-    background: var(--bg-secondary) !important;
-    color: var(--text-primary) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-btn) !important;
-    
-    /* 그라데이션 제거 - 완전 플랫 */
-    box-shadow: none !important;
-    transition: all 0.2s ease !important;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--surface-border);
+    background: var(--surface-glass);
+    color: var(--text-primary);
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header .btn:hover,
-.header .btn--icon:hover,
 .header button:hover,
 .header a.btn:hover {
-    background: var(--bg-tertiary) !important;
-    color: var(--text-primary) !important;
-    border-color: var(--accent-primary) !important;
-    transform: none !important; /* 움직임 제거 */
-    box-shadow: none !important;
+    border-color: rgba(var(--accent-primary-rgb), 0.6);
+    background: rgba(var(--accent-primary-rgb), 0.12);
+    transform: translateY(-1px);
 }
 
-/* 활성 상태도 플랫하게 */
 .header .btn:active,
-.header .btn--icon:active,
 .header button:active,
 .header a.btn:active {
-    background: var(--bg-primary) !important;
-    transform: none !important;
+    transform: translateY(0);
 }
 
-/* 특정 버튼 스타일 통일 */
-.btn-report,
-.btn-guide,
-.btn-notice,
-.btn-home,
-.btn-settings,
-.btn-shortcuts,
-.btn-action {
-    background: var(--bg-secondary) !important;
-    color: var(--text-primary) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-btn) !important;
-    box-shadow: none !important;
+@media (max-width: 720px) {
+    .header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .header-brand {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
 }
 
-.btn-report:hover,
-.btn-guide:hover,
-.btn-notice:hover,
-.btn-home:hover,
-.btn-settings:hover,
-.btn-shortcuts:hover,
-.btn-action:hover {
-    background: var(--bg-tertiary) !important;
-    border-color: var(--accent-primary) !important;
-    box-shadow: none !important;
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.common-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 40;
+    margin-top: var(--space-xl);
+    width: 100%;
+    padding: var(--space-lg) var(--space-xl);
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-soft);
 }
 
-/* 테마 토글 버튼도 통일 */
-.theme-toggle {
-    background: var(--bg-secondary) !important;
-    color: var(--text-primary) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-btn) !important;
-    box-shadow: none !important;
+.common-footer .footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
 }
 
-.theme-toggle:hover {
-    background: var(--bg-tertiary) !important;
-    border-color: var(--accent-primary) !important;
-    box-shadow: none !important;
+.common-footer .footer-copy {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin: 0;
+    white-space: nowrap;
 }
 
-/* 뱃지 스타일 통일 */
-.badge,
-.badge--warning,
-.badge--primary,
-.badge--success,
-.badge--danger,
-.badge--info {
-    border-radius: var(--radius-btn) !important;
-    box-shadow: none !important;
+.common-footer .footer-divider {
+    color: var(--border-color);
+    font-size: 0.85rem;
 }
 
-/* 라이트 모드 대응 */
-body.light-mode .header .btn,
-body.light-mode .header .btn--icon,
-body.light-mode .header button,
-body.light-mode .header a.btn,
-body.light-mode .theme-toggle,
-body.light-mode .btn-action {
-    background: var(--bg-secondary) !important;
-    border-color: var(--border-color) !important;
+.common-footer .footer-links {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
 }
 
-body.light-mode .header .btn:hover,
-body.light-mode .header .btn--icon:hover,
-body.light-mode .header button:hover,
-body.light-mode .header a.btn:hover,
-body.light-mode .theme-toggle:hover,
-body.light-mode .btn-action:hover {
-    background: var(--bg-tertiary) !important;
-    border-color: var(--accent-primary) !important;
+.common-footer .footer-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+}
+
+.common-footer .footer-link:hover {
+    color: var(--accent-primary);
+    background: rgba(var(--accent-primary-rgb), 0.1);
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .common-footer .footer-content {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+    
+    .common-footer .footer-divider {
+        display: none;
+    }
+    
+    .common-footer .footer-copy {
+        text-align: center;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Shortcuts modal
+   -------------------------------------------------------------------------- */
+.shortcuts-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 20, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.shortcuts-content {
+    width: min(560px, 92%);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    background: rgba(18, 19, 30, 0.9);
+    border: var(--glass-border);
+    box-shadow: var(--shadow-card);
+}
+
+.shortcuts-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.shortcuts-header button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.shortcuts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.shortcut-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.shortcut-row kbd {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    font-family: var(--font-family-mono);
+    font-size: 0.85rem;
+}
+
+.shortcut-row span {
+    color: var(--text-secondary);
+    margin-left: var(--space-md);
+    flex: 1;
+    text-align: right;
 }

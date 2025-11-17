@@ -106,27 +106,37 @@ function refreshStatus() {
         presets.length > 0 ? `기본 ${presets.filter(p => p.isDefault).length}개 + 사용자 ${customPresets.length}개` : '저장된 설정이 없습니다');
     
     // ===== 보고서 상태 =====
+    console.log('[Data Management] 보고서 카운트 시작...');
     let reports = [];
     try {
-        const savedReports = localStorage.getItem('saved_reports');
+        // 올바른 localStorage 키 사용: saved_counseling_reports
+        const savedReports = localStorage.getItem('saved_counseling_reports');
+        console.log('[Data Management] saved_counseling_reports 로드:', savedReports ? '데이터 존재' : '데이터 없음');
+        
         if (savedReports) {
             reports = JSON.parse(savedReports);
+            console.log('[Data Management] 파싱된 보고서:', reports);
+            
             // 배열이 아니면 빈 배열로 초기화
             if (!Array.isArray(reports)) {
-                console.warn('[Data Management] saved_reports가 배열이 아닙니다. 초기화합니다.');
+                console.warn('[Data Management] saved_counseling_reports가 배열이 아닙니다. 초기화합니다.');
                 reports = [];
-                localStorage.setItem('saved_reports', '[]');
+                localStorage.setItem('saved_counseling_reports', '[]');
             }
         }
     } catch (e) {
         console.error('[Data Management] 보고서 데이터 파싱 오류:', e);
         reports = [];
-        localStorage.setItem('saved_reports', '[]');
+        localStorage.setItem('saved_counseling_reports', '[]');
     }
     
     const activeReports = reports.filter(r => !r.isDeleted);
+    console.log('[Data Management] 전체 보고서:', reports.length, ', 활성 보고서:', activeReports.length);
+    
     updateStatusCard('reports', activeReports.length,
         activeReports.length > 0 ? `활성 ${activeReports.length}개 / 전체 ${reports.length}개` : '저장된 보고서가 없습니다');
+    
+    console.log('[Data Management] 보고서 updateStatusCard 호출 완료');
     
     // ===== 전체 데이터 크기 =====
     let totalSize = 0;
@@ -174,17 +184,18 @@ function refreshStatus() {
 
 function updateStatusCard(type, count, metaText) {
     const countEl = document.getElementById(`${type}Count`);
-    const valueEl = document.getElementById(`${type}Value`);
     const metaEl = document.getElementById(`${type}Meta`);
     
     if (countEl) {
         countEl.textContent = count;
+        // stat-value 클래스에 empty 상태 추가/제거
+        if (count > 0) {
+            countEl.classList.remove('empty');
+        } else {
+            countEl.classList.add('empty');
+        }
     } else {
         console.warn(`[Data Management] 요소를 찾을 수 없음: ${type}Count`);
-    }
-    
-    if (valueEl) {
-        valueEl.className = count > 0 ? 'status-value' : 'status-value empty';
     }
     
     if (metaEl) {
@@ -262,7 +273,7 @@ function backupAll() {
     const groqKey = loadApiKeySafely(window.STORAGE_KEYS.GROQ_API);
     const gptKey = loadApiKeySafely(window.STORAGE_KEYS.GPT_API);
     const presets = JSON.parse(localStorage.getItem(window.STORAGE_KEYS.PRESETS) || '[]');
-    const reports = JSON.parse(localStorage.getItem('saved_reports') || '[]');
+    const reports = JSON.parse(localStorage.getItem('saved_counseling_reports') || '[]');
     
     const backupData = {
         version: '1.0',
@@ -295,7 +306,7 @@ function backupAll() {
 }
 
 function backupReports() {
-    const reports = JSON.parse(localStorage.getItem('saved_reports') || '[]');
+    const reports = JSON.parse(localStorage.getItem('saved_counseling_reports') || '[]');
     
     if (reports.length === 0) {
         alert('백업할 보고서가 없습니다.');
@@ -453,7 +464,7 @@ function restoreAll(file) {
             
             // 보고서 복원
             if (data.data.reports) {
-                localStorage.setItem('saved_reports', JSON.stringify(data.data.reports));
+                localStorage.setItem('saved_counseling_reports', JSON.stringify(data.data.reports));
             }
             
             // 설정 복원
@@ -523,7 +534,7 @@ function restoreReports(file) {
             
             let existingReports = [];
             try {
-                existingReports = JSON.parse(localStorage.getItem('saved_reports') || '[]');
+                existingReports = JSON.parse(localStorage.getItem('saved_counseling_reports') || '[]');
                 if (!Array.isArray(existingReports)) {
                     existingReports = [];
                 }
@@ -542,7 +553,7 @@ function restoreReports(file) {
                 return;
             }
             
-            localStorage.setItem('saved_reports', JSON.stringify(finalReports));
+            localStorage.setItem('saved_counseling_reports', JSON.stringify(finalReports));
             
             refreshStatus();
             alert(`✅ 보고서가 복원되었습니다!\n복원된 보고서 수: ${finalReports.length}개`);

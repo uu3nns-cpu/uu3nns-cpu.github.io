@@ -1,751 +1,482 @@
 /**
- * Report Unified CSS
+ * Report Unified CSS - Complete Redesign
  * report.html 전용 통합 스타일시트
  * 
- * 통합된 파일:
- * - report-sidebar.css (사이드바 레이아웃)
- * - report-enhancements.css (UI 개선)
- * - report-custom.css (커스텀 스타일)
- * 
- * 셀렉터 특정성을 높여 !important 없이 우선순위 확보
+ * 변경 사항:
+ * - 전체 페이지와 일관된 glass morphism 디자인
+ * - 부드러운 색상과 그림자
+ * - 자연스러운 간격과 흐름
  */
 
 /* ============================================
-   SECTION 1: 사이드바 레이아웃
+   SECTION 1: 레이아웃 기본 구조
    ============================================ */
 
-/* 3단 레이아웃 구조 */
+/* 2단 레이아웃 (사이드바 제거) */
+
+/* Page container spacing */
+.page-container.report-page {
+    width: min(2200px, calc(100% - 12px));
+    margin-inline: auto;
+    padding-top: clamp(var(--space-2xl), 3.5vw, var(--space-3xl));
+    padding-bottom: clamp(var(--space-2xl), 4vw, var(--space-3xl));
+}
+
+.page-container.report-page .report-layout {
+    gap: clamp(var(--space-md), 2vw, var(--space-xl));
+    margin: 0 auto;
+    max-width: none;
+}
+
 .report-layout {
     display: flex;
     width: 100%;
-    gap: 0;
-    height: calc(100vh - 120px);
-    overflow: hidden;
     position: relative;
-    direction: ltr;
+    min-height: calc(100vh - 120px);
 }
 
-/* 우측 사이드바 */
+/* 
+/* 우측 사이드바 - 제거됨 */
+/*
 .report-layout .settings-sidebar {
     position: fixed;
-    right: -494px;
-    top: 60px;
-    width: 494px;
-    height: calc(100vh - 120px);
-    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-    border-left: 1px solid var(--border-color);
+    right: -460px;
+    top: clamp(24px, 3vw, 48px);
+    bottom: clamp(24px, 3vw, 48px);
+    width: 420px;
+    max-height: none;
+    height: auto;
+    background: linear-gradient(160deg, rgba(19, 25, 52, 0.85), rgba(9, 12, 27, 0.9));
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
     display: flex;
     flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-xl) var(--space-lg);
     overflow-y: auto;
-    overflow-x: hidden;
-    flex-shrink: 0;
-    transition: right 0.33s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 10000;
-    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.3);
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 900;
+    box-shadow: 0 30px 90px rgba(4, 6, 14, 0.55);
 }
 
 .report-layout .settings-sidebar.open {
-    right: 0;
+    right: clamp(24px, 3vw, 48px);
 }
+*/
 
-/* 사이드바 헤더 */
+/* 
+/* 사이드바 헤더 - 제거됨 */
+/*
 .report-layout .sidebar-header {
-    padding: 24px 24px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%);
-    flex-shrink: 0;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.015);
 }
+*/
 
-.report-layout .sidebar-header h3 {
-    font-size: 1.3em;
-    font-weight: 700;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
-    letter-spacing: -0.02em;
-}
-
-/* 사이드바 닫기 버튼 */
-.report-layout .sidebar-close-btn {
-    position: absolute;
-    top: 18px;
-    right: 20px;
-    width: 32px;
-    height: 32px;
-    background: transparent;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3em;
-    color: var(--text-secondary);
-    transition: all 0.2s;
-    padding: 0;
-}
-
-.report-layout .sidebar-close-btn:hover {
-    background: rgba(255, 0, 0, 0.1);
-    color: var(--error);
-    transform: scale(1.1);
-}
-
-/* 현재 프리셋 표시 */
-.report-layout .current-preset-display {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 18px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 100%);
-    border: 2px solid rgba(102, 126, 234, 0.3);
-    border-radius: 12px;
-    font-size: 0.9em;
-    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
-    transition: all 0.3s ease;
-}
-
-.report-layout .current-preset-display:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
-}
-
-/* 사이드바 섹션 */
-.report-layout .sidebar-section {
-    border-bottom: 1px solid var(--border-color);
-    padding: 24px 24px;
-    margin: 0 12px;
-    transition: all 0.3s ease;
-}
-
-.report-layout .sidebar-section:hover {
-    background: rgba(102, 126, 234, 0.03);
-    border-radius: 12px;
-    margin: 0 8px;
-    padding: 24px 28px;
-}
-
-.report-layout .sidebar-section:last-of-type {
-    border-bottom: none;
-}
-
-.report-layout .sidebar-section-title {
-    font-size: 0.95em;
-    font-weight: 700;
-    color: var(--accent-primary);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid rgba(102, 126, 234, 0.2);
-}
+/* 사이드바 관련 스타일 - 모두 제거됨 */
+/*
+.report-layout .sidebar-header h3 { ... }
+.report-layout .sidebar-close-btn { ... }
+.report-layout .current-preset-display { ... }
+.report-layout .sidebar-section { ... }
+.report-layout .setting-preview-item { ... }
+... 기타 사이드바 스타일 ...
+*/
 
 /* ============================================
-   SECTION 2: UI 개선 및 모달
+   SECTION 2: 메인 영역 - 좌우 분할
    ============================================ */
 
-/* 팁 3칼럼 레이아웃 */
-.report-layout .tip-columns {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 20px;
-}
-
-/* 모달 공통 스타일 */
-.shortcuts-modal, 
-.report-history-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    animation: fadeIn 0.2s;
-}
-
-/* 데스크톱: 사이드바 항상 표시 */
-@media (min-width: 1024px) {
-    .report-layout .settings-sidebar {
-        transform: translateX(0);
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .report-layout {
-        grid-template-columns: 280px 1fr;
-    }
-}
-
-/* ============================================
-   SECTION 3: 메인 레이아웃 - 좌우 분할
-   ============================================ */
-
-/* Main Area 레이아웃 - 좌우 분할 (비율 최적화) */
+/* 메인 영역 - 좌우 분할 (sidebar 마진 제거) */
 .report-layout .main-area {
     display: grid;
-    grid-template-columns: minmax(600px, 1.5fr) minmax(400px, 1fr);
-    grid-template-areas: "output input";
-    gap: 20px;
-    height: calc(100vh - 80px);
-    padding: 20px;
-    padding-bottom: 60px;
-    overflow: hidden;
-    flex: 1;
-    min-width: 0;
-    transition: margin-right 0.33s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.report-layout .main-area.sidebar-open {
-    margin-right: 494px;
-}
-
-/* 좌측: 출력 영역 (결과) */
-.report-layout .output-area-compact {
-    grid-area: output;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    max-height: calc(100vh - 160px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    transition: box-shadow 0.2s ease;
-    min-height: 0;
-}
-
-.report-layout .output-area-compact:hover {
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* 우측: 입력 영역 (메모) - 높이 최대화 강제 */
-.report-layout .input-area-compact {
-    grid-area: input;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    max-height: 100%;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    transition: box-shadow 0.2s ease;
-    min-height: 0;
-}
-
-.report-layout .input-area-compact:hover {
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* ============================================
-   SECTION 4: 입력 영역 스타일
-   ============================================ */
-
-/* 입력 헤더 */
-.report-layout .input-header-compact {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 0;
-    background: var(--bg-tertiary);
-    border-bottom: 1px solid var(--border-color);
-    flex-shrink: 0;
-    flex-grow: 0;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-.report-layout .input-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    min-height: 48px;
-    box-sizing: border-box;
-}
-
-/* 상담 메모 타이틀 */
-.report-layout .memo-title {
-    font-size: 1.1em;
-    font-weight: 700;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
-    line-height: 1;
-    letter-spacing: -0.01em;
-    animation: shimmer 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-    0%, 100% { background-position: 0% center; }
-    50% { background-position: 100% center; }
-}
-
-/* 구분선 스타일 - 완전히 숨김 */
-.report-layout .input-divider {
-    display: none;
-    height: 0;
-    margin: 0;
-    padding: 0;
-}
-
-/* 액션 버튼 영역 */
-.report-layout .input-actions-compact {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 20px;
-    gap: 12px;
-    border-top: 1px solid var(--border-color);
-    flex-shrink: 0;
-    flex-grow: 0;
-}
-
-.report-layout .button-group-left,
-.report-layout .button-group-right {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.report-layout .button-group-middle {
-    flex: 1;
-}
-
-/* Textarea 영역 - 최대 높이 확보 강제 */
-.report-layout .textarea-wrapper {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    padding: 10px 20px;
-    overflow: hidden;
-    position: relative;
-    min-height: 0;
-    max-height: 100%;
-}
-
-.report-layout .input-textarea-compact {
+    grid-template-columns: minmax(0, 2.35fr) minmax(0, 1fr) !important;
+    gap: clamp(var(--space-sm), 1.2vw, var(--space-lg)) !important;
+    padding: clamp(var(--space-md), 1.2vw, var(--space-xl)) !important;
     width: 100%;
-    height: 100%;
-    max-height: 100%;
-    padding: 14px;
-    font-size: 0.95em;
-    line-height: 1.8;
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-md);
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    resize: none;
-    transition: all 0.2s;
-    font-family: inherit;
-    text-align: justify;
-    word-break: keep-all;
-    box-sizing: border-box;
-    overflow-y: auto;
+    max-width: 100%;
+    margin: 0 auto var(--space-2xl);
+    flex: 1;
+    align-items: start;
 }
 
-.report-layout .input-textarea-compact:focus {
-    outline: none;
-    border-color: var(--accent-primary);
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-}
-
-/* 글자수 오버레이 */
-.report-layout .char-count-overlay {
-    position: absolute;
-    bottom: 18px;
-    right: 26px;
-    font-size: 0.75em;
-    color: var(--text-tertiary);
-    background: var(--bg-secondary);
-    padding: 4px 10px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
-    pointer-events: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-/* 생성 버튼 영역 */
-.report-layout .generate-button-area {
-    padding: 10px 20px;
-    background: var(--bg-secondary);
-    border-top: 0;
-    flex-shrink: 0;
-    flex-grow: 0;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center; /* 가운데 정렬 */
-    gap: 12px;
-    position: relative; /* 사용량 배지 절대 위치 기준 */
-}
-
-/* 보고서 작성 버튼 - 가운데 정렬 */
-.report-layout .generate-button-area .btn-generate {
-    margin: 0 auto; /* 가운데 정렬 */
-}
-
-/* 사용량 배지 - 우측 고정 */
-.report-layout .usage-badge-inline {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    background: var(--bg-primary);
-    border: 2px solid var(--border-color);
-    border-radius: 20px;
-    font-size: 0.9em;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    right: 20px; /* 우측에 고정 */
+.report-layout .main-area.report-workspace {
+    grid-template-columns: minmax(0, 2.45fr) minmax(0, 1fr) !important;
+    gap: clamp(var(--space-sm), 1vw, var(--space-lg)) !important;
+    padding: clamp(var(--space-md), 1vw, var(--space-xl)) !important;
+    margin-bottom: var(--space-2xl);
 }
 
 /* ============================================
-   SECTION 5: 출력 영역 - Empty State
+   SECTION 3: 출력 영역 (좌측)
    ============================================ */
 
+/* 출력 영역 - 뉴트럴 스모크 글래스모피즘 */
+.report-layout .output-area-compact {
+    background: rgba(43, 47, 55, 0.25) !important;
+    backdrop-filter: blur(32px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 28px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
+    padding: var(--space-xl) !important;
+    display: flex;
+    flex-direction: column;
+    min-height: clamp(760px, 80vh, 1100px);
+    height: auto;
+    gap: var(--space-xl);
+}
+
+/* Empty State */
 .report-layout .output-empty-state {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    padding: 60px 40px;
-    background: 
-        radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.06) 0%, transparent 50%),
-        var(--bg-primary);
+    padding: var(--space-3xl) var(--space-xl);
+    text-align: center;
+    flex: 1;
+}
+
+.report-layout .output-empty-state.is-hidden {
+    display: none;
 }
 
 .report-layout .empty-hero {
-    text-align: center;
-    max-width: 600px;
-    animation: fadeInUp 0.8s ease-out;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    max-width: 500px;
 }
 
 .report-layout .empty-title {
-    font-size: 5em;
+    font-size: 4rem;
     font-weight: 900;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
-    background-size: 200% auto;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
     margin: 0;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    animation: shimmer 3s ease-in-out infinite;
 }
 
 .report-layout .empty-divider {
-    width: 120px;
-    height: 4px;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(102, 126, 234, 0.8), 
-        rgba(118, 75, 162, 0.8),
-        transparent
-    );
-    margin: 40px auto; /* 32px -> 40px로 증가 */
-    border-radius: 2px;
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
-    display: block; /* none -> block으로 변경 */
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    margin: var(--space-lg) auto;
+    border-radius: var(--radius-full);
 }
 
-/* 부제 텍스트 스타일 - 크기 증가, 볼드체, 줄간격 넘어 */
 .report-layout .empty-description {
-    font-size: 1.8em; /* 크기 증가 */
-    font-weight: 700; /* 볼드체 적용 */
+    font-size: 1.4rem;
+    font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
-    margin: 0;
-    margin-bottom: 20px; /* 줄간격 넘어 */
-    line-height: 1.5;
-    letter-spacing: -0.01em;
+    margin: var(--space-md) 0;
 }
 
 .report-layout .empty-subdescription {
-    font-size: 1.5em; /* 크기 증가 */
-    font-weight: 600; /* 볼드체 적용 */
+    font-size: 1rem;
     color: var(--text-secondary);
     margin: 0;
-    line-height: 1.6;
-    letter-spacing: -0.005em;
 }
 
-/* ============================================
-   SECTION 6: 탭 및 출력 패널 - 크기 완전 통일
-   ============================================ */
-
-/* 출력 탭 컨테이너 */
+/* 탭 컨테이너 */
 .report-layout .output-tabs-container {
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow: hidden;
+    flex: 1;
+    gap: var(--space-lg);
 }
 
-/* 출력 탭 헤더 - 다크모드 */
+.report-layout .output-tabs-container.is-hidden {
+    display: none;
+}
+
+/* 탭 헤더 - 글래스 효과 */
 .report-layout .output-tabs-header {
     display: flex;
-    justify-content: stretch;
-    gap: 0;
-    padding: 12px 20px;
-    background: #1a1a1a;
-    border-bottom: 2px solid var(--border-color);
-    flex-shrink: 0;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    min-height: 48px;
-    box-sizing: border-box;
+    justify-content: center;
+    background: transparent !important;
+    padding: 0 !important;
+    gap: var(--space-xs) !important;
+    border-radius: 0 !important;
+    border-bottom: none !important;
 }
 
-/* 라이트 모드 - 탭 헤더 */
-body.light-mode .report-layout .output-tabs-header {
-    background: #f5f5f5;
-}
 
+/* 탭 버튼 - 글래스 스타일 */
 .report-layout .output-tab {
-    padding: 6px 16px;
-    background: #2a2a2a;
-    border: none;
-    border-bottom: 3px solid transparent;
-    color: #ffffff;
-    font-size: 0.9em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    bottom: 0;
-    border-radius: 0;
     flex: 1;
-    text-align: center;
+    padding: 10px 18px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: none !important;
+    border-radius: 999px !important;
+    color: var(--text-secondary) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 
-/* 라이트 모드 - 비활성 탭 */
-body.light-mode .report-layout .output-tab {
-    background: #e0e0e0;
-    color: #333333;
-}
-
-/* 비교 탭은 더 넓게 */
-.report-layout .output-tab[data-tab="compare"] {
-    flex: 1.5;
-    padding: 6px 24px;
-}
 
 .report-layout .output-tab:hover {
-    color: #ffffff;
-    background: #3a3a3a;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+    transform: translateY(-1px) !important;
 }
 
-/* 라이트 모드 - 탭 호버 */
-body.light-mode .report-layout .output-tab:hover {
-    background: #d0d0d0;
-    color: #000000;
-}
 
 .report-layout .output-tab.active {
-    color: var(--accent-primary);
-    border-bottom-color: var(--accent-primary);
-    background: #1a1a1a;
+    background: linear-gradient(120deg, rgba(147, 51, 234, 0.85), rgba(79, 70, 229, 0.9)) !important;
+    color: #fff !important;
+    box-shadow: 0 10px 30px rgba(80, 70, 229, 0.35) !important;
+    transform: translateY(-2px) !important;
 }
 
-/* 라이트 모드 - 활성 탭 */
-body.light-mode .report-layout .output-tab.active {
-    background: #ffffff;
-    color: var(--accent-primary);
-}
 
-/* 출력 탭 패널 */
+/* 탭 패널 */
 .report-layout .output-tab-panel {
     display: none;
-    flex-direction: column;
     flex: 1;
-    overflow-y: auto;
-    padding-bottom: 40px;
+    min-height: 600px;
 }
 
 .report-layout .output-tab-panel.active {
     display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
 }
 
 /* ============================================
-   SECTION 7: 비교 패널과 개별 패널 헤더 - 완전 통일
+   비교 탭 - 완전 통일된 디자인
+   - 비교창은 단순히 두 결과를 나란히 배치
+   - Groq/GPT 단독 탭과 완전히 동일한 스타일
    ============================================ */
 
-/* 비교 패널 헤더 */
+/* 비교 컨테이너 - 레이아웃만 처리 */
+.report-layout .output-compare-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+    width: 100%;
+    flex: 1;
+    min-height: 600px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    align-items: start;
+    position: static;
+    overflow: visible;
+    box-shadow: none;
+}
+
+/* 비교 패널 - 글라스 카드 */
+.report-layout .output-compare-panel {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    min-height: 100%;
+}
+
+.report-layout .output-compare-panel:first-child {
+    padding-left: 0;
+}
+
+.report-layout .output-compare-panel:last-child {
+    padding-right: 0;
+}
+
+/* 비교 패널 헤더 - 단독 탭과 동일 */
 .report-layout .compare-panel-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    padding: 12px 16px;
-    background: var(--bg-tertiary);
-    border-bottom: 1px solid var(--border-color);
-    flex-shrink: 0;
-    border-radius: 0;
+    gap: var(--space-sm);
+    padding: 0 var(--space-sm);
     min-height: 48px;
-    height: 48px;
-    box-sizing: border-box;
+    background: transparent;
+    border-radius: 0;
+    margin-bottom: var(--space-sm);
+    border: none;
 }
 
-/* 개별 패널 헤더 */
+/* 비교 콘텐츠 - output-content와 동일 */
+.report-layout .compare-content {
+    flex: 1;
+    padding: var(--space-lg);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.15) !important;
+    backdrop-filter: blur(16px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-align: justify;
+    min-height: 500px;
+    max-height: none;
+    overflow-y: auto;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+}
+
+/* 단독 탭 헤더 - 비교 탭과 동일 */
 .report-layout .output-header-compact {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    padding: 12px 16px;
-    background: var(--bg-tertiary);
-    border-bottom: 1px solid var(--border-color);
-    flex-shrink: 0;
-    border-radius: 0;
+    gap: var(--space-sm);
+    padding: 0 var(--space-sm);
     min-height: 48px;
-    height: 48px;
-    box-sizing: border-box;
+    background: transparent;
+    border-radius: 0;
+    margin-bottom: var(--space-sm);
+    border: none;
 }
 
-/* 출력 카운트 통일 */
-.report-layout .output-count {
-    font-size: 0.85em;
-    color: var(--text-tertiary);
-    font-weight: 600;
-    line-height: 1;
-}
-
-/* 버튼 스타일 통일 */
+/* 버튼 스타일 통일 - 글래스모피즘 */
 .report-layout .compare-panel-header .btn,
 .report-layout .output-header-compact .btn,
 .report-layout .compare-panel-header button,
 .report-layout .output-header-compact button {
-    padding: 6px 14px;
-    font-size: 0.85em;
-    height: auto;
-    line-height: 1.4;
-    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: none !important;
+    color: var(--text-primary) !important;
+    padding: 6px 14px !important;
+    border-radius: 999px !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+    box-shadow: none !important;
 }
 
-/* ============================================
-   SECTION 8: 비교 콘텐츠와 개별 콘텐츠 - 완전 통일
-   ============================================ */
-
-/* 비교 모드 컨테이너 */
-.report-layout .output-compare-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border-color);
-    height: 100%;
-    overflow: hidden;
-    padding-bottom: 16px;
+.report-layout .compare-panel-header .btn:hover,
+.report-layout .output-header-compact .btn:hover,
+.report-layout .compare-panel-header button:hover,
+.report-layout .output-header-compact button:hover {
+    background: rgba(147, 51, 234, 0.35) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    transform: translateY(-1px) !important;
 }
 
-.report-layout .output-compare-panel {
-    background: var(--bg-secondary);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-radius: 0;
-    border: none;
+.report-layout .compare-panel-header .btn:disabled,
+.report-layout .output-header-compact .btn:disabled,
+.report-layout .compare-panel-header button:disabled,
+.report-layout .output-header-compact button:disabled {
+    opacity: 0.4 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
 }
 
-/* 개별 패널 컨테이너 */
+.report-layout .output-count {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* 출력 콘텐츠 */
 .report-layout .output-panel-content {
-    background: var(--bg-secondary);
     display: flex;
     flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-}
-
-/* 비교 콘텐츠 영역 - 크기 및 여백 최적화 */
-.report-layout .compare-content {
-    padding: 20px;
-    line-height: 1.8;
-    font-size: 0.95em;
-    overflow-y: auto;
     flex: 1;
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-md);
-    margin: 12px;
-    margin-bottom: 20px;
-    background: var(--bg-primary);
-    text-align: justify;
-    word-break: keep-all;
-    box-sizing: border-box;
-    color: var(--text-primary);
-    white-space: pre-wrap;
+    padding: var(--space-md);
 }
 
-/* 개별 콘텐츠 영역 - 크기 및 여백 최적화 */
+/* 출력 콘텐츠 영역 - 뉴트럴 스모크 */
 .report-layout .output-content {
-    padding: 20px;
-    line-height: 1.8;
-    font-size: 0.95em;
-    color: var(--text-primary);
-    overflow-y: auto;
     flex: 1;
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-md);
-    margin: 12px;
-    margin-bottom: 20px;
-    background: var(--bg-primary);
-    text-align: justify;
-    word-break: keep-all;
-    box-sizing: border-box;
+    padding: var(--space-lg);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.15) !important;
+    backdrop-filter: blur(16px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
     white-space: pre-wrap;
+    word-break: break-word;
+    text-align: justify;
+    min-height: 500px;
+    max-height: none;
+    overflow-y: auto;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
 }
 
-/* 빈 상태 텍스트 제거 */
-.report-layout .output-content:empty::before,
-.report-layout .compare-content:empty::before,
-.report-layout .output-content:empty::after,
-.report-layout .compare-content:empty::after {
-    content: none;
+/* 스크롤바 스타일 - 모든 출력 영역 동일 */
+.report-layout .output-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.report-layout .output-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
+}
+
+.report-layout .output-content::-webkit-scrollbar-thumb {
+    background: rgba(147, 51, 234, 0.3);
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+.report-layout .output-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(147, 51, 234, 0.5);
+}
+
+.report-layout .output-content.is-hidden {
     display: none;
 }
 
-/* ============================================
-   SECTION 9: 로딩 애니메이션
-   ============================================ */
+/* 입력 영역 스크롤바 */
+.report-layout .input-textarea-compact::-webkit-scrollbar {
+    width: 6px;
+}
 
+.report-layout .input-textarea-compact::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
+}
+
+.report-layout .input-textarea-compact::-webkit-scrollbar-thumb {
+    background: rgba(147, 51, 234, 0.3);
+    border-radius: 3px;
+}
+
+.report-layout .input-textarea-compact::-webkit-scrollbar-thumb:hover {
+    background: rgba(147, 51, 234, 0.5);
+}
+
+/* 로딩 */
 .report-layout .loading {
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 30px;
-    gap: 16px;
-    flex: 1;
+    padding: var(--space-3xl);
+    gap: var(--space-md);
+}
+
+.report-layout .loading.active {
+    display: flex;
+}
+
+.report-layout .loading.is-hidden {
+    display: none;
 }
 
 .report-layout .spinner {
     width: 40px;
     height: 40px;
-    border: 4px solid var(--border-color);
+    border: 3px solid var(--surface-border);
     border-top-color: var(--accent-primary);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
@@ -756,53 +487,266 @@ body.light-mode .report-layout .output-tab.active {
 }
 
 /* ============================================
-   SECTION 10: Floating 버튼 및 Resize Handle 숨김
+   SECTION 4: 입력 영역 (우측)
    ============================================ */
 
-/* Floating 버튼 숨김 */
-.sidebar-floating-toggle,
-.chatbot-floating-btn {
-    position: static;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    top: auto;
+/* 입력 영역 - 뉴트럴 스모크 글래스모피즘 */
+.report-layout .input-area-compact {
+    background: rgba(43, 47, 55, 0.25) !important;
+    backdrop-filter: blur(32px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 28px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
+    display: flex;
+    flex-direction: column;
+    min-height: clamp(760px, 80vh, 1100px);
+    height: auto;
+    padding: clamp(var(--space-md), 1.2vw, var(--space-lg)) !important;
+}
+
+/* 단축키 힌트 - textarea 하단에 자연스럽게 배치 */
+.keyboard-shortcuts-hint {
+    position: absolute;
+    bottom: calc(var(--space-sm) + var(--space-xs));
+    left: var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.report-layout .textarea-wrapper:hover .keyboard-shortcuts-hint {
+    opacity: 1;
+}
+
+.keyboard-shortcuts-hint .hint-label {
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+    margin-right: 2px;
+}
+
+.keyboard-shortcuts-hint .hint-text {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.keyboard-shortcuts-hint .hint-divider {
+    color: var(--text-tertiary);
+    opacity: 0.5;
+    margin: 0 4px;
+}
+
+.keyboard-shortcuts-hint kbd {
+    display: inline-block;
+    padding: 1px 5px;
+    font-size: 0.65rem;
+    font-family: var(--font-mono, 'SF Mono', 'Monaco', 'Consolas', monospace);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .keyboard-shortcuts-hint {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+        gap: 4px;
+    }
+    
+    .keyboard-shortcuts-hint kbd {
+        font-size: 0.6rem;
+        padding: 1px 4px;
+    }
+}
+
+/* 입력 헤더 - 글래스모피즘 */
+.report-layout .input-header-compact {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
+    border-radius: 0;
+    padding-bottom: var(--space-sm);
+}
+
+.report-layout .input-title {
+    padding: var(--space-lg) var(--space-xl);
+    text-align: center;
+}
+
+.report-layout .memo-title {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin: 0;
-    transform: none;
-    box-shadow: none;
-    opacity: 0;
+    text-align: center;
+}
+
+.report-layout .input-divider {
+    display: none;
+}
+
+.report-layout .input-actions-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(var(--space-xs), 0.6vw, var(--space-sm));
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+    margin-top: var(--space-xs);
+}
+
+.report-layout .input-actions-compact .btn {
+    font-size: 1.3rem;
+    padding: 8px 12px !important;
+    min-width: auto;
+}
+
+/* Textarea */
+.report-layout .textarea-wrapper {
+    flex: 1;
+    padding: var(--space-sm) 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border-radius: 0;
+}
+
+/* Textarea - 뉴트럴 스모크 글래스 */
+.report-layout .input-textarea-compact {
+    width: 100%;
+    padding: var(--space-md);
+    border: none !important;
+    border-radius: 20px !important;
+    background: rgba(0, 0, 0, 0.25) !important;
+    backdrop-filter: blur(16px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    text-align: justify;
+    resize: vertical;
+    font-family: inherit;
+    flex: 1;
+    min-height: clamp(580px, 50vh, 780px);
+    transition: all 0.3s ease !important;
+}
+
+.report-layout .input-textarea-compact:focus {
+    outline: none !important;
+    background: rgba(0, 0, 0, 0.35) !important;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.15) !important;
+}
+
+.report-layout .input-textarea-compact::placeholder {
+    color: var(--text-tertiary);
+}
+
+.report-layout .char-count-overlay {
+    position: absolute;
+    bottom: calc(var(--space-sm) + var(--space-xs));
+    right: var(--space-sm);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     pointer-events: none;
 }
 
-/* Resize Handle 완전히 숨김 */
-.resize-handle,
-.resize-handle-bar,
-.resizer,
-.drag-handle,
-.splitter,
-.horizontal-separator,
-.horizontal-resizer,
-.horizontal-divider {
-    display: none !important;
-    height: 0 !important;
-    width: 0 !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-    border: none !important;
-    background: none !important;
+/* 생성 버튼 영역 - 글래스모피즘 */
+.report-layout .generate-button-area {
+    padding: var(--space-sm) 0 0;
+    background: transparent;
+    border-top: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    position: relative;
+}
+
+.report-layout .usage-badge-inline {
+    position: absolute;
+    right: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    font-size: 0.85rem;
 }
 
 /* ============================================
-   SECTION 11: 반응형 디자인
+   SECTION 5: 설정 미리보기 아이템 (제거됨)
+   ============================================ */
+
+/* 사이드바 관련 스타일들은 모두 주석 처리됨 */
+
+/* ============================================
+   SECTION 6: 마크다운 스타일
+   ============================================ */
+
+.report-layout .output-content h1,
+.report-layout .output-content h2,
+.report-layout .output-content h3,
+.report-layout .compare-content h1,
+.report-layout .compare-content h2,
+.report-layout .compare-content h3 {
+    color: var(--text-primary);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.report-layout .output-content p,
+.report-layout .compare-content p {
+    margin-bottom: var(--space-md);
+}
+
+.report-layout .output-content ul,
+.report-layout .output-content ol,
+.report-layout .compare-content ul,
+.report-layout .compare-content ol {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-lg);
+}
+
+/* ============================================
+   SECTION 7: 반응형
    ============================================ */
 
 @media (max-width: 1400px) {
     .report-layout .main-area {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-        height: auto;
-        min-height: calc(100vh - 80px);
+        grid-template-rows: auto auto;
+        align-items: stretch;
     }
     
     .report-layout .output-area-compact,
@@ -813,159 +757,322 @@ body.light-mode .report-layout .output-tab.active {
 
 @media (max-width: 768px) {
     .report-layout .main-area {
-        padding: 12px;
-        gap: 12px;
+        padding: var(--space-md);
+        gap: var(--space-md);
     }
     
     .report-layout .output-compare-container {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+    
+    .report-layout .settings-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .report-layout .output-content,
+    .report-layout .compare-content {
+        max-height: 400px;
     }
 }
 
 /* ============================================
-   SECTION 12: 마크다운 콘텐츠 스타일
+   SECTION 8: 챗봇 모달 - 개선된 디자인 (화이트모드 지원)
    ============================================ */
 
-.report-layout .output-content h1,
-.report-layout .output-content h2,
-.report-layout .output-content h3,
-.report-layout .compare-content h1,
-.report-layout .compare-content h2,
-.report-layout .compare-content h3 {
-    color: var(--text-primary);
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.report-layout .output-content p,
-.report-layout .compare-content p {
-    margin-bottom: 12px;
-}
-
-.report-layout .output-content ul,
-.report-layout .output-content ol,
-.report-layout .compare-content ul,
-.report-layout .compare-content ol {
-    margin-bottom: 12px;
-    padding-left: 24px;
-}
-
-/* 라이트 모드 대응 */
-body.light-mode .report-layout .usage-badge-inline {
-    background: #ffffff;
-    border-color: rgba(102, 126, 234, 0.3);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
-}
-
-/* ============================================
-   SECTION 13: 사이드바 아이템 스타일 개선
-   ============================================ */
-
-/* 설정 미리보기 아이템 */
-.report-layout .setting-preview-item,
-.report-layout .format-preview-list > div,
-.report-layout .style-preview-list > div {
-    padding: 12px 16px;
-    margin-bottom: 10px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.03) 100%);
-    border: 1px solid rgba(102, 126, 234, 0.15);
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    cursor: default;
-}
-
-.report-layout .setting-preview-item:hover,
-.report-layout .format-preview-list > div:hover,
-.report-layout .style-preview-list > div:hover {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.06) 100%);
-    border-color: rgba(102, 126, 234, 0.3);
-    transform: translateX(4px);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
-}
-
-/* 나만의 작성 규칙 */
-.report-layout .custom-prompt-preview {
-    padding: 14px 16px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.05) 100%);
-    border: 1px solid rgba(102, 126, 234, 0.2);
-    border-radius: 10px;
-    font-size: 0.9em;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    font-style: italic;
-    max-height: 200px;
-    overflow-y: auto;
-    transition: all 0.3s ease;
-}
-
-.report-layout .custom-prompt-preview:hover {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.08) 100%);
-    border-color: rgba(102, 126, 234, 0.35);
-    box-shadow: 0 2px 12px rgba(102, 126, 234, 0.2);
-}
-
-/* API 연결 상태 */
-.report-layout .api-status-container {
+.chatbot-modal {
+    position: fixed;
+    top: 100px;
+    bottom: 100px;
+    right: -460px;
+    width: 420px;
+    max-width: calc(100% - 32px);
+    max-height: calc(100vh - 220px);
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    border-radius: 28px;
+    box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    padding: clamp(var(--space-md), 1.2vw, var(--space-lg));
+    gap: var(--space-md);
+    z-index: 1100;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
-.report-layout .api-status-item {
+.chatbot-modal.active {
+    right: clamp(24px, 3vw, 48px);
+}
+
+.chatbot-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.03) 100%);
-    border: 1px solid rgba(102, 126, 234, 0.15);
-    border-radius: 10px;
-    font-size: 0.95em;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--surface-border);
 }
 
-.report-layout .api-status-item:hover {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.06) 100%);
-    border-color: rgba(102, 126, 234, 0.3);
-    transform: translateX(4px);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+.chatbot-header h3 {
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0;
 }
 
-.report-layout .status-badge {
-    font-size: 1.2em;
-    transition: transform 0.3s ease;
-}
-
-.report-layout .api-status-item:hover .status-badge {
-    transform: scale(1.2);
-}
-
-/* 프리셋 레이블 및 값 */
-.report-layout .preset-label {
-    font-weight: 600;
+.chatbot-close-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: var(--surface-2);
     color: var(--text-secondary);
-    font-size: 0.9em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
 }
 
-.report-layout .preset-value {
-    font-weight: 700;
-    color: var(--accent-primary);
-    font-size: 1.05em;
+.chatbot-close-btn:hover {
+    background: var(--surface-3);
+    color: var(--text-primary);
 }
 
-.report-layout .preset-change-link {
-    color: var(--accent-primary);
-    text-decoration: none;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 6px;
+.chatbot-messages {
+    flex: 1;
+    padding: var(--space-xs) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    overflow-y: auto;
+    min-height: 200px;
+}
+
+.chatbot-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chatbot-messages::-webkit-scrollbar-track {
+    background: var(--surface-1);
+    border-radius: 3px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    opacity: 0.3;
+    border-radius: 3px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb:hover {
+    opacity: 0.5;
+}
+
+.chat-welcome-message {
+    border-radius: 16px;
+    padding: var(--space-md);
+    background: rgba(var(--accent-primary-rgb), 0.06);
+    border: 1px solid rgba(var(--accent-primary-rgb), 0.15);
+    color: var(--text-primary);
+}
+
+.chat-welcome-message p {
+    margin: var(--space-xs) 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.chat-welcome-example {
+    margin-top: var(--space-sm);
+    padding: var(--space-sm);
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.chatbot-input-area {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--surface-border);
+}
+
+.chatbot-input-area textarea {
+    width: 100%;
+    padding: var(--space-md);
+    border-radius: 16px;
+    border: 1px solid var(--surface-border);
+    background: var(--surface-2);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    resize: none;
+    min-height: 80px;
+    transition: all 0.2s ease;
+}
+
+.chatbot-input-area textarea:focus {
+    outline: none;
+    background: var(--surface-3);
+    border-color: var(--accent-primary);
+}
+
+.chatbot-input-area textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+.chatbot-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.chatbot-toggles {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.chatbot-toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    cursor: pointer;
+    user-select: none;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    transition: background 0.2s ease;
+}
+
+.chatbot-toggle-switch:hover {
+    background: var(--surface-3);
+}
+
+.chatbot-toggle-switch input {
+    display: none;
+}
+
+.chatbot-toggle-slider {
+    position: relative;
+    width: 38px;
+    height: 20px;
+    border-radius: 999px;
+    background: var(--surface-3);
+    transition: background 0.3s ease;
+}
+
+.chatbot-toggle-slider::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
     transition: all 0.3s ease;
-    font-size: 0.9em;
 }
 
-.report-layout .preset-change-link:hover {
-    background: rgba(102, 126, 234, 0.15);
-    transform: translateX(2px);
+.chatbot-toggle-switch input:checked + .chatbot-toggle-slider {
+    background: rgba(var(--accent-primary-rgb), 0.5);
+}
+
+.chatbot-toggle-switch input:checked + .chatbot-toggle-slider::after {
+    transform: translateX(18px);
+    background: var(--accent-primary);
+}
+
+.chatbot-toggle-label {
+    font-size: 0.8rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+.chatbot-send-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: none;
+    background: var(--accent-primary);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chatbot-send-btn:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-1px);
+}
+
+.chatbot-send-btn:active {
+    transform: translateY(0);
+}
+
+.chatbot-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.chatbot-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+@media (max-width: 640px) {
+    .chatbot-modal {
+        width: calc(100% - 24px);
+        max-height: calc(100vh - 200px);
+        top: 80px;
+        bottom: 80px;
+    }
+
+    .chatbot-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .chatbot-send-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .chatbot-toggles {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+/* ============================================
+   SECTION 9: 유틸리티
+   ============================================ */
+
+/* Floating 버튼 숨김 */
+.sidebar-floating-toggle,
+.chatbot-floating-btn {
+    display: none !important;
+}
+
+/* Resize handle 숨김 */
+.resize-handle {
+    display: none !important;
 }

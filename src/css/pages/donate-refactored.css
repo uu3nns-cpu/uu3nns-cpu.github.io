@@ -1,0 +1,423 @@
+/* --------------------------------------------------------------------------
+   Donate Page Refactored Styles
+   --------------------------------------------------------------------------
+   donate.html의 독자적 스타일을 통합 디자인 시스템으로 변환
+   모든 하드코딩 색상 제거 및 CSS 변수 사용
+   구분선 제거 및 일체감 있는 디자인 적용
+   -------------------------------------------------------------------------- */
+
+/* 후원 페이지 컨테이너 */
+.donate-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--container-gutter) var(--space-3xl);
+}
+
+/* 후원 헤더 */
+.donate-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    /* 구분선 제거 */
+}
+
+.donate-icon {
+    font-size: 60px;
+    margin-bottom: var(--space-sm);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.donate-header h1 {
+    font-size: 2em;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.donate-header p {
+    font-size: 1em;
+    color: var(--text-secondary);
+    line-height: var(--line-height-base);
+}
+
+/* 메시지 박스 */
+.message-box {
+    background: linear-gradient(135deg, var(--surface-3), var(--surface-2));
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+.message-box p {
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    line-height: var(--line-height-base);
+    margin-bottom: var(--space-2xs);
+}
+
+.message-box .highlight {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* 탭 시스템 */
+.tabs {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+    background: var(--surface-2);
+    padding: var(--space-2xs);
+    border-radius: var(--radius-md);
+    border: none;
+}
+
+.tab {
+    flex: 1;
+    padding: var(--space-sm);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.tab.active {
+    background: var(--surface-3);
+    color: var(--accent-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab:hover:not(.active) {
+    color: var(--text-primary);
+    background: var(--surface-1);
+}
+
+/* 탭 컨텐츠 */
+.tab-content {
+    display: none;
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 후원 버튼 그리드 */
+.buttons-grid {
+    display: grid;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+/* 후원 버튼 - 크기 20% 증가 */
+.donation-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 29px; /* 18px * 1.2 = 21.6, 24px * 1.2 = 28.8 */
+    background: var(--surface-2);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    text-decoration: none;
+    color: inherit;
+    font-size: 19px; /* 16px * 1.2 = 19.2 */
+    font-weight: var(--font-weight-regular);
+}
+
+.donation-btn:hover {
+    transform: translateY(-2px);
+    background: var(--accent-primary);
+    color: white;
+    box-shadow: 0 8px 24px rgba(var(--accent-primary-rgb), 0.35);
+}
+
+.donation-btn:active {
+    transform: translateY(0);
+}
+
+.btn-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.btn-icon {
+    font-size: 29px; /* 24px * 1.2 = 28.8 */
+}
+
+.btn-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.btn-title {
+    font-weight: var(--font-weight-semibold);
+    font-size: 18px; /* 15px * 1.2 = 18 */
+}
+
+.btn-desc {
+    font-size: 14px; /* 12px * 1.2 = 14.4 */
+    color: var(--text-tertiary);
+    margin-top: var(--space-3xs);
+}
+
+.donation-btn:hover .btn-desc {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-amount {
+    font-size: 24px; /* 20px * 1.2 = 24 */
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-primary);
+}
+
+.donation-btn:hover .btn-amount {
+    color: white;
+}
+
+/* 커스텀 후원 섹션 */
+.custom-section {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    margin-top: var(--space-lg);
+    /* 구분선 제거 */
+}
+
+.custom-label {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: var(--space-lg);
+}
+
+.custom-input-group {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.custom-input {
+    flex: 1;
+    padding: 14px 16px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    text-align: right;
+    transition: all var(--transition-base);
+    background: var(--surface-2);
+    color: var(--text-primary);
+}
+
+.custom-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent-primary-alpha);
+}
+
+.currency {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--surface-3);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    border: none;
+}
+
+/* 후원 Footer */
+.donate-footer {
+    text-align: center;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-xl);
+    /* 구분선 제거 */
+}
+
+.donate-footer p {
+    color: var(--text-tertiary);
+    font-size: 13px;
+    line-height: var(--line-height-base);
+}
+
+/* 계좌 정보 */
+.account-info {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: var(--surface-3);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-sm);
+    margin: var(--space-sm) 0;
+    font-size: 15px;
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+    border: none;
+}
+
+.copy-btn {
+    background: var(--surface-1);
+    border: none;
+    padding: var(--space-2xs) 14px;
+    border-radius: var(--radius-2xs);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+}
+
+.copy-btn:hover {
+    background: var(--accent-primary);
+    color: white;
+}
+
+/* 결제 방법 안내 */
+.method-info {
+    background: var(--surface-2);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    margin-top: var(--space-lg);
+    border: none;
+}
+
+.method-info h3 {
+    font-size: 14px;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.method-info ol {
+    margin-left: var(--space-lg);
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* 하단 돌아가기 섹션 */
+.donate-container .page-footer {
+    text-align: center;
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+    border-top: none; /* 구분선 제거 */
+}
+
+.donate-container .btn-home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.donate-container .btn-home::before {
+    content: '🏠';
+    font-size: 20px;
+}
+
+.donate-container .btn-home:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 공지 텍스트 */
+.donate-notice {
+    font-size: 12px;
+    margin-top: var(--space-sm);
+    color: var(--text-tertiary);
+    line-height: 1.6;
+}
+
+/* Toast 애니메이션 */
+@keyframes slideDown {
+    from { opacity: 0; transform: translate(-50%, -20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 1; transform: translate(-50%, 0); }
+    to { opacity: 0; transform: translate(-50%, -20px); }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .donate-container {
+        padding: var(--space-lg) var(--space-md) var(--space-xl);
+    }
+
+    .donate-header h1 {
+        font-size: 1.5em;
+    }
+
+    .donation-btn {
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .btn-icon {
+        font-size: 20px;
+    }
+
+    .btn-amount {
+        font-size: 18px;
+    }
+}
+
+/* 라이트 모드 - CSS 변수 기반 */
+html[data-theme="light"] .tab-content {
+    background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.75), 
+        rgba(248, 250, 252, 0.8));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1),
+                0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+html[data-theme="light"] .message-box {
+    background: linear-gradient(135deg, var(--surface-3), var(--surface-2));
+}
+
+html[data-theme="light"] .donation-btn {
+    background: var(--surface-2);
+    border: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme="light"] .donation-btn:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 24px rgba(var(--accent-primary-rgb), 0.25);
+}

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -15,9 +15,10 @@
     </script>
     
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-9257454501555292"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
          crossorigin="anonymous"></script>
     
+
     <!-- CSS -->
     <link rel="stylesheet" href="../src/css/base/variables.css">
     <link rel="stylesheet" href="../src/css/base/base.css">
@@ -26,192 +27,12 @@
     <link rel="stylesheet" href="../src/css/components/components-layout.css">
     <link rel="stylesheet" href="../src/css/base/browser-compatibility.css">
     <link rel="stylesheet" href="../src/css/components/header-unified.css">
+    <link rel="stylesheet" href="../src/css/components/buttons-unified.css">
+    <link rel="stylesheet" href="../src/css/components/glass-effects.css">
+    <link rel="stylesheet" href="../src/css/components/toast.css">
+    <link rel="stylesheet" href="../src/css/components/common-page-layout.css">
     <link rel="stylesheet" href="css/guide-common.css">
-    
-    <style>
-        /* notice.html 스타일 적용 */
-        .guide-hero {
-            text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--border-color);
-        }
-        
-        .guide-hero-icon {
-            font-size: 60px;
-            margin-bottom: 10px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .guide-hero h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-        
-        .guide-hero-subtitle {
-            font-size: 1em;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        
-        /* 상담사 관점의 개인정보 보호 안내 */
-        .privacy-notice {
-            background: var(--bg-secondary);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .privacy-notice::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .privacy-notice-content {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        
-        .privacy-notice-icon {
-            font-size: 40px;
-            flex-shrink: 0;
-            margin-top: 5px;
-        }
-        
-        .privacy-notice-text {
-            flex: 1;
-        }
-        
-        .privacy-notice-text h3 {
-            font-size: 1.3em;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-        
-        .privacy-notice-text p {
-            font-size: 1.05em;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        
-        .privacy-notice-text p:last-child {
-            margin-bottom: 0;
-        }
-        
-        .privacy-notice-btn {
-            background: var(--accent-primary);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        
-        .privacy-notice-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
-        }
-        
-        .guide-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            margin: 32px 0;
-        }
-        
-        .guide-card {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: 16px;
-            padding: 28px;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .guide-card:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
-        }
-        
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-        
-        .card-number {
-            background: linear-gradient(135deg, var(--accent-primary) 0%, #9333ea 100%);
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.3em;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-            flex-shrink: 0;
-        }
-        
-        .card-title {
-            font-size: 1.4em;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-        
-        .card-description {
-            font-size: 1em;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-        
-        .card-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .feature-tag {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            padding: 4px 12px;
-            border-radius: 16px;
-            font-size: 0.85em;
-            color: var(--text-tertiary);
-            font-weight: 500;
-        }
-
-    </style>
+    <link rel="stylesheet" href="../src/css/components/glass-theme-fix.css">
 </head>
 <body>
     <div class="header"></div>
@@ -228,7 +49,7 @@
         </div>
 
         <!-- 개인정보 보호 안내 (상담사 관점) -->
-        <div class="privacy-notice">
+        <div class="privacy-notice glass-card">
             <div class="privacy-notice-content">
                 <div class="privacy-notice-icon">🔐</div>
                 <div class="privacy-notice-text">
@@ -244,7 +65,7 @@
         <!-- Guide Cards -->
         <div class="guide-section">
             <div class="guide-cards-grid">
-                <a href="01-start.html" class="guide-card">
+                <a href="01-start.html" class="guide-card glass-card">
                     <div class="card-header">
                         <div class="card-number">1</div>
                         <div class="card-title">시작하기</div>
@@ -253,12 +74,11 @@
                         RE:가 무엇인지, 어떻게 작동하는지 알아봅니다
                     </div>
                     <div class="card-features">
-                        <span class="feature-tag">⏱️ 3분</span>
                         <span class="feature-tag">🎯 초보자 필수</span>
                     </div>
                 </a>
                 
-                <a href="02-basic.html" class="guide-card">
+                <a href="02-basic.html" class="guide-card glass-card">
                     <div class="card-header">
                         <div class="card-number">2</div>
                         <div class="card-title">기본 사용법</div>
@@ -267,28 +87,26 @@
                         API 키 발급부터 첫 보고서 작성까지
                     </div>
                     <div class="card-features">
-                        <span class="feature-tag">⏱️ 10분</span>
                         <span class="feature-tag">🔑 API 키</span>
                         <span class="feature-tag">✍️ 실습</span>
                     </div>
                 </a>
                 
-                <a href="03-advanced.html" class="guide-card">
+                <a href="03-advanced.html" class="guide-card glass-card">
                     <div class="card-header">
                         <div class="card-number">3</div>
                         <div class="card-title">고급 기능</div>
                     </div>
                     <div class="card-description">
-                        AI 챗봇, 보고서 관리, 단축키 활용
+                        AI 챗봇 활용과 보고서 관리 방법
                     </div>
                     <div class="card-features">
-                        <span class="feature-tag">⏱️ 5분</span>
                         <span class="feature-tag">🤖 AI 챗봇</span>
-                        <span class="feature-tag">⌨️ 단축키</span>
+                        <span class="feature-tag">📚 보고서 관리</span>
                     </div>
                 </a>
                 
-                <a href="05-troubleshoot.html" class="guide-card">
+                <a href="05-troubleshoot.html" class="guide-card glass-card">
                     <div class="card-header">
                         <div class="card-number">4</div>
                         <div class="card-title">문제 해결</div>
@@ -297,7 +115,6 @@
                         자주 발생하는 문제와 해결 방법, FAQ
                     </div>
                     <div class="card-features">
-                        <span class="feature-tag">⏱️ 필요시</span>
                         <span class="feature-tag">❓ FAQ</span>
                         <span class="feature-tag">🔧 트러블슈팅</span>
                     </div>
@@ -306,10 +123,8 @@
         </div>
 
         <!-- Home -->
-        <div style="text-align: center; margin-top: 48px; padding-top: 32px; border-top: 2px solid var(--border-color);">
-            <a href="../index.html" class="btn-back">
-                <span>🏠 홈으로 돌아가기</span>
-            </a>
+        <div class="page-footer">
+            <a href="../index.html" class="btn-home">홈으로 돌아가기</a>
         </div>
     </div>
 
@@ -317,3 +132,4 @@
     <script src="../js/common-components.js"></script>
 </body>
 </html>
+

@@ -332,13 +332,13 @@ function createReportCard(report) {
         actionsLeftHTML = `
             <span class="report-counseling-date">
                 📅 ${report.counselingDateTime}
-                <button class="btn-inline-edit" onclick="event.stopPropagation(); editCounselingDate(${report.id})" title="수정">✏️</button>
+                <button class="btn-inline-edit" data-edit-datetime="${report.id}" title="수정">✏️</button>
             </span>
         `;
     } else {
         // 상담일시가 없는 경우
         actionsLeftHTML = `
-            <span class="counseling-placeholder" onclick="event.stopPropagation(); openDatetimeModal(${report.id})">
+            <span class="counseling-placeholder" data-add-datetime="${report.id}">
                 📅 <span class="text-muted">상담일시 미지정</span>
             </span>
         `;
@@ -361,9 +361,6 @@ function createReportCard(report) {
                     contenteditable="true"
                     data-report-id="${report.id}"
                     data-original-title="${UIUtils.escapeHtml(title)}"
-                    onclick="event.stopPropagation()"
-                    onblur="saveTitle(${report.id}, this)"
-                    onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}"
                     title="${UIUtils.escapeHtml(title)}"
                 >${UIUtils.escapeHtml(displayTitle)}</div>
                 <div class="report-title-meta">
@@ -378,25 +375,107 @@ function createReportCard(report) {
                 ${actionsLeftHTML}
             </div>
             <div class="report-actions-right">
-                <button class="report-action-btn icon-only" onclick="event.stopPropagation(); exportReport(${report.id}, 'text')" title="TXT로 내려받기">
+                <button class="report-action-btn icon-only" data-export="${report.id}" title="TXT로 내려받기">
                     📄
                 </button>
-                <button class="report-action-btn icon-only" onclick="event.stopPropagation(); loadReportInEditor(${report.id})" title="편집">
+                <button class="report-action-btn icon-only" data-edit="${report.id}" title="편집">
                     ✏️
                 </button>
-                <button class="report-action-btn icon-only danger-action" onclick="event.stopPropagation(); deleteReport(${report.id})" title="삭제">
+                <button class="report-action-btn icon-only danger-action" data-delete="${report.id}" title="삭제">
                     🗑️
                 </button>
             </div>
         </div>
     `;
     
-    // 카드 클릭 시 상세보기
+    // 이벤트 리스너 등록
+    
+    // 1. 제목 수정 (contenteditable)
+    const titleElement = card.querySelector('.report-title.editable');
+    if (titleElement) {
+        // 클릭 시 카드 이벤트 차단
+        titleElement.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('제목 클릭됨:', report.id);
+        });
+        
+        // 포커스 시에도 카드 이벤트 차단
+        titleElement.addEventListener('focus', function(e) {
+            e.stopPropagation();
+            console.log('제목 포커스:', report.id);
+        });
+        
+        // 편집 완료 시 저장
+        titleElement.addEventListener('blur', function() {
+            console.log('제목 저장:', report.id);
+            saveTitle(report.id, this);
+        });
+        
+        // Enter 키로 편집 완료
+        titleElement.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.blur();
+            }
+        });
+    }
+    
+    // 2. 상담일시 추가 버튼
+    const addDatetimeBtn = card.querySelector('[data-add-datetime]');
+    if (addDatetimeBtn) {
+        console.log('상담일시 추가 버튼 발견:', report.id);
+        addDatetimeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('상담일시 미지정 클릭됨:', report.id);
+            openDatetimeModal(report.id);
+        });
+    }
+    
+    // 3. 상담일시 수정 버튼
+    const editDatetimeBtn = card.querySelector('[data-edit-datetime]');
+    if (editDatetimeBtn) {
+        console.log('상담일시 수정 버튼 발견:', report.id);
+        editDatetimeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('상담일시 수정 클릭됨:', report.id);
+            editCounselingDate(report.id);
+        });
+    }
+    
+    // 4. 내보내기 버튼
+    const exportBtn = card.querySelector('[data-export]');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('내보내기 클릭됨:', report.id);
+            exportReport(report.id, 'text');
+        });
+    }
+    
+    // 5. 편집 버튼
+    const editBtn = card.querySelector('[data-edit]');
+    if (editBtn) {
+        editBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('편집 클릭됨:', report.id);
+            loadReportInEditor(report.id);
+        });
+    }
+    
+    // 6. 삭제 버튼
+    const deleteBtn = card.querySelector('[data-delete]');
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('삭제 클릭됨:', report.id);
+            deleteReport(report.id);
+        });
+    }
+    
+    // 7. 카드 클릭 시 상세보기 (다른 요소 클릭이 아닌 경우에만)
     card.addEventListener('click', function(e) {
-        if (e.target.closest('.report-action-btn') || 
-            e.target.closest('.report-title.editable')) {
-            return;
-        }
+        console.log('카드 클릭됨 (상세보기):', report.id);
+        // 이미 stopPropagation으로 막혔으면 여기 도달하지 않음
         openDetailModal(report.id);
     });
     

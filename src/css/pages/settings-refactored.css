@@ -1,0 +1,407 @@
+/* --------------------------------------------------------------------------
+   Settings Page Refactored Styles
+   --------------------------------------------------------------------------
+   settings.html의 300+ 라인 인라인 스타일을 분리
+   모든 !important 제거하고 CSS 변수 사용
+   -------------------------------------------------------------------------- */
+
+/* 설정 컨테이너 */
+.settings-container {
+    width: min(1440px, calc(100% - var(--container-gutter) * 2));
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: clamp(32px, 4vw, 64px) 0 64px;
+}
+
+/* 설정 섹션 */
+.settings-section-compact {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    transition: all var(--transition-smooth);
+}
+
+.settings-section-compact:hover {
+    transform: translateY(-2px);
+    border-color: rgba(var(--accent-primary-rgb), 0.4);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* 섹션 타이틀 */
+.section-title-compact {
+    font-size: 1.05rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.section-header-row {
+    margin-bottom: var(--space-sm);
+}
+
+/* 3칼럼 레이아웃 */
+.settings-row-three-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.settings-row-three-column .settings-section-compact {
+    margin-bottom: 0;
+}
+
+/* 2칼럼 레이아웃 */
+.settings-two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.settings-left-column,
+.settings-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* 3열 레이아웃 */
+.settings-three-column-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.settings-column {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.column-header {
+    margin-bottom: var(--space-md);
+}
+
+.column-header h3 {
+    font-size: 1.05rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+/* API 키 섹션 */
+.api-keys-compact {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+    box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* API 키 그리드 레이아웃 */
+.api-keys-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+/* API 키 그룹 */
+.api-key-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.api-key-group .label {
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+/* API 키 입력 래퍼 */
+.api-key-input-wrapper {
+    display: flex;
+    gap: var(--space-xs);
+    align-items: center;
+}
+
+.api-key-input-wrapper .input {
+    flex: 1;
+    height: 42px;
+}
+
+.api-key-input-wrapper .btn {
+    flex-shrink: 0;
+    height: 42px;
+    padding: 0 var(--space-md);
+    white-space: nowrap;
+}
+
+/* API 액션 버튼 그룹 */
+.api-action-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+.api-action-buttons .btn {
+    flex: 1;
+    min-width: 120px;
+}
+
+.api-guide-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xs);
+}
+
+.api-guide-toggle-btn #apiGuideToggleIcon {
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.api-guide-toggle-btn.active #apiGuideToggleIcon {
+    transform: rotate(180deg);
+}
+
+/* 프리셋 관리 */
+.preset-manager {
+    margin-bottom: var(--space-lg);
+}
+
+.preset-info {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-md);
+}
+
+.preset-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    gap: var(--space-sm);
+}
+
+.preset-item {
+    /* btn-card 기본 스타일 사용, 추가 스타일만 정의 */
+    justify-content: space-between;
+    min-height: 64px;
+    gap: var(--space-sm);
+    padding: 14px 18px;
+}
+
+.preset-info-compact {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+    min-width: 0;
+}
+
+.preset-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.preset-name-text {
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.preset-badge-compact {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: var(--font-weight-semibold);
+    background: var(--accent-primary-alpha);
+    color: var(--accent-primary);
+    border: 1px solid rgba(var(--accent-primary-rgb), 0.4);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.preset-badge-active {
+    background: linear-gradient(120deg, rgba(var(--accent-primary-rgb), 0.3), rgba(75, 214, 229, 0.3));
+    color: var(--accent-secondary);
+    border: 1px solid rgba(75, 214, 229, 0.5);
+    box-shadow: 0 0 12px rgba(75, 214, 229, 0.3);
+}
+
+/* 프리셋 삭제 버튼은 buttons-unified.css로 이동 */
+/* .btn-delete-preset 스타일은 buttons-unified.css에 정의됨 */
+
+/* 모델 토글 */
+.model-toggles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+}
+
+.model-toggle-item {
+    margin: 0;
+}
+
+/* 슬라이더 */
+.risk-meter-container {
+    margin-top: var(--space-2xs);
+    margin-bottom: var(--space-sm);
+}
+
+.slider-labels {
+    margin-top: var(--space-2xs);
+}
+
+.slider-labels span {
+    font-size: 0.75rem;
+}
+
+/* 보고서 구조 설정 */
+.format-toggles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+}
+
+/* 보고서 기술 설정 */
+.style-selects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+}
+
+.select-group {
+    margin-bottom: 0;
+}
+
+.select-group .label {
+    margin-bottom: var(--space-2xs);
+    font-size: 0.9rem;
+}
+
+.select-help {
+    margin-top: var(--space-3xs);
+    font-size: 0.75rem;
+}
+
+/* 정보 박스 */
+.info-box {
+    margin-top: var(--space-2xs);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8rem;
+}
+
+/* Footer 버튼은 buttons-unified.css의 기본 스타일 사용 */
+/* .btn-add-preset 스타일은 buttons-unified.css에 정의됨 */
+
+/* Footer 레이아웃 */
+.settings-footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--surface-border);
+}
+
+.settings-footer-buttons .footer-left,
+.settings-footer-buttons .footer-center,
+.settings-footer-buttons .footer-right {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* 반응형 - 3칼럼 */
+@media (max-width: 1400px) {
+    .settings-three-column-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .api-keys-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 반응형 - 3칼럼 상단 */
+@media (max-width: 1024px) {
+    .settings-row-three-column {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+}
+
+/* 반응형 - 2열 레이아웃 */
+@media (max-width: 1200px) {
+    .settings-two-column-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .preset-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 반응형 - 보고서 기술 설정 */
+@media (max-width: 900px) {
+    .style-selects {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 반응형 - API 키, 프리셋 */
+@media (max-width: 768px) {
+    .format-toggles,
+    .preset-list {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Footer 버튼 반응형 */
+    .settings-footer-buttons {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+    
+    .settings-footer-buttons .footer-left,
+    .settings-footer-buttons .footer-center,
+    .settings-footer-buttons .footer-right {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .settings-footer-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* 라이트 모드 */
+html[data-theme="light"] .settings-section-compact,
+html[data-theme="light"] .settings-column,
+html[data-theme="light"] .api-keys-compact {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.98));
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    box-shadow: 0 30px 90px rgba(15, 23, 42, 0.18);
+}
+
+/* preset-item의 라이트 모드는 btn-card의 라이트 모드 스타일 상속 */
