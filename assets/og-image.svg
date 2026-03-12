@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9b8bff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4bd6e5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="100" cy="100" r="150" fill="#9b8bff" opacity="0.1"/>
+  <circle cx="1100" cy="530" r="200" fill="#4bd6e5" opacity="0.1"/>
+  
+  <!-- Main Content -->
+  <g transform="translate(100, 200)">
+    <!-- Logo/Icon -->
+    <rect x="0" y="0" width="100" height="120" rx="15" fill="white" opacity="0.95"/>
+    <rect x="20" y="30" width="60" height="8" rx="4" fill="url(#accentGradient)" opacity="0.7"/>
+    <rect x="20" y="50" width="45" height="8" rx="4" fill="url(#accentGradient)" opacity="0.5"/>
+    <rect x="20" y="70" width="50" height="8" rx="4" fill="url(#accentGradient)" opacity="0.5"/>
+    <circle cx="85" cy="25" r="12" fill="#9b8bff"/>
+    <text x="85" y="32" font-family="Arial" font-size="16" fill="white" text-anchor="middle">✨</text>
+    
+    <!-- Title -->
+    <text x="140" y="40" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white">
+      RE:
+    </text>
+    <text x="140" y="100" font-family="Arial, sans-serif" font-size="42" font-weight="300" fill="#e0e0e0">
+      간편해진 보고서 작성
+    </text>
+  </g>
+  
+  <!-- Subtitle -->
+  <text x="100" y="380" font-family="Arial, sans-serif" font-size="32" fill="url(#accentGradient)">
+    상담사를 위한 AI 기반 보고서 자동 생성 도구
+  </text>
+  
+  <!-- Features -->
+  <g transform="translate(100, 440)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" fill="#b0b0b0">
+      ✓ Groq &amp; GPT-4o-mini 듀얼 AI
+    </text>
+    <text x="0" y="40" font-family="Arial, sans-serif" font-size="24" fill="#b0b0b0">
+      ✓ 실시간 AI 챗봇 수정
+    </text>
+    <text x="0" y="80" font-family="Arial, sans-serif" font-size="24" fill="#b0b0b0">
+      ✓ 완벽한 데이터 보안 (로컬 저장)
+    </text>
+  </g>
+  
+  <!-- URL -->
+  <text x="1100" y="600" font-family="Arial, sans-serif" font-size="20" fill="#808080" text-anchor="end">
+    uu3nns-cpu.github.io
+  </text>
+</svg>

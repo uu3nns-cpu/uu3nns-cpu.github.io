@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=guide/index.html">
+    <title>사용 가이드 - RE: </title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .redirect-message {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .redirect-message h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .redirect-message p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        .redirect-link {
+            display: inline-block;
+            padding: 12px 32px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+        .redirect-link:hover {
+            transform: translateY(-2px);
+        }
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto 0;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-message">
+        <h1>📚 가이드로 이동 중...</h1>
+        <p>새로운 가이드 페이지로 자동으로 이동합니다.</p>
+        <a href="guide/index.html" class="redirect-link">바로 이동하기</a>
+        <div class="spinner"></div>
+    </div>
+    
+    <script>
+        // 자동 리다이렉트 (백업)
+        setTimeout(() => {
+            window.location.href = 'guide/index.html';
+        }, 500);
+    </script>
+</body>
+</html>

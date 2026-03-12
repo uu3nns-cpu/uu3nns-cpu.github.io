@@ -1,0 +1,180 @@
+/* ==============================================
+   Toast 알림 - 통합 스타일
+   ============================================== */
+
+.toast {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    
+    min-width: 250px;
+    max-width: 500px;
+    padding: 16px 24px;
+    
+    background: var(--surface-glass, rgba(30, 30, 30, 0.95));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
+    border: 1px solid var(--surface-border, rgba(255, 255, 255, 0.1));
+    border-radius: 12px;
+    
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    
+    color: var(--text-primary, #e0e0e0);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.5;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 9999;
+}
+
+/* 토스트 표시 상태 */
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 성공 (기본) */
+.toast.success {
+    background: linear-gradient(135deg, 
+                rgba(61, 213, 152, 0.15) 0%, 
+                rgba(61, 213, 152, 0.05) 100%),
+                var(--surface-glass, rgba(30, 30, 30, 0.95));
+    border-color: rgba(61, 213, 152, 0.4);
+    color: #3dd598;
+}
+
+/* 에러 */
+.toast.error {
+    background: linear-gradient(135deg, 
+                rgba(255, 107, 129, 0.15) 0%, 
+                rgba(255, 107, 129, 0.05) 100%),
+                var(--surface-glass, rgba(30, 30, 30, 0.95));
+    border-color: rgba(255, 107, 129, 0.4);
+    color: #ff6b81;
+}
+
+/* 정보 */
+.toast.info {
+    background: linear-gradient(135deg, 
+                rgba(155, 139, 255, 0.15) 0%, 
+                rgba(155, 139, 255, 0.05) 100%),
+                var(--surface-glass, rgba(30, 30, 30, 0.95));
+    border-color: rgba(155, 139, 255, 0.4);
+    color: #9b8bff;
+}
+
+/* 경고 */
+.toast.warning {
+    background: linear-gradient(135deg, 
+                rgba(255, 193, 7, 0.15) 0%, 
+                rgba(255, 193, 7, 0.05) 100%),
+                var(--surface-glass, rgba(30, 30, 30, 0.95));
+    border-color: rgba(255, 193, 7, 0.4);
+    color: #ffc107;
+}
+
+/* 라이트 모드 */
+body.light-mode .toast {
+    background: rgba(255, 255, 255, 0.95);
+    color: #1f2937;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+}
+
+body.light-mode .toast.success {
+    background: linear-gradient(135deg, 
+                rgba(61, 213, 152, 0.2) 0%, 
+                rgba(61, 213, 152, 0.1) 100%),
+                rgba(255, 255, 255, 0.95);
+    border-color: rgba(61, 213, 152, 0.5);
+    color: #0a8754;
+}
+
+body.light-mode .toast.error {
+    background: linear-gradient(135deg, 
+                rgba(255, 107, 129, 0.2) 0%, 
+                rgba(255, 107, 129, 0.1) 100%),
+                rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 107, 129, 0.5);
+    color: #c62828;
+}
+
+body.light-mode .toast.info {
+    background: linear-gradient(135deg, 
+                rgba(155, 139, 255, 0.2) 0%, 
+                rgba(155, 139, 255, 0.1) 100%),
+                rgba(255, 255, 255, 0.95);
+    border-color: rgba(155, 139, 255, 0.5);
+    color: #5e35b1;
+}
+
+body.light-mode .toast.warning {
+    background: linear-gradient(135deg, 
+                rgba(255, 193, 7, 0.2) 0%, 
+                rgba(255, 193, 7, 0.1) 100%),
+                rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 193, 7, 0.5);
+    color: #f57c00;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .toast {
+        top: 60px;
+        left: 16px;
+        right: 16px;
+        transform: translateY(-20px);
+        max-width: none;
+        min-width: auto;
+    }
+    
+    .toast.show {
+        transform: translateY(0);
+    }
+}
+
+/* 애니메이션 개선 */
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+}
+
+/* 접근성 개선 */
+.toast[role="alert"] {
+    /* 스크린 리더를 위한 설정 */
+}
+
+/* 프린트 시 숨김 */
+@media print {
+    .toast {
+        display: none !important;
+    }
+}

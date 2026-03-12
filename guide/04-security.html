@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. 보안 & 개인정보 - RE: 가이드</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+         crossorigin="anonymous"></script>
+    
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../src/css/base/variables.css">
+    <link rel="stylesheet" href="../src/css/base/base.css">
+    <link rel="stylesheet" href="../src/css/base/layout.css">
+    <link rel="stylesheet" href="../src/css/components/components-base.css">
+    <link rel="stylesheet" href="../src/css/components/components-layout.css">
+    <link rel="stylesheet" href="../src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="../src/css/components/header-unified.css">
+    <link rel="stylesheet" href="../src/css/components/buttons-unified.css">
+    <link rel="stylesheet" href="../src/css/components/glass-effects.css">
+    <link rel="stylesheet" href="../src/css/components/toast.css">
+    <link rel="stylesheet" href="css/guide-common.css">
+    <link rel="stylesheet" href="../src/css/components/glass-theme-fix.css">
+</head>
+<body>
+    <div class="header"></div>
+
+    <div class="guide-page">
+        <div class="guide-header glass-section">
+            <div class="guide-number">4</div>
+            <h1>보안 & 개인정보</h1>
+            <p class="guide-header-desc">데이터 처리 방식과 안전한 사용법</p>
+        </div>
+
+        <div class="info-box warning">
+            <h4>⚠️ 필독</h4>
+            <p>개인정보를 다루는 만큼 이 페이지는 꼭 읽어주세요.</p>
+        </div>
+
+        <!-- 데이터 저장 위치 -->
+        <div class="guide-section glass-card">
+            <h2>💾 데이터 저장 위치</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>저장 위치</th>
+                        <th>인터넷 전송</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>API 키</strong></td>
+                        <td>사용자 컴퓨터</td>
+                        <td class="icon-no">없음</td>
+                    </tr>
+                    <tr>
+                        <td><strong>상담 메모</strong></td>
+                        <td>사용자 컴퓨터</td>
+                        <td class="icon-no">없음</td>
+                    </tr>
+                    <tr>
+                        <td><strong>작성 히스토리</strong></td>
+                        <td>사용자 컴퓨터</td>
+                        <td class="icon-no">없음</td>
+                    </tr>
+                    <tr>
+                        <td><strong>보고서 생성</strong></td>
+                        <td>AI 서버</td>
+                        <td class="icon-yes">임시 (즉시 삭제)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <h4>💡 핵심</h4>
+                <p>대부분의 데이터는 <strong>여러분의 컴퓨터에만</strong> 저장됩니다. AI 서버로 전송되는 데이터는 <strong>처리 후 즉시 삭제</strong>됩니다.</p>
+            </div>
+        </div>
+
+        <!-- 왜 안전한가? -->
+        <div class="guide-section glass-card">
+            <h2>🛡️ 왜 안전한가?</h2>
+            
+            <h3>핵심 원리: 중앙 서버 없음</h3>
+            <p>RE는 네이버, 카카오처럼 중앙 서버에 데이터를 모으지 않습니다. 여러분의 컴퓨터에서 직접 AI 서비스를 호출합니다.</p>
+
+            <h3>3가지 안전 장치</h3>
+            <ol style="line-height: 2;">
+                <li><strong>RE 서버는 데이터를 보지도, 저장하지도 못함</strong></li>
+                <li><strong>AI 서버도 처리 후 즉시 삭제</strong> (GDPR 준수)</li>
+                <li><strong>여러분만 데이터를 소유하고 통제</strong></li>
+            </ol>
+
+            <div class="info-box success">
+                <h4>✅ 결론</h4>
+                <p>RE는 데이터를 <strong>저장할 서버 자체가 없습니다.</strong> 해킹이나 유출이 구조적으로 불가능합니다.</p>
+            </div>
+        </div>
+
+        <!-- 보안 체크리스트 -->
+        <div class="guide-section glass-card">
+            <h2>✅ 보안 체크리스트</h2>
+            
+            <ol style="line-height: 2;">
+                <li><strong>API 키 보호:</strong> 절대 공유 금지, 누출 시 즉시 재발급</li>
+                <li><strong>공용 PC 주의:</strong> 사용 후 브라우저 캐시 삭제 또는 시크릿 모드 사용</li>
+                <li><strong>개인정보 최소화:</strong> 실명, 주민번호, 연락처 최소화</li>
+                <li><strong>정기 백업:</strong> 중요 보고서는 TXT 다운로드</li>
+                <li><strong>안전한 네트워크:</strong> 공공 Wi-Fi 대신 안전한 네트워크 사용</li>
+            </ol>
+        </div>
+
+        <!-- FAQ -->
+        <div class="guide-section glass-card">
+            <h2>❓ 자주 묻는 질문</h2>
+            
+            <h3>Q1. AI 서버에서 정말 즉시 삭제되나요?</h3>
+            <p><strong>네.</strong> Groq와 OpenRouter는 GDPR, HIPAA 준수 기업으로 API 호출 완료 후 데이터를 즉시 삭제합니다.</p>
+            
+            <h3>Q2. API 키가 유출되면?</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Groq:</strong> 무료 한도 소진 (금전적 손실 없음)</li>
+                <li><strong>OpenRouter:</strong> 사용료 청구 (금전적 손실 발생)</li>
+            </ul>
+            <p><strong>해결:</strong> 즉시 해당 서비스에서 키 삭제 후 재발급</p>
+            
+            <h3>Q3. 기관 보안 정책 위배 여부는?</h3>
+            <p>각 기관 정책에 따라 다릅니다. 사용 전 기관 담당자에게 문의하세요.</p>
+            
+            <h3>Q4. 브라우저 데이터 삭제 시?</h3>
+            <p>히스토리와 설정이 모두 사라집니다. <strong>중요 데이터는 반드시 백업하세요.</strong></p>
+        </div>
+
+        <!-- 권장 vs 금지 -->
+        <div class="guide-section glass-card">
+            <h2>⚖️ 권장 vs 금지</h2>
+            
+            <div class="two-column">
+                <div class="column-box do">
+                    <h4>✅ 권장</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>익명 표현 ("내담자 A")</li>
+                        <li>개인 컴퓨터 사용</li>
+                        <li>정기적 백업</li>
+                        <li>안전한 네트워크</li>
+                    </ul>
+                </div>
+                
+                <div class="column-box dont">
+                    <h4>❌ 금지</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>실명, 주민번호 기재</li>
+                        <li>공용 PC 무분별 사용</li>
+                        <li>API 키 공유</li>
+                        <li>공공 Wi-Fi 사용</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 요약 -->
+        <div class="info-box success">
+            <h4>📌 핵심 요약</h4>
+            <ul style="margin-left: 20px;">
+                <li>대부분 데이터는 <strong>사용자 컴퓨터에만</strong> 저장</li>
+                <li>AI 전송 데이터는 <strong>즉시 삭제</strong></li>
+                <li>개인식별정보 <strong>최소화</strong></li>
+                <li>중요 데이터는 <strong>별도 백업</strong></li>
+            </ul>
+        </div>
+
+        <!-- 네비게이션 -->
+        <div class="guide-navigation">
+            <a href="03-advanced.html" class="guide-nav-btn">
+                <div class="guide-nav-icon">←</div>
+                <div>
+                    <div class="guide-nav-btn-label">이전</div>
+                    <div class="guide-nav-btn-title">고급 기능</div>
+                </div>
+            </a>
+            
+            <a href="05-troubleshoot.html" class="guide-nav-btn next">
+                <div>
+                    <div class="guide-nav-btn-label">다음</div>
+                    <div class="guide-nav-btn-title">문제 해결</div>
+                </div>
+                <div class="guide-nav-icon">→</div>
+            </a>
+        </div>
+    </div>
+
+    <script src="../js/browser-polyfills.js"></script>
+    <script src="../js/common-components.js"></script>
+</body>
+</html>

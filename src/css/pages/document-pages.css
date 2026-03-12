@@ -1,0 +1,587 @@
+/* ========================================
+   DOCUMENT PAGES COMMON STYLES
+   문서형 페이지 공통 스타일 (Privacy, Notice, Donate 등)
+   ======================================== */
+
+/* 공통 컨테이너 */
+.document-container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-2xl) var(--space-3xl) var(--space-2xl);
+}
+
+.privacy-container,
+.notice-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-2xl);
+    flex: 1;
+}
+
+/* 헤더 스타일 - glass-section 제거 후 플랫 디자인 */
+.document-header,
+.privacy-header,
+.notice-header,
+.donate-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    padding-bottom: 0;
+    /* 배경, 테두리, 패딩 제거로 본문과 일체감 */
+}
+
+.notice-header,
+.donate-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: 0;
+}
+
+.document-icon,
+.notice-icon,
+.donate-icon {
+    font-size: 60px;
+    margin-bottom: var(--space-xs);
+    animation: bounce 2s infinite;
+}
+
+/* @keyframes bounce → common-page-layout.css에 정의됨 (중복 제거) */
+
+.document-header h1,
+.privacy-header h1,
+.notice-header h1,
+.donate-header h1 {
+    font-size: 2.5em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.notice-header h1,
+.donate-header h1 {
+    font-size: 2em;
+    margin-bottom: var(--space-xs);
+}
+
+.privacy-header .last-updated,
+.notice-header p,
+.donate-header p {
+    color: var(--text-tertiary);
+    font-size: 0.9em;
+}
+
+.notice-header p,
+.donate-header p {
+    font-size: 1em;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* 콘텐츠 박스 - 글래스 효과 강화 */
+.document-content,
+.privacy-content,
+.notice-content {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    line-height: 1.8;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    position: relative;
+    overflow: hidden;
+}
+
+.notice-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+}
+
+/* 섹션 스타일 */
+.document-content h2,
+.privacy-content h2,
+.notice-section-title {
+    font-size: 1.5em;
+    color: var(--text-primary);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--surface-border);
+}
+
+.notice-section-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--accent-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.document-content h2:first-child,
+.privacy-content h2:first-child {
+    margin-top: 0;
+}
+
+.document-content h3,
+.privacy-content h3 {
+    font-size: 1.2em;
+    color: var(--text-primary);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+}
+
+.document-content p,
+.privacy-content p,
+.notice-text {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.notice-text {
+    font-size: 1.05em;
+    line-height: 2;
+    margin-bottom: var(--space-lg);
+    text-indent: 0;
+}
+
+/* notice-section 내 텍스트 일체감 강화 */
+.notice-section {
+    /* 배경이나 테두리 제거로 플랫하게 */
+}
+
+.notice-section .notice-text:first-of-type {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+}
+
+.notice-section .notice-text:not(:first-of-type) {
+    /* 나머지 텍스트들은 자연스럽게 이어지도록 */
+    margin-bottom: 24px;
+}
+
+/* 의견제출 버튼 래퍼 */
+.notice-button-wrapper {
+    text-align: center;
+    margin: var(--space-xl) 0;
+    padding: var(--space-3xs) 0;
+}
+
+.document-content ul,
+.document-content ol,
+.privacy-content ul,
+.privacy-content ol,
+.notice-list {
+    color: var(--text-secondary);
+    margin-left: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.notice-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-lg) 0;
+}
+
+.document-content li,
+.privacy-content li {
+    margin-bottom: var(--space-3xs);
+}
+
+.notice-list li {
+    padding: var(--space-sm) var(--space-lg);
+    margin-bottom: var(--space-sm);
+    background: var(--surface-glass);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-sm);
+    position: relative;
+    padding-left: 50px;
+    transition: all 0.2s;
+}
+
+.notice-list li:hover {
+    background: var(--surface-3);
+    border-color: var(--accent-primary);
+    transform: translateX(5px);
+}
+
+.notice-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-primary);
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.document-content strong,
+.privacy-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* 하이라이트 박스 */
+.notice-highlight {
+    background: rgba(var(--accent-primary-rgb), 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-left: 4px solid var(--accent-primary);
+    padding: var(--space-lg) var(--space-xl);
+    border-radius: var(--radius-sm);
+    margin: var(--space-lg) 0;
+}
+
+.notice-highlight strong {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+/* 경고/정보 박스 */
+.notice-warning {
+    background: var(--error-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-left: 4px solid var(--error);
+    padding: var(--space-lg) var(--space-xl);
+    border-radius: var(--radius-sm);
+    margin: var(--space-lg) 0;
+}
+
+.notice-warning-title {
+    color: var(--error);
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: var(--space-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3xs);
+}
+
+.notice-info {
+    background: var(--info-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-left: 4px solid var(--accent-secondary);
+    padding: var(--space-lg) var(--space-xl);
+    border-radius: var(--radius-sm);
+    margin: var(--space-lg) 0;
+}
+
+.notice-info-title {
+    color: var(--info-text);
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: var(--space-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3xs);
+}
+
+/* 연락처 박스 */
+.notice-contact {
+    text-align: center;
+    padding: var(--space-xl);
+    background: var(--surface-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-md);
+    margin-top: var(--space-2xl);
+}
+
+.notice-contact-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.notice-contact-email {
+    font-size: 1.2em;
+    color: var(--accent-primary);
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+}
+
+.notice-contact-text {
+    color: var(--text-secondary);
+    font-size: 1em;
+}
+
+/* 푸터 */
+.document-footer,
+.privacy-footer {
+    text-align: center;
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-2xl);
+    border-top: 2px solid var(--surface-border);
+}
+
+.notice-footer {
+    text-align: center;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-sm);
+    border-top: 2px solid var(--surface-border);
+}
+
+/* donate-footer: donate-refactored.css의 .donate-container .page-footer가
+   실제 렌더링을 담당하므로, 이 선택자는 document-pages.css에서 사용되지 않음.
+   donate.html은 common-page-layout.css의 .page-footer + buttons-unified.css의 .btn-home 조합 사용. */
+.donate-footer {
+    text-align: center;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--surface-border);
+}
+
+.donate-footer p {
+    color: var(--text-tertiary);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* [DEPRECATED] .back-btn (Phase 4-A)
+   HTML에서 미사용 확인됨 → .btn.btn--secondary로 대체 권장 */
+
+/* 피드백 모달 (notice 페이지용) - 글래스 효과 강화 */
+.feedback-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 8, 20, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.feedback-modal.active {
+    display: flex;
+}
+
+.feedback-modal-content {
+    background: var(--surface-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    width: 95%;
+    max-width: 1000px;
+    height: 92vh;
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.03);
+    position: relative;
+    animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.feedback-modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--surface-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.feedback-modal-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.feedback-modal-close {
+    background: var(--surface-glass);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--surface-border);
+    font-size: 1.8em;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feedback-modal-close:hover {
+    background: var(--surface-2);
+    color: var(--text-primary);
+    transform: rotate(90deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feedback-modal-body {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.feedback-modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0 0 24px 24px;
+}
+
+/* 라이트모드 지원 */
+html[data-theme="light"] .document-content,
+html[data-theme="light"] .privacy-content,
+html[data-theme="light"] .notice-content,
+html[data-theme="light"] .feedback-modal-content {
+    background: linear-gradient(160deg,
+        rgba(255, 255, 255, 0.94),
+        rgba(250, 250, 250, 0.96)) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html[data-theme="light"] .notice-list li {
+    background: rgba(255, 255, 255, 0.90) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html[data-theme="light"] .notice-list li:hover {
+    background: rgba(250, 250, 250, 0.95) !important;
+    border-color: rgba(93, 95, 234, 0.4) !important;
+}
+
+html[data-theme="light"] .feedback-modal-close,
+html[data-theme="light"] .back-btn {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 애니메이션 */
+@keyframes contentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.document-content,
+.privacy-content,
+.notice-content {
+    animation: contentFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .privacy-container,
+    .notice-container,
+    .document-container {
+        padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+}
+
+    .privacy-content,
+    .notice-content,
+    .document-content {
+        padding: var(--space-xl);
+    }
+
+    .privacy-header h1,
+    .notice-header h1,
+    .document-header h1 {
+        font-size: 2em;
+    }
+
+    .notice-section-title {
+        font-size: 1.5em;
+    }
+
+    .notice-text {
+        font-size: 1em;
+        line-height: 1.9;
+        margin-bottom: 20px;
+    }
+
+    .notice-section .notice-text:first-of-type {
+        font-size: 1.05em;
+        margin-bottom: 24px;
+    }
+
+    .notice-button-wrapper {
+        margin: 28px 0;
+    }
+}
+
+/* ========================================
+   TERMS PAGE — 요약 박스
+   terms.html 인라인 스타일에서 이관
+   (원래 var(--surface-secondary) 오타 → var(--surface-2) 수정)
+   ======================================== */
+.terms-summary {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--accent-primary);
+}
+
+.terms-summary-title {
+    margin-top: 0;
+    color: var(--accent-primary);
+    font-size: 1.1em;
+    font-weight: var(--font-weight-bold);
+}
+
+.terms-summary-list {
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+
+.terms-summary-list li {
+    margin-bottom: 4px;
+}
+
+html[data-theme="light"] .terms-summary {
+    background: var(--surface-2);
+    border-left-color: var(--accent-primary);
+}

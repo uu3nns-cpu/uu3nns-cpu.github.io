@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. 문제 해결 - RE: 가이드</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+         crossorigin="anonymous"></script>
+    
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../src/css/base/variables.css">
+    <link rel="stylesheet" href="../src/css/base/base.css">
+    <link rel="stylesheet" href="../src/css/base/layout.css">
+    <link rel="stylesheet" href="../src/css/components/components-base.css">
+    <link rel="stylesheet" href="../src/css/components/components-layout.css">
+    <link rel="stylesheet" href="../src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="../src/css/components/header-unified.css">
+    <link rel="stylesheet" href="../src/css/components/buttons-unified.css">
+    <link rel="stylesheet" href="../src/css/components/glass-effects.css">
+    <link rel="stylesheet" href="../src/css/components/toast.css">
+    <link rel="stylesheet" href="css/guide-common.css">
+    <link rel="stylesheet" href="../src/css/components/glass-theme-fix.css">
+</head>
+<body>
+    <div class="header"></div>
+
+    <div class="guide-page">
+        <div class="guide-header glass-section">
+            <div class="guide-number">5</div>
+            <h1>문제 해결</h1>
+            <p class="guide-header-desc">자주 발생하는 문제와 해결 방법</p>
+        </div>
+
+        <!-- API 키 문제 -->
+        <div class="guide-section glass-card">
+            <h2>🔑 API 키 문제</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">❌ "API 키가 유효하지 않습니다"</div>
+                <div class="faq-answer">
+                    <strong>해결:</strong>
+                    <ol>
+                        <li>API 키 다시 복사 후 붙여넣기</li>
+                        <li>앞뒤 공백 확인</li>
+                        <li>Groq/OpenRouter에서 키 활성화 확인</li>
+                        <li>필요시 새 키 발급</li>
+                        <li>Chrome 브라우저 사용 권장</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❌ "일일 사용량 초과"</div>
+                <div class="faq-answer">
+                    <strong>Groq 무료 한도 초과 시:</strong>
+                    <ul>
+                        <li>사용량 리셋 대기</li>
+                        <li>OpenRouter로 전환</li>
+                        <li>새 계정 생성</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ API 키를 잃어버렸어요</div>
+                <div class="faq-answer">
+                    <strong>해결:</strong> 기존 키 삭제 → 새 키 발급 → RE 설정에 재등록
+                </div>
+            </div>
+        </div>
+
+        <!-- 보고서 생성 문제 -->
+        <div class="guide-section glass-card">
+            <h2>📝 보고서 생성 문제</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">❌ 보고서가 생성되지 않아요</div>
+                <div class="faq-answer">
+                    <strong>확인 사항:</strong>
+                    <ol>
+                        <li>인터넷 연결 확인</li>
+                        <li>API 키 올바른지 확인</li>
+                        <li>메모 길이 (50자 이상 권장)</li>
+                        <li>F5로 페이지 새로고침</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❌ 생성된 보고서가 이상해요</div>
+                <div class="faq-answer">
+                    <strong>해결:</strong>
+                    <ul>
+                        <li>메모를 더 구체적으로 작성</li>
+                        <li>"보고서 생성" 다시 클릭</li>
+                        <li>AI 챗봇으로 수정 요청</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 데이터 문제 -->
+        <div class="guide-section glass-card">
+            <h2>💾 데이터 문제</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">❌ 히스토리가 사라졌어요</div>
+                <div class="faq-answer">
+                    <strong>원인:</strong> 브라우저 캐시 삭제 또는 다른 브라우저 사용<br>
+                    <strong>해결:</strong> 백업 파일 "불러오기" 또는 정기적으로 TXT 다운로드
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ 다른 컴퓨터로 옮기고 싶어요</div>
+                <div class="faq-answer">
+                    <strong>방법:</strong>
+                    <ol>
+                        <li>설정 → "히스토리 내보내기" → JSON 저장</li>
+                        <li>새 컴퓨터로 파일 복사</li>
+                        <li>설정 → "히스토리 불러오기"</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- 동영상 재생 문제 -->
+        <div class="guide-section glass-card">
+            <h2>🎬 동영상이 재생되지 않을 때</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">❌ 유튜브 동영상이 보이지 않아요</div>
+                <div class="faq-answer">
+                    <strong>확인 사항:</strong>
+                    <ol>
+                        <li><strong>인터넷 연결 확인</strong> - 동영상은 온라인에서만 재생됩니다</li>
+                        <li><strong>브라우저 업데이트</strong> - Chrome, Edge 최신 버전 권장</li>
+                        <li><strong>광고 차단기</strong> - 임시로 비활성화 후 시도</li>
+                        <li><strong>F5 새로고침</strong> - 페이지를 다시 로드해보세요</li>
+                        <li><strong>다른 브라우저</strong> - Chrome, Edge, Firefox 중 다른 것 시도</li>
+                    </ol>
+                    <strong>그래도 안 되면:</strong>
+                    <ul>
+                        <li>유튜브에서 직접 영상 URL 접속해보기</li>
+                        <li>영상이 업로더에 의해 비공개/삭제되었을 수 있음</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❌ "동영상 소유자가 외부 재생을 차단했습니다" 메시지</div>
+                <div class="faq-answer">
+                    <strong>원인:</strong> 해당 영상의 업로더가 외부 사이트 재생을 차단한 경우<br>
+                    <strong>해결:</strong> 유튜브에서 직접 시청하거나, 관련 대체 영상 찾기
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ API 발급 영상이 안 보여요 (설정 페이지)</div>
+                <div class="faq-answer">
+                    <strong>해결:</strong>
+                    <ol>
+                        <li>설정 페이지 새로고침 (F5)</li>
+                        <li>"발급방법" 버튼 → 문서로 확인</li>
+                        <li>직접 유튜브 링크로 접속:
+                            <ul>
+                                <li><a href="https://www.youtube.com/watch?v=Jc2WmLiXyjg" target="_blank" style="color: var(--accent-primary);">Groq API 발급 영상</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=u9Aplb30JPE" target="_blank" style="color: var(--accent-primary);">GPT API 발급 영상</a></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- 브라우저 문제 -->
+        <div class="guide-section glass-card">
+            <h2>🌐 브라우저 문제</h2>
+            
+            <div class="info-box">
+                <h4>✅ 권장 브라우저</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Chrome (버전 90+) - 가장 권장</li>
+                    <li>Edge (버전 90+)</li>
+                    <li>Firefox (버전 88+)</li>
+                    <li>Safari (버전 14+)</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ 화면이 깨져요</div>
+                <div class="faq-answer">
+                    <strong>해결:</strong>
+                    <ol>
+                        <li>브라우저 최신 버전으로 업데이트</li>
+                        <li>Ctrl+F5로 강력 새로고침</li>
+                        <li>확대/축소 100% (Ctrl+0)</li>
+                        <li>다른 브라우저 시도</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="guide-section glass-card">
+            <h2>❓ 자주 묻는 질문</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">💰 비용이 얼마인가요?</div>
+                <div class="faq-answer">
+                    <strong>Groq:</strong> 완전 무료 (하루 사용량 제한)<br>
+                    <strong>OpenRouter:</strong> 결제수단 미등록 시 제한량까지 무료
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">🔒 데이터가 안전한가요?</div>
+                <div class="faq-answer">
+                    대부분 데이터는 사용자 컴퓨터에만 저장. AI 전송 데이터는 즉시 삭제. 
+                    <a href="04-security.html" style="color: var(--accent-primary);">보안 가이드</a> 참고
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">👥 여러 명이 사용 가능한가요?</div>
+                <div class="faq-answer">
+                    각자 다른 API 키 또는 다른 브라우저 프로필 사용 권장
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">📱 오프라인 사용 가능한가요?</div>
+                <div class="faq-answer">
+                    불가능. AI 서버 통신을 위해 인터넷 연결 필수
+                </div>
+            </div>
+        </div>
+
+        <!-- 네비게이션 -->
+        <div class="guide-navigation">
+            <a href="04-security.html" class="guide-nav-btn">
+                <div class="guide-nav-icon">←</div>
+                <div>
+                    <div class="guide-nav-btn-label">이전</div>
+                    <div class="guide-nav-btn-title">보안 & 개인정보</div>
+                </div>
+            </a>
+            
+            <a href="index.html" class="guide-nav-btn next">
+                <div>
+                    <div class="guide-nav-btn-label">처음으로</div>
+                    <div class="guide-nav-btn-title">가이드 홈</div>
+                </div>
+                <div class="guide-nav-icon">🏠</div>
+            </a>
+        </div>
+    </div>
+
+    <script src="../js/browser-polyfills.js"></script>
+    <script src="../js/common-components.js"></script>
+</body>
+</html>

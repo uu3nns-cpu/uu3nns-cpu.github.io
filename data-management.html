@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="Copyright (c) 2025 김도현. All Rights Reserved.">
+    <meta name="author" content="김도현">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="RE: 데이터 관리. API 키, 설정, 보고서를 안전하게 백업하고 복원하세요.">
+    <meta name="keywords" content="RE 데이터 관리, API 키 백업, 보고서 백업, 설정 복원, 상담 보고서">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://uu3nns-cpu.github.io/data-management.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon-detailed.svg">
+    
+    <title>데이터 관리 - RE: 간편해진 보고서 작성</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+         crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/base/variables.css?v=20241118003">
+    <link rel="stylesheet" href="src/css/base/base.css">
+    <link rel="stylesheet" href="src/css/base/layout.css">
+    <link rel="stylesheet" href="src/css/components/components-base.css?v=20241118003">
+    <link rel="stylesheet" href="src/css/components/components-layout.css">
+    <link rel="stylesheet" href="src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="src/css/components/header-unified.css">
+    <link rel="stylesheet" href="src/css/components/buttons-unified.css">
+    <link rel="stylesheet" href="src/css/components/glass-effects.css">
+    <link rel="stylesheet" href="src/css/components/toast.css">
+    <link rel="stylesheet" href="src/css/components/common-page-layout.css">
+    <link rel="stylesheet" href="src/css/pages/data-management.css">
+    <link rel="stylesheet" href="src/css/components/glass-theme-fix.css?v=20241118003">
+    
+    <!-- 인라인 스타일 제거 완료 -->
+</head>
+<body>
+    <!-- 공통 Header (JS로 자동 생성) -->
+    <div class="header"></div>
+
+    <div id="toast" class="toast"></div>
+
+    <main class="data-management-container">
+        <!-- 페이지 헤더 -->
+        <div class="page-header">
+            <div class="page-header-icon">📦</div>
+            <h1>데이터 관리</h1>
+            <p class="subtitle">
+                API 키, 설정, 보고서를 안전하게 백업하고 복원하세요
+            </p>
+        </div>
+        
+        <!-- 현황 통계 (2중 박스 제거) -->
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">API 키</div>
+                <div class="stat-value" id="apiCount">0</div>
+                <div class="stat-meta" id="apiMeta">저장된 API 키가 없습니다</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">설정 모음</div>
+                <div class="stat-value" id="presetCount">0</div>
+                <div class="stat-meta" id="presetMeta">저장된 설정이 없습니다</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">보고서</div>
+                <div class="stat-value" id="reportsCount">0</div>
+                <div class="stat-meta" id="reportsMeta">저장된 보고서가 없습니다</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">전체 크기</div>
+                <div class="stat-value" id="totalSize">0 KB</div>
+                <div class="stat-meta" id="totalMeta">전체 0개 항목</div>
+            </div>
+        </div>
+        
+        <!-- 데이터 타입별 관리 (섹션 타이틀 추가) -->
+        <div class="section-title">🗂️ 데이터 타입별 관리</div>
+        
+        <div class="data-grid">
+            <!-- API 키 관리 -->
+            <div class="data-type-card">
+                <div class="card-header">
+                    <div class="card-icon">🔑</div>
+                    <div class="card-title">API 키 관리</div>
+                </div>
+                <div class="card-desc">
+                    저장된 API 키를 백업하고 복원하거나 삭제합니다
+                </div>
+                <div class="button-group">
+                    <button class="btn btn--secondary btn--small" onclick="backupApiKeys()" id="backupApiBtn">
+                        백업하기
+                    </button>
+                    <button class="btn btn--secondary btn--small" onclick="document.getElementById('restoreApiInput').click()">
+                        복원하기
+                    </button>
+                    <button class="btn btn--danger-strong btn--small" onclick="deleteApiKeys()" id="deleteApiBtn">
+                        삭제하기
+                    </button>
+                </div>
+                <input type="file" id="restoreApiInput" class="hidden-file-input" accept=".json" onchange="restoreApiKeys(this.files[0])">
+            </div>
+            
+            <!-- 설정 모음 관리 -->
+            <div class="data-type-card">
+                <div class="card-header">
+                    <div class="card-icon">⚙️</div>
+                    <div class="card-title">설정 모음 관리</div>
+                </div>
+                <div class="card-desc">
+                    저장된 설정 프리셋을 백업하고 복원하거나 삭제합니다
+                </div>
+                <div class="button-group">
+                    <button class="btn btn--secondary btn--small" onclick="backupPresets()" id="backupPresetsBtn">
+                        백업하기
+                    </button>
+                    <button class="btn btn--secondary btn--small" onclick="document.getElementById('restorePresetsInput').click()">
+                        복원하기
+                    </button>
+                    <button class="btn btn--danger-strong btn--small" onclick="deletePresets()" id="deletePresetsBtn">
+                        삭제하기
+                    </button>
+                </div>
+                <input type="file" id="restorePresetsInput" class="hidden-file-input" accept=".json" onchange="restorePresets(this.files[0])">
+            </div>
+            
+            <!-- 보고서 관리 -->
+            <div class="data-type-card">
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">보고서 관리</div>
+                </div>
+                <div class="card-desc">
+                    저장된 보고서를 백업하고 복원하거나 삭제합니다
+                </div>
+                <div class="button-group">
+                    <button class="btn btn--secondary btn--small" onclick="backupReports()" id="backupReportsBtn">
+                        백업하기
+                    </button>
+                    <button class="btn btn--secondary btn--small" onclick="document.getElementById('restoreReportsInput').click()">
+                        복원하기
+                    </button>
+                    <button class="btn btn--danger-strong btn--small" onclick="deleteReports()" id="deleteReportsBtn">
+                        삭제하기
+                    </button>
+                </div>
+                <input type="file" id="restoreReportsInput" class="hidden-file-input" accept=".json" onchange="restoreReports(this.files[0])">
+            </div>
+        </div>
+        
+        <!-- 전체 데이터 관리 -->
+        <div class="section-title section-title--warning">⚠️ 전체 데이터 관리</div>
+        <p class="section-description">
+            모든 데이터를 한 번에 백업하거나 복원할 수 있습니다. 전체 초기화는 신중하게 사용하세요.
+        </p>
+        
+        <div class="full-management-section">
+            <div class="full-management-grid">
+                <button class="btn btn--secondary btn--large" onclick="backupAll()">
+                    💾 전체 백업
+                </button>
+                <button class="btn btn--secondary btn--large" onclick="document.getElementById('restoreAllInput').click()">
+                    📥 전체 복원
+                </button>
+                <button class="btn btn--danger btn--large" onclick="resetAll()">
+                    ⚠️ 전체 초기화
+                </button>
+            </div>
+            <input type="file" id="restoreAllInput" class="hidden-file-input" accept=".json" onchange="restoreAll(this.files[0])">
+        </div>
+        
+        <div class="page-footer">
+            <a href="index.html" class="btn-home">홈으로 돌아가기</a>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="js/browser-polyfills.js"></script>
+    <script src="js/common-components.js"></script>
+    <script src="js/security.js"></script>
+    <script src="js/config/app-constants.js?v=20251111001"></script>
+    <script src="js/config/model-configs.js?v=20251111001"></script>
+    <script src="js/modules/settings-storage.js"></script>
+    <script src="js/modules/ui-controls.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/data-management.js"></script>
+</body>
+</html>
