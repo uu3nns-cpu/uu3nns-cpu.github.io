@@ -343,7 +343,6 @@ html[data-theme="light"] body {
     background-image: var(--gradient-hero) !important;
 }
 
-/* 라이트모드 Glass 효과 - 투명도 극대화 + 강력한 블러 */
 html[data-theme="light"] .settings-section-compact,
 html[data-theme="light"] .settings-column,
 html[data-theme="light"] .api-keys-compact,
@@ -389,7 +388,6 @@ html[data-theme="light"] .quick-links-section {
                 inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
 }
 
-/* 라이트모드 notice-section도 투명하게 */
 html[data-theme="light"] .notice-section {
     background: transparent !important;
     backdrop-filter: none !important;
@@ -429,7 +427,6 @@ html[data-theme="light"] .notice-item:hover {
                 0 4px 12px rgba(93, 95, 234, 0.2) !important;
 }
 
-/* 라이트모드 리포트 페이지 */
 html[data-theme="light"] .output-area-compact,
 html[data-theme="light"] .input-area-compact,
 html[data-theme="light"] .output-tab-panel,
@@ -445,7 +442,6 @@ html[data-theme="light"] .output-compare-panel {
                 inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
 }
 
-/* 라이트모드 Input - 투명하게 */
 html[data-theme="light"] .input,
 html[data-theme="light"] input[type="text"],
 html[data-theme="light"] input[type="password"],
@@ -471,7 +467,6 @@ html[data-theme="light"] select:focus {
                 inset 0 2px 4px rgba(15, 23, 42, 0.05) !important;
 }
 
-/* 라이트모드 헤더 */
 html[data-theme="light"] .header,
 html[data-theme="light"] .glass-header {
     background: linear-gradient(160deg, 
@@ -484,7 +479,6 @@ html[data-theme="light"] .glass-header {
                 inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
 }
 
-/* 라이트모드 챗봇 */
 html[data-theme="light"] .chatbot-modal {
     background: linear-gradient(160deg, 
         rgba(255, 255, 255, 0.92), 
@@ -507,7 +501,6 @@ html[data-theme="light"] .chat-message {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
-/* 라이트모드 피드백 모달 */
 html[data-theme="light"] .feedback-modal-content {
     background: linear-gradient(160deg, 
         rgba(255, 255, 255, 0.92), 
@@ -525,14 +518,12 @@ html[data-theme="light"] .feedback-modal-header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
-/* 라이트모드 아이콘 래퍼 */
 html[data-theme="light"] .feature-icon,
 html[data-theme="light"] .quick-link-icon {
     background: rgba(255, 255, 255, 0.90) !important;
     border: 2px solid rgba(0, 0, 0, 0.08) !important;
 }
 
-/* 라이트모드 뱃지 */
 html[data-theme="light"] .hero-badge,
 html[data-theme="light"] .glass-badge,
 html[data-theme="light"] .preset-badge-compact {
@@ -547,39 +538,25 @@ html[data-theme="light"] .preset-badge-compact {
    15. 특수 요소 수정
    =========================================== */
 
-/* Empty State */
-.output-empty-state {
+.output-empty-state { background: transparent !important; }
+.empty-hero, .empty-title { color: var(--text-primary) !important; }
+.empty-description, .empty-subdescription { color: var(--text-secondary) !important; }
+.input-divider, .empty-divider { background: var(--surface-border) !important; }
+
+/* 슬라이더 — C 스타일과 충돌하지 않도록 수정
+   [FIX] .risk-meter-slider는 투명 배경 유지 (트랙 위에 겹치는 input)
+         .risk-meter-track은 회색 배경 컨테이너 역할 (fill이 따로 색을 가짐)
+         이전처럼 그라디언트를 직접 주면 fill div가 가려짐 */
+.risk-meter-slider {
     background: transparent !important;
 }
 
-.empty-hero {
-    color: var(--text-primary) !important;
-}
-
-.empty-title {
-    color: var(--text-primary) !important;
-}
-
-.empty-description,
-.empty-subdescription {
-    color: var(--text-secondary) !important;
-}
-
-/* Divider */
-.input-divider,
-.empty-divider {
-    background: var(--surface-border) !important;
-}
-
-/* 슬라이더 */
-.risk-meter-slider {
+.risk-meter-track {
     background: var(--surface-2) !important;
 }
 
-.risk-meter-track {
-    background: linear-gradient(90deg, 
-        var(--accent-primary), 
-        var(--accent-secondary)) !important;
+.risk-meter-track-fill {
+    background: var(--accent-primary) !important;
 }
 
 .slider-labels span {
@@ -614,9 +591,6 @@ html[data-theme="light"] .preset-badge-compact {
 /* ===========================================
    17. 애니메이션 부드럽게 - 전역 선택자 제거
    =========================================== */
-/* 전역 트랜지션 제거 - 아코디언 등 동적 요소 충돌 방지 */
-
-/* 트랜지션 제외할 요소 */
 input[type="range"],
 .spinner,
 .loading *,

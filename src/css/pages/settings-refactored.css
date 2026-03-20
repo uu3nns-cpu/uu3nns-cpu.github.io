@@ -1,8 +1,5 @@
 /* --------------------------------------------------------------------------
    Settings Page Refactored Styles
-   --------------------------------------------------------------------------
-   settings.html의 300+ 라인 인라인 스타일을 분리
-   모든 !important 제거하고 CSS 변수 사용
    -------------------------------------------------------------------------- */
 
 /* 설정 컨테이너 */
@@ -265,11 +262,8 @@
 
 /* ==========================================================================
    커스텀 토글 UI
-   [FIX] checkbox에 appearance:none이 전역 적용되어 토글이 보이지 않던 문제 해결
-         숨겨진 checkbox + .toggle-ui pseudo-element 방식으로 완전 구현
    ========================================================================== */
 
-/* 토글 아이템 공통 래퍼 */
 .toggle-item,
 .model-toggle-item {
     display: flex;
@@ -288,7 +282,6 @@
     background: rgba(var(--accent-primary-rgb), 0.06);
 }
 
-/* toggle-item 내 텍스트 */
 .toggle-item > span:first-child,
 .model-label {
     font-size: 0.9rem;
@@ -297,7 +290,6 @@
     flex: 1;
 }
 
-/* 실제 checkbox 숨기기 */
 .toggle-item input[type="checkbox"],
 .model-toggle-item input[type="checkbox"] {
     position: absolute;
@@ -307,7 +299,6 @@
     pointer-events: none;
 }
 
-/* 토글 트랙 (.toggle-ui) */
 .toggle-ui {
     position: relative;
     display: inline-block;
@@ -321,7 +312,6 @@
     cursor: pointer;
 }
 
-/* 토글 썸(원) — ::after */
 .toggle-ui::after {
     content: '';
     position: absolute;
@@ -331,11 +321,9 @@
     height: 16px;
     border-radius: 50%;
     background: var(--text-tertiary);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                background 0.25s ease;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease;
 }
 
-/* 체크됨 상태 */
 input[type="checkbox"]:checked + .toggle-ui {
     background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary));
     border-color: transparent;
@@ -347,13 +335,11 @@ input[type="checkbox"]:checked + .toggle-ui::after {
     background: #fff;
 }
 
-/* focus-visible 접근성 */
 input[type="checkbox"]:focus-visible + .toggle-ui {
     outline: 2px solid rgba(var(--accent-primary-rgb), 0.5);
     outline-offset: 2px;
 }
 
-/* 모델 토글 */
 .model-toggles {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -361,7 +347,7 @@ input[type="checkbox"]:focus-visible + .toggle-ui {
 }
 
 .model-toggle-item {
-    flex-direction: row-reverse; /* 텍스트 왼쪽, 토글 오른쪽 */
+    flex-direction: row-reverse;
     justify-content: flex-end;
     gap: var(--space-sm);
     padding: var(--space-sm);
@@ -375,7 +361,6 @@ input[type="checkbox"]:focus-visible + .toggle-ui {
     background: rgba(var(--accent-primary-rgb), 0.05);
 }
 
-/* 라이트 모드 토글 */
 html[data-theme="light"] .toggle-ui {
     background: rgba(15, 23, 42, 0.1);
     border-color: rgba(15, 23, 42, 0.15);
@@ -400,64 +385,114 @@ html[data-theme="light"] .model-toggle-item {
 }
 
 /* ==========================================================================
-   슬라이더 (risk-meter)
+   슬라이더 — C 스타일 (슬림 모던)
+   얇은 4px 트랙 + 아웃라인 썸 + 현재 값 float 배지
    ========================================================================== */
+
 .risk-meter-container {
-    margin-top: var(--space-2xs);
-    margin-bottom: var(--space-sm);
     position: relative;
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-sm);
+    padding-top: 28px; /* float 배지 공간 */
 }
 
-.risk-meter-slider {
-    width: 100%;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 6px;
+/* float 값 배지 */
+.risk-meter-value {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-primary);
+    background: rgba(var(--accent-primary-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-primary-rgb), 0.3);
+    border-radius: 999px;
+    padding: 2px 10px;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: left 0.1s ease;
+    line-height: 1.6;
+}
+
+/* 트랙 배경 wrapper */
+.risk-meter-track-wrap {
+    position: relative;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* 트랙 베이스 */
+.risk-meter-track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
     border-radius: 999px;
     background: var(--surface-2);
+    border: 1px solid var(--surface-border);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* 채워진 트랙 */
+.risk-meter-track-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--accent-primary);
+    border-radius: 999px;
+    transition: width 0.1s ease;
+    pointer-events: none;
+}
+
+/* range input — 트랙 위에 투명하게 겹침 */
+.risk-meter-slider {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
     outline: none;
     cursor: pointer;
-    position: relative;
     z-index: 1;
 }
 
+/* 썸 — 아웃라인 스타일 */
 .risk-meter-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    background: var(--surface-1);
+    border: 2px solid var(--accent-primary);
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb), 0.4);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
-.risk-meter-slider::-webkit-slider-thumb:hover {
+.risk-meter-slider:hover::-webkit-slider-thumb {
     transform: scale(1.15);
-    box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.6);
+    box-shadow: 0 0 0 4px rgba(var(--accent-primary-rgb), 0.18);
 }
 
 .risk-meter-slider::-moz-range-thumb {
     width: 18px;
     height: 18px;
-    border: none;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    background: var(--surface-1);
+    border: 2px solid var(--accent-primary);
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb), 0.4);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
-/* 트랙 장식선 */
-.risk-meter-track {
-    width: 100%;
-    height: 3px;
-    margin-top: var(--space-2xs);
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-    opacity: 0.35;
-}
-
+/* 라벨 */
 .slider-labels {
     display: flex;
     justify-content: space-between;
@@ -475,6 +510,17 @@ html[data-theme="light"] .model-toggle-item {
 .slider-labels span.active {
     color: var(--accent-primary);
     font-weight: var(--font-weight-bold);
+}
+
+/* 라이트 모드 */
+html[data-theme="light"] .risk-meter-track {
+    background: rgba(15, 23, 42, 0.08);
+    border-color: rgba(15, 23, 42, 0.1);
+}
+
+html[data-theme="light"] .risk-meter-slider::-webkit-slider-thumb {
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* 보고서 구조 설정 */
@@ -530,83 +576,39 @@ html[data-theme="light"] .model-toggle-item {
     gap: var(--space-sm);
 }
 
-/* 반응형 - 3칼럼 (보고서 기술/구조/규칙) */
+/* 반응형 */
 @media (max-width: 1400px) {
-    .settings-three-column-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .api-keys-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .api-action-buttons .btn {
-        flex: 1 1 auto;
-        min-width: 0;
-    }
+    .settings-three-column-layout { grid-template-columns: 1fr; }
+    .api-keys-grid { grid-template-columns: 1fr; }
+    .api-action-buttons .btn { flex: 1 1 auto; min-width: 0; }
 }
 
-/* 반응형 - 3칼럼 상단 (모델/화면/보고서) */
 @media (max-width: 1024px) {
-    .settings-row-three-column {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-    }
+    .settings-row-three-column { grid-template-columns: 1fr; gap: var(--space-md); }
 }
 
-/* 반응형 - 2열 레이아웃 */
 @media (max-width: 1200px) {
-    .settings-two-column-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .preset-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .settings-two-column-layout { grid-template-columns: 1fr; }
+    .preset-list { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* 반응형 - 보고서 기술 설정 */
 @media (max-width: 900px) {
-    .style-selects {
-        grid-template-columns: 1fr;
-    }
+    .style-selects { grid-template-columns: 1fr; }
 }
 
-/* 반응형 - API 키, 프리셋 */
 @media (max-width: 768px) {
     .format-toggles,
-    .preset-list {
-        grid-template-columns: 1fr;
-    }
+    .preset-list { grid-template-columns: 1fr; }
 
-    .api-action-buttons {
-        flex-direction: column;
-    }
+    .api-action-buttons { flex-direction: column; }
+    .api-action-buttons .btn { width: 100%; flex: none; }
+    .model-toggles { grid-template-columns: 1fr; }
 
-    .api-action-buttons .btn {
-        width: 100%;
-        flex: none;
-    }
-
-    .model-toggles {
-        grid-template-columns: 1fr;
-    }
-
-    .settings-footer-buttons {
-        flex-direction: column;
-        gap: var(--space-md);
-    }
-
+    .settings-footer-buttons { flex-direction: column; gap: var(--space-md); }
     .settings-footer-buttons .footer-left,
     .settings-footer-buttons .footer-center,
-    .settings-footer-buttons .footer-right {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .settings-footer-buttons .btn {
-        width: 100%;
-    }
+    .settings-footer-buttons .footer-right { width: 100%; flex-direction: column; }
+    .settings-footer-buttons .btn { width: 100%; }
 }
 
 /* 라이트 모드 */
@@ -617,5 +619,3 @@ html[data-theme="light"] .api-keys-compact {
     border: 1px solid rgba(15, 23, 42, 0.12);
     box-shadow: 0 30px 90px rgba(15, 23, 42, 0.18);
 }
-
-/* preset-item의 라이트 모드는 btn-card의 라이트 모드 스타일 상속 */
