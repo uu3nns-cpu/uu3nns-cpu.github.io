@@ -363,9 +363,11 @@
         </div>
 
         <!-- Footer 버튼 영역 -->
+        <!-- [FIX] <a> 태그에서 이모지를 직접 텍스트로 넣고, btn-home 클래스는 제거
+             btn-home::before 가 이모지를 pseudo-element로 추가하므로 중복 방지 -->
         <div class="settings-footer-buttons">
             <div class="footer-left">
-                <a href="index.html" class="btn btn--large">🏠 홈으로 돌아가기</a>
+                <a href="index.html" class="btn btn--large">홈으로 돌아가기</a>
                 <button class="btn btn--danger btn--large" onclick="resetSettings()">설정 초기화</button>
             </div>
             <div class="footer-center">

@@ -176,9 +176,11 @@ button {
 
 /* ========================================
    Appearance 제거 (크로스 브라우저)
+   [FIX] checkbox, radio는 제외 — 커스텀 토글 UI가 이를 숨기고 대체하므로
+         전역 appearance:none 이 적용되면 토글이 완전히 사라짐
    ======================================== */
 
-input,
+input:not([type="checkbox"]):not([type="radio"]),
 select,
 textarea,
 button {

@@ -162,7 +162,7 @@
 
 .api-action-buttons .btn {
     flex: 1;
-    min-width: 120px;
+    min-width: 0;
 }
 
 .api-guide-toggle-btn {
@@ -205,7 +205,6 @@
 }
 
 .preset-item {
-    /* btn-card 기본 스타일 사용, 추가 스타일만 정의 */
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -264,32 +263,218 @@
     box-shadow: 0 0 12px rgba(75, 214, 229, 0.3);
 }
 
-/* 프리셋 삭제 버튼은 buttons-unified.css로 이동 */
-/* .btn-delete-preset 스타일은 buttons-unified.css에 정의됨 */
+/* ==========================================================================
+   커스텀 토글 UI
+   [FIX] checkbox에 appearance:none이 전역 적용되어 토글이 보이지 않던 문제 해결
+         숨겨진 checkbox + .toggle-ui pseudo-element 방식으로 완전 구현
+   ========================================================================== */
+
+/* 토글 아이템 공통 래퍼 */
+.toggle-item,
+.model-toggle-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    user-select: none;
+}
+
+.toggle-item:hover,
+.model-toggle-item:hover {
+    background: rgba(var(--accent-primary-rgb), 0.06);
+}
+
+/* toggle-item 내 텍스트 */
+.toggle-item > span:first-child,
+.model-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-semibold);
+    flex: 1;
+}
+
+/* 실제 checkbox 숨기기 */
+.toggle-item input[type="checkbox"],
+.model-toggle-item input[type="checkbox"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 토글 트랙 (.toggle-ui) */
+.toggle-ui {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 2px solid var(--surface-border);
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+/* 토글 썸(원) — ::after */
+.toggle-ui::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.25s ease;
+}
+
+/* 체크됨 상태 */
+input[type="checkbox"]:checked + .toggle-ui {
+    background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary));
+    border-color: transparent;
+    box-shadow: 0 0 10px rgba(var(--accent-primary-rgb), 0.35);
+}
+
+input[type="checkbox"]:checked + .toggle-ui::after {
+    transform: translateX(20px);
+    background: #fff;
+}
+
+/* focus-visible 접근성 */
+input[type="checkbox"]:focus-visible + .toggle-ui {
+    outline: 2px solid rgba(var(--accent-primary-rgb), 0.5);
+    outline-offset: 2px;
+}
 
 /* 모델 토글 */
 .model-toggles {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-sm);
+    gap: var(--space-xs);
 }
 
 .model-toggle-item {
-    margin: 0;
+    flex-direction: row-reverse; /* 텍스트 왼쪽, 토글 오른쪽 */
+    justify-content: flex-end;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--surface-border);
+    background: rgba(255, 255, 255, 0.02);
 }
 
-/* 슬라이더 */
+.model-toggle-item:hover {
+    border-color: rgba(var(--accent-primary-rgb), 0.3);
+    background: rgba(var(--accent-primary-rgb), 0.05);
+}
+
+/* 라이트 모드 토글 */
+html[data-theme="light"] .toggle-ui {
+    background: rgba(15, 23, 42, 0.1);
+    border-color: rgba(15, 23, 42, 0.15);
+}
+
+html[data-theme="light"] .toggle-ui::after {
+    background: rgba(15, 23, 42, 0.4);
+}
+
+html[data-theme="light"] input[type="checkbox"]:checked + .toggle-ui {
+    background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary));
+    border-color: transparent;
+}
+
+html[data-theme="light"] input[type="checkbox"]:checked + .toggle-ui::after {
+    background: #fff;
+}
+
+html[data-theme="light"] .model-toggle-item {
+    border-color: rgba(15, 23, 42, 0.1);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* ==========================================================================
+   슬라이더 (risk-meter)
+   ========================================================================== */
 .risk-meter-container {
     margin-top: var(--space-2xs);
     margin-bottom: var(--space-sm);
+    position: relative;
+}
+
+.risk-meter-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.risk-meter-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb), 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.risk-meter-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.6);
+}
+
+.risk-meter-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb), 0.4);
+}
+
+/* 트랙 장식선 */
+.risk-meter-track {
+    width: 100%;
+    height: 3px;
+    margin-top: var(--space-2xs);
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    opacity: 0.35;
 }
 
 .slider-labels {
-    margin-top: var(--space-2xs);
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-xs);
 }
 
 .slider-labels span {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    line-height: 1.3;
+    transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+.slider-labels span.active {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-bold);
 }
 
 /* 보고서 구조 설정 */
@@ -327,9 +512,6 @@
     font-size: 0.8rem;
 }
 
-/* Footer 버튼은 buttons-unified.css의 기본 스타일 사용 */
-/* .btn-add-preset 스타일은 buttons-unified.css에 정의됨 */
-
 /* Footer 레이아웃 */
 .settings-footer-buttons {
     display: flex;
@@ -348,7 +530,7 @@
     gap: var(--space-sm);
 }
 
-/* 반응형 - 3칼럼 */
+/* 반응형 - 3칼럼 (보고서 기술/구조/규칙) */
 @media (max-width: 1400px) {
     .settings-three-column-layout {
         grid-template-columns: 1fr;
@@ -357,9 +539,14 @@
     .api-keys-grid {
         grid-template-columns: 1fr;
     }
+
+    .api-action-buttons .btn {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
 }
 
-/* 반응형 - 3칼럼 상단 */
+/* 반응형 - 3칼럼 상단 (모델/화면/보고서) */
 @media (max-width: 1024px) {
     .settings-row-three-column {
         grid-template-columns: 1fr;
@@ -391,20 +578,32 @@
     .preset-list {
         grid-template-columns: 1fr;
     }
-    
-    /* Footer 버튼 반응형 */
+
+    .api-action-buttons {
+        flex-direction: column;
+    }
+
+    .api-action-buttons .btn {
+        width: 100%;
+        flex: none;
+    }
+
+    .model-toggles {
+        grid-template-columns: 1fr;
+    }
+
     .settings-footer-buttons {
         flex-direction: column;
         gap: var(--space-md);
     }
-    
+
     .settings-footer-buttons .footer-left,
     .settings-footer-buttons .footer-center,
     .settings-footer-buttons .footer-right {
         width: 100%;
         flex-direction: column;
     }
-    
+
     .settings-footer-buttons .btn {
         width: 100%;
     }
