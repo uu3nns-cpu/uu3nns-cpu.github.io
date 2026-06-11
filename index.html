@@ -22,6 +22,7 @@
     <meta property="og:image" content="https://uu3nns-cpu.github.io/assets/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="RE: 간편해진 보고서 작성 - AI 상담 보고서 생성 도구">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -65,108 +66,134 @@
     <link rel="stylesheet" href="src/css/components/glass-theme-fix.css?v=20241118003">
 
     <style>
-      /* ── 전체 레이아웃 ── */
-      html, body {
-        height: 100%;
-        overflow: auto;
-      }
+      /* ═══════════════════════════════════════════
+         홈 페이지 대시보드 레이아웃
+         FamilyTree.io 스타일 참고, RE: 변수 체계 사용
+      ═══════════════════════════════════════════ */
 
+      /* ── 전체 구조 ── */
       .home-main {
         flex: 1;
         display: flex;
         flex-direction: column;
-        padding: 0;
       }
 
       .home-dashboard {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr;
-        grid-template-areas: "sidebar feat2 feat1";
+        grid-template-columns: 320px 1fr 1fr;
+        grid-template-areas: "sidebar feat-guide feat-report";
         gap: 18px;
-        padding: 80px 160px 40px;
+        padding: 32px clamp(20px, 4vw, 80px) 32px;
         box-sizing: border-box;
         width: 100%;
+        flex: 1;
+        min-height: 0;
       }
 
-      /* ── 기능 카드 ── */
+      /* ══════════════════════════════════════
+         기능 카드 공통 (FamilyTree.io 스타일)
+      ══════════════════════════════════════ */
       .home-feat-card {
-        border-radius: 18px;
-        padding: 32px 30px 24px;
+        border-radius: var(--radius-lg);
+        padding: 28px 26px 22px;
         cursor: pointer;
         display: flex;
         flex-direction: column;
-        transition: transform 0.18s ease, box-shadow 0.18s ease;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid var(--color-border-primary, rgba(255,255,255,0.1));
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        background: var(--surface-glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--surface-border);
+        box-shadow: var(--shadow-card);
         overflow: hidden;
         position: relative;
         text-decoration: none;
+        color: inherit;
+        min-height: 340px;
       }
 
       .home-feat-card:hover {
         transform: translateY(-3px);
+        border-color: rgba(var(--accent-primary-rgb), 0.4);
         box-shadow: 0 12px 32px rgba(0,0,0,0.3);
       }
 
       .home-feat-card.feat-primary {
-        border-color: rgba(59, 130, 246, 0.3);
+        border-color: rgba(var(--accent-primary-rgb), 0.3);
+        background: linear-gradient(
+          135deg,
+          rgba(var(--accent-primary-rgb), 0.06),
+          var(--surface-glass)
+        );
       }
 
-      .feat-card-area-1 { grid-area: feat1; }
-      .feat-card-area-2 { grid-area: feat2; }
+      .home-feat-card.feat-primary:hover {
+        border-color: rgba(var(--accent-primary-rgb), 0.55);
+      }
 
+      .feat-card-guide  { grid-area: feat-guide; }
+      .feat-card-report { grid-area: feat-report; }
+
+      /* 아이콘 행 */
       .feat-icon-row {
         display: flex;
         align-items: center;
         gap: 14px;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
       }
 
       .feat-icon-bg {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
+        width: 50px;
+        height: 50px;
+        border-radius: var(--radius-md);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 26px;
+        font-size: 24px;
         flex-shrink: 0;
+        border: 1px solid var(--surface-border);
+        background: var(--surface-2);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
       }
 
-      .feat-icon-bg.primary   { background: rgba(59,130,246,0.15); }
-      .feat-icon-bg.secondary { background: rgba(34,197,94,0.15); }
-      .feat-icon-bg.warning   { background: rgba(245,158,11,0.15); }
+      .home-feat-card:hover .feat-icon-bg {
+        transform: scale(1.08) rotate(4deg);
+        box-shadow: 0 6px 18px rgba(var(--accent-primary-rgb), 0.25);
+        border-color: rgba(var(--accent-primary-rgb), 0.45);
+      }
 
       .feat-card-title {
-        font-size: 20px;
+        font-size: 1.2rem;
         font-weight: 700;
         margin: 0;
-        color: var(--color-text-primary, #f0f0f0);
+        color: var(--text-primary);
+        transition: color 0.2s ease;
+      }
+
+      .home-feat-card:hover .feat-card-title {
+        color: var(--accent-primary);
       }
 
       .feat-card-desc {
-        font-size: 15px;
-        color: var(--color-text-secondary, #a0a0b0);
-        line-height: 1.6;
-        margin: 0 0 16px;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        margin: 0 0 14px;
         flex: 1;
       }
 
       .feat-card-list {
         list-style: none;
         padding: 0;
-        margin: 0 0 20px;
+        margin: 0 0 18px;
         display: flex;
         flex-direction: column;
-        gap: 7px;
+        gap: 6px;
       }
 
       .feat-card-list li {
-        font-size: 14px;
-        color: var(--color-text-secondary, #a0a0b0);
+        font-size: 0.85rem;
+        color: var(--text-tertiary);
         display: flex;
         align-items: center;
         gap: 8px;
@@ -174,9 +201,10 @@
 
       .feat-card-list li::before {
         content: "✓";
-        color: var(--color-primary, #3b82f6);
+        color: var(--accent-primary);
         font-weight: 700;
-        font-size: 13px;
+        font-size: 0.8rem;
+        flex-shrink: 0;
       }
 
       .feat-card-footer {
@@ -184,225 +212,372 @@
         align-items: center;
         justify-content: space-between;
         padding-top: 14px;
-        border-top: 1px solid var(--color-border-primary, rgba(255,255,255,0.1));
+        border-top: 1px solid var(--surface-border);
       }
 
       .feat-card-cta-text {
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--color-primary, #3b82f6);
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--accent-primary);
+        letter-spacing: 0.01em;
       }
-      .feat-card-cta-text.success { color: var(--color-success, #22c55e); }
-      .feat-card-cta-text.warning { color: var(--color-warning, #f59e0b); }
+
+      .feat-card-cta-text.cta-warning { color: var(--warning); }
+      .feat-card-cta-text.cta-success { color: var(--success); }
 
       .feat-card-arrow {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        background: rgba(59,130,246,0.12);
+        width: 34px;
+        height: 34px;
+        border-radius: var(--radius-sm);
+        background: rgba(var(--accent-primary-rgb), 0.12);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 17px;
-        color: var(--color-primary, #3b82f6);
-        transition: background 0.15s;
+        font-size: 16px;
+        color: var(--accent-primary);
+        transition: background 0.15s, transform 0.2s;
+        flex-shrink: 0;
       }
-      .feat-card-arrow.success { background: rgba(34,197,94,0.12); color: var(--color-success, #22c55e); }
-      .feat-card-arrow.warning { background: rgba(245,158,11,0.12); color: var(--color-warning, #f59e0b); }
-      .home-feat-card:hover .feat-card-arrow         { background: rgba(59,130,246,0.22); }
-      .home-feat-card:hover .feat-card-arrow.success { background: rgba(34,197,94,0.22); }
-      .home-feat-card:hover .feat-card-arrow.warning { background: rgba(245,158,11,0.22); }
 
-      /* ── 사이드바 ── */
+      .feat-card-arrow.arrow-warning { background: rgba(255,179,71,0.12); color: var(--warning); }
+      .feat-card-arrow.arrow-success { background: rgba(61,213,152,0.12); color: var(--success); }
+
+      .home-feat-card:hover .feat-card-arrow                   { background: rgba(var(--accent-primary-rgb), 0.22); transform: translateX(3px); }
+      .home-feat-card:hover .feat-card-arrow.arrow-warning     { background: rgba(255,179,71,0.22); }
+      .home-feat-card:hover .feat-card-arrow.arrow-success     { background: rgba(61,213,152,0.22); }
+
+      /* ══════════════════════════════
+         사이드바
+      ══════════════════════════════ */
       .home-sidebar {
         grid-area: sidebar;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 14px;
         overflow: hidden;
       }
 
-      /* 자매 링크 카드 */
-      .notice-card {
-        border-radius: 18px;
-        padding: 20px 24px;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid var(--color-border-primary, rgba(255,255,255,0.1));
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+      .sidebar-card {
+        border-radius: var(--radius-lg);
+        background: var(--surface-glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--surface-border);
+        box-shadow: var(--shadow-card);
+      }
+
+      /* 자매 서비스 카드 */
+      .sister-card {
+        padding: 18px 20px;
         cursor: pointer;
-        transition: transform 0.18s ease;
+        transition: transform 0.18s ease, border-color 0.18s ease;
         flex-shrink: 0;
         display: flex;
         flex-direction: column;
+        text-decoration: none;
+        color: inherit;
       }
 
-      .notice-card:hover { transform: translateY(-2px); }
+      .sister-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(61, 213, 152, 0.4);
+      }
 
-      .notice-card-header {
+      .sister-card-header {
         display: flex;
         align-items: center;
         gap: 10px;
         margin-bottom: 10px;
       }
 
-      .notice-card-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 11px;
+      .sister-card-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
+        font-size: 18px;
         flex-shrink: 0;
+        border: 1px solid var(--surface-border);
+        background: rgba(61, 213, 152, 0.12);
       }
-      .notice-card-icon.green  { background: rgba(34,197,94,0.15); }
-      .notice-card-icon.blue   { background: rgba(59,130,246,0.15); }
 
-      .notice-card-title {
-        font-size: 17px;
+      .sister-card-title {
+        font-size: 0.95rem;
         font-weight: 700;
         margin: 0;
-        color: var(--color-text-primary, #f0f0f0);
+        color: var(--text-primary);
       }
 
-      .notice-card-desc {
-        font-size: 14px;
-        color: var(--color-text-secondary, #a0a0b0);
+      .sister-card-desc {
+        font-size: 0.82rem;
+        color: var(--text-secondary);
         margin: 0 0 12px;
         line-height: 1.5;
-        flex: 1;
       }
 
       /* 영상 카드 */
       .video-card {
-        border-radius: 18px;
-        padding: 18px 20px;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid var(--color-border-primary, rgba(255,255,255,0.1));
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        padding: 16px 18px;
         display: flex;
         flex-direction: column;
         gap: 10px;
+        flex-shrink: 0;
       }
 
       .video-card-label {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--color-text-tertiary, #666680);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--text-tertiary);
         text-transform: uppercase;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.07em;
       }
 
-      .video-card video {
+      .video-card-wrap {
+        position: relative;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        background: var(--surface-1);
+        border: 1px solid var(--surface-border);
+        line-height: 0;
+      }
+
+      .video-card-wrap video {
         width: 100%;
-        border-radius: 10px;
         display: block;
-        background: #000;
+        max-height: 160px;
+        object-fit: cover;
       }
 
       .video-card-caption {
-        font-size: 13px;
-        color: var(--color-text-secondary, #a0a0b0);
+        font-size: 0.78rem;
+        color: var(--text-tertiary);
         margin: 0;
         text-align: center;
+        line-height: 1.4;
       }
 
-      /* 빠른 링크 */
+      /* 빠른 링크 카드 */
       .quick-links-card {
-        border-radius: 18px;
-        padding: 18px 20px;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid var(--color-border-primary, rgba(255,255,255,0.1));
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        padding: 16px 18px;
         flex: 1;
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        min-height: 0;
       }
 
       .quick-links-label {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--color-text-tertiary, #666680);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--text-tertiary);
         text-transform: uppercase;
-        letter-spacing: 0.06em;
-        margin-bottom: 12px;
+        letter-spacing: 0.07em;
+        margin-bottom: 10px;
+        flex-shrink: 0;
       }
 
-      .quick-links-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+      .quick-links-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 3px;
+        gap: 4px;
+        overflow: hidden;
       }
 
       .quick-link-row {
         display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 10px 12px;
-        border-radius: 11px;
+        gap: 8px;
+        padding: 9px 10px;
+        border-radius: var(--radius-md);
         text-decoration: none;
-        color: var(--color-text-primary, #f0f0f0);
+        color: var(--text-primary);
         transition: background 0.15s;
         cursor: pointer;
+        border: 1px solid transparent;
       }
 
-      .quick-link-row:hover { background: rgba(255,255,255,0.06); }
+      .quick-link-row:hover {
+        background: var(--surface-2);
+        border-color: var(--surface-border);
+      }
 
-      .quick-link-row-icon {
-        width: 34px;
-        height: 34px;
-        border-radius: 9px;
+      .quick-link-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-sm);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 17px;
+        font-size: 15px;
+        flex-shrink: 0;
+        background: var(--surface-2);
+        border: 1px solid var(--surface-border);
+      }
+
+      .quick-link-text {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* ══════════════════════════════════════════
+         피드백 모달 — home-improved.css 없이 자체 정의
+         핵심: display:none → .active 시 display:flex
+      ══════════════════════════════════════════ */
+      .feedback-modal {
+        display: none;           /* 기본 숨김 */
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 8, 20, 0.82);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .feedback-modal.active {
+        display: flex;           /* 열릴 때만 표시 */
+      }
+
+      .feedback-modal-content {
+        width: 95%;
+        max-width: 1000px;
+        height: 92vh;
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        /* glass-surface 클래스와 동일한 효과 직접 적용 */
+        background: var(--surface-glass);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid var(--surface-border);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 8px 32px rgba(0,0,0,0.2);
+      }
+
+      .feedback-modal-header {
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--surface-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--surface-3);
         flex-shrink: 0;
       }
 
-      .ql-blue   { background: rgba(59,130,246,0.15); }
-      .ql-green  { background: rgba(34,197,94,0.15); }
-      .ql-purple { background: rgba(139,92,246,0.15); }
-      .ql-orange { background: rgba(245,158,11,0.15); }
-      .ql-pink   { background: rgba(236,72,153,0.15); }
-
-      .quick-link-row-text {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--color-text-primary, #f0f0f0);
+      .feedback-modal-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
       }
 
-      /* ── 반응형 ── */
-      @media (max-width: 1100px) {
-        .home-dashboard { padding: 40px 40px 32px; }
+      .feedback-modal-close {
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-sm);
+        font-size: 1.1rem;
+        background: transparent;
+        border: 1px solid var(--surface-border);
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        flex-shrink: 0;
+        line-height: 1;
+      }
+
+      .feedback-modal-close:hover {
+        background: var(--surface-2);
+        color: var(--text-primary);
+      }
+
+      .feedback-modal-body {
+        flex: 1;
+        overflow: hidden;
+        min-height: 0;
+      }
+
+      .feedback-modal-body iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        .feedback-modal-content {
+          width: 100%;
+          height: 100dvh;
+          border-radius: 0;
+        }
+      }
+
+      /* ══════════════════════════
+         반응형
+      ══════════════════════════ */
+
+      @media (max-width: 1200px) {
+        .home-dashboard {
+          grid-template-columns: 280px 1fr 1fr;
+          padding: 24px clamp(14px, 3vw, 40px) 24px;
+          gap: 14px;
+        }
       }
 
       @media (max-width: 900px) {
         .home-dashboard {
           grid-template-columns: 1fr 1fr;
-          grid-template-rows: auto auto;
           grid-template-areas:
-            "feat1 feat2"
-            "sidebar sidebar";
-          padding: 12px 14px;
+            "feat-report feat-guide"
+            "sidebar     sidebar";
+          padding: 14px;
           gap: 12px;
+          flex: none;
         }
+
+        .home-feat-card {
+          min-height: 280px;
+        }
+
+        .home-sidebar {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .sister-card      { flex: 1 1 200px; }
+        .video-card       { flex: 1 1 200px; }
+        .quick-links-card { flex: 1 1 260px; }
       }
 
       @media (max-width: 600px) {
         .home-dashboard {
           grid-template-columns: 1fr;
           grid-template-areas:
-            "feat1"
-            "feat2"
+            "feat-report"
+            "feat-guide"
             "sidebar";
           padding: 10px 12px;
+        }
+
+        .home-sidebar {
+          flex-direction: column;
+        }
+
+        .home-feat-card {
+          min-height: 260px;
+        }
+
+        .quick-links-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
       }
     </style>
@@ -413,10 +588,10 @@
 
     <!-- 피드백 모달 -->
     <div class="feedback-modal" id="feedbackModal" onclick="closeFeedbackModal(event)">
-        <div class="feedback-modal-content glass-surface" onclick="event.stopPropagation()">
+        <div class="feedback-modal-content" onclick="event.stopPropagation()">
             <div class="feedback-modal-header">
                 <div class="feedback-modal-title">💬 의견 제출</div>
-                <button class="feedback-modal-close btn btn--icon" type="button" onclick="closeFeedbackModal()" title="닫기">✕</button>
+                <button class="feedback-modal-close" type="button" onclick="closeFeedbackModal()" title="닫기" aria-label="닫기">✕</button>
             </div>
             <div class="feedback-modal-body">
                 <iframe id="feedbackIframe" src="" loading="lazy"></iframe>
@@ -427,87 +602,83 @@
     <main class="home-main" role="main">
       <div class="home-dashboard">
 
-        <!-- ── 사이드바 ── -->
-        <aside class="home-sidebar" aria-label="관련 서비스 및 빠른 링크">
+        <!-- ═══════════════ 사이드바 ═══════════════ -->
+        <aside class="home-sidebar" aria-label="관련 서비스 및 바로가기">
 
           <!-- 자매 서비스: 결속 -->
-          <div
-            class="notice-card"
-            onclick="window.open('https://uu3nns-cpu.github.io/FamilyTree.io/', '_blank', 'noopener noreferrer')"
-            role="button"
-            tabindex="0"
+          <a
+            class="sidebar-card sister-card"
+            href="https://uu3nns-cpu.github.io/FamilyTree.io/"
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="결속 페이지로 이동"
-            onkeydown="if(event.key==='Enter'||event.key===' ')window.open('https://uu3nns-cpu.github.io/FamilyTree.io/','_blank','noopener noreferrer')"
           >
-            <div class="notice-card-header">
-              <div class="notice-card-icon green">🌳</div>
-              <h2 class="notice-card-title">결속</h2>
+            <div class="sister-card-header">
+              <div class="sister-card-icon">🌳</div>
+              <h2 class="sister-card-title">결속</h2>
             </div>
-            <p class="notice-card-desc">전문가를 위한 가계도 작성 도구</p>
+            <p class="sister-card-desc">전문가를 위한 가계도(제노그램) 작성 도구</p>
             <div class="feat-card-footer">
-              <span class="feat-card-cta-text success">바로가기</span>
-              <div class="feat-card-arrow success">→</div>
+              <span class="feat-card-cta-text cta-success">바로가기</span>
+              <div class="feat-card-arrow arrow-success">→</div>
             </div>
-          </div>
+          </a>
 
           <!-- 영상 가이드 -->
-          <div class="video-card">
+          <div class="sidebar-card video-card">
             <div class="video-card-label">🎬 영상 가이드</div>
-            <video controls preload="metadata">
-              <source src="guidevideo/ReportPage.mp4" type="video/mp4">
-              브라우저가 비디오 태그를 지원하지 않습니다.
-            </video>
+            <div class="video-card-wrap">
+              <video controls preload="metadata">
+                <source src="guidevideo/ReportPage.mp4" type="video/mp4">
+                브라우저가 비디오 태그를 지원하지 않습니다.
+              </video>
+            </div>
             <p class="video-card-caption">RE: 사용 전체 과정을 영상으로 확인하세요</p>
           </div>
 
           <!-- 빠른 링크 -->
-          <div class="quick-links-card">
+          <div class="sidebar-card quick-links-card">
             <div class="quick-links-label">바로가기</div>
-            <ul class="quick-links-list" aria-label="바로가기 메뉴">
-              <li>
-                <a href="report-management.html" class="quick-link-row">
-                  <div class="quick-link-row-icon ql-blue">📋</div>
-                  <span class="quick-link-row-text">보고서 관리</span>
-                </a>
-              </li>
-              <li>
-                <a href="data-management.html" class="quick-link-row">
-                  <div class="quick-link-row-icon ql-green">💾</div>
-                  <span class="quick-link-row-text">데이터 관리</span>
-                </a>
-              </li>
-              <li>
-                <a href="settings.html" class="quick-link-row">
-                  <div class="quick-link-row-icon ql-purple">⚙️</div>
-                  <span class="quick-link-row-text">설정</span>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:void(0)" onclick="openFeedbackModal()" class="quick-link-row">
-                  <div class="quick-link-row-icon ql-pink">💬</div>
-                  <span class="quick-link-row-text">의견 제출</span>
-                </a>
-              </li>
-              <li>
-                <a href="donate.html" class="quick-link-row">
-                  <div class="quick-link-row-icon ql-orange">☕</div>
-                  <span class="quick-link-row-text">후원하기</span>
-                </a>
-              </li>
-              <li>
-                <a href="changelog.html" class="quick-link-row">
-                  <div class="quick-link-row-icon ql-blue">📝</div>
-                  <span class="quick-link-row-text">업데이트 내역</span>
-                </a>
-              </li>
-            </ul>
+            <nav class="quick-links-grid" aria-label="바로가기 메뉴">
+
+              <a href="report-management.html" class="quick-link-row">
+                <div class="quick-link-icon">📋</div>
+                <span class="quick-link-text">보고서 관리</span>
+              </a>
+
+              <a href="data-management.html" class="quick-link-row">
+                <div class="quick-link-icon">💾</div>
+                <span class="quick-link-text">데이터 관리</span>
+              </a>
+
+              <a href="settings.html" class="quick-link-row">
+                <div class="quick-link-icon">⚙️</div>
+                <span class="quick-link-text">설정</span>
+              </a>
+
+              <a href="javascript:void(0)" onclick="openFeedbackModal()" class="quick-link-row">
+                <div class="quick-link-icon">💬</div>
+                <span class="quick-link-text">의견 제출</span>
+              </a>
+
+              <a href="donate.html" class="quick-link-row">
+                <div class="quick-link-icon">☕</div>
+                <span class="quick-link-text">후원하기</span>
+              </a>
+
+              <a href="changelog.html" class="quick-link-row">
+                <div class="quick-link-icon">📝</div>
+                <span class="quick-link-text">업데이트</span>
+              </a>
+
+            </nav>
           </div>
 
         </aside>
 
-        <!-- ── 사용 안내 카드 (가운데) ── -->
+        <!-- ═══════════════ 사용 안내 카드 ═══════════════ -->
         <article
-          class="home-feat-card feat-card-area-2"
+          class="home-feat-card feat-card-guide"
           onclick="window.location.href='guide/index.html'"
           role="button"
           tabindex="0"
@@ -515,12 +686,12 @@
           onkeydown="if(event.key==='Enter'||event.key===' ')window.location.href='guide/index.html'"
         >
           <div class="feat-icon-row">
-            <div class="feat-icon-bg warning">📖</div>
+            <div class="feat-icon-bg">📖</div>
             <h2 class="feat-card-title">사용 안내</h2>
           </div>
           <p class="feat-card-desc">
-            단계별 가이드와 영상으로 RE: 사용법을 쉽게 배울 수 있습니다.<br>
-            API 발급부터 보고서 작성까지 모든 과정을 안내합니다.
+            단계별 가이드와 영상으로 RE:의 모든 기능을 쉽게 배울 수 있습니다.
+            API 발급부터 보고서 작성까지 전 과정을 안내합니다.
           </p>
           <ul class="feat-card-list">
             <li>단계별 상세 가이드</li>
@@ -528,14 +699,14 @@
             <li>실전 예제 포함</li>
           </ul>
           <div class="feat-card-footer">
-            <span class="feat-card-cta-text warning">가이드 보기</span>
-            <div class="feat-card-arrow warning">→</div>
+            <span class="feat-card-cta-text cta-warning">가이드 보기</span>
+            <div class="feat-card-arrow arrow-warning">→</div>
           </div>
         </article>
 
-        <!-- ── 보고서 작성 카드 (우측) ── -->
+        <!-- ═══════════════ 보고서 작성 카드 ═══════════════ -->
         <article
-          class="home-feat-card feat-primary feat-card-area-1"
+          class="home-feat-card feat-primary feat-card-report"
           onclick="window.location.href='report.html'"
           role="button"
           tabindex="0"
@@ -543,12 +714,12 @@
           onkeydown="if(event.key==='Enter'||event.key===' ')window.location.href='report.html'"
         >
           <div class="feat-icon-row">
-            <div class="feat-icon-bg primary">✍️</div>
+            <div class="feat-icon-bg">✍️</div>
             <h2 class="feat-card-title">보고서 작성</h2>
           </div>
           <p class="feat-card-desc">
-            상담 메모를 입력하면 AI가 자동으로 전문 보고서를 생성합니다.<br>
-            Groq와 GPT 두 가지 모델을 동시에 사용할 수 있습니다.
+            상담 메모를 입력하면 AI가 자동으로 전문 보고서를 생성합니다.
+            Groq와 GPT 두 가지 모델을 동시에 비교할 수 있습니다.
           </p>
           <ul class="feat-card-list">
             <li>2개 AI 모델 동시 비교</li>
