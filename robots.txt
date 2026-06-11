@@ -1,0 +1,32 @@
+# robots.txt for RE: Report Effortless
+# https://uu3nns-cpu.github.io/
+
+User-agent: *
+Allow: /
+
+# 주요 페이지
+Allow: /index.html
+Allow: /report.html
+Allow: /guide/
+Allow: /notice.html
+Allow: /privacy.html
+
+# 설정 및 관리 페이지 (검색 엔진 색인 제외)
+Disallow: /settings.html
+Disallow: /data-management.html
+Disallow: /report-management.html
+
+# 리소스 폴더
+Allow: /src/css/
+Allow: /guidevideo/
+Allow: /image/
+
+# JavaScript 파일 (크롤링 불필요)
+Disallow: /js/
+
+# 개발 문서 및 내부 자료
+Disallow: /docs/
+Disallow: /archive/
+
+# Sitemap
+Sitemap: https://uu3nns-cpu.github.io/sitemap.xml

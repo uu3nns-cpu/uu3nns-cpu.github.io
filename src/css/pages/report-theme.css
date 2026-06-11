@@ -1,0 +1,298 @@
+/* --------------------------------------------------------------------------
+   Report Page Theme Styles
+   --------------------------------------------------------------------------
+   report.html의 라이트/다크 모드 테마 스타일
+   HTML 내부의 하드코딩된 스타일을 디자인 시스템으로 통합
+   설정 사이드바 제거됨
+   -------------------------------------------------------------------------- */
+
+/* 라이트모드 - 설정 사이드바 (제거됨) */
+/*
+html[data-theme="light"] .report-layout .settings-sidebar {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.85), rgba(248, 250, 252, 0.9));
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    box-shadow: 0 30px 90px rgba(15, 23, 42, 0.15);
+}
+*/
+
+/* 라이트모드 - 출력 영역 */
+html[data-theme="light"] .report-layout .output-area-compact {
+    background: rgba(255, 255, 255, 0.40) !important;
+    backdrop-filter: blur(32px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 라이트모드 - 입력 영역 */
+html[data-theme="light"] .report-layout .input-area-compact {
+    background: rgba(255, 255, 255, 0.40) !important;
+    backdrop-filter: blur(32px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 라이트모드 - 입력 텍스트 영역 */
+html[data-theme="light"] .report-layout .input-textarea-compact {
+    background: rgba(255, 255, 255, 0.35) !important;
+    backdrop-filter: blur(16px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+    color: var(--text-primary);
+}
+
+html[data-theme="light"] .report-layout .input-textarea-compact:focus {
+    background: rgba(255, 255, 255, 0.50) !important;
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* 라이트모드 - 출력 콘텐츠 */
+html[data-theme="light"] .report-layout .output-content {
+    background: rgba(255, 255, 255, 0.30) !important;
+    backdrop-filter: blur(16px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+    color: var(--text-primary);
+}
+
+html[data-theme="light"] .report-layout .compare-content {
+    background: rgba(255, 255, 255, 0.30) !important;
+    backdrop-filter: blur(16px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+    color: var(--text-primary);
+}
+
+/* 라이트모드 - 챗봇 모달 */
+html[data-theme="light"] .chatbot-modal {
+    background: rgba(255, 255, 255, 0.50);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* 라이트모드 - 챗봇 입력 영역 */
+html[data-theme="light"] .chatbot-input-area textarea {
+    background: rgba(255, 255, 255, 0.40) !important;
+    backdrop-filter: blur(12px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+    color: var(--text-primary);
+}
+
+html[data-theme="light"] .chatbot-input-area textarea:focus {
+    background: rgba(255, 255, 255, 0.60) !important;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* 라이트모드 - 출력 탭 */
+html[data-theme="light"] .report-layout .output-tab {
+    background: rgba(15, 23, 42, 0.05) !important;
+    color: var(--text-secondary) !important;
+}
+
+html[data-theme="light"] .report-layout .output-tab:hover {
+    background: rgba(15, 23, 42, 0.08) !important;
+    color: var(--text-primary) !important;
+}
+
+html[data-theme="light"] .report-layout .output-tab.active {
+    background: linear-gradient(120deg, rgba(93, 95, 234, 0.2), rgba(79, 70, 229, 0.25)) !important;
+    color: var(--accent-primary) !important;
+    box-shadow: 0 4px 12px rgba(93, 95, 234, 0.2) !important;
+}
+
+/* 라이트모드 - 버튼 */
+html[data-theme="light"] .report-layout .compare-panel-header .btn,
+html[data-theme="light"] .report-layout .output-header-compact .btn,
+html[data-theme="light"] .report-layout .compare-panel-header button,
+html[data-theme="light"] .report-layout .output-header-compact button {
+    background: rgba(15, 23, 42, 0.08) !important;
+    color: var(--text-primary) !important;
+}
+
+html[data-theme="light"] .report-layout .compare-panel-header .btn:hover,
+html[data-theme="light"] .report-layout .output-header-compact .btn:hover,
+html[data-theme="light"] .report-layout .compare-panel-header button:hover,
+html[data-theme="light"] .report-layout .output-header-compact button:hover {
+    background: rgba(93, 95, 234, 0.15) !important;
+    color: var(--accent-primary) !important;
+}
+
+/* 라이트모드 - 사이드바 섹션 (제거됨) */
+/*
+html[data-theme="light"] .report-layout .sidebar-section {
+    background: rgba(15, 23, 42, 0.03);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+}
+*/
+
+/* 라이트모드 - 설정 미리보기 아이템 (제거됨) */
+/*
+html[data-theme="light"] .report-layout .setting-preview-item,
+html[data-theme="light"] .report-layout .format-preview-list > div,
+html[data-theme="light"] .report-layout .style-preview-list > div {
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+}
+*/
+
+/*
+html[data-theme="light"] .report-layout .setting-preview-item:hover,
+html[data-theme="light"] .report-layout .format-preview-list > div:hover,
+html[data-theme="light"] .report-layout .style-preview-list > div:hover {
+    background: rgba(241, 245, 249, 0.95);
+    border-color: rgba(93, 95, 234, 0.3);
+}
+*/
+
+/* 라이트모드 - API 상태 (제거됨) */
+/*
+html[data-theme="light"] .report-layout .api-status-item {
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+}
+*/
+
+/* 라이트모드 - 커스텀 프롬프트 미리보기 (제거됨) */
+/*
+html[data-theme="light"] .report-layout .custom-prompt-preview {
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+}
+*/
+
+/* 라이트모드 - 현재 프리셋 표시 (제거됨) */
+/*
+html[data-theme="light"] .report-layout .current-preset-display {
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+}
+*/
+
+/* 라이트모드 - 사용량 배지 */
+html[data-theme="light"] .report-layout .usage-badge-inline {
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+/* 라이트모드 - 글자 수 표시 */
+html[data-theme="light"] .report-layout .char-count-overlay {
+    background: rgba(248, 250, 252, 0.95);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+/* 라이트모드 - 스크롤바 */
+html[data-theme="light"] .report-layout .output-content::-webkit-scrollbar-track,
+html[data-theme="light"] .report-layout .input-textarea-compact::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.05);
+}
+
+html[data-theme="light"] .report-layout .output-content::-webkit-scrollbar-thumb,
+html[data-theme="light"] .report-layout .input-textarea-compact::-webkit-scrollbar-thumb {
+    background: rgba(93, 95, 234, 0.3);
+}
+
+html[data-theme="light"] .report-layout .output-content::-webkit-scrollbar-thumb:hover,
+html[data-theme="light"] .report-layout .input-textarea-compact::-webkit-scrollbar-thumb:hover {
+    background: rgba(93, 95, 234, 0.5);
+}
+
+/* 라이트모드 - 챗봇 헤더 */
+html[data-theme="light"] .chatbot-header {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+/* 라이트모드 - 챗봇 닫기 버튼 */
+html[data-theme="light"] .chatbot-close-btn {
+    background: rgba(15, 23, 42, 0.05);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+html[data-theme="light"] .chatbot-close-btn:hover {
+    background: rgba(15, 23, 42, 0.1);
+}
+
+/* 라이트모드 - 챗봇 토글 */
+html[data-theme="light"] .chatbot-toggle-slider {
+    background: rgba(15, 23, 42, 0.15);
+}
+
+html[data-theme="light"] .chatbot-toggle-slider::after {
+    background: white;
+}
+
+html[data-theme="light"] .chatbot-toggle-switch input:checked + .chatbot-toggle-slider {
+    background: rgba(93, 95, 234, 0.6);
+}
+
+/* 라이트모드 - 챗봇 입력 구분선 */
+html[data-theme="light"] .chatbot-input-area {
+    border-top: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+/* 라이트모드 - 챗봇 환영 메시지 */
+html[data-theme="light"] .chat-welcome-message {
+    background: rgba(93, 95, 234, 0.08);
+    border: 1px solid rgba(93, 95, 234, 0.2);
+}
+
+html[data-theme="light"] .chat-welcome-example {
+    background: rgba(15, 23, 42, 0.05);
+}
+
+/* 라이트모드 - 사이드바 닫기 버튼 (제거됨) */
+/*
+html[data-theme="light"] .report-layout .sidebar-close-btn {
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    color: var(--text-secondary);
+}
+
+html[data-theme="light"] .report-layout .sidebar-close-btn:hover {
+    background: var(--error);
+    color: white;
+    border-color: var(--error);
+}
+*/
+
+/* 라이트모드 - Empty State */
+html[data-theme="light"] .report-layout .empty-title {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+html[data-theme="light"] .report-layout .empty-divider {
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+}
+
+/* --------------------------------------------------------------------------
+   레이아웃 수정
+   -------------------------------------------------------------------------- */
+
+/* 본문이 밀리지 않도록 수정 */
+.report-layout .main-area {
+    transition: none;
+    margin-right: 0;
+}
+
+.report-layout .main-area.sidebar-open,
+.report-layout .main-area.chatbot-open {
+    margin-right: 0;
+}
+
+/* 오버레이 투명도 제거 */
+.chatbot-overlay {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.chatbot-overlay.active {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}

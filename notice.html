@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="Copyright (c) 2025 김도현. All Rights Reserved.">
+    <meta name="author" content="김도현">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="RE: 공지사항. 서비스 개발 배경, 운영 방침, 업데이트 소식을 확인하세요.">
+    <meta name="keywords" content="RE 공지, 서비스 소식, 업데이트, 상담사 도구">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://uu3nns-cpu.github.io/notice.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/svg+xml" href="favicon-detailed.svg">
+    <link rel="apple-touch-icon" href="favicon-detailed.svg">
+    
+    <title>공지사항 - RE: 간편해진 보고서 작성</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+         crossorigin="anonymous"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/base/variables.css">
+    <link rel="stylesheet" href="src/css/base/base.css">
+    <link rel="stylesheet" href="src/css/base/layout.css">
+    <link rel="stylesheet" href="src/css/components/components-base.css">
+    <link rel="stylesheet" href="src/css/components/components-layout.css">
+    <link rel="stylesheet" href="src/css/base/browser-compatibility.css">
+    <link rel="stylesheet" href="src/css/components/header-unified.css">
+    <link rel="stylesheet" href="src/css/components/buttons-unified.css">
+    <link rel="stylesheet" href="src/css/components/glass-effects.css">
+    <link rel="stylesheet" href="src/css/components/toast.css">
+    <link rel="stylesheet" href="src/css/components/common-page-layout.css">
+    <link rel="stylesheet" href="src/css/pages/document-pages.css">
+    <link rel="stylesheet" href="src/css/components/glass-theme-fix.css">
+</head>
+<body>
+    <!-- 공통 Header (JS로 자동 생성) -->
+    <div class="header"></div>
+    
+    <!-- 피드백 모달 -->
+    <div class="feedback-modal" id="feedbackModal" onclick="closeFeedbackModal(event)">
+        <div class="feedback-modal-content glass-modal" onclick="event.stopPropagation()">
+            <div class="feedback-modal-header">
+                <div class="feedback-modal-title">💬 의견 제출</div>
+                <button class="feedback-modal-close" onclick="closeFeedbackModal()" title="닫기">✕</button>
+            </div>
+            <div class="feedback-modal-body">
+                <iframe id="feedbackIframe" src="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <main class="document-container">
+        <div class="page-header glass-section">
+            <div class="page-header-icon">📢</div>
+            <h1 class="page-title">공지사항</h1>
+            <p class="page-subtitle">서비스를 제공하는 개발자가 전하는 말씀입니다</p>
+        </div>
+        
+        <div class="notice-content glass-card">
+            <div class="notice-section">
+                <p class="notice-text">
+                    안녕하세요. RE: 서비스를 제공하고 있는 상담사입니다.
+                </p>
+                <p class="notice-text">
+                    이 서비스를 만들게 된 계기는, 매번 AI에게 상담일지나 보고서 작성을 요청할 때마다 비슷한 지시를 반복해야 하는 불편함 때문이었습니다. 보다 효율적으로 상담일지를 작성할 수 있는 방법을 찾던 중, AI를 활용한 도구를 직접 개발하게 되었고, 같은 불편을 겪는 분들과 공유하고 싶다는 마음으로 공개하게 되었습니다.
+                </p>
+                <p class="notice-text">
+                    저는 전문 개발자가 아니며, 개인적인 필요에서 출발한 프로젝트이기에 이 서비스를 꾸준히 유지·발전시켜 나갈 수 있을지는 아직 확실치 않습니다. 따라서 예고 없이 서비스가 중단될 수도 있다는 점 양해 부탁드립니다.
+                </p>
+                <p class="notice-text">
+                    이용 중 불편한 점이나 개선이 필요한 부분이 있다면 아래 버튼을 통해 의견을 제출해주세요.
+                </p>
+                
+                <!-- 의견 제출 버튼 -->
+                <div class="notice-button-wrapper">
+                    <button onclick="openFeedbackModal()" class="btn btn--primary">
+                        <span>💬</span>
+                        <span>의견제출</span>
+                    </button>
+                </div>
+                <p class="notice-text">
+                    이 서비스가 여러분의 보고서 작성 시간을 줄이고, 그만큼 더 많은 에너지를 '상담' 그 자체에 집중할 수 있도록 돕는 작은 도구가 되기를 바랍니다. 이용해주셔서 진심으로 감사합니다.
+                </p>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <a href="index.html" class="btn-home">홈으로 돌아가기</a>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="js/browser-polyfills.js"></script>
+    <script src="js/common-components.js"></script>
+    
+    <script>
+        function openFeedbackModal() {
+            const modal = document.getElementById('feedbackModal');
+            const iframe = document.getElementById('feedbackIframe');
+            iframe.src = 'https://docs.google.com/forms/d/e/1FAIpQLScc5DQyJCcwpusgrI_UiTy_NtXMSsdWRk-uJJzx17nxX_d3qg/viewform?embedded=true';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeFeedbackModal(event) {
+            const modal = document.getElementById('feedbackModal');
+            const iframe = document.getElementById('feedbackIframe');
+            if (!event || event.target === modal || event.type === 'click') {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                setTimeout(() => { iframe.src = ''; }, 300);
+            }
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('feedbackModal');
+                if (modal.classList.contains('active')) closeFeedbackModal();
+            }
+        });
+    </script>
+</body>
+</html>

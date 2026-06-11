@@ -1,0 +1,144 @@
+/* --------------------------------------------------------------------------
+   Buttons
+   기본 .btn 스타일은 buttons-unified.css에서 정의됩니다.
+   이 파일에서는 중복 선언을 제거하고 Form Controls, Badges만 정의합니다.
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   Form Controls
+   -------------------------------------------------------------------------- */
+.input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(200, 200, 210, 0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.input:hover {
+    border-color: rgba(200, 200, 210, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.input:focus {
+    outline: none;
+    border-color: rgba(var(--accent-primary-rgb), 0.5);
+    box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.1);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.input.error {
+    border-color: var(--error);
+}
+
+.input.error:focus {
+    box-shadow: 0 0 0 3px rgba(255, 107, 129, 0.2);
+}
+
+.input--monospace {
+    font-family: var(--font-family-mono);
+}
+
+.input--small {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.85rem;
+}
+
+.input--large {
+    padding: var(--space-md) var(--space-lg);
+    font-size: 1rem;
+}
+
+.input--textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.input--select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 9 1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 36px;
+}
+
+/* Select 옵션 텍스트 색상 (드롭다운) */
+html[data-theme="light"] .input--select option {
+    background-color: var(--surface-2);
+    color: var(--text-primary);
+}
+
+label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-sm);
+}
+
+small {
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+}
+
+/* --------------------------------------------------------------------------
+   Chips & Badges
+   -------------------------------------------------------------------------- */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: var(--space-3xs) var(--space-sm);
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+.badge--primary {
+    background: rgba(var(--accent-primary-rgb), 0.15);
+    color: var(--accent-primary);
+    border-color: rgba(var(--accent-primary-rgb), 0.35);
+}
+
+.badge--success {
+    background: rgba(61, 213, 152, 0.15);
+    color: #3dd598;
+    border-color: rgba(61, 213, 152, 0.4);
+}
+
+.badge--danger {
+    background: rgba(255, 107, 129, 0.15);
+    color: #ff6b81;
+    border-color: rgba(255, 107, 129, 0.35);
+}

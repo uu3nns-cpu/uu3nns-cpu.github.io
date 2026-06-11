@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사이트맵 - RE:</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS3BEEQ84"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWS3BEEQ84');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9257454501555292"
+         crossorigin="anonymous"></script>
+    
+    <!-- CSS - 새 시스템 적용 -->
+    <link rel="stylesheet" href="src/css/base/variables.css?v=20241118003">
+    <link rel="stylesheet" href="src/css/base/base.css">
+    <link rel="stylesheet" href="src/css/base/layout.css">
+    <link rel="stylesheet" href="src/css/components/components-base.css?v=20241118003">
+    <link rel="stylesheet" href="src/css/components/components-layout.css">
+    <link rel="stylesheet" href="src/css/components/header-unified.css">
+    <link rel="stylesheet" href="src/css/components/glass-effects.css">
+    <link rel="stylesheet" href="src/css/components/toast.css">
+    <link rel="stylesheet" href="src/css/components/common-page-layout.css">
+    <link rel="stylesheet" href="src/css/pages/document-pages.css">
+    <link rel="stylesheet" href="src/css/components/glass-theme-fix.css?v=20241118003">
+    
+    <style>
+        .sitemap-container {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .sitemap-section {
+            margin-bottom: 40px;
+        }
+        
+        .sitemap-category {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sitemap-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .sitemap-item {
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .sitemap-item::before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+        
+        .sitemap-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .sitemap-link:hover {
+            color: var(--accent-primary);
+            text-decoration: underline;
+        }
+        
+        .sitemap-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast 알림 -->
+    <div id="toast" class="toast"></div>
+    
+    <!-- Header -->
+    <div class="header"></div>
+    
+    <!-- Main Content -->
+    <div class="document-container">
+        <div class="page-header glass-section">
+            <div class="page-header-icon">🗺️</div>
+            <h1 class="page-title">사이트맵</h1>
+            <p class="page-subtitle">RE: 간편해진 보고서 작성의 모든 페이지</p>
+        </div>
+        
+        <div class="document-content glass-card">
+            <div class="sitemap-container">
+                
+                <!-- 핵심 기능 -->
+                <div class="sitemap-section">
+                    <h2 class="sitemap-category">핵심 기능</h2>
+                    <ul class="sitemap-list">
+                        <li class="sitemap-item">
+                            <a href="index.html" class="sitemap-link">대시보드</a>
+                            <span class="sitemap-desc">메인 페이지</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="report.html" class="sitemap-link">보고서 작성</a>
+                            <span class="sitemap-desc">AI 기반 상담 보고서 자동 생성</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="report-management.html" class="sitemap-link">보고서 관리</a>
+                            <span class="sitemap-desc">저장된 보고서 확인 및 관리</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="settings.html" class="sitemap-link">설정</a>
+                            <span class="sitemap-desc">API 키, 프리셋, 옵션 설정</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 사용 안내서 -->
+                <div class="sitemap-section">
+                    <h2 class="sitemap-category">사용 안내서</h2>
+                    <ul class="sitemap-list">
+                        <li class="sitemap-item">
+                            <a href="guide/index.html" class="sitemap-link">안내서 메인</a>
+                            <span class="sitemap-desc">목차 및 시작 가이드</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="guide/01-start.html" class="sitemap-link">시작하기</a>
+                            <span class="sitemap-desc">첫 설정 및 API 키 등록</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="guide/02-basic.html" class="sitemap-link">기본 사용법</a>
+                            <span class="sitemap-desc">보고서 작성 및 기본 기능</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="guide/03-advanced.html" class="sitemap-link">고급 기능</a>
+                            <span class="sitemap-desc">프리셋, 커스텀 프롬프트</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="guide/04-security.html" class="sitemap-link">보안 가이드</a>
+                            <span class="sitemap-desc">API 키 보안 및 데이터 보호</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="guide/05-troubleshoot.html" class="sitemap-link">문제 해결</a>
+                            <span class="sitemap-desc">FAQ 및 문제 해결 방법</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 정보 및 정책 -->
+                <div class="sitemap-section">
+                    <h2 class="sitemap-category">정보 및 정책</h2>
+                    <ul class="sitemap-list">
+                        <li class="sitemap-item">
+                            <a href="notice.html" class="sitemap-link">공지사항</a>
+                            <span class="sitemap-desc">서비스 공지 및 업데이트</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="changelog.html" class="sitemap-link">업데이트 내역</a>
+                            <span class="sitemap-desc">버전별 변경사항</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="privacy.html" class="sitemap-link">개인정보처리방침</a>
+                            <span class="sitemap-desc">개인정보 보호 정책</span>
+                        </li>
+                        <li class="sitemap-item">
+                            <a href="donate.html" class="sitemap-link">후원하기</a>
+                            <span class="sitemap-desc">서비스 후원 및 지원</span>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="js/ui-utils.js"></script>
+    <script src="js/common-components.js"></script>
+</body>
+</html>
