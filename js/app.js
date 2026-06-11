@@ -857,8 +857,11 @@ function containsUnwantedLanguages(text) {
 }
 
 // Groq 생성 (재시도 로직 포함)
-async function generateWithGroq(input, apiKey, retryCount = 0) {
-    const MAX_RETRIES = 2; // 최대 2회 재시도 (총 3회 시도)
+// apiRetryCount: API 호출 실패 재시도 횟수 (최대 1회)
+// langRetryCount: 외국어 감지 재시도 횟수 (최대 2회)
+async function generateWithGroq(input, apiKey, langRetryCount = 0, apiRetryCount = 0) {
+    const MAX_LANG_RETRIES = 2;  // 외국어 감지: 최대 2회 재시도
+    const MAX_API_RETRIES = 1;   // API 오류: 최대 1회 재시도
     
     const outputDiv = document.getElementById('groqOutput');
     const loading = document.getElementById('groqLoading');
@@ -1039,12 +1042,21 @@ ${customPrompt}
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            console.error('Groq API Error:', {
-                status: response.status,
-                statusText: response.statusText,
-                errorData: errorData
-            });
-            throw new Error(`Groq API 요청 실패 (${response.status}): ${errorData.error?.message || response.statusText}`);
+            const status = response.status;
+            console.error('Groq API Error:', { status, statusText: response.statusText, errorData });
+
+            // 429(rate limit) 또는 5xx(서버 오류): 1회 재시도
+            const isRetryable = status === 429 || status >= 500;
+            if (isRetryable && apiRetryCount < MAX_API_RETRIES) {
+                clearInterval(messageInterval);
+                console.log(`[Groq] API 오류(${status}), 3초 후 재시도...`);
+                if (loadingText) loadingText.textContent = '잠시 후 다시 시도하는 중...';
+                if (loadingTextCompare) loadingTextCompare.textContent = '잠시 후 다시 시도하는 중...';
+                await new Promise(r => setTimeout(r, 3000));
+                return await generateWithGroq(input, apiKey, langRetryCount, apiRetryCount + 1);
+            }
+
+            throw new Error(`Groq API 요청 실패 (${status}): ${errorData.error?.message || response.statusText}`);
         }
 
         const data = await response.json();
@@ -1059,13 +1071,11 @@ ${customPrompt}
         
         // 언어 검증: 한글+영어 외 언어 감지
         if (containsUnwantedLanguages(result)) {
-            if (retryCount < MAX_RETRIES) {
-                console.log(`[Groq] 외국어 감지, 재시도 ${retryCount + 1}/${MAX_RETRIES}`);
-                // 로딩 상태 유지하고 재시도
-                return await generateWithGroq(input, apiKey, retryCount + 1);
+            if (langRetryCount < MAX_LANG_RETRIES) {
+                console.log(`[Groq] 외국어 감지, 재시도 ${langRetryCount + 1}/${MAX_LANG_RETRIES}`);
+                return await generateWithGroq(input, apiKey, langRetryCount + 1, apiRetryCount);
             } else {
                 console.warn('[Groq] 최대 재시도 횟수 초과, 외국어 제거 후 표시');
-                // 3회 시도 후에도 실패하면 외국어만 제거하고 표시
                 result = result.replace(/[\u4e00-\u9fff\u3400-\u4dbf\u3040-\u309f\u30a0-\u30ff\u0400-\u04ff\u0600-\u06ff\u0e00-\u0e7f]/g, '');
             }
         }
@@ -1123,23 +1133,27 @@ ${customPrompt}
     } catch (error) {
         clearInterval(messageInterval);
         console.error('Groq Error:', error);
-        
-        // 사용자에게 더 상세한 오류 메시지 표시
-        let errorMessage = 'Groq 오류 발생.';
-        
-        if (error.message.includes('401')) {
-            errorMessage = 'Groq API 키가 유효하지 않습니다. 설정에서 API 키를 확인해주세요.';
-        } else if (error.message.includes('429')) {
-            errorMessage = 'API 호출 제한을 초과했습니다. 잠시 후 다시 시도해주세요.';
-        } else if (error.message.includes('402')) {
-            errorMessage = `${config.displayName} API 크레딧이 부족합니다.`;
-        } else if (error.message) {
-            errorMessage = `${config.name} 오류: ${error.message}`;
+
+        let errorMessage;
+        const msg = error.message || '';
+
+        if (msg.includes('401')) {
+            errorMessage = 'Groq API 키가 유효하지 않습니다.\n설정에서 API 키를 확인해주세요.';
+        } else if (msg.includes('402')) {
+            errorMessage = 'Groq API 크레딧이 부족합니다.';
+        } else if (msg.includes('429') || (apiRetryCount >= MAX_API_RETRIES)) {
+            // 1회 재시도 후에도 실패한 경우 → 요청 제한 안내
+            errorMessage = '잠시 후 다시 시도해 주세요.\n잔여한 요청이 많아 Groq AI가 응답하지 않을 수 있습니다.';
+        } else {
+            errorMessage = `Groq 오류: ${msg}`;
         }
-        
-        outputDiv.textContent = errorMessage + '\n\n브라우저 콘솔(F12)에서 상세 오류를 확인할 수 있습니다.';
+
+        // 에러를 패널과 토스트 양쪽에 표시
+        outputDiv.textContent = errorMessage;
         outputDiv.classList.add('empty');
         outputDiv.classList.remove('is-hidden');
+        outputDiv.style.display = '';
+        if (typeof showError === 'function') showError('⚠️ Groq: ' + errorMessage.split('\n')[0]);
     } finally {
         clearInterval(messageInterval);
         loading.classList.remove('active');
@@ -1257,10 +1271,12 @@ function toggleShortcutsModal() {
     document.body.insertAdjacentHTML('beforeend', html);
 }
 
-// ==================== 문제 수정된 API 함수 ====================
 // GPT 생성 (재시도 로직 포함)
-async function generateWithGPT(input, apiKey, retryCount = 0) {
-    const MAX_RETRIES = 2; // 최대 2회 재시도 (총 3회 시도)
+// apiRetryCount: API 호출 실패 재시도 횟수 (최대 1회)
+// langRetryCount: 외국어 감지 재시도 횟수 (최대 2회)
+async function generateWithGPT(input, apiKey, langRetryCount = 0, apiRetryCount = 0) {
+    const MAX_LANG_RETRIES = 2;  // 외국어 감지: 최대 2회 재시도
+    const MAX_API_RETRIES = 1;   // API 오류: 최대 1회 재시도
     
     const outputDiv = document.getElementById('gptOutput');
     const loading = document.getElementById('gptLoading');
@@ -1433,12 +1449,21 @@ ${customPrompt}
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            console.error('GPT API Error:', {
-                status: response.status,
-                statusText: response.statusText,
-                errorData: errorData
-            });
-            throw new Error(`GPT API 요청 실패 (${response.status}): ${errorData.error?.message || response.statusText}`);
+            const status = response.status;
+            console.error('GPT API Error:', { status, statusText: response.statusText, errorData });
+
+            // 429(rate limit) 또는 5xx(서버 오류): 1회 재시도
+            const isRetryable = status === 429 || status >= 500;
+            if (isRetryable && apiRetryCount < MAX_API_RETRIES) {
+                clearInterval(messageInterval);
+                console.log(`[GPT] API 오류(${status}), 3초 후 재시도...`);
+                if (loadingText) loadingText.textContent = '잠시 후 다시 시도하는 중...';
+                if (loadingTextCompare) loadingTextCompare.textContent = '잠시 후 다시 시도하는 중...';
+                await new Promise(r => setTimeout(r, 3000));
+                return await generateWithGPT(input, apiKey, langRetryCount, apiRetryCount + 1);
+            }
+
+            throw new Error(`GPT API 요청 실패 (${status}): ${errorData.error?.message || response.statusText}`);
         }
 
         const data = await response.json();
@@ -1453,13 +1478,11 @@ ${customPrompt}
         
         // 언어 검증: 한글+영어 외 언어 감지
         if (containsUnwantedLanguages(result)) {
-            if (retryCount < MAX_RETRIES) {
-                console.log(`[GPT] 외국어 감지, 재시도 ${retryCount + 1}/${MAX_RETRIES}`);
-                // 로딩 상태 유지하고 재시도
-                return await generateWithGPT(input, apiKey, retryCount + 1);
+            if (langRetryCount < MAX_LANG_RETRIES) {
+                console.log(`[GPT] 외국어 감지, 재시도 ${langRetryCount + 1}/${MAX_LANG_RETRIES}`);
+                return await generateWithGPT(input, apiKey, langRetryCount + 1, apiRetryCount);
             } else {
                 console.warn('[GPT] 최대 재시도 횟수 초과, 외국어 제거 후 표시');
-                // 3회 시도 후에도 실패하면 외국어만 제거하고 표시
                 result = result.replace(/[\u4e00-\u9fff\u3400-\u4dbf\u3040-\u309f\u30a0-\u30ff\u0400-\u04ff\u0600-\u06ff\u0e00-\u0e7f]/g, '');
             }
         }
@@ -1517,23 +1540,27 @@ ${customPrompt}
     } catch (error) {
         clearInterval(messageInterval);
         console.error('GPT Error:', error);
-        
-        // 사용자에게 더 상세한 오류 메시지 표시
-        let errorMessage = 'GPT 오류 발생.';
-        
-        if (error.message.includes('401')) {
-            errorMessage = 'GPT API 키가 유효하지 않습니다. 설정에서 API 키를 확인해주세요.';
-        } else if (error.message.includes('429')) {
-            errorMessage = 'API 호출 제한을 초과했습니다. 잠시 후 다시 시도해주세요.';
-        } else if (error.message.includes('402')) {
+
+        let errorMessage;
+        const msg = error.message || '';
+
+        if (msg.includes('401')) {
+            errorMessage = 'GPT API 키가 유효하지 않습니다.\n설정에서 API 키를 확인해주세요.';
+        } else if (msg.includes('402')) {
             errorMessage = 'GPT API 크레딧이 부족합니다. OpenRouter에서 크레딧을 충전해주세요.';
-        } else if (error.message) {
-            errorMessage = `GPT 오류: ${error.message}`;
+        } else if (msg.includes('429') || (apiRetryCount >= MAX_API_RETRIES)) {
+            // 1회 재시도 후에도 실패한 경우 → 요청 제한 안내
+            errorMessage = '잠시 후 다시 시도해 주세요.\n잔여한 요청이 많아 GPT AI가 응답하지 않을 수 있습니다.';
+        } else {
+            errorMessage = `GPT 오류: ${msg}`;
         }
-        
-        outputDiv.textContent = errorMessage + '\n\n브라우저 콘솔(F12)에서 상세 오류를 확인할 수 있습니다.';
+
+        // 에러를 패널과 토스트 양쪽에 표시
+        outputDiv.textContent = errorMessage;
         outputDiv.classList.add('empty');
         outputDiv.classList.remove('is-hidden');
+        outputDiv.style.display = '';
+        if (typeof showError === 'function') showError('⚠️ GPT: ' + errorMessage.split('\n')[0]);
     } finally {
         clearInterval(messageInterval);
         loading.classList.remove('active');

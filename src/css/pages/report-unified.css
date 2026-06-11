@@ -16,10 +16,15 @@
 
 /* Page container spacing */
 .page-container.report-page {
-    width: min(2200px, calc(100% - 12px));
+    width: 100%;
     margin-inline: auto;
-    padding-top: clamp(var(--space-2xl), 3.5vw, var(--space-3xl));
-    padding-bottom: clamp(var(--space-2xl), 4vw, var(--space-3xl));
+    padding: 0;
+    /* layout.css 의 padding 오버라이드 */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .page-container.report-page .report-layout {
@@ -32,7 +37,8 @@
     display: flex;
     width: 100%;
     position: relative;
-    min-height: calc(100vh - 120px);
+    flex: 1;
+    min-height: 0;
 }
 
 /* 
@@ -95,19 +101,20 @@
     display: grid;
     grid-template-columns: minmax(0, 2.35fr) minmax(0, 1fr) !important;
     gap: clamp(var(--space-sm), 1.2vw, var(--space-lg)) !important;
-    padding: clamp(var(--space-md), 1.2vw, var(--space-xl)) !important;
+    padding: clamp(10px, 1.2vw, var(--space-xl)) !important;
     width: 100%;
     max-width: 100%;
-    margin: 0 auto var(--space-2xl);
+    margin: 0;
     flex: 1;
-    align-items: start;
+    align-items: stretch;
+    min-height: 0;
 }
 
 .report-layout .main-area.report-workspace {
     grid-template-columns: minmax(0, 2.45fr) minmax(0, 1fr) !important;
     gap: clamp(var(--space-sm), 1vw, var(--space-lg)) !important;
-    padding: clamp(var(--space-md), 1vw, var(--space-xl)) !important;
-    margin-bottom: var(--space-2xl);
+    padding: clamp(10px, 1vw, var(--space-xl)) !important;
+    margin-bottom: 0;
 }
 
 /* ============================================
@@ -123,12 +130,13 @@
     border-radius: 28px !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
-    padding: var(--space-xl) !important;
+    padding: var(--space-lg) !important;
     display: flex;
     flex-direction: column;
-    min-height: clamp(760px, 80vh, 1100px);
-    height: auto;
-    gap: var(--space-xl);
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    gap: var(--space-md);
 }
 
 /* Empty State */
@@ -183,9 +191,10 @@
 .report-layout .output-tabs-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
     flex: 1;
-    gap: var(--space-lg);
+    min-height: 0;
+    gap: var(--space-sm);
+    overflow: hidden;
 }
 
 .report-layout .output-tabs-container.is-hidden {
@@ -239,13 +248,14 @@
 .report-layout .output-tab-panel {
     display: none;
     flex: 1;
-    min-height: 600px;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .report-layout .output-tab-panel.active {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-sm);
 }
 
 /* ============================================
@@ -261,14 +271,14 @@
     gap: var(--space-md);
     width: 100%;
     flex: 1;
-    min-height: 600px;
+    min-height: 0;
     background: transparent;
     border: none;
     border-radius: 0;
     padding: 0;
-    align-items: start;
+    align-items: stretch;
     position: static;
-    overflow: visible;
+    overflow: hidden;
     box-shadow: none;
 }
 
@@ -280,8 +290,9 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-    min-height: 100%;
+    gap: var(--space-sm);
+    min-height: 0;
+    overflow: hidden;
 }
 
 .report-layout .output-compare-panel:first-child {
@@ -309,7 +320,7 @@
 /* 비교 콘텐츠 - output-content와 동일 */
 .report-layout .compare-content {
     flex: 1;
-    padding: var(--space-lg);
+    padding: var(--space-md);
     line-height: 1.8;
     font-size: 0.95rem;
     color: var(--text-primary);
@@ -321,8 +332,7 @@
     white-space: pre-wrap;
     word-break: break-word;
     text-align: justify;
-    min-height: 500px;
-    max-height: none;
+    min-height: 0;
     overflow-y: auto;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
 }
@@ -394,7 +404,7 @@
 /* 출력 콘텐츠 영역 - 뉴트럴 스모크 */
 .report-layout .output-content {
     flex: 1;
-    padding: var(--space-lg);
+    padding: var(--space-md);
     line-height: 1.8;
     font-size: 0.95rem;
     color: var(--text-primary);
@@ -406,8 +416,7 @@
     white-space: pre-wrap;
     word-break: break-word;
     text-align: justify;
-    min-height: 500px;
-    max-height: none;
+    min-height: 0;
     overflow-y: auto;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
 }
@@ -501,9 +510,10 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
     display: flex;
     flex-direction: column;
-    min-height: clamp(760px, 80vh, 1100px);
-    height: auto;
-    padding: clamp(var(--space-md), 1.2vw, var(--space-lg)) !important;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: clamp(10px, 1.2vw, var(--space-lg)) !important;
 }
 
 /* 단축키 힌트 - textarea 하단에 자연스럽게 배치 */
@@ -628,12 +638,13 @@
 /* Textarea */
 .report-layout .textarea-wrapper {
     flex: 1;
-    padding: var(--space-sm) 0;
+    padding: var(--space-xs) 0;
     position: relative;
     display: flex;
     flex-direction: column;
     background: transparent;
     border-radius: 0;
+    min-height: 0;
 }
 
 /* Textarea - 뉴트럴 스모크 글래스 */
@@ -649,10 +660,10 @@
     font-size: 0.95rem;
     line-height: 1.8;
     text-align: justify;
-    resize: vertical;
+    resize: none;
     font-family: inherit;
     flex: 1;
-    min-height: clamp(580px, 50vh, 780px);
+    min-height: 0;
     transition: all 0.3s ease !important;
 }
 
@@ -749,36 +760,59 @@
 
 @media (max-width: 1400px) {
     .report-layout .main-area {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 1fr 340px;
         align-items: stretch;
-    }
-    
-    .report-layout .output-area-compact,
-    .report-layout .input-area-compact {
-        min-height: 500px;
     }
 }
 
 @media (max-width: 768px) {
-    .report-layout .main-area {
-        padding: var(--space-md);
-        gap: var(--space-md);
+    /* 모바일: 세로 스크롤 허용, 각 패널 독립 높이 */
+    .page-container.report-page {
+        overflow: visible;
+        flex: none;
     }
-    
+
+    .report-layout {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .report-layout .main-area {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        align-items: stretch;
+        gap: var(--space-sm) !important;
+        padding: var(--space-sm) !important;
+    }
+
+    .report-layout .output-area-compact {
+        height: auto !important;
+        min-height: 400px !important;
+    }
+
+    .report-layout .input-area-compact {
+        height: auto !important;
+        min-height: auto !important;
+    }
+
+    .report-layout .input-textarea-compact {
+        min-height: 200px !important;
+        resize: vertical !important;
+    }
+
     .report-layout .output-compare-container {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
+        overflow: visible;
     }
-    
-    .report-layout .settings-sidebar {
-        width: 100%;
-        right: -100%;
+
+    .report-layout .output-compare-panel {
+        min-height: 300px;
     }
-    
+
     .report-layout .output-content,
     .report-layout .compare-content {
-        max-height: 400px;
+        min-height: 200px;
     }
 }
 

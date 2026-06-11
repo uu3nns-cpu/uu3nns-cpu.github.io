@@ -284,6 +284,12 @@ html[data-theme="light"] .report-layout .empty-divider {
     margin-right: 0;
 }
 
+/* 라이트모드 출력 영역 overflow 허용 */
+html[data-theme="light"] .report-layout .output-area-compact,
+html[data-theme="light"] .report-layout .input-area-compact {
+    overflow: hidden;
+}
+
 /* 오버레이 투명도 제거 */
 .chatbot-overlay {
     background: transparent;

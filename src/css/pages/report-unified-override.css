@@ -7,9 +7,9 @@
    1. 컨테이너 스타일 통일
    ============================================ */
 
-/* 출력 영역 - 패딩 추가로 입력 영역과 동일하게 */
+/* 출력 영역 - 패딩 조정 */
 .report-layout .output-area-compact {
-    padding: 24px !important;
+    padding: 16px !important;
 }
 
 /* ============================================
@@ -19,7 +19,7 @@
 /* 출력 콘텐츠 - 입력창과 완전히 동일한 스타일 */
 .report-layout .output-content,
 .report-layout .compare-content {
-    padding: 20px !important;
+    padding: 16px !important;
     line-height: 1.8 !important;
     font-size: 0.95rem !important;
     font-weight: 400 !important;
@@ -30,11 +30,12 @@
     border-radius: 12px !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    min-height: 0 !important;
 }
 
 /* 입력 textarea - 출력창과 완전히 동일한 스타일 */
 .report-layout .input-textarea-compact {
-    padding: 20px !important;
+    padding: 16px !important;
     line-height: 1.8 !important;
     font-size: 0.95rem !important;
     font-weight: 400 !important;
@@ -45,6 +46,7 @@
     border-radius: 12px !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    min-height: 0 !important;
 }
 
 /* ============================================
@@ -156,13 +158,13 @@
    ============================================ */
 
 .report-layout .output-compare-panel {
-    padding: 16px !important;
+    padding: 8px !important;
 }
 
 .report-layout .output-compare-panel:first-child {
-    padding-right: 16px !important;
+    padding-right: 8px !important;
 }
 
 .report-layout .output-compare-panel:last-child {
-    padding-left: 16px !important;
+    padding-left: 8px !important;
 }
